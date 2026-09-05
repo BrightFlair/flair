@@ -1,0 +1,140 @@
+<main id="main-content" class="home">
+	<section class="hero" aria-labelledby="hero-title">
+		<div class="hero-heading">
+			<h1 id="hero-title">FLAIR</h1>
+			<p class="hero-subheading">Progressive, declarative UI system</p>
+		</div>
+		<div class="hero-footer">
+			<p>Built by <a href="https://www.brightflair.com/" target="_blank">Bright Flair</a>.</p>
+			<a class="hero-scroll" href="#introduction">Explore Flair ↓</a>
+		</div>
+	</section>
+
+	<section id="introduction" class="introduction" aria-labelledby="intro-title">
+		<p class="eyebrow">A sensible starting point for web projects</p>
+		<h2 id="intro-title">How Flair works</h2>
+		<div class="introduction-copy">
+			<p><strong>Progressive.</strong> Use <code>@extend</code> to bring as much or as little of Flair into your application as you need. The library’s Sass placeholders only produce CSS when extended, so unused placeholders stay out of your compiled stylesheet.</p>
+			<p><strong>Declarative.</strong> Choose and compose styles in your Sass source, which compiles to CSS before reaching the browser. Your HTML can stay minimal and semantic, with the same markup styled differently by different stylesheets.</p>
+			<p><strong>SCSS.</strong> Named placeholder selectors can extend one another, building from individual visual treatments to patterns, components and whole page layouts. Add your own design decisions at each level, layering your project’s identity over a shared base.</p>
+		</div>
+	</section>
+
+	<section id="hierarchy" class="hierarchy" aria-labelledby="hierarchy-title">
+		<header class="hierarchy-heading">
+			<p class="eyebrow">Directory structure</p>
+			<h2 id="hierarchy-title">Stylesheet hierarchy</h2>
+			<p>Flair organises styles by responsibility and composition, from shared values to individual pages. These categories describe what a rule owns, increasing in specificity through each layer.</p>
+		</header>
+		<ol class="hierarchy-layers">
+			<li>
+				<h3>Variable</h3>
+				<div><p>Shared values and configurable design decisions: palettes, semantic colours, spacing, typography scales, borders, motion and breakpoints.</p><p class="hierarchy-convention"><code>variable/</code> · Public CSS properties: <code>--pal-*</code>, <code>--size-*</code></p></div>
+			</li>
+			<li>
+				<h3>Decoration</h3>
+				<div><p>A visual treatment that can be applied to different kinds of UI, such as body typography, an elevated surface, muted text or a focus ring. It does not define a complete control or content structure.</p><p class="hierarchy-convention"><code>decoration/</code> · <code>%d-*</code></p></div>
+			</li>
+			<li>
+				<h3>Element</h3>
+				<div><p>Default presentation for native HTML elements, including normalisation: the body, headings, links, buttons, inputs and tables.</p><p class="hierarchy-convention"><code>element/</code> · HTML selectors</p></div>
+			</li>
+			<li>
+				<h3>Object</h3>
+				<div><p>One recognisable UI unit, independent of a particular application. A button, badge, form field, avatar or progress indicator is an object; it may contain several HTML elements.</p><p class="hierarchy-convention"><code>object/</code> · <code>%o-*</code></p></div>
+			</li>
+			<li>
+				<h3>Pattern</h3>
+				<div><p>A repeatable relationship between UI units, including their arrangement and presentation of state: form fields, an action group, a navigation list or repeated editable rows.</p><p class="hierarchy-convention"><code>pattern/</code> · <code>%p-*</code></p></div>
+			</li>
+			<li>
+				<h3>Layout</h3>
+				<div><p>The spatial arrangement of major regions or collections: a sidebar beside content, a split pane, a responsive gallery grid or a dashboard grid.</p><p class="hierarchy-convention"><code>layout/</code> · <code>%l-*</code></p></div>
+			</li>
+			<li>
+				<h3>Component</h3>
+				<div><p>Styles attached to a named HTML component, composing the lower layers and defining its particular presentation: <code>contact-form</code>, <code>request-editor</code>, <code>site-nav</code> or <code>pricing-card</code>.</p><p class="hierarchy-convention"><code>component/</code> · Custom-tag selectors</p></div>
+			</li>
+			<li>
+				<h3>Page</h3>
+				<div><p>Composition and exceptions specific to a route or page template, such as a homepage hero arrangement, documentation page or account settings page.</p><p class="hierarchy-convention"><code>page/</code> · Page-scoped selectors</p></div>
+			</li>
+		</ol>
+
+		<div class="hierarchy-notes">
+			<section aria-labelledby="hierarchy-boundaries">
+				<h3 id="hierarchy-boundaries">Layer boundaries</h3>
+				<p><strong>Visual treatments.</strong> Decorations define reusable appearance, such as a surface background, border and shadow. A card that combines this treatment with a heading, content and actions is an object. Spacing belongs to the object or pattern that needs it and uses shared variables; individual padding and margin values do not need their own placeholders.</p>
+				<p><strong>HTML defaults and shared UI styles.</strong> Element styles apply defaults to native HTML tags. Objects define styles for a UI role that may be used by different tags. Both a native button and a download link can extend <code>%o-button</code>, while retaining their own HTML semantics.</p>
+				<pre><code>button {
+	@extend %o-button;
+}
+
+.download-link {
+	@extend %o-button;
+}</code></pre>
+				<p>The <code>button</code> rule belongs in Element; the reusable definition belongs in Object. The numbered hierarchy is therefore not a strict Sass dependency order. Element can consume Object, and module dependencies should be explicit.</p>
+				<p><strong>Grouping and positioning.</strong> Patterns arrange related UI units, such as fields within a form. Layouts position larger regions or collections, such as a sidebar beside the main content. Objects, patterns and layouts can all require a particular HTML structure.</p>
+				<ul>
+					<li>Form fields are a pattern; a sidebar beside main content is a layout.</li>
+					<li>A photo grid is a layout; its image tiles are objects.</li>
+					<li>Blog comments are a pattern; a particular <code>&lt;blog-comments&gt;</code> implementation is a component.</li>
+					<li>A calendar composes objects and patterns, potentially as a component; its month grid is a layout.</li>
+				</ul>
+				<p><strong>HTML components.</strong> Component styles belong to a named HTML component, which can be reused within one application or across projects. Flair provides generic components; applications define specialised ones. A <code>&lt;contact-form&gt;</code> can use <code>%p-form-fields</code>, with submission handling owned by the application.</p>
+			</section>
+			<section aria-labelledby="hierarchy-classification">
+				<h3 id="hierarchy-classification">Where does a rule belong?</h3>
+				<ol>
+					<li>A configurable value? <strong>Variable.</strong></li>
+					<li>A visual treatment? <strong>Decoration.</strong></li>
+					<li>A default for a native tag? <strong>Element.</strong></li>
+					<li>One UI unit? <strong>Object.</strong></li>
+					<li>Related UI units organised together? <strong>Pattern.</strong></li>
+					<li>Major regions or collections arranged spatially? <strong>Layout.</strong></li>
+					<li>Presentation owned by a named HTML component? <strong>Component.</strong></li>
+					<li>Something specific to a page or template? <strong>Page.</strong></li>
+				</ol>
+				<h3>Extending Flair</h3>
+				<p>Applications follow these categories where useful, extending Flair’s definitions and supplying their own theme values and component styles. Empty directories are unnecessary. Flair owns design and layout; application data, business rules and submission handling stay with the implementing project.</p>
+				<p>Placeholder-based styles produce CSS when extended. Concrete element defaults and other directly emitted rules produce CSS when their modules are included, so those entry points should be opt-in. Sass does not automatically remove unused concrete selectors.</p>
+			</section>
+		</div>
+	</section>
+
+	<nav id="contents" class="contents" aria-labelledby="contents-title">
+		<div class="contents-heading"><h2 id="contents-title">Library contents</h2><p class="eyebrow">Interactive UI examples</p></div>
+		<ol>
+			<li>
+				<a href="/library/typography/"><span class="contents-number">01</span><span class="contents-name">Typography</span><span class="contents-description">Headings, paragraphs, lists and the rhythm of readable text.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/controls/"><span class="contents-number">02</span><span class="contents-name">Controls</span><span class="contents-description">Buttons, inputs, selects and the small details of interaction.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/forms/"><span class="contents-number">03</span><span class="contents-name">Forms</span><span class="contents-description">Labels, help text, validation and fields that work together.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/surfaces/"><span class="contents-number">04</span><span class="contents-name">Surfaces</span><span class="contents-description">Cards, panels and containers that give content a home.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/navigation/"><span class="contents-number">05</span><span class="contents-name">Navigation</span><span class="contents-description">Menus, tabs, breadcrumbs and finding your way around.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/disclosures/"><span class="contents-number">06</span><span class="contents-name">Disclosures</span><span class="contents-description">Details, expandable sections and content on demand.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/tables/"><span class="contents-number">07</span><span class="contents-name">Tables</span><span class="contents-description">Readable rows, columns and collections of information.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/feedback/"><span class="contents-number">08</span><span class="contents-name">Feedback</span><span class="contents-description">Notices, empty states, progress and useful responses.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/code/"><span class="contents-number">09</span><span class="contents-name">Code</span><span class="contents-description">Code samples, preformatted text and technical content.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+			<li>
+				<a href="/library/layouts/"><span class="contents-number">10</span><span class="contents-name">Layouts</span><span class="contents-description">Sidebars, grids and the relationships between larger pieces.</span><span class="contents-arrow" aria-hidden="true">↗</span></a>
+			</li>
+		</ol>
+	</nav>
+</main>

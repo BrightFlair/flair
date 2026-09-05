@@ -1,0 +1,80 @@
+.hierarchy {
+	padding: 0 var(--site-gutter) var(--site-section-space);
+	font-size: clamp(1rem, 1.2vw, 1.15rem);
+
+	.hierarchy-heading {
+		max-width: 48rem;
+		margin-bottom: var(--site-space-large);
+		h2 {
+			margin-block: var(--site-space-medium);
+			font-size: clamp(3rem, 6vw, 6rem);
+			line-height: 1;
+		}
+	}
+
+	h3 {
+		margin: 0;
+		font: 400 clamp(1.8rem, 3vw, 2.5rem)/1.15 var(--site-font-heading);
+	}
+	code { font-family: var(--site-font-mono); overflow-wrap: anywhere; }
+	.hierarchy-layers {
+		list-style: none;
+		counter-reset: layer;
+		padding: 0;
+		margin: 0;
+		border-top: 2px solid var(--site-ink);
+		>li {
+			counter-increment: layer;
+			display: grid;
+			grid-template-columns: 3rem minmax(8rem, 1fr) minmax(0, 2fr);
+			gap: var(--site-space-medium);
+			padding-block: var(--site-space-large);
+			border-bottom: 1px solid var(--site-line);
+			&::before { content: counter(layer, decimal-leading-zero); font-family: var(--site-font-mono); }
+		}
+	}
+	.hierarchy-convention { margin-top: var(--site-space-small); color: var(--site-muted); }
+	.hierarchy-notes {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: var(--site-section-space);
+		margin-top: var(--site-section-space);
+		p, pre, ul, ol { margin: var(--site-space-medium) 0; }
+		ul, ol { padding-left: var(--site-space-medium); line-height: 1.65; }
+		li+li { margin-top: var(--site-space-small); }
+		p+h3 { margin-top: var(--site-space-large); }
+		pre {
+			padding: var(--site-space-medium);
+			border: 1px solid var(--site-line);
+			font: 1rem/1.5 var(--site-font-mono);
+			white-space: pre-wrap;
+			tab-size: 2;
+		}
+	}
+}
+
+@media(min-width: 70rem) {
+	.hierarchy {
+		display: grid;
+		grid-template-columns: var(--site-content-columns);
+		column-gap: var(--site-space-large);
+		align-items: start;
+		.hierarchy-heading { max-width: none; margin-bottom: 0; }
+		.hierarchy-layers>li {
+			grid-template-columns: 2rem minmax(0, 1fr);
+			>div { grid-column: 2; }
+		}
+		.hierarchy-notes { grid-column: 1 / -1; }
+	}
+}
+
+@media(max-width: 45rem) {
+	.hierarchy {
+		.hierarchy-layers>li {
+			grid-template-columns: 2rem minmax(0, 1fr);
+			gap: var(--site-space-small);
+			>div { grid-column: 2; }
+		}
+		.hierarchy-notes { grid-template-columns: minmax(0, 1fr); gap: var(--site-space-large); }
+	}
+}
