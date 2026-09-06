@@ -9,6 +9,9 @@
 	--site-line: var(--flair-color-border);
 	--site-font-body: "Ubuntu", sans-serif;
 	--site-font-heading: "Ubuntu Condensed", sans-serif;
+	// Reserve room for the wordmark and its font-specific optical adjustment.
+	--site-hero-width-factor: 2.5;
+	--site-hero-offset: -0.047em;
 	--site-font-mono: "Ubuntu Mono", monospace;
 	--site-gutter: clamp(1.25rem, 4vw, 5rem);
 	--site-library-max-width: 80rem;

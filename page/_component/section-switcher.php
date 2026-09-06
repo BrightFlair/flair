@@ -6,7 +6,8 @@ use Gt\Http\ServerRequest;
 
 function go(Element $element, Uri $uri, ServerRequest $request):void {
 	foreach($element->querySelectorAll(".section-form option") as $option) {
-		if(trim($uri->getPath(), "/") === "library/{$option->value}") {
+		if(trim($uri->getPath(), "/") === "library/{$option->value}"
+			|| ($option->value === "playground" && preg_match("~^/playground(?:/|$)~", $uri->getPath()))) {
 			$option->setAttribute("selected", "");
 		}
 	}

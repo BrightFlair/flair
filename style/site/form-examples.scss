@@ -107,7 +107,7 @@
 	}
 	.token-list {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		grid-template-columns: minmax(0, 1fr);
 		gap: var(--site-space-small) var(--site-space-medium);
 		line-height: 1.5;
 		dt,
@@ -116,16 +116,19 @@
 			padding-bottom: var(--site-space-small);
 			border-bottom: 1px solid var(--site-line);
 		}
+		dd {
+			padding-bottom: var(--site-space-medium);
+		}
 	}
 	#form-result {
 		margin-top: var(--site-space-medium);
 	}
 }
-@media (max-width: 45rem) {
+@media (min-width: 45rem) {
 	.reference-section .token-list {
-		grid-template-columns: minmax(0, 1fr);
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 		dd {
-			padding-bottom: var(--site-space-medium);
+			padding-bottom: var(--site-space-small);
 		}
 	}
 }

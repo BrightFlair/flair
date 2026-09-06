@@ -89,6 +89,8 @@
 	--site-font-body: var(--flair-font-body);
 	--site-font-heading: var(--flair-font-body);
 	--site-font-size: 14px;
+	--site-hero-width-factor: 2.7;
+	--site-hero-offset: -0.037em;
 	--site-switcher-border-width: 1px;
 	--site-switcher-border: var(--flair-color-border);
 	--site-switcher-radius: var(--flair-radius);
@@ -107,6 +109,7 @@
 	--flair-color-accent: #6750a4;
 	--flair-color-on-accent: #fff;
 	--flair-color-danger: #b3261e;
+	--flair-control-background: #fff;
 	--flair-control-min-height: 3.5rem;
 	--flair-control-padding-block: 0.9375rem;
 	--flair-control-padding-inline: var(--flair-space-4);
@@ -141,6 +144,8 @@
 	--site-font-heading: var(--flair-font-body);
 	--site-switcher-border-width: 1px;
 	--site-switcher-border: #cac4d0;
+	--site-hero-width-factor: 2.5;
+	--site-hero-offset: -0.058em;
 	--site-switcher-radius: var(--flair-radius);
 	--site-switcher-shadow: 0 2px 6px rgb(0 0 0 / 16%);
 	color-scheme: light;

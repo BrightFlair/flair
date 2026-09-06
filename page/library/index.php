@@ -9,6 +9,10 @@ function go(Input $input, Response $response):void {
 		$response->redirect("/");
 		return;
 	}
+	if($section === "playground") {
+		$response->redirect("/playground/");
+		return;
+	}
 	if(!in_array($section, ["typography", "controls", "forms", "surfaces", "navigation", "disclosures", "tables", "feedback", "code", "layouts"], true)) {
 		throw new HttpNotFound();
 	}

@@ -39,6 +39,10 @@ Configure your Sass load path to include Flair's `style` directory. Load fonts i
 
 ## Width and responsive behaviour
 
+Start with the narrow layout in the base rules. All width breakpoints use `min-width`, with enhancements ordered from smaller to larger thresholds. Choose thresholds where the content needs a different arrangement, rather than targeting named devices. The website uses 36rem, 45rem and 70rem thresholds. These media-query rem values follow the browser’s initial font size, not a theme’s root font-size override.
+
+Prefer intrinsic grid sizing and flex wrapping for reusable components: available container space is more useful than screen size when the same component appears in a sidebar or nested layout. Queries for accessibility preferences, such as reduced motion or forced colours, are independent of this width-breakpoint convention.
+
 Objects and form patterns do not impose application content widths. `%p-grid` uses available container width, not viewport breakpoints. `--flair-grid-columns` is a positive integer (default 3), `--flair-grid-min` is a positive length (default 16rem), and `--flair-grid-gap` is a nonnegative length (default space 6). The grid can produce fewer columns when constrained; a final incomplete row retains the established column widths. Child content can wrap without enlarging its track.
 
 `%l-sidebar` expects a direct `aside` and `.layout-content`. They wrap in source order; neither needs absolute positioning or a matching margin offset. `--flair-sidebar-width` and `--flair-content-min` set preferred sizes. `%l-article` intentionally limits reading measure with `--flair-prose-measure` (65ch); `%p-prose` itself remains fluid.

@@ -24,8 +24,10 @@ section-switcher {
 	}
 
 	label {
+		display: grid;
+		padding-top: var(--site-space-small);
 		flex: 1;
-		gap: var(--site-space-small);
+		gap: 0;
 		padding-inline: var(--site-space-small);
 	}
 
@@ -65,10 +67,10 @@ section-switcher {
 	}
 }
 
-@media (max-width: 36rem) {
+@media (min-width: 36rem) {
 	section-switcher label {
-		display: grid;
-		gap: 0;
-		padding-top: var(--site-space-small);
+		display: flex;
+		gap: var(--site-space-small);
+		padding-top: 0;
 	}
 }
