@@ -1,0 +1,28 @@
+@use "../object/form-field";
+@use "field-row";
+@use "form-actions";
+
+%p-form-fields {
+	display: grid;
+	gap: var(--flair-form-gap, var(--flair-space-4));
+	min-inline-size: 0;
+	margin: 0;
+	color: var(--flair-color-text);
+	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
+		var(--flair-font-body);
+	> :where(.field, label:not(.choice)) {
+		@extend %o-form-field;
+	}
+	> .choice {
+		@extend %o-choice-field;
+	}
+	> fieldset {
+		@extend %o-fieldset;
+	}
+	> .field-row {
+		@extend %p-field-row;
+	}
+	> .actions {
+		@extend %p-form-actions;
+	}
+}

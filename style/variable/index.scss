@@ -1,0 +1,30 @@
+// Emits nothing until explicitly included on :root or a theme container.
+@mixin defaults {
+	--flair-space-1: 0.25rem;
+	--flair-space-2: 0.5rem;
+	--flair-space-3: 0.75rem;
+	--flair-space-4: 1rem;
+	--flair-space-6: 1.5rem;
+	--flair-space-8: 2rem;
+	--flair-color-text: #111;
+	--flair-color-muted: #525252;
+	--flair-color-surface: #fff;
+	--flair-color-surface-disabled: #eee;
+	--flair-color-border: #767676;
+	--flair-color-accent: #111;
+	--flair-color-on-accent: #fff;
+	--flair-color-danger: #111;
+	--flair-font-body: "Ubuntu", sans-serif;
+	--flair-font-size: 1rem;
+	--flair-line-height: 1.5;
+	--flair-font-weight: 400;
+	--flair-label-weight: 500;
+	--flair-border-width: 1px;
+	--flair-radius: 0;
+	--flair-focus-width: 3px;
+	--flair-focus-offset: 2px;
+	--flair-control-min-height: 2.75rem;
+	--flair-choice-size: 1.25rem;
+	--flair-textarea-min-height: 8rem;
+	--flair-field-min-width: 14rem;
+}

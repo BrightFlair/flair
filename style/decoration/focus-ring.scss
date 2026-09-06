@@ -1,0 +1,5 @@
+%d-focus-ring {
+	outline: var(--flair-focus-width) solid
+		var(--flair-focus-color, var(--flair-color-accent));
+	outline-offset: var(--flair-focus-offset);
+}

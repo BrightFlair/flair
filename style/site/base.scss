@@ -1,45 +1,87 @@
-// Tokens for the gallery shell, independent of the future library API.
+@use "../variable";
+
+// The site and its examples share one theme.
 :root {
-	--site-paper: #fff;
-	--site-ink: #111;
-	--site-muted: #525252;
-	--site-line: #d5d5d5;
+	@include variable.defaults;
+	--site-paper: var(--flair-color-surface);
+	--site-ink: var(--flair-color-text);
+	--site-muted: var(--flair-color-muted);
+	--site-line: var(--flair-color-border);
 	--site-font-body: "Ubuntu", sans-serif;
 	--site-font-heading: "Ubuntu Condensed", sans-serif;
 	--site-font-mono: "Ubuntu Mono", monospace;
 	--site-gutter: clamp(1.25rem, 4vw, 5rem);
-	--site-space-small: .75rem;
+	--site-library-max-width: 80rem;
+	--site-space-small: 0.75rem;
 	--site-space-medium: 1.5rem;
 	--site-space-large: 3rem;
 	--site-section-space: clamp(4rem, 9vw, 9rem);
 	color-scheme: light;
 	font-family: var(--site-font-body);
+	font-size: var(--site-font-size, 16px);
 	color: var(--site-ink);
 	background: var(--site-paper);
 }
 
-* { box-sizing: border-box; }
+* {
+	box-sizing: border-box;
+}
 html {
 	scroll-behavior: smooth;
 }
-body { margin: 0; }
-[hidden] { display: none !important; }
-h1, h2, p { margin: 0; }
-h1, h2 { font-family: var(--site-font-heading); font-weight: 400; }
-p { line-height: 1.65; }
-a { color: inherit; text-underline-offset: .2em; }
-button, select { font: inherit; color: inherit; }
-button { cursor: pointer; }
-::selection { background: var(--site-ink); color: var(--site-paper); }
-:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
-.eyebrow { font: 400 .9rem/1.4 var(--site-font-mono); text-transform: uppercase; letter-spacing: .06em; }
+body {
+	margin: 0;
+}
+[hidden] {
+	display: none !important;
+}
+h1,
+h2,
+p {
+	margin: 0;
+}
+h1,
+h2 {
+	font-family: var(--site-font-heading);
+	font-weight: 400;
+}
+p {
+	line-height: 1.65;
+}
+a {
+	color: inherit;
+	text-underline-offset: 0.2em;
+}
+button,
+select {
+	font: inherit;
+	color: inherit;
+}
+button {
+	cursor: pointer;
+}
+::selection {
+	background: var(--site-ink);
+	color: var(--site-paper);
+}
+:focus-visible {
+	outline: 3px solid currentColor;
+	outline-offset: 5px;
+}
+.eyebrow {
+	font: 400 0.9rem/1.4 var(--site-font-mono);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
 .skip-link {
 	position: fixed;
-	inset: .75rem auto auto .75rem;
+	inset: 0.75rem auto auto 0.75rem;
 	z-index: 100;
 	padding: var(--site-space-small);
 	background: var(--site-ink);
 	color: var(--site-paper);
 	transform: translateY(-200%);
-	&:focus { transform: none; }
+	&:focus {
+		transform: none;
+	}
 }

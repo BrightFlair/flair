@@ -1,14 +1,365 @@
-<section-switcher data-position="top"></section-switcher>
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 03</p>
-		<h1>Forms.</h1>
-		<p class="library-description">Labels, help text, validation and fields that work together.</p>
+		<h1>Forms</h1>
+		<p class="library-description">
+			Field objects, responsive rows and action groups composed with
+			%p-form-fields.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" aria-labelledby="field-object">
+		<h2 id="field-object">A form field</h2>
+		<p>
+			<code>%o-form-field</code>
+			arranges a label, a native control and optional help or error text. It
+			includes the element mapping for direct child controls, which extends the
+			control objects documented on the
+			<a href="/library/controls/">Controls page</a>
+			.
+		</p>
+		<div class="reference-grid">
+			<div class="flair-example">
+				<label class="demo-field">
+					<span>Display name</span>
+					<input aria-describedby="field-name-help" autocomplete="nickname" />
+					<span id="field-name-help" class="field-help">
+						The name shown beside your comments.
+					</span>
+				</label>
+			</div>
+			<pre><code>&lt;label class="profile-name"&gt;
+	&lt;span&gt;Display name&lt;/span&gt;
+	&lt;input aria-describedby="name-help" /&gt;
+	&lt;span id="name-help" class="field-help"&gt;
+		The name shown beside your comments.
+	&lt;/span&gt;
+&lt;/label&gt;
+
+.profile-name {
+	@extend %o-form-field;
+}</code></pre>
+		</div>
+		<p>
+			Use a wrapping
+			<code>label</code>
+			with a
+			<code>span</code>
+			followed by its control. The label provides the association, so
+			<code>for</code>
+			and a control ID are unnecessary. Help and error messages use spans inside
+			the label; give those messages IDs when referenced by
+			<code>aria-describedby</code>
+			. A separate
+			<code>.field</code>
+			wrapper remains available when the structure requires one.
+		</p>
+	</section>
+	<section
+		class="reference-section"
+		aria-labelledby="pattern-example"
+		data-form-example
+	>
+		<h2 id="pattern-example">Form fields pattern</h2>
+		<p>
+			This form extends
+			<code>%p-form-fields</code>
+			. Its fields, rows, choice group and actions are styled by the objects and
+			patterns below. Submitting reloads this local example page; no application
+			record is created.
+		</p>
+		<div class="demo-settings" hidden>
+			<label>
+				Spacing
+				<select data-setting="density">
+					<option value="default">Default</option>
+					<option value="compact">Compact</option>
+				</select>
+			</label>
+		</div>
+		<div class="flair-example">
+			<form class="demo-form" method="get" action="/library/forms/#form-result">
+				<div class="field-row">
+					<label>
+						<span>Name (required)</span>
+						<input name="name" autocomplete="name" required />
+					</label>
+					<label>
+						<span>Email (required)</span>
+						<input type="email" name="email" autocomplete="email" required />
+					</label>
+				</div>
+				<label>
+					<span>Role</span>
+					<select name="role">
+						<option value="developer">Developer</option>
+						<option value="designer">Designer</option>
+						<option value="other">Other</option>
+					</select>
+				</label>
+				<label>
+					<span>Notes</span>
+					<textarea
+						name="notes"
+						rows="4"
+						aria-describedby="profile-notes-help"
+					></textarea>
+					<span class="field-help" id="profile-notes-help">
+						Optional. Use this field to test longer text and resizing.
+					</span>
+				</label>
+				<fieldset>
+					<legend>Contact preference</legend>
+					<label class="choice">
+						<input type="radio" name="contact" value="email" checked />
+						<span>Email</span>
+					</label>
+					<label class="choice">
+						<input type="radio" name="contact" value="none" />
+						<span>Do not contact me</span>
+					</label>
+				</fieldset>
+				<label class="choice">
+					<input type="checkbox" name="updates" value="yes" />
+					<span>
+						Receive release notes and documentation updates. This longer label
+						demonstrates how choice text wraps beside its control.
+					</span>
+				</label>
+				<div class="actions">
+					<button class="action-start" type="reset">Reset</button>
+					<button class="primary" type="submit" name="example" value="profile">
+						Submit example
+					</button>
+				</div>
+			</form>
+			<p id="form-result" role="status" tabindex="-1" hidden>
+				Example submitted. No application record has been created.
+			</p>
+		</div>
+	</section>
+	<section class="reference-section" aria-labelledby="additional-states">
+		<h2 id="additional-states">Errors and disabled groups</h2>
+		<p>
+			Invalid state is explicit: the application sets
+			<code>aria-invalid="true"</code>
+			and provides error text. Required fields are not styled as errors before
+			validation. A disabled fieldset uses native HTML behaviour to disable its
+			controls together.
+		</p>
+		<div class="reference-grid">
+			<div class="flair-example">
+				<div class="demo-form">
+					<label>
+						<span>Email</span>
+						<input
+							type="email"
+							value="missing-address"
+							aria-invalid="true"
+							aria-describedby="form-error-help form-error-message"
+						/>
+						<span id="form-error-help" class="field-help">
+							Use the address where you receive account messages.
+						</span>
+						<span id="form-error-message" class="field-error">
+							Error: enter an email address such as name@example.com.
+						</span>
+					</label>
+				</div>
+			</div>
+			<div class="flair-example">
+				<div class="demo-form">
+					<fieldset disabled>
+						<legend>Unavailable settings</legend>
+						<label>
+							<span>Account name</span>
+							<input value="Example account" />
+						</label>
+						<label class="choice">
+							<input type="checkbox" checked />
+							<span>Send account notifications</span>
+						</label>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section
+		class="reference-section"
+		id="implementation-notes"
+		aria-labelledby="form-dependencies"
+	>
+		<h2 id="form-dependencies">How the pattern is composed</h2>
+		<ol>
+			<li>
+				<code>%o-form-field</code>
+				provides label, control and message layout.
+			</li>
+			<li>
+				<code>%o-choice-field</code>
+				puts a native checkbox or radio beside wrapping label text.
+			</li>
+			<li>
+				<code>%o-fieldset</code>
+				provides a bordered group with a legend, fields and choices.
+			</li>
+			<li>
+				<code>%p-field-row</code>
+				extends field objects inside a wrapping flex row. Fields wrap when their
+				combined minimum widths and gap no longer fit the container.
+			</li>
+			<li>
+				<code>%p-form-actions</code>
+				arranges buttons without changing their DOM order. A direct
+				<code>.primary</code>
+				child extends
+				<code>%o-button-primary</code>
+				;
+				<code>.action-start</code>
+				pushes subsequent actions towards the inline end.
+			</li>
+			<li>
+				<code>%p-form-fields</code>
+				combines these definitions into one form structure.
+			</li>
+		</ol>
+		<pre><code>@use "path/to/flair/style/flair";
+
+:root {
+	@include flair.defaults;
+}
+
+contact-form form {
+	@extend %p-form-fields;
+}
+
+contact-form {
+	--flair-form-gap: var(--flair-space-6);
+	--flair-control-radius: .25rem;
+}</code></pre>
+		<h3>Direct children of the pattern</h3>
+		<dl class="token-list">
+			<dt>
+				<code>.field</code>
+				or
+				<code>label</code>
+			</dt>
+			<dd>
+				A wrapping label with its caption span, control and optional messages. A
+				.field container is also supported when needed.
+			</dd>
+			<dt><code>.field-row</code></dt>
+			<dd>
+				A wrapping row containing direct
+				<code>.field</code>
+				or
+				<code>label</code>
+				children.
+			</dd>
+			<dt><code>.choice</code></dt>
+			<dd>
+				A wrapping label containing a checkbox or radio followed by its text in
+				a span.
+			</dd>
+			<dt><code>fieldset</code></dt>
+			<dd>
+				A legend and direct labels,
+				<code>.field</code>
+				containers or
+				<code>.choice</code>
+				labels.
+			</dd>
+			<dt><code>.actions</code></dt>
+			<dd>
+				Buttons and optional application-styled links. Apply
+				<code>%o-button</code>
+				to a link selector if it should look like a button.
+			</dd>
+		</dl>
+		<p>
+			These hooks describe structural roles. They are not a list of visual
+			utility classes. Existing applications can extend the smaller objects and
+			patterns on their own selectors when their markup differs. Arbitrary
+			wrapper depths and nested components are intentionally not traversed.
+		</p>
+		<h3>Form properties</h3>
+		<dl class="token-list">
+			<dt><code>--flair-form-gap</code></dt>
+			<dd>
+				Space between fields and within rows and groups. Falls back to
+				<code>--flair-space-4</code>
+				(1rem).
+			</dd>
+			<dt><code>--flair-field-gap</code></dt>
+			<dd>
+				Space between a label, control and message. Falls back to
+				<code>--flair-space-2</code>
+				(0.5rem).
+			</dd>
+			<dt><code>--flair-field-min-width</code></dt>
+			<dd>
+				Preferred field width before a row wraps. Default: 14rem. Fields can
+				shrink below this to fit narrow containers.
+			</dd>
+			<dt><code>--flair-label-weight</code></dt>
+			<dd>Label, legend and error-text weight. Default: 500.</dd>
+			<dt><code>--flair-fieldset-padding</code></dt>
+			<dd>
+				Falls back to
+				<code>--flair-space-4</code>
+				.
+			</dd>
+			<dt>
+				<code>--flair-actions-align</code>
+				,
+				<code>--flair-actions-gap</code>
+				,
+				<code>--flair-actions-margin</code>
+			</dt>
+			<dd>
+				Action justification, gap and block-start margin. Defaults: flex-end,
+				spacing step 3, spacing step 2.
+			</dd>
+		</dl>
+		<h3>Output and responsibility</h3>
+		<p>
+			Only extended placeholders produce rules. Including
+			<code>defaults()</code>
+			explicitly emits variables; including
+			<code>controls()</code>
+			explicitly emits native element selectors. Extending a form also includes
+			the objects it depends on. Sass does not inspect the HTML to remove unused
+			parts of that pattern.
+		</p>
+		<p>
+			Extensions add selectors where the original placeholder is defined, not
+			where the extension is written. Use CSS properties for theme changes and
+			local declarations for application-specific adjustments. Extending a
+			placeholder from inside an unrelated media query is not supported; apply
+			responsive property overrides instead.
+		</p>
+		<p>
+			The library adds no JavaScript, validation logic, network requests or
+			submission handlers. The global theme selector, example spacing controls
+			and submission acknowledgement belong to this website. Themes change CSS
+			properties; native browser controls may still render differently between
+			browsers.
+		</p>
+		<p>
+			References:
+			<a href="https://sass-lang.com/documentation/at-rules/extend/">
+				Sass extension behaviour
+			</a>
+			,
+			<a href="https://www.w3.org/WAI/tutorials/forms/labels/">form labels</a>
+			,
+			<a href="https://www.w3.org/WAI/tutorials/forms/grouping/">
+				grouping controls
+			</a>
+			and
+			<a href="https://www.w3.org/WAI/tutorials/forms/notifications/">
+				validation messages
+			</a>
+			.
+		</p>
 	</section>
 </main>

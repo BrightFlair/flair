@@ -1,0 +1,41 @@
+@use "../object/control";
+@use "../object/button";
+
+// Include at the root for global defaults, or inside a selector to scope them.
+// Objects use the child prefix to avoid styling nested component internals.
+@mixin controls($prefix: "") {
+	#{$prefix}:where(
+		input:not(
+			[type="hidden"],
+			[type="checkbox"],
+			[type="radio"],
+			[type="range"],
+			[type="color"],
+			[type="button"],
+			[type="submit"],
+			[type="reset"],
+			[type="image"]
+		),
+		select,
+		textarea
+	) {
+		@extend %o-control;
+	}
+	#{$prefix}:where(input[type="checkbox"], input[type="radio"]) {
+		@extend %o-choice;
+	}
+	#{$prefix}:where(input[type="range"]) {
+		@extend %o-range;
+	}
+	#{$prefix}:where(input[type="color"]) {
+		@extend %o-color;
+	}
+	#{$prefix}:where(
+		button,
+		input[type="button"],
+		input[type="submit"],
+		input[type="reset"]
+	) {
+		@extend %o-button;
+	}
+}

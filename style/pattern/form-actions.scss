@@ -1,0 +1,19 @@
+@use "../object/button";
+
+%p-form-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: var(--flair-actions-align, flex-end);
+	gap: var(--flair-actions-gap, var(--flair-space-3));
+	margin-block-start: var(--flair-actions-margin, var(--flair-space-2));
+	> :where(button, input[type="submit"], input[type="reset"]) {
+		@extend %o-button;
+	}
+	> .primary {
+		@extend %o-button-primary;
+	}
+	> .action-start {
+		margin-inline-end: auto;
+	}
+}

@@ -1,0 +1,58 @@
+@use "../decoration/control";
+
+%o-button {
+	@extend %d-control;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--flair-space-2);
+	inline-size: auto;
+	min-block-size: var(--flair-button-min-height, var(--flair-control-min-height));
+	padding-block: var(--flair-button-padding-block, var(--flair-control-padding-block, var(--flair-space-2)));
+	padding-inline: var(--flair-button-padding-inline, var(--flair-control-padding-inline, var(--flair-space-3)));
+	border-radius: var(--flair-button-radius, var(--flair-control-radius, var(--flair-radius)));
+	border-color: var(--flair-button-border, var(--flair-control-border, var(--flair-color-border)));
+	font-size: var(--flair-button-font-size, var(--flair-font-size));
+	text-align: center;
+	text-decoration: none;
+	overflow-wrap: anywhere;
+	cursor: pointer;
+	background: var(--flair-button-background, var(--flair-color-surface));
+	color: var(--flair-button-text, var(--flair-color-text));
+	font-weight: var(--flair-button-weight, var(--flair-label-weight));
+	&:hover:not(:disabled) {
+		border-color: var(--flair-button-border-hover, var(--flair-control-border-hover, var(--flair-color-text)));
+		box-shadow: var(--flair-button-shadow-hover, none);
+		background: var(
+			--flair-button-background-hover,
+			var(--flair-color-surface-disabled)
+		);
+	}
+	&:active:not(:disabled) {
+		background: var(--flair-button-background-active, var(--flair-button-background-hover, var(--flair-color-surface-disabled)));
+		box-shadow: none;
+	}
+}
+
+%o-button-primary {
+	@extend %o-button;
+	&:not(:disabled) {
+		background: var(
+			--flair-button-primary-background,
+			var(--flair-color-accent)
+		);
+		color: var(--flair-button-primary-text, var(--flair-color-on-accent));
+		border-color: var(--flair-button-primary-border, var(--flair-button-primary-background, var(--flair-color-accent)));
+	}
+	&:hover:not(:disabled) {
+		border-color: var(--flair-button-primary-border, var(--flair-button-primary-background, var(--flair-color-accent)));
+		background: var(
+			--flair-button-primary-background-hover,
+			var(--flair-color-text)
+		);
+		text-decoration: var(--flair-button-primary-decoration-hover, underline);
+	}
+	&:active:not(:disabled) {
+		background: var(--flair-button-primary-background-active, var(--flair-button-primary-background-hover, var(--flair-color-text)));
+	}
+}

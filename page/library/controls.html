@@ -1,14 +1,289 @@
-<section-switcher data-position="top"></section-switcher>
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 02</p>
-		<h1>Controls.</h1>
-		<p class="library-description">Buttons, inputs, selects and the small details of interaction.</p>
+		<h1>Controls</h1>
+		<p class="library-description">
+			Native inputs, buttons and the Sass definitions used to style them.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" aria-labelledby="control-dependencies">
+		<h2 id="control-dependencies">Definitions and dependencies</h2>
+		<p>
+			The entry point
+			<code>style/flair.scss</code>
+			loads definitions without emitting any CSS. Include the default variables
+			once, then extend the objects you need. Fonts are supplied by the
+			application; these examples use the Ubuntu files installed on this
+			website.
+		</p>
+		<ol>
+			<li>
+				<code>variable/index.scss</code>
+				provides
+				<code>defaults()</code>
+				: monochrome colours, spacing, typography and control sizes.
+			</li>
+			<li>
+				<code>%d-focus-ring</code>
+				defines the keyboard focus outline.
+			</li>
+			<li>
+				<code>%d-control</code>
+				defines padding, border, background, text and native disabled state. Its
+				focus-visible rule extends
+				<code>%d-focus-ring</code>
+				.
+			</li>
+			<li>
+				<code>%o-control</code>
+				extends
+				<code>%d-control</code>
+				for text inputs, selects and textareas. It adds full width, placeholder
+				text and read-only presentation.
+			</li>
+			<li>
+				<code>%o-button</code>
+				extends
+				<code>%d-control</code>
+				for buttons and links.
+				<code>%o-button-primary</code>
+				extends it for the primary action.
+			</li>
+			<li>
+				<code>%o-choice</code>
+				and
+				<code>%o-range</code>
+				retain native checkbox, radio and range appearance and extend the focus
+				ring.
+				<code>%o-color</code>
+				extends the control decoration with a smaller swatch size.
+			</li>
+		</ol>
+		<pre><code>@use "path/to/flair/style/flair";
+
+:root {
+	@include flair.defaults;
+}
+.search-input {
+	@extend %o-control;
+}
+.download-link {
+	@extend %o-button;
+}
+.save-button {
+	@extend %o-button-primary;
+}</code></pre>
+		<p>
+			Alternatively, include
+			<code>flair.controls()</code>
+			to apply objects to native tags. At the stylesheet root this emits global
+			element defaults; inside a selector it limits them to that region. Hidden
+			and image inputs are excluded. Checkboxes, radios, range and colour inputs
+			receive their own objects.
+		</p>
+		<pre><code>.search-area {
+	@include flair.controls;
+}</code></pre>
+	</section>
+	<section
+		class="reference-section"
+		aria-labelledby="control-states"
+		data-form-example
+	>
+		<h2 id="control-states">Control states</h2>
+		<p>
+			Use the global theme selector to change the page and its examples. Focus a
+			control using the keyboard to inspect its outline. Invalid and read-only
+			examples have dashed and dotted borders respectively. Error text
+			identifies the problem independently of colour.
+		</p>
+		<div class="demo-settings" hidden>
+			<label>
+				Spacing
+				<select data-setting="density">
+					<option value="default">Default</option>
+					<option value="compact">Compact</option>
+				</select>
+			</label>
+		</div>
+		<div class="flair-example control-grid">
+			<label class="demo-field">
+				<span>Name</span>
+				<input type="text" placeholder="e.g. Alex Smith" autocomplete="name" />
+			</label>
+			<label class="demo-field">
+				<span>Reference (read-only)</span>
+				<input value="FLAIR-001" readonly />
+				<span class="field-help">This value can be selected and copied.</span>
+			</label>
+			<label class="demo-field">
+				<span>Organisation (disabled)</span>
+				<input value="Not available" disabled />
+			</label>
+			<label class="demo-field">
+				<span>Email</span>
+				<input
+					type="email"
+					value="alex@"
+					aria-invalid="true"
+					aria-describedby="control-error"
+					autocomplete="email"
+				/>
+				<span id="control-error" class="field-error">
+					Error: enter a complete email address.
+				</span>
+			</label>
+			<label class="demo-field">
+				<span>Language</span>
+				<select>
+					<option>English</option>
+					<option>Français</option>
+					<option>Deutsch</option>
+				</select>
+			</label>
+			<label class="demo-field">
+				<span>Formats (multiple selection)</span>
+				<select multiple size="3">
+					<option>HTML</option>
+					<option>CSS</option>
+					<option>JavaScript</option>
+				</select>
+			</label>
+			<label class="demo-field">
+				<span>Date</span>
+				<input type="date" />
+			</label>
+			<label class="demo-field">
+				<span>Quantity</span>
+				<input type="number" min="0" value="1" />
+			</label>
+			<label class="demo-field">
+				<span>Volume</span>
+				<input type="range" min="0" max="100" value="50" />
+			</label>
+			<label class="demo-field">
+				<span>Colour</span>
+				<input type="color" value="#111111" />
+			</label>
+			<label class="demo-field">
+				<span>Attachment</span>
+				<input type="file" />
+				<span class="field-help">Selecting a file does not upload it.</span>
+			</label>
+			<label class="demo-field">
+				<span>Notes</span>
+				<textarea rows="4" placeholder="Additional information"></textarea>
+			</label>
+		</div>
+	</section>
+	<section class="reference-section" aria-labelledby="button-examples">
+		<h2 id="button-examples">Buttons and choices</h2>
+		<p>
+			These buttons have no application action. A link styled as a button still
+			navigates. Use native
+			<code>disabled</code>
+			on buttons; styling alone cannot disable a link or prevent an action.
+		</p>
+		<div class="flair-example demo-stack">
+			<div class="demo-actions">
+				<button class="demo-button" type="button">Default</button>
+				<button class="demo-primary" type="button">Primary</button>
+				<button class="demo-button" type="button" disabled>Disabled</button>
+				<button class="demo-primary" type="button" disabled>
+					Disabled primary
+				</button>
+				<a class="demo-button" href="/library/forms/">Form examples</a>
+			</div>
+			<label class="demo-choice">
+				<input type="checkbox" checked />
+				<span>Receive updates</span>
+			</label>
+			<label class="demo-choice">
+				<input type="checkbox" disabled />
+				<span>Unavailable preference (disabled)</span>
+			</label>
+			<fieldset class="demo-native">
+				<legend>Delivery method</legend>
+				<label>
+					<input type="radio" name="delivery" checked />
+					Email
+				</label>
+				<label>
+					<input type="radio" name="delivery" />
+					Post
+				</label>
+			</fieldset>
+		</div>
+	</section>
+	<section class="reference-section" aria-labelledby="control-tokens">
+		<h2 id="control-tokens">CSS properties</h2>
+		<p>
+			Set properties on the application root or on a containing element. Objects
+			read these values without assigning local defaults that would override
+			inherited settings. The default mixin should be included once per
+			independent theme scope.
+		</p>
+		<dl class="token-list">
+			<dt><code>--flair-color-*</code></dt>
+			<dd>
+				Text, muted text, surface, disabled surface, border, accent, on-accent
+				and danger colours.
+			</dd>
+			<dt>
+				<code>--flair-font-body</code>
+				,
+				<code>--flair-font-size</code>
+				,
+				<code>--flair-font-weight</code>
+				,
+				<code>--flair-line-height</code>
+			</dt>
+			<dd>
+				Shared control and field typography. Default: Ubuntu, 1rem, 400, 1.5.
+			</dd>
+			<dt>
+				<code>--flair-control-padding-block</code>
+				,
+				<code>--flair-control-padding-inline</code>
+			</dt>
+			<dd>Fallback: spacing steps 2 and 3 (0.5rem and 0.75rem).</dd>
+			<dt>
+				<code>--flair-control-min-height</code>
+				,
+				<code>--flair-control-radius</code>
+			</dt>
+			<dd>
+				Default minimum height: 2.75rem. Radius falls back to the shared radius,
+				initially zero.
+			</dd>
+			<dt>
+				<code>--flair-control-background</code>
+				,
+				<code>--flair-control-text</code>
+				,
+				<code>--flair-control-border</code>
+			</dt>
+			<dd>Control-specific overrides of the semantic colours.</dd>
+			<dt>
+				<code>--flair-focus-color</code>
+				,
+				<code>--flair-focus-width</code>
+				,
+				<code>--flair-focus-offset</code>
+			</dt>
+			<dd>Default: accent colour, 3px width, 2px offset.</dd>
+			<dt><code>--flair-button-*</code></dt>
+			<dd>
+				Button background, text and weight, hover background, and primary-action
+				colours. See the complete reference below.
+			</dd>
+		</dl>
+		<p>
+			The complete property list, markup contract and extension examples are in
+			<a href="/library/forms/#implementation-notes">the form documentation</a>
+			and
+			<code>docs/forms.md</code>
+			in the repository.
+		</p>
 	</section>
 </main>

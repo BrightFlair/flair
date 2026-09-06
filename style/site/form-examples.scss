@@ -1,0 +1,131 @@
+@use "../flair";
+
+// These selectors and themes belong to the documentation website.
+.flair-example {
+	padding: var(--site-space-medium);
+	border: 1px solid var(--site-line);
+	background: var(--flair-color-surface);
+	color: var(--flair-color-text);
+
+	&[data-density="compact"] {
+		--flair-form-gap: var(--flair-space-3);
+		--flair-field-gap: var(--flair-space-1);
+		--flair-control-padding-block: var(--flair-space-1);
+		--flair-control-padding-inline: var(--flair-space-2);
+		--flair-control-min-height: 2.25rem;
+	}
+}
+
+.demo-field {
+	@extend %o-form-field;
+}
+.demo-choice {
+	@extend %o-choice-field;
+}
+.demo-button {
+	@extend %o-button;
+}
+.demo-primary {
+	@extend %o-button-primary;
+}
+.demo-actions {
+	@extend %p-form-actions;
+}
+.demo-form {
+	@extend %p-form-fields;
+}
+.demo-native {
+	@include flair.controls;
+}
+
+.reference-section {
+	padding-block: var(--site-space-large);
+	border-bottom: 1px solid var(--site-line);
+	> h2 {
+		font-size: clamp(2.25rem, 4vw, 4rem);
+		line-height: 1.1;
+		margin-bottom: var(--site-space-medium);
+	}
+	> p {
+		max-width: 52rem;
+		margin-block: var(--site-space-medium);
+	}
+	h3 {
+		font: 400 1.75rem/1.2 var(--site-font-heading);
+		margin: 0 0 var(--site-space-medium);
+	}
+	code {
+		font-family: var(--site-font-mono);
+		overflow-wrap: anywhere;
+	}
+	pre {
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+		padding: var(--site-space-medium);
+		border: 1px solid var(--site-line);
+		font: 1rem/1.5 var(--site-font-mono);
+		tab-size: 2;
+	}
+	ul,
+	ol {
+		padding-left: var(--site-space-medium);
+		line-height: 1.65;
+	}
+	li + li {
+		margin-top: var(--site-space-small);
+	}
+	.reference-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+		gap: var(--site-space-large);
+	}
+	.control-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+		gap: var(--flair-space-6);
+	}
+	.demo-stack {
+		display: grid;
+		gap: var(--flair-space-6);
+	}
+	.demo-settings {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--site-space-medium);
+		margin-bottom: var(--site-space-medium);
+		label {
+			display: flex;
+			align-items: center;
+			gap: var(--site-space-small);
+		}
+		select {
+			min-height: 2.75rem;
+			padding: var(--site-space-small);
+			background: var(--site-paper);
+			border: 1px solid var(--site-ink);
+		}
+	}
+	.token-list {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: var(--site-space-small) var(--site-space-medium);
+		line-height: 1.5;
+		dt,
+		dd {
+			margin: 0;
+			padding-bottom: var(--site-space-small);
+			border-bottom: 1px solid var(--site-line);
+		}
+	}
+	#form-result {
+		margin-top: var(--site-space-medium);
+	}
+}
+@media (max-width: 45rem) {
+	.reference-section .token-list {
+		grid-template-columns: minmax(0, 1fr);
+		dd {
+			padding-bottom: var(--site-space-medium);
+		}
+	}
+}

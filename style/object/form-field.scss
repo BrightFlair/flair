@@ -1,0 +1,69 @@
+@use "../element/controls";
+@use "control";
+
+%o-form-field {
+	display: grid;
+	align-content: start;
+	gap: var(--flair-field-gap, var(--flair-space-2));
+	min-inline-size: 0;
+	margin: 0;
+	color: var(--flair-color-text);
+	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
+		var(--flair-font-body);
+	@include controls.controls("> ");
+	> :where(label, .field-label, span:first-child) {
+		font-weight: var(--flair-label-weight);
+		font-size: var(--flair-label-font-size, var(--flair-font-size));
+	}
+	> :where(.field-help, .field-error) {
+		margin: 0;
+		font: inherit;
+		font-size: var(--flair-message-font-size, var(--flair-font-size));
+	}
+	> .field-help {
+		color: var(--flair-color-muted);
+	}
+	> .field-error {
+		color: var(--flair-color-danger);
+		font-weight: var(--flair-label-weight);
+	}
+}
+
+%o-choice-field {
+	display: grid;
+	grid-template-columns: var(--flair-choice-size) minmax(0, 1fr);
+	align-items: start;
+	gap: var(--flair-space-2);
+	min-inline-size: 0;
+	margin: 0;
+	color: var(--flair-color-text);
+	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
+		var(--flair-font-body);
+	> :where(input[type="checkbox"], input[type="radio"]) {
+		@extend %o-choice;
+		margin-block-start: var(--flair-space-1);
+	}
+}
+
+%o-fieldset {
+	display: grid;
+	gap: var(--flair-form-gap, var(--flair-space-4));
+	min-inline-size: 0;
+	margin: 0;
+	padding: var(--flair-fieldset-padding, var(--flair-space-4));
+	border: var(--flair-border-width) solid var(--flair-color-border);
+	border-radius: var(--flair-radius);
+	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
+		var(--flair-font-body);
+	color: var(--flair-color-text);
+	> legend {
+		padding-inline: var(--flair-space-2);
+		font-weight: var(--flair-label-weight);
+	}
+	> :where(.field, label:not(.choice)) {
+		@extend %o-form-field;
+	}
+	> .choice {
+		@extend %o-choice-field;
+	}
+}

@@ -1,24 +1,23 @@
 for(const switcher of document.querySelectorAll("section-switcher")) {
-	const form = switcher.querySelector("form");
-	const select = form.querySelector("select");
-	const submit = form.querySelector('[type="submit"]');
-	select.addEventListener("change", () => submit.click());
-	submit.hidden = true;
+	const sectionForm = switcher.querySelector(".section-form");
+	const sectionSelect = sectionForm.querySelector("select");
+	const sectionSubmit = sectionForm.querySelector('[type="submit"]');
+	sectionSelect.addEventListener("change", () => sectionSubmit.click());
+	sectionSubmit.hidden = true;
 
-	const button = switcher.querySelector(".switcher-position");
-	const label = button.querySelector(".position-label");
-	const arrow = button.querySelector("[aria-hidden]");
-	const update = () => {
-		const atBottom = switcher.dataset.position === "bottom";
-		label.textContent = atBottom ? "Move up" : "Move down";
-		arrow.textContent = atBottom ? "↑" : "↓";
-		button.title = atBottom ? "Move navigation to the top" : "Move navigation to the bottom";
-		button.setAttribute("aria-label", button.title);
-	};
-	button.hidden = false;
-	update();
-	button.addEventListener("click", () => {
-		switcher.dataset.position = switcher.dataset.position === "bottom" ? "top" : "bottom";
-		update();
+	const themeForm = switcher.querySelector(".theme-form");
+	const themeSelect = themeForm.querySelector("select");
+	themeSelect.addEventListener("change", () => {
+		const theme = themeSelect.value;
+		document.documentElement.dataset.theme = theme;
+		document.cookie = `flair-theme=${theme}; Path=/; Max-Age=31536000; SameSite=Lax`;
+		// A no-JavaScript theme submission may have left a theme in the URL.
+		// Keep it consistent so reloading retains the current selection.
+		const url = new URL(window.location.href);
+		if(url.searchParams.has("theme")) {
+			url.searchParams.set("theme", theme);
+			window.history.replaceState(null, "", url);
+		}
 	});
+	themeForm.querySelector('[type="submit"]').hidden = true;
 }

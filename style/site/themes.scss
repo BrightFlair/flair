@@ -1,0 +1,147 @@
+// Website theme choices; the library only supplies defaults.
+
+:root[data-theme="ink"] {
+	--flair-color-text: #f5f5f5;
+	--flair-color-muted: #bbb;
+	--flair-color-surface: #161616;
+	--flair-color-surface-disabled: #303030;
+	--flair-color-border: #999;
+	--flair-color-accent: #fff;
+	--flair-color-on-accent: #111;
+	--flair-color-danger: #fff;
+	color-scheme: dark;
+}
+:root[data-theme="paper"] {
+	--flair-color-text: #24211d;
+	--flair-color-muted: #59564f;
+	--flair-color-surface: #fffdf5;
+	--flair-color-surface-disabled: #eee8d8;
+	--flair-color-border: #827765;
+	--flair-color-accent: #315c40;
+	--flair-color-on-accent: #fff;
+	--flair-color-danger: #952a20;
+	--flair-radius: 0.4rem;
+}
+
+:root[data-theme="vivid"] {
+	--flair-color-text: #29134d;
+	--flair-color-muted: #60456e;
+	--flair-color-surface: #fff6b0;
+	--flair-color-surface-disabled: #e8ddf0;
+	--flair-color-border: #603bb2;
+	--flair-color-accent: #6025d6;
+	--flair-color-on-accent: #fff;
+	--flair-color-danger: #b01941;
+	--flair-control-background: #fffdf7;
+	--flair-control-border-hover: #005e65;
+	--flair-button-background: #e1fbec;
+	--flair-button-background-hover: #c4f3d8;
+	--flair-button-primary-background: #c7ff54;
+	--flair-button-primary-background-hover: #b0ed35;
+	--flair-button-primary-text: #29134d;
+	--flair-focus-color: #005e65;
+	--flair-border-width: 2px;
+	--flair-radius: 1.25rem;
+	--flair-control-radius: 0.75rem;
+	--flair-control-padding-block: 0.875rem;
+	--flair-control-padding-inline: 1.125rem;
+	--flair-control-min-height: 3.25rem;
+	--flair-form-gap: var(--flair-space-6);
+	--flair-field-gap: var(--flair-space-3);
+	--flair-fieldset-padding: var(--flair-space-6);
+	--flair-actions-gap: var(--flair-space-4);
+	--flair-actions-margin: var(--flair-space-4);
+	--flair-label-weight: 700;
+}
+
+// api.horse's light palette and shared user-interface/button styles.
+:root[data-theme="github"] {
+	--flair-font-body: "Mona Sans", sans-serif;
+	--flair-color-text: #1f2328;
+	--flair-color-muted: #656d76;
+	--flair-color-surface: #fff;
+	--flair-color-surface-disabled: #f6f8fa;
+	--flair-color-border: #d8dee4;
+	--flair-color-accent: #0969da;
+	--flair-color-on-accent: #fff;
+	--flair-color-danger: #a40e26;
+	--flair-control-background: #f6f8fa;
+	--flair-control-background-focus: #fff;
+	--flair-control-border-hover: var(--flair-color-accent);
+	--flair-control-padding-block: var(--flair-space-2);
+	--flair-control-padding-inline: var(--flair-space-2);
+	--flair-control-min-height: 0;
+	--flair-line-height: normal;
+	--flair-radius: 0.25rem;
+	--flair-focus-width: 2px;
+	--flair-label-weight: 700;
+	--flair-button-weight: 400;
+	--flair-button-padding-inline: var(--flair-space-4);
+	--flair-button-background: #f6f8fa;
+	--flair-button-background-hover: color-mix(in srgb, #f6f8fa, #1f2328 5%);
+	--flair-button-background-active: color-mix(in srgb, #f6f8fa, #1f2328 20%);
+	--flair-button-border-hover: var(--flair-color-border);
+	--flair-button-primary-background: #1f883d;
+	--flair-button-primary-background-hover: color-mix(in srgb, #1f883d, white 5%);
+	--flair-button-primary-background-active: color-mix(in srgb, #1f883d, white 20%);
+	--flair-button-primary-border: #1e793a;
+	--flair-button-primary-decoration-hover: none;
+	--site-font-body: var(--flair-font-body);
+	--site-font-heading: var(--flair-font-body);
+	--site-font-size: 14px;
+	--site-switcher-border-width: 1px;
+	--site-switcher-border: var(--flair-color-border);
+	--site-switcher-radius: var(--flair-radius);
+	--site-switcher-shadow: 0 1px 0 rgb(31 35 40 / 4%);
+	color-scheme: light;
+}
+
+// Material 3 light colours, outlined fields and filled/outlined buttons.
+:root[data-theme="material"] {
+	--flair-font-body: "Roboto", sans-serif;
+	--flair-color-text: #1d1b20;
+	--flair-color-muted: #49454f;
+	--flair-color-surface: #fef7ff;
+	--flair-color-surface-disabled: #e4dfe6;
+	--flair-color-border: #79747e;
+	--flair-color-accent: #6750a4;
+	--flair-color-on-accent: #fff;
+	--flair-color-danger: #b3261e;
+	--flair-control-min-height: 3.5rem;
+	--flair-control-padding-block: 0.9375rem;
+	--flair-control-padding-inline: var(--flair-space-4);
+	--flair-control-radius: 0.25rem;
+	--flair-control-invalid-border-style: solid;
+	--flair-control-focus-offset: -2px;
+	--flair-label-font-size: 0.75rem;
+	--flair-message-font-size: 0.75rem;
+	--flair-radius: 0.75rem;
+	--flair-focus-width: 2px;
+	--flair-label-weight: 400;
+	--flair-form-gap: var(--flair-space-6);
+	--flair-field-gap: var(--flair-space-2);
+	--flair-fieldset-padding: var(--flair-space-6);
+	--flair-actions-gap: var(--flair-space-2);
+	--flair-actions-margin: var(--flair-space-4);
+	--flair-button-min-height: 2.5rem;
+	--flair-button-padding-block: 0.5625rem;
+	--flair-button-padding-inline: var(--flair-space-6);
+	--flair-button-radius: 999px;
+	--flair-button-font-size: 0.875rem;
+	--flair-button-weight: 500;
+	--flair-button-text: var(--flair-color-accent);
+	--flair-button-background-hover: color-mix(in srgb, #fef7ff, #6750a4 8%);
+	--flair-button-background-active: color-mix(in srgb, #fef7ff, #6750a4 12%);
+	--flair-button-border-hover: var(--flair-color-border);
+	--flair-button-primary-background-hover: color-mix(in srgb, #6750a4, white 8%);
+	--flair-button-primary-background-active: color-mix(in srgb, #6750a4, white 12%);
+	--flair-button-primary-decoration-hover: none;
+	--flair-button-shadow-hover: 0 1px 2px rgb(0 0 0 / 20%);
+	--site-font-body: var(--flair-font-body);
+	--site-font-heading: var(--flair-font-body);
+	--site-switcher-border-width: 1px;
+	--site-switcher-border: #cac4d0;
+	--site-switcher-radius: var(--flair-radius);
+	--site-switcher-shadow: 0 2px 6px rgb(0 0 0 / 16%);
+	color-scheme: light;
+}
