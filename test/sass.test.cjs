@@ -107,3 +107,13 @@ test('every public placeholder can be consumed in isolation', () => {
 		assert.doesNotMatch(css, /@font-face|data-theme|section-switcher|!important/, placeholder);
 	}
 });
+
+test('checklists remain independent of pricing, card surfaces and application fonts', () => {
+	const css = compile(`@use "flair";
+.features {
+	@extend %p-checklist;
+}`);
+	assert.match(css, /checklist-marker/);
+	assert.match(css, /data-available=false/);
+	assert.doesNotMatch(css, /authwave|plan-price|@font-face|Morion|:root/);
+});

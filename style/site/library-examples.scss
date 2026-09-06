@@ -184,3 +184,14 @@
 .flair-example [id] {
 	scroll-margin-block-start: 8rem;
 }
+
+.flair-example .demo-highlight {
+	@extend %d-highlight;
+	display: inline-block;
+	max-inline-size: 100%;
+	padding: var(--flair-space-2);
+}
+
+.flair-example .demo-highlight-wrap {
+	max-inline-size: 20ch;
+}

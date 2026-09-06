@@ -1,0 +1,31 @@
+%p-checklist {
+	display: grid;
+	gap: var(--flair-checklist-gap, var(--flair-space-4));
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	> li {
+		display: grid;
+		grid-template-columns: var(--flair-checklist-marker-size, 1.25rem) minmax(
+				0,
+				1fr
+			);
+		align-items: start;
+		gap: var(--flair-space-3);
+		margin: 0;
+		overflow-wrap: anywhere;
+	}
+	.checklist-marker {
+		display: grid;
+		place-items: center;
+		min-block-size: var(--flair-checklist-marker-size, 1.25rem);
+		background: var(--flair-color-text);
+		color: var(--flair-color-surface);
+		font-size: var(--flair-small-size, 0.875rem);
+		line-height: 1;
+	}
+	[data-available="false"] .checklist-marker {
+		background: var(--flair-color-surface-disabled);
+		color: var(--flair-color-muted);
+	}
+}

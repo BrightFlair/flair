@@ -131,6 +131,55 @@
 }</code></pre>
 		</details>
 	</section>
+	<section class="reference-section" id="highlight" aria-labelledby="highlight-title">
+		<h2 id="highlight-title">Highlight decoration</h2>
+		<p>
+			<code>%d-highlight</code> adds a border with four square markers outside its
+			corners. It can frame text or a whole container. Inline text uses
+			<code>display: inline-block</code> so wrapped lines share one box.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack">
+				<p><span class="demo-highlight">Highlighted text</span></p>
+				<div class="demo-highlight-wrap">
+					<p><span class="demo-highlight">This longer text wraps inside one highlighted box.</span></p>
+				</div>
+				<div class="demo-highlight">
+					<p>The same decoration can frame a container at its available width.</p>
+				</div>
+			</div>
+		</div>
+		<p>
+			Markers use the text colour; the border inherits the theme’s border colour.
+			Override <code>--flair-highlight-marker-size</code>,
+			<code>--flair-highlight-border-width</code> or
+			<code>--flair-highlight-border-color</code> to adjust them.
+			The decoration uses <code>::before</code> and needs space outside its border
+			without clipping by an ancestor.
+		</p>
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;p&gt;&lt;span class="demo-highlight"&gt;Highlighted text&lt;/span&gt;&lt;/p&gt;
+&lt;div class="demo-highlight-wrap"&gt;
+	&lt;p&gt;&lt;span class="demo-highlight"&gt;This longer text wraps inside one highlighted box.&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="demo-highlight"&gt;
+	&lt;p&gt;The same decoration can frame a container at its available width.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-highlight {
+	@extend %d-highlight;
+	display: inline-block;
+	max-inline-size: 100%;
+	padding: var(--flair-space-2);
+}
+
+.demo-highlight-wrap {
+	max-inline-size: 20ch;
+}</code></pre>
+		</details>
+	</section>
 	<section class="reference-section" id="identity" aria-labelledby="identity-title">
 		<h2 id="identity-title">Identity and vertical lists</h2>
 		<p>

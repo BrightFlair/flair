@@ -1,9 +1,21 @@
 {
-  "dependencies": {
-    "esbuild": "^0.28.2",
-    "sass": "^1.104.0"
-  },
-  "scripts": {
-    "test": "node --test test/*.test.cjs"
-  }
+	"name": "flair",
+	"version": "0.1.0",
+	"sass": "style/flair.scss",
+	"files": [
+		"style/flair.scss",
+		"style/variable/",
+		"style/decoration/",
+		"style/element/",
+		"style/object/",
+		"style/pattern/",
+		"style/layout/"
+	],
+	"devDependencies": {
+		"esbuild": "^0.28.2",
+		"sass": "^1.104.0"
+	},
+	"scripts": {
+		"test": "node --test test/*.test.cjs"
+	}
 }

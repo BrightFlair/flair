@@ -290,3 +290,57 @@ Start the Flair website on port 8084 first (`gt run -p 8084`). Set `FLAIR_TEST_U
 The Disclosures page includes a simple close action, primary/negative choices, and a required-field form. All use the same dialog object. Native `method="dialog"` submission closes the dialog without a network request; required fields prevent submission until valid. A cancel submitter uses `formnovalidate` so incomplete input does not prevent dismissal. Escape remains available.
 
 The website reveals all example actions after enhancement, resets `returnValue` before reopening, and reports each choice in a status region outside the dialog. Focus returns to its own opener. Without JavaScript, the three dialogs remain inline previews with modal action controls hidden. These behaviours belong to `script/component/library-example.es6`, not to the Sass library.
+
+## Checklist pattern
+
+`%p-checklist` is defined in `style/pattern/checklist.scss`. Use it on a list with a `.checklist-marker` and text in each direct list item. Markers carry explicit accessible labels such as “Included” or “Not included”; the latter can also set `data-available="false"` on the item for a secondary marker treatment. These are informational markers, not checkbox controls.
+
+```html
+<ul class="plan-features">
+	<li>
+		<span class="checklist-marker" role="img" aria-label="Included">✓</span>
+		<span>User management</span>
+	</li>
+	<li data-available="false">
+		<span class="checklist-marker" role="img" aria-label="Not included">×</span>
+		<span>Managed hosting</span>
+	</li>
+</ul>
+```
+
+```scss
+@use "flair";
+
+.plan-features {
+	@extend %p-checklist;
+}
+```
+
+`--flair-checklist-gap` defaults to space 4; `--flair-checklist-marker-size` defaults to 1.25rem. Marker colours inherit the existing text, surface, disabled-surface and muted tokens. The separate Authwave website uses this pattern without adding pricing-specific behaviour to Flair.
+
+## Local npm consumption
+
+An implementing project can require `"flair": "file:../../BrightFlair/flair"` in `package.json`, adjusting the relative path to its checkout. Run `npm install`, then add `node_modules/flair/style` to the Sass load path. WebEngine projects can override the Sass command in `build.ini`:
+
+```ini
+[style/**/*.scss]
+execute=./node_modules/.bin/sass --load-path=node_modules/flair/style ./style/style.scss www/style.css --source-map --embed-sources --embed-source-map
+```
+
+Use `@use "flair";` in consuming modules. The package contains only the public Sass entry and library directories. Application fonts, navigation scripts and website themes are not included. Rebuild the implementing project after editing Flair.
+
+## Highlight decoration
+
+`%d-highlight` draws a border with four square markers outside its corners. It uses `::before`, which must remain available, and leaves layout decisions to the consumer. Use `display: inline-block` for inline text so wrapping produces one enclosing box. Ancestors must allow overflow for the external markers to remain visible.
+
+```scss
+@use "flair";
+
+.highlight {
+	@extend %d-highlight;
+	display: inline-block;
+	max-inline-size: 100%;
+}
+```
+
+`--flair-highlight-marker-size` defaults to `0.375rem`. `--flair-highlight-border-width` and `--flair-highlight-border-color` fall back to the standard border tokens. Markers use `currentColor`; they do not intercept pointer events.
