@@ -1,0 +1,28 @@
+@use "../decoration/surface";
+%o-notice {
+	@extend %d-surface;
+	border-inline-start: var(--flair-notice-border-width, 4px) solid
+		var(--flair-notice-color, var(--flair-color-accent));
+	background: var(
+		--flair-notice-background,
+		var(--flair-surface-background, var(--flair-color-surface))
+	);
+	> :first-child {
+		margin-block-start: 0;
+	}
+	> :last-child {
+		margin-block-end: 0;
+	}
+}
+%o-notice-success {
+	@extend %o-notice;
+	border-inline-start-color: var(--flair-color-success, var(--flair-color-text));
+}
+%o-notice-warning {
+	@extend %o-notice;
+	border-inline-start-color: var(--flair-color-warning, var(--flair-color-text));
+}
+%o-notice-danger {
+	@extend %o-notice;
+	border-inline-start-color: var(--flair-color-danger);
+}

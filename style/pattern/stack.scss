@@ -1,0 +1,9 @@
+@use "../decoration/flow";
+
+%p-stack {
+	@extend %d-stack;
+}
+
+%p-cluster {
+	@extend %d-cluster;
+}

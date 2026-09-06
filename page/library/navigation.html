@@ -1,13 +1,236 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 05</p>
-		<h1>Navigation.</h1>
-		<p class="library-description">Menus, tabs, breadcrumbs and finding your way around.</p>
+		<h1>Navigation</h1>
+		<p class="library-description">
+			Page links, section navigation, breadcrumbs and pagination.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section
+		class="reference-section"
+		id="primary-navigation"
+		aria-labelledby="primary-navigation-title"
+	>
+		<h2 id="primary-navigation-title">Primary navigation</h2>
+		<p>
+			Use ordinary links for page navigation. The current destination is identified with
+			aria-current.
+		</p>
+		<div class="flair-example">
+			<nav class="demo-navigation" aria-label="Example library navigation">
+				<ul>
+					<li><a href="/library/navigation/" aria-current="page">Navigation</a></li>
+					<li><a href="/library/forms/">Forms</a></li>
+					<li><a href="/library/tables/">Tables</a></li>
+					<li><a href="/library/layouts/">Layouts</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;nav class="demo-navigation" aria-label="Example library navigation"&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href="/library/navigation/" aria-current="page"&gt;Navigation&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/forms/"&gt;Forms&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/tables/"&gt;Tables&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/layouts/"&gt;Layouts&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-navigation {
+	@extend %p-navigation;
+}</code></pre>
+		</details>
+	</section>
+	<section
+		class="reference-section"
+		id="side-navigation"
+		aria-labelledby="side-navigation-title"
+	>
+		<h2 id="side-navigation-title">Side navigation</h2>
+		<p>
+			This vertical pattern remains in document flow. Its parent layout supplies its
+			width.
+		</p>
+		<div class="flair-example">
+			<div class="demo-narrow">
+				<nav class="demo-side-navigation" aria-label="Example section navigation">
+					<ul>
+						<li><a href="#primary-navigation">Primary navigation</a></li>
+						<li>
+							<a href="#side-navigation" aria-current="location">Side navigation</a>
+						</li>
+						<li><a href="#breadcrumbs">Breadcrumbs</a></li>
+						<li><a href="#pagination">Pagination</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-narrow"&gt;
+	&lt;nav class="demo-side-navigation" aria-label="Example section navigation"&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;a href="#primary-navigation"&gt;Primary navigation&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#side-navigation" aria-current="location"&gt;Side navigation&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#breadcrumbs"&gt;Breadcrumbs&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#pagination"&gt;Pagination&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/nav&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-side-navigation {
+	@extend %p-side-navigation;
+}
+
+.demo-narrow {
+	max-inline-size: 28rem;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="page-tabs" aria-labelledby="page-tabs-title">
+		<h2 id="page-tabs-title">Page navigation with an active indicator</h2>
+		<p>
+			These are links to separate pages, not an interactive tab widget. They wrap without
+			hiding destinations.
+		</p>
+		<div class="flair-example">
+			<nav class="demo-page-tabs" aria-label="Related examples">
+				<ul>
+					<li><a href="/library/navigation/" aria-current="page">Overview</a></li>
+					<li><a href="/library/controls/">Controls</a></li>
+					<li><a href="/library/disclosures/">Expandable content</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;nav class="demo-page-tabs" aria-label="Related examples"&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href="/library/navigation/" aria-current="page"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/controls/"&gt;Controls&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/disclosures/"&gt;Expandable content&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-page-tabs {
+	@extend %p-page-tabs;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="breadcrumbs" aria-labelledby="breadcrumbs-title">
+		<h2 id="breadcrumbs-title">Breadcrumbs</h2>
+		<p>
+			An ordered list expresses the hierarchy. Separators are hidden from assistive
+			technology.
+		</p>
+		<div class="flair-example">
+			<nav class="demo-breadcrumbs" aria-label="Breadcrumb">
+				<ol>
+					<li><a href="/">Flair</a></li>
+					<li>
+						<span class="separator" aria-hidden="true">/</span
+						><a href="/#contents">Library</a>
+					</li>
+					<li>
+						<span class="separator" aria-hidden="true">/</span
+						><span aria-current="page">Navigation</span>
+					</li>
+				</ol>
+			</nav>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;nav class="demo-breadcrumbs" aria-label="Breadcrumb"&gt;
+	&lt;ol&gt;
+		&lt;li&gt;&lt;a href="/"&gt;Flair&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;
+			&lt;span class="separator" aria-hidden="true"&gt;/&lt;/span&gt;&lt;a href="/#contents"&gt;Library&lt;/a&gt;
+		&lt;/li&gt;
+		&lt;li&gt;
+			&lt;span class="separator" aria-hidden="true"&gt;/&lt;/span
+			&gt;&lt;span aria-current="page"&gt;Navigation&lt;/span&gt;
+		&lt;/li&gt;
+	&lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-breadcrumbs {
+	@extend %p-breadcrumbs;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="pagination" aria-labelledby="pagination-title">
+		<h2 id="pagination-title">Pagination</h2>
+		<p>
+			This example moves between library sections. Unavailable destinations are text,
+			rather than disabled-looking links.
+		</p>
+		<div class="flair-example">
+			<nav class="demo-pagination" aria-label="Example sections">
+				<ul>
+					<li><span aria-disabled="true">Previous</span></li>
+					<li>
+						<a
+							href="/library/navigation/"
+							aria-current="page"
+							aria-label="Section 1, Navigation"
+							>1</a
+						>
+					</li>
+					<li>
+						<a href="/library/disclosures/" aria-label="Section 2, Disclosures">2</a>
+					</li>
+					<li><a href="/library/tables/" aria-label="Section 3, Tables">3</a></li>
+					<li><a href="/library/disclosures/">Next</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;nav class="demo-pagination" aria-label="Example sections"&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;span aria-disabled="true"&gt;Previous&lt;/span&gt;&lt;/li&gt;
+		&lt;li&gt;
+			&lt;a
+				href="/library/navigation/"
+				aria-current="page"
+				aria-label="Section 1, Navigation"
+				&gt;1&lt;/a
+			&gt;
+		&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/disclosures/" aria-label="Section 2, Disclosures"&gt;2&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/tables/" aria-label="Section 3, Tables"&gt;3&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="/library/disclosures/"&gt;Next&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-pagination {
+	@extend %p-pagination;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

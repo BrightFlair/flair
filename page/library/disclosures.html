@@ -1,13 +1,425 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 06</p>
-		<h1>Disclosures.</h1>
-		<p class="library-description">Details, expandable sections and content on demand.</p>
+		<h1>Disclosures</h1>
+		<p class="library-description">
+			Native expandable content and an optional modal presentation.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" id="single" aria-labelledby="single-title">
+		<h2 id="single-title">Expandable content</h2>
+		<p>
+			Details and summary provide keyboard and pointer interaction without
+			JavaScript. The native marker indicates the state.
+		</p>
+		<div class="flair-example">
+			<details class="demo-disclosure">
+				<summary>Connection settings</summary>
+				<div class="disclosure-content demo-prose">
+					<p>Additional information is hidden until the reader expands it.</p>
+					<a href="/library/forms/">View related form examples</a>
+				</div>
+			</details>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;details class="demo-disclosure"&gt;
+	&lt;summary&gt;Connection settings&lt;/summary&gt;
+	&lt;div class="disclosure-content demo-prose"&gt;
+		&lt;p&gt;Additional information is hidden until the reader expands it.&lt;/p&gt;
+		&lt;a href="/library/forms/"&gt;View related form examples&lt;/a&gt;
+	&lt;/div&gt;
+&lt;/details&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-prose {
+	@extend %p-prose;
+}
+
+.demo-disclosure {
+	@extend %o-disclosure;
+}</code></pre>
+		</details>
+	</section>
+	<section
+		class="reference-section"
+		id="accordion"
+		aria-labelledby="accordion-title"
+	>
+		<h2 id="accordion-title">Grouped disclosures</h2>
+		<p>
+			Independent panels may remain open together. Add a shared name to details
+			elements when only one should remain open.
+		</p>
+		<div class="flair-example">
+			<div class="demo-accordion">
+				<details open>
+					<summary>Where are styles defined?</summary>
+					<div class="disclosure-content">
+						<p>In Sass placeholders, extended onto application selectors.</p>
+					</div>
+				</details>
+				<details>
+					<summary>Can I override the spacing?</summary>
+					<div class="disclosure-content">
+						<p>
+							Yes. Set the appropriate inherited CSS properties on the
+							containing scope.
+						</p>
+					</div>
+				</details>
+				<details>
+					<summary>Does this require JavaScript?</summary>
+					<div class="disclosure-content">
+						<p>No. The browser handles this interaction.</p>
+					</div>
+				</details>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-accordion"&gt;
+	&lt;details open&gt;
+		&lt;summary&gt;Where are styles defined?&lt;/summary&gt;
+		&lt;div class="disclosure-content"&gt;
+			&lt;p&gt;In Sass placeholders, extended onto application selectors.&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/details&gt;
+	&lt;details&gt;
+		&lt;summary&gt;Can I override the spacing?&lt;/summary&gt;
+		&lt;div class="disclosure-content"&gt;
+			&lt;p&gt;Yes. Set the appropriate inherited CSS properties on the containing scope.&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/details&gt;
+	&lt;details&gt;
+		&lt;summary&gt;Does this require JavaScript?&lt;/summary&gt;
+		&lt;div class="disclosure-content"&gt;&lt;p&gt;No. The browser handles this interaction.&lt;/p&gt;&lt;/div&gt;
+	&lt;/details&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-accordion {
+	@extend %p-accordion;
+}</code></pre>
+		</details>
+	</section>
+	<section
+		class="reference-section"
+		id="exclusive"
+		aria-labelledby="exclusive-title"
+	>
+		<h2 id="exclusive-title">Exclusive disclosures</h2>
+		<p>
+			These two details elements share a name. Supporting browsers close the
+			other panel when one opens.
+		</p>
+		<div class="flair-example">
+			<div class="demo-accordion">
+				<details name="exclusive-demo">
+					<summary>Request information</summary>
+					<div class="disclosure-content">
+						<p>Request headers and body would appear here.</p>
+					</div>
+				</details>
+				<details name="exclusive-demo">
+					<summary>Response information</summary>
+					<div class="disclosure-content">
+						<p>Response status and body would appear here.</p>
+					</div>
+				</details>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-accordion"&gt;
+	&lt;details name="exclusive-demo"&gt;
+		&lt;summary&gt;Request information&lt;/summary&gt;
+		&lt;div class="disclosure-content"&gt;
+			&lt;p&gt;Request headers and body would appear here.&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/details&gt;
+	&lt;details name="exclusive-demo"&gt;
+		&lt;summary&gt;Response information&lt;/summary&gt;
+		&lt;div class="disclosure-content"&gt;
+			&lt;p&gt;Response status and body would appear here.&lt;/p&gt;
+		&lt;/div&gt;
+	&lt;/details&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-accordion {
+	@extend %p-accordion;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="dialog" aria-labelledby="dialog-title">
+		<h2 id="dialog-title">Dialog</h2>
+		<p>
+			Without JavaScript the dialog content appears inline. The website
+			enhancement enables modal opening, Escape dismissal and return of focus to
+			the opener.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack" data-dialog-example>
+				<button class="demo-button" type="button" data-dialog-open hidden>
+					Open example dialog
+				</button>
+				<dialog class="demo-dialog" aria-labelledby="example-dialog-title" open>
+					<div class="demo-stack">
+						<h3 id="example-dialog-title">Example dialog</h3>
+						<p>
+							This dialog demonstrates presentation and focus handling. It does
+							not save or delete anything.
+						</p>
+						<form method="dialog">
+							<button class="demo-button" data-dialog-close hidden>
+								Close dialog
+							</button>
+						</form>
+					</div>
+				</dialog>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack" data-dialog-example&gt;
+	&lt;button class="demo-button" type="button" data-dialog-open hidden&gt;
+		Open example dialog
+	&lt;/button&gt;
+	&lt;dialog class="demo-dialog" aria-labelledby="example-dialog-title" open&gt;
+		&lt;div class="demo-stack"&gt;
+			&lt;h3 id="example-dialog-title"&gt;Example dialog&lt;/h3&gt;
+			&lt;p&gt;
+				This dialog demonstrates presentation and focus handling. It does not save or
+				delete anything.
+			&lt;/p&gt;
+			&lt;form method="dialog"&gt;
+				&lt;button class="demo-button" data-dialog-close hidden&gt;Close dialog&lt;/button&gt;
+			&lt;/form&gt;
+		&lt;/div&gt;
+	&lt;/dialog&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-dialog {
+	@extend %o-dialog;
+}
+
+.demo-button {
+	@extend %o-button;
+}</code></pre>
+		</details>
+	</section>
+	<section
+		class="reference-section"
+		id="dialog-actions"
+		aria-labelledby="dialog-actions-title"
+	>
+		<h2 id="dialog-actions-title">Dialog with primary and negative actions</h2>
+		<p>
+			Both actions close the dialog and report the selected choice below. This
+			is a presentation example; no draft is saved or discarded.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack" data-dialog-example>
+				<button class="demo-button" type="button" data-dialog-open hidden>
+					Open action dialog
+				</button>
+				<dialog class="demo-dialog" aria-labelledby="action-dialog-title" open>
+					<div class="demo-stack">
+						<h3 id="action-dialog-title">Keep this draft?</h3>
+						<p>
+							Choose the primary action to keep the example draft, or the
+							negative action to discard it.
+						</p>
+						<form class="demo-actions" method="dialog">
+							<button
+								class="demo-danger-button"
+								type="submit"
+								value="discard"
+								data-dialog-result="Discard selected. No draft was changed."
+								data-dialog-close
+								hidden
+							>
+								Discard draft
+							</button>
+							<button
+								class="demo-primary"
+								type="submit"
+								value="keep"
+								data-dialog-result="Keep selected. No draft was changed."
+								data-dialog-close
+								hidden
+							>
+								Keep draft
+							</button>
+						</form>
+					</div>
+				</dialog>
+				<p class="demo-output" role="status" data-dialog-status></p>
+			</div>
+		</div>
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack" data-dialog-example&gt;
+	&lt;button class="demo-button" type="button" data-dialog-open hidden&gt;Open action dialog&lt;/button&gt;
+	&lt;dialog class="demo-dialog" aria-labelledby="action-dialog-title" open&gt;
+		&lt;div class="demo-stack"&gt;
+			&lt;h3 id="action-dialog-title"&gt;Keep this draft?&lt;/h3&gt;
+			&lt;p&gt;Choose the primary action to keep the example draft, or the negative action to discard it.&lt;/p&gt;
+			&lt;form class="demo-actions" method="dialog"&gt;
+				&lt;button class="demo-danger-button" type="submit" value="discard" data-dialog-result="Discard selected. No draft was changed." data-dialog-close hidden&gt;Discard draft&lt;/button&gt;
+				&lt;button class="demo-primary" type="submit" value="keep" data-dialog-result="Keep selected. No draft was changed." data-dialog-close hidden&gt;Keep draft&lt;/button&gt;
+			&lt;/form&gt;
+		&lt;/div&gt;
+	&lt;/dialog&gt;
+	&lt;p class="demo-output" role="status" data-dialog-status&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-dialog {
+	@extend %o-dialog;
+}
+
+.demo-actions {
+	@extend %p-form-actions;
+}
+
+.demo-button {
+	@extend %o-button;
+}
+
+.demo-primary {
+	@extend %o-button-primary;
+}
+
+.demo-danger-button {
+	@extend %o-button-danger;
+}</code></pre>
+		</details>
+	</section>
+	<section
+		class="reference-section"
+		id="dialog-form"
+		aria-labelledby="dialog-form-title"
+	>
+		<h2 id="dialog-form-title">Dialog with a required field</h2>
+		<p>
+			Submit requires a project name. Native form validation keeps the dialog
+			open when the field is empty; Cancel and Escape still dismiss it. The
+			value is not sent or saved.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack" data-dialog-example>
+				<button class="demo-button" type="button" data-dialog-open hidden>
+					Open form dialog
+				</button>
+				<dialog class="demo-dialog" aria-labelledby="form-dialog-title" open>
+					<form class="demo-form" method="dialog">
+						<h3 id="form-dialog-title">Name the example project</h3>
+						<label>
+							<span>Project name (required)</span>
+							<input
+								name="project-name"
+								required
+								aria-describedby="dialog-name-help"
+							/>
+							<span class="field-help" id="dialog-name-help"
+								>Required before submitting this example.</span
+							>
+						</label>
+						<div class="actions">
+							<button
+								type="submit"
+								value="cancel"
+								formnovalidate
+								data-dialog-result="Cancelled. No project was created."
+								data-dialog-close
+								hidden
+							>
+								Cancel
+							</button>
+							<button
+								class="primary"
+								type="submit"
+								value="submit"
+								data-dialog-result="Example submitted. No project was created."
+								data-dialog-close
+								hidden
+							>
+								Submit example
+							</button>
+						</div>
+					</form>
+				</dialog>
+				<p class="demo-output" role="status" data-dialog-status></p>
+			</div>
+		</div>
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack" data-dialog-example&gt;
+	&lt;button class="demo-button" type="button" data-dialog-open hidden&gt;Open form dialog&lt;/button&gt;
+	&lt;dialog class="demo-dialog" aria-labelledby="form-dialog-title" open&gt;
+		&lt;form class="demo-form" method="dialog"&gt;
+			&lt;h3 id="form-dialog-title"&gt;Name the example project&lt;/h3&gt;
+			&lt;label&gt;
+				&lt;span&gt;Project name (required)&lt;/span&gt;
+				&lt;input name="project-name" required aria-describedby="dialog-name-help" /&gt;
+				&lt;span class="field-help" id="dialog-name-help"&gt;Required before submitting this example.&lt;/span&gt;
+			&lt;/label&gt;
+			&lt;div class="actions"&gt;
+				&lt;button type="submit" value="cancel" formnovalidate data-dialog-result="Cancelled. No project was created." data-dialog-close hidden&gt;Cancel&lt;/button&gt;
+				&lt;button class="primary" type="submit" value="submit" data-dialog-result="Example submitted. No project was created." data-dialog-close hidden&gt;Submit example&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/form&gt;
+	&lt;/dialog&gt;
+	&lt;p class="demo-output" role="status" data-dialog-status&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-dialog {
+	@extend %o-dialog;
+}
+
+.demo-form {
+	@extend %p-form-fields;
+}
+
+.demo-button {
+	@extend %o-button;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your
+			application root, then extend the placeholders shown in each example onto
+			your own selectors. The <code>demo-</code> names belong to this website.
+			The containing layout determines available width; theme properties are
+			inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files,
+			dependencies, property fallbacks and behavioural requirements are
+			documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

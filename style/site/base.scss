@@ -51,6 +51,7 @@ p {
 a {
 	color: inherit;
 	text-underline-offset: 0.2em;
+	text-decoration-thickness: var(--flair-link-thickness, 1px);
 }
 button,
 select {

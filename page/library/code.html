@@ -1,13 +1,176 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 09</p>
-		<h1>Code.</h1>
-		<p class="library-description">Code samples, preformatted text and technical content.</p>
+		<h1>Code</h1>
+		<p class="library-description">
+			Inline code, keyboard input, source blocks and command output.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" id="inline" aria-labelledby="inline-title">
+		<h2 id="inline-title">Inline code and keyboard input</h2>
+		<p>
+			Use code for source fragments, kbd for keyboard input and samp for program output.
+		</p>
+		<div class="flair-example">
+			<div class="demo-prose">
+				<p>Run <code class="demo-code">gt build</code> from the project directory.</p>
+				<p>
+					Press <kbd class="demo-key">Ctrl</kbd> + <kbd class="demo-key">S</kbd> to save
+					in your editor.
+				</p>
+				<p>Expected output: <samp class="demo-code">Build complete</samp>.</p>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-prose"&gt;
+	&lt;p&gt;Run &lt;code class="demo-code"&gt;gt build&lt;/code&gt; from the project directory.&lt;/p&gt;
+	&lt;p&gt;
+		Press &lt;kbd class="demo-key"&gt;Ctrl&lt;/kbd&gt; + &lt;kbd class="demo-key"&gt;S&lt;/kbd&gt; to save in your
+		editor.
+	&lt;/p&gt;
+	&lt;p&gt;Expected output: &lt;samp class="demo-code"&gt;Build complete&lt;/samp&gt;.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-prose {
+	@extend %p-prose;
+}
+
+.demo-code {
+	@extend %o-code;
+}
+
+.demo-key {
+	@extend %o-key;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="source" aria-labelledby="source-title">
+		<h2 id="source-title">Source code</h2>
+		<p>
+			Wrapping keeps long lines within the container. Select and copy works without
+			JavaScript; the optional copy button reports clipboard failures.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack" data-copy-example>
+				<pre class="demo-code-block"><code>@use "flair";
+
+.contact-form {
+	@extend %p-form-fields;
+	--flair-form-gap: 1.5rem;
+}</code></pre>
+				<button class="demo-button" type="button" data-copy-button hidden>
+					Copy code
+				</button>
+				<p class="demo-output" data-copy-status role="status"></p>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack" data-copy-example&gt;
+	&lt;pre class="demo-code-block"&gt;&lt;code&gt;@use "flair";
+
+.contact-form {
+	@extend %p-form-fields;
+	--flair-form-gap: 1.5rem;
+}&lt;/code&gt;&lt;/pre&gt;
+	&lt;button class="demo-button" type="button" data-copy-button hidden&gt;Copy code&lt;/button&gt;
+	&lt;p class="demo-output" data-copy-status role="status"&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-code-block {
+	@extend %o-code-block;
+}
+
+.demo-button {
+	@extend %o-button;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="syntax" aria-labelledby="syntax-title">
+		<h2 id="syntax-title">Syntax styling hooks</h2>
+		<p>
+			These spans are marked up in the example. Flair supplies the presentation, not a
+			syntax parser. Equivalent hljs keyword, string, comment and number classes are
+			supported.
+		</p>
+		<div class="flair-example">
+			<pre
+				class="demo-code-block demo-syntax"
+			><code><span class="syntax-comment">// A static JavaScript example</span>
+<span class="syntax-keyword">const</span> project = <span class="syntax-string">"Flair"</span>;
+<span class="syntax-keyword">const</span> columns = <span class="syntax-number">3</span>;</code></pre>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;pre
+	class="demo-code-block demo-syntax"
+&gt;&lt;code&gt;&lt;span class="syntax-comment"&gt;// A static JavaScript example&lt;/span&gt;
+&lt;span class="syntax-keyword"&gt;const&lt;/span&gt; project = &lt;span class="syntax-string"&gt;"Flair"&lt;/span&gt;;
+&lt;span class="syntax-keyword"&gt;const&lt;/span&gt; columns = &lt;span class="syntax-number"&gt;3&lt;/span&gt;;&lt;/code&gt;&lt;/pre&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-code-block {
+	@extend %o-code-block;
+}
+
+.demo-syntax {
+	@extend %d-syntax;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="output" aria-labelledby="output-title">
+		<h2 id="output-title">Command output and long lines</h2>
+		<p>Output remains selectable and wraps without adding a page scrollbar.</p>
+		<div class="flair-example">
+			<div class="demo-narrow">
+				<pre class="demo-code-block"><samp>$ gt build
+Compiling styles…
+Build complete.
+asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_behaviour.css</samp></pre>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-narrow"&gt;
+	&lt;pre class="demo-code-block"&gt;&lt;samp&gt;$ gt build
+Compiling styles…
+Build complete.
+asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_behaviour.css&lt;/samp&gt;&lt;/pre&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-code-block {
+	@extend %o-code-block;
+}
+
+.demo-narrow {
+	max-inline-size: 28rem;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

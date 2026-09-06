@@ -1,0 +1,16 @@
+%d-syntax {
+	:where(.syntax-keyword, .hljs-keyword) {
+		color: var(--flair-syntax-keyword, var(--flair-color-accent));
+		font-weight: 700;
+	}
+	:where(.syntax-string, .hljs-string) {
+		color: var(--flair-syntax-string, var(--flair-color-text));
+	}
+	:where(.syntax-comment, .hljs-comment) {
+		color: var(--flair-syntax-comment, var(--flair-color-muted));
+		font-style: italic;
+	}
+	:where(.syntax-number, .hljs-number) {
+		color: var(--flair-syntax-number, var(--flair-color-accent));
+	}
+}

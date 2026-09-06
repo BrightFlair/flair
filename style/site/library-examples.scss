@@ -1,0 +1,186 @@
+@use "../flair";
+
+// Selectors and example arrangements belong to this website, not the library.
+.flair-example {
+	@extend %d-typography;
+}
+
+.flair-example .demo-prose {
+	@extend %p-prose;
+}
+
+.flair-example .demo-card {
+	@extend %o-card;
+}
+
+.flair-example .demo-inset {
+	@extend %o-inset;
+}
+
+.flair-example .demo-avatar {
+	@extend %o-avatar;
+}
+
+.flair-example .demo-stack {
+	@extend %p-stack;
+}
+
+.flair-example .demo-cluster {
+	@extend %p-cluster;
+}
+
+.flair-example .demo-grid {
+	@extend %p-grid;
+}
+
+.flair-example .demo-data-list {
+	@extend %p-data-list;
+}
+
+.flair-example .demo-list {
+	@extend %p-list;
+}
+
+.flair-example .demo-link {
+	@extend %o-link;
+}
+
+.flair-example .demo-navigation {
+	@extend %p-navigation;
+}
+
+.flair-example .demo-side-navigation {
+	@extend %p-side-navigation;
+}
+
+.flair-example .demo-page-tabs {
+	@extend %p-page-tabs;
+}
+
+.flair-example .demo-breadcrumbs {
+	@extend %p-breadcrumbs;
+}
+
+.flair-example .demo-pagination {
+	@extend %p-pagination;
+}
+
+.flair-example .demo-disclosure {
+	@extend %o-disclosure;
+}
+
+.flair-example .demo-accordion {
+	@extend %p-accordion;
+}
+
+.flair-example .demo-dialog {
+	@extend %o-dialog;
+}
+
+.flair-example .demo-table {
+	@extend %o-table;
+}
+
+.flair-example .demo-table-scroll {
+	@extend %p-table-scroll;
+}
+
+.flair-example .demo-notice {
+	@extend %o-notice;
+}
+
+.flair-example .demo-success {
+	@extend %o-notice-success;
+}
+
+.flair-example .demo-warning {
+	@extend %o-notice-warning;
+}
+
+.flair-example .demo-danger {
+	@extend %o-notice-danger;
+}
+
+.flair-example .demo-badge {
+	@extend %o-badge;
+}
+
+.flair-example .demo-progress {
+	@extend %o-progress;
+}
+
+.flair-example .demo-empty-state {
+	@extend %p-empty-state;
+}
+
+.flair-example .demo-code {
+	@extend %o-code;
+}
+
+.flair-example .demo-key {
+	@extend %o-key;
+}
+
+.flair-example .demo-code-block {
+	@extend %o-code-block;
+}
+
+.flair-example .demo-sidebar {
+	@extend %l-sidebar;
+}
+
+.flair-example .demo-gallery {
+	@extend %l-gallery;
+}
+
+.flair-example .demo-dashboard {
+	@extend %l-dashboard;
+}
+
+.flair-example .demo-article {
+	@extend %l-article;
+}
+
+.flair-example .demo-danger-button {
+	@extend %o-button-danger;
+}
+
+.flair-example .demo-syntax {
+	@extend %d-syntax;
+}
+.flair-example .demo-narrow {
+	max-inline-size: 28rem;
+}
+.flair-example .demo-two-columns {
+	--flair-grid-columns: 2;
+}
+.flair-example .demo-four-columns {
+	--flair-grid-columns: 4;
+	--flair-grid-min: 12rem;
+}
+.flair-example .demo-compact-table {
+	--flair-table-padding-block: var(--flair-space-1);
+	--flair-table-padding-inline: var(--flair-space-2);
+}
+.flair-example .demo-wide-table {
+	min-inline-size: 48rem;
+}
+.flair-example .demo-stat {
+	font-size: var(--flair-heading-1, 2.5rem);
+	font-weight: var(--flair-heading-weight, 500);
+	font-variant-numeric: tabular-nums;
+}
+.flair-example .demo-output {
+	min-block-size: 1.6em;
+}
+.reference-source {
+	margin-block-start: var(--site-space-medium);
+	> summary {
+		cursor: pointer;
+		padding-block: var(--site-space-small);
+	}
+}
+.reference-section,
+.flair-example [id] {
+	scroll-margin-block-start: 8rem;
+}

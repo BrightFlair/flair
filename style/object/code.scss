@@ -1,0 +1,33 @@
+%o-code {
+	font-family: var(--flair-font-mono, "Ubuntu Mono", monospace);
+	font-size: var(--flair-code-size, 0.95em);
+	background: var(--flair-code-background, var(--flair-color-surface-disabled));
+	color: var(--flair-code-text, var(--flair-color-text));
+	border-radius: var(--flair-code-radius, var(--flair-radius));
+	padding: var(--flair-space-1) var(--flair-space-2);
+	overflow-wrap: anywhere;
+}
+%o-key {
+	@extend %o-code;
+	border: var(--flair-border-width) solid var(--flair-color-border);
+	box-shadow: 0 2px 0 var(--flair-color-border);
+}
+%o-code-block {
+	margin: 0;
+	padding: var(--flair-code-padding, var(--flair-space-6));
+	border: var(--flair-border-width) solid var(--flair-color-border);
+	border-radius: var(--flair-code-radius, var(--flair-radius));
+	background: var(--flair-code-background, var(--flair-color-surface-disabled));
+	color: var(--flair-code-text, var(--flair-color-text));
+	font-family: var(--flair-font-mono, "Ubuntu Mono", monospace);
+	font-size: var(--flair-code-size, 0.95em);
+	line-height: var(--flair-code-leading, 1.6);
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	tab-size: var(--flair-code-tab-size, 4);
+	> code {
+		font: inherit;
+		background: transparent;
+		padding: 0;
+	}
+}

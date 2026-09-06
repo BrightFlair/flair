@@ -1,0 +1,17 @@
+@use "../decoration/focus-ring";
+%o-link {
+	color: var(--flair-color-accent);
+	text-decoration: underline;
+	text-underline-offset: var(--flair-link-offset, 0.2em);
+	text-decoration-thickness: var(--flair-link-thickness, 1px);
+	overflow-wrap: anywhere;
+	&:hover {
+		text-decoration-thickness: var(
+			--flair-link-hover-thickness,
+			var(--flair-link-thickness, 1px)
+		);
+	}
+	&:focus-visible {
+		@extend %d-focus-ring;
+	}
+}

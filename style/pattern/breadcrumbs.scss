@@ -1,0 +1,24 @@
+@use "../object/link";
+%p-breadcrumbs {
+	> ol {
+		display: flex;
+		align-items: baseline;
+		flex-wrap: wrap;
+		gap: var(--flair-space-2);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		> li {
+			margin: 0;
+			min-inline-size: 0;
+			overflow-wrap: anywhere;
+		}
+		> li > a {
+			@extend %o-link;
+		}
+	}
+	.separator {
+		margin-inline-end: var(--flair-space-2);
+		color: var(--flair-color-muted);
+	}
+}

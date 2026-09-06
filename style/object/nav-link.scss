@@ -1,0 +1,32 @@
+@use "../decoration/focus-ring";
+%o-nav-link {
+	display: block;
+	padding: var(--flair-nav-padding-block, var(--flair-space-3))
+		var(--flair-nav-padding-inline, var(--flair-space-4));
+	border-radius: var(--flair-nav-radius, var(--flair-radius));
+	color: var(--flair-color-text);
+	font-family: var(--flair-font-body);
+	text-decoration: none;
+	overflow-wrap: anywhere;
+	&:hover {
+		background: var(
+			--flair-nav-hover-background,
+			var(--flair-color-surface-disabled)
+		);
+	}
+	&[aria-current]:not([aria-current="false"]):not([aria-current=""]) {
+		background: var(
+			--flair-selected-background,
+			var(--flair-color-surface-disabled)
+		);
+		color: var(--flair-selected-text, var(--flair-color-text));
+		font-weight: var(--flair-nav-current-weight, 700);
+		box-shadow: var(
+			--flair-nav-current-shadow,
+			inset 0 -3px var(--flair-color-accent)
+		);
+	}
+	&:focus-visible {
+		@extend %d-focus-ring;
+	}
+}

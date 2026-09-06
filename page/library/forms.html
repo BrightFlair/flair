@@ -3,17 +3,16 @@
 		<p class="eyebrow">Flair library / 03</p>
 		<h1>Forms</h1>
 		<p class="library-description">
-			Field objects, responsive rows and action groups composed with
-			%p-form-fields.
+			Field objects, responsive rows and action groups composed with %p-form-fields.
 		</p>
 	</header>
 	<section class="reference-section" aria-labelledby="field-object">
 		<h2 id="field-object">A form field</h2>
 		<p>
 			<code>%o-form-field</code>
-			arranges a label, a native control and optional help or error text. It
-			includes the element mapping for direct child controls, which extends the
-			control objects documented on the
+			arranges a label, a native control and optional help or error text. It includes the
+			element mapping for direct child controls, which extends the control objects
+			documented on the
 			<a href="/library/controls/">Controls page</a>
 			.
 		</p>
@@ -46,26 +45,21 @@
 			<code>span</code>
 			followed by its control. The label provides the association, so
 			<code>for</code>
-			and a control ID are unnecessary. Help and error messages use spans inside
-			the label; give those messages IDs when referenced by
+			and a control ID are unnecessary. Help and error messages use spans inside the
+			label; give those messages IDs when referenced by
 			<code>aria-describedby</code>
 			. A separate
 			<code>.field</code>
 			wrapper remains available when the structure requires one.
 		</p>
 	</section>
-	<section
-		class="reference-section"
-		aria-labelledby="pattern-example"
-		data-form-example
-	>
+	<section class="reference-section" aria-labelledby="pattern-example" data-form-example>
 		<h2 id="pattern-example">Form fields pattern</h2>
 		<p>
 			This form extends
 			<code>%p-form-fields</code>
-			. Its fields, rows, choice group and actions are styled by the objects and
-			patterns below. Submitting reloads this local example page; no application
-			record is created.
+			. Its fields, rows, choice group and actions are styled by the objects and patterns
+			below. Submitting reloads this local example page; no application record is created.
 		</p>
 		<div class="demo-settings" hidden>
 			<label>
@@ -142,9 +136,8 @@
 		<p>
 			Invalid state is explicit: the application sets
 			<code>aria-invalid="true"</code>
-			and provides error text. Required fields are not styled as errors before
-			validation. A disabled fieldset uses native HTML behaviour to disable its
-			controls together.
+			and provides error text. Required fields are not styled as errors before validation.
+			A disabled fieldset uses native HTML behaviour to disable its controls together.
 		</p>
 		<div class="reference-grid">
 			<div class="flair-example">
@@ -204,8 +197,8 @@
 			</li>
 			<li>
 				<code>%p-field-row</code>
-				extends field objects inside a wrapping flex row. Fields wrap when their
-				combined minimum widths and gap no longer fit the container.
+				extends field objects inside a wrapping flex row. Fields wrap when their combined
+				minimum widths and gap no longer fit the container.
 			</li>
 			<li>
 				<code>%p-form-actions</code>
@@ -244,8 +237,8 @@ contact-form {
 				<code>label</code>
 			</dt>
 			<dd>
-				A wrapping label with its caption span, control and optional messages. A
-				.field container is also supported when needed.
+				A wrapping label with its caption span, control and optional messages. A .field
+				container is also supported when needed.
 			</dd>
 			<dt><code>.field-row</code></dt>
 			<dd>
@@ -257,8 +250,7 @@ contact-form {
 			</dd>
 			<dt><code>.choice</code></dt>
 			<dd>
-				A wrapping label containing a checkbox or radio followed by its text in
-				a span.
+				A wrapping label containing a checkbox or radio followed by its text in a span.
 			</dd>
 			<dt><code>fieldset</code></dt>
 			<dd>
@@ -276,10 +268,10 @@ contact-form {
 			</dd>
 		</dl>
 		<p>
-			These hooks describe structural roles. They are not a list of visual
-			utility classes. Existing applications can extend the smaller objects and
-			patterns on their own selectors when their markup differs. Arbitrary
-			wrapper depths and nested components are intentionally not traversed.
+			These hooks describe structural roles. They are not a list of visual utility
+			classes. Existing applications can extend the smaller objects and patterns on their
+			own selectors when their markup differs. Arbitrary wrapper depths and nested
+			components are intentionally not traversed.
 		</p>
 		<h3>Form properties</h3>
 		<dl class="token-list">
@@ -297,8 +289,8 @@ contact-form {
 			</dd>
 			<dt><code>--flair-field-min-width</code></dt>
 			<dd>
-				Preferred field width before a row wraps. Default: 14rem. Fields can
-				shrink below this to fit narrow containers.
+				Preferred field width before a row wraps. Default: 14rem. Fields can shrink below
+				this to fit narrow containers.
 			</dd>
 			<dt><code>--flair-label-weight</code></dt>
 			<dd>Label, legend and error-text weight. Default: 500.</dd>
@@ -316,8 +308,8 @@ contact-form {
 				<code>--flair-actions-margin</code>
 			</dt>
 			<dd>
-				Action justification, gap and block-start margin. Defaults: flex-end,
-				spacing step 3, spacing step 2.
+				Action justification, gap and block-start margin. Defaults: flex-end, spacing step
+				3, spacing step 2.
 			</dd>
 		</dl>
 		<h3>Output and responsibility</h3>
@@ -326,23 +318,21 @@ contact-form {
 			<code>defaults()</code>
 			explicitly emits variables; including
 			<code>controls()</code>
-			explicitly emits native element selectors. Extending a form also includes
-			the objects it depends on. Sass does not inspect the HTML to remove unused
-			parts of that pattern.
+			explicitly emits native element selectors. Extending a form also includes the
+			objects it depends on. Sass does not inspect the HTML to remove unused parts of that
+			pattern.
 		</p>
 		<p>
-			Extensions add selectors where the original placeholder is defined, not
-			where the extension is written. Use CSS properties for theme changes and
-			local declarations for application-specific adjustments. Extending a
-			placeholder from inside an unrelated media query is not supported; apply
-			responsive property overrides instead.
+			Extensions add selectors where the original placeholder is defined, not where the
+			extension is written. Use CSS properties for theme changes and local declarations
+			for application-specific adjustments. Extending a placeholder from inside an
+			unrelated media query is not supported; apply responsive property overrides instead.
 		</p>
 		<p>
-			The library adds no JavaScript, validation logic, network requests or
-			submission handlers. The global theme selector, example spacing controls
-			and submission acknowledgement belong to this website. Themes change CSS
-			properties; native browser controls may still render differently between
-			browsers.
+			The library adds no JavaScript, validation logic, network requests or submission
+			handlers. The global theme selector, example spacing controls and submission
+			acknowledgement belong to this website. Themes change CSS properties; native browser
+			controls may still render differently between browsers.
 		</p>
 		<p>
 			References:
@@ -352,14 +342,90 @@ contact-form {
 			,
 			<a href="https://www.w3.org/WAI/tutorials/forms/labels/">form labels</a>
 			,
-			<a href="https://www.w3.org/WAI/tutorials/forms/grouping/">
-				grouping controls
-			</a>
+			<a href="https://www.w3.org/WAI/tutorials/forms/grouping/"> grouping controls </a>
 			and
 			<a href="https://www.w3.org/WAI/tutorials/forms/notifications/">
 				validation messages
 			</a>
 			.
 		</p>
+	</section>
+	<section
+		class="reference-section"
+		id="contained-form"
+		aria-labelledby="contained-form-title"
+	>
+		<h2 id="contained-form-title">Form in a narrow layout</h2>
+		<p>
+			The containing surface controls available width. The same form pattern wraps its
+			field row without applying a maximum width to the form itself.
+		</p>
+		<div class="flair-example">
+			<div class="demo-narrow">
+				<div class="demo-card">
+					<form class="demo-form" action="/library/forms/#contained-form" method="get">
+						<div class="field-row">
+							<label><span>Search terms</span><input type="search" name="q" /></label
+							><label
+								><span>Section</span
+								><select name="scope">
+									<option value="all">All sections</option>
+									<option value="forms">Forms</option>
+								</select></label
+							>
+						</div>
+						<p>
+							This example submits the selected values in the URL; no search service is
+							connected.
+						</p>
+						<div class="actions">
+							<button type="reset">Reset</button
+							><button class="primary" type="submit">Submit example</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-narrow"&gt;
+	&lt;div class="demo-card"&gt;
+		&lt;form class="demo-form" action="/library/forms/#contained-form" method="get"&gt;
+			&lt;div class="field-row"&gt;
+				&lt;label&gt;&lt;span&gt;Search terms&lt;/span&gt;&lt;input type="search" name="q" /&gt;&lt;/label
+				&gt;&lt;label
+					&gt;&lt;span&gt;Section&lt;/span
+					&gt;&lt;select name="scope"&gt;
+						&lt;option value="all"&gt;All sections&lt;/option&gt;
+						&lt;option value="forms"&gt;Forms&lt;/option&gt;
+					&lt;/select&gt;&lt;/label
+				&gt;
+			&lt;/div&gt;
+			&lt;p&gt;
+				This example submits the selected values in the URL; no search service is
+				connected.
+			&lt;/p&gt;
+			&lt;div class="actions"&gt;
+				&lt;button type="reset"&gt;Reset&lt;/button
+				&gt;&lt;button class="primary" type="submit"&gt;Submit example&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/form&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-card {
+	@extend %o-card;
+}
+
+.demo-form {
+	@extend %p-form-fields;
+}
+
+.demo-narrow {
+	max-inline-size: 28rem;
+}</code></pre>
+		</details>
 	</section>
 </main>

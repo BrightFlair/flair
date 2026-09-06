@@ -55,3 +55,55 @@ test('public overrides remain inherited, not reset on individual controls', () =
 	assert.match(css, /var\(--flair-control-padding-inline, var\(--flair-space-3\)\)/);
 	assert.equal((css.match(/--flair-control-padding-inline:/g) || []).length, 1);
 });
+
+test('grid consumers do not emit surfaces, navigation or application width limits', () => {
+	const css = compile(`@use "flair";
+.results {
+	@extend %p-grid;
+}`);
+	assert.match(css, /repeat\(auto-fit/);
+	assert.match(css, /--flair-grid-columns, 3/);
+	assert.doesNotMatch(css, /max-inline-size|background|aria-current|:root|@media/);
+});
+
+test('sidebar consumers wrap in source order without positioning offsets', () => {
+	const css = compile(`@use "flair";
+.workspace {
+	@extend %l-sidebar;
+}`);
+	assert.match(css, /flex-wrap: wrap/);
+	assert.match(css, /\.workspace > aside/);
+	assert.doesNotMatch(css, /position:|order:|margin-left|100vw/);
+});
+
+test('disclosure extension preserves native visibility and marker behaviour', () => {
+	const css = compile(`@use "flair";
+.faq {
+	@extend %p-accordion;
+}`);
+	assert.match(css, /details\[open\] > summary/);
+	assert.match(css, /summary:focus-visible/);
+	assert.doesNotMatch(css, /display: none|list-style: none|aria-hidden|button|table/);
+});
+
+test('every public placeholder can be consumed in isolation', () => {
+	const fs = require('node:fs');
+	const root = path.resolve(__dirname, '../style');
+	const placeholders = new Set();
+	for (const folder of ['decoration', 'object', 'pattern', 'layout']) {
+		for (const file of fs.readdirSync(path.join(root, folder))) {
+			const source = fs.readFileSync(path.join(root, folder, file), 'utf8');
+			for (const match of source.matchAll(/^%([\w-]+)\s*\{/gm)) {
+				placeholders.add(match[1]);
+			}
+		}
+	}
+	for (const placeholder of placeholders) {
+		const css = compile(`@use "flair";
+.consumer {
+	@extend %${placeholder};
+}`);
+		assert.ok(css.includes('.consumer'), placeholder);
+		assert.doesNotMatch(css, /@font-face|data-theme|section-switcher|!important/, placeholder);
+	}
+});

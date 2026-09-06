@@ -1,0 +1,16 @@
+@use "../pattern/stack";
+@use "../pattern/grid";
+@use "../object/card";
+%l-dashboard {
+	@extend %p-stack;
+	> header {
+		@extend %p-cluster;
+		justify-content: space-between;
+	}
+	> .metrics {
+		@extend %p-grid;
+		> article {
+			@extend %o-card;
+		}
+	}
+}

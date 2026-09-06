@@ -1,13 +1,254 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 04</p>
-		<h1>Surfaces.</h1>
-		<p class="library-description">Cards, panels and containers that give content a home.</p>
+		<h1>Surfaces</h1>
+		<p class="library-description">
+			Cards, inset panels, identity details and repeated content.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" id="cards" aria-labelledby="cards-title">
+		<h2 id="cards-title">Cards</h2>
+		<p>
+			Cards combine surface, typography and stack definitions. They do not set their own
+			maximum width.
+		</p>
+		<div class="flair-example">
+			<div class="demo-grid">
+				<article class="demo-card">
+					<h3>Project settings</h3>
+					<p>A heading, description and footer action share one surface.</p>
+					<footer>
+						<a class="demo-link" href="/library/forms/">View form examples</a>
+					</footer>
+				</article>
+				<article class="demo-card">
+					<h3>Longer content</h3>
+					<p>
+						This card has more descriptive text. The grid gives cards equal column widths,
+						and the footer stays at the end of the card.
+					</p>
+					<p>Changing themes alters padding, corner shape, border and shadow.</p>
+					<footer><a class="demo-link" href="/library/layouts/">View layouts</a></footer>
+				</article>
+				<article class="demo-card">
+					<h3>Summary</h3>
+					<dl class="demo-data-list">
+						<div>
+							<dt>Examples</dt>
+							<dd>10 sections</dd>
+						</div>
+						<div>
+							<dt>Theme</dt>
+							<dd>Inherited</dd>
+						</div>
+					</dl>
+				</article>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-grid"&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Project settings&lt;/h3&gt;
+		&lt;p&gt;A heading, description and footer action share one surface.&lt;/p&gt;
+		&lt;footer&gt;&lt;a class="demo-link" href="/library/forms/"&gt;View form examples&lt;/a&gt;&lt;/footer&gt;
+	&lt;/article&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Longer content&lt;/h3&gt;
+		&lt;p&gt;
+			This card has more descriptive text. The grid gives cards equal column widths, and
+			the footer stays at the end of the card.
+		&lt;/p&gt;
+		&lt;p&gt;Changing themes alters padding, corner shape, border and shadow.&lt;/p&gt;
+		&lt;footer&gt;&lt;a class="demo-link" href="/library/layouts/"&gt;View layouts&lt;/a&gt;&lt;/footer&gt;
+	&lt;/article&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Summary&lt;/h3&gt;
+		&lt;dl class="demo-data-list"&gt;
+			&lt;div&gt;
+				&lt;dt&gt;Examples&lt;/dt&gt;
+				&lt;dd&gt;10 sections&lt;/dd&gt;
+			&lt;/div&gt;
+			&lt;div&gt;
+				&lt;dt&gt;Theme&lt;/dt&gt;
+				&lt;dd&gt;Inherited&lt;/dd&gt;
+			&lt;/div&gt;
+		&lt;/dl&gt;
+	&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-card {
+	@extend %o-card;
+}
+
+.demo-grid {
+	@extend %p-grid;
+}
+
+.demo-data-list {
+	@extend %p-data-list;
+}
+
+.demo-link {
+	@extend %o-link;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="inset" aria-labelledby="inset-title">
+		<h2 id="inset-title">Inset and nested surfaces</h2>
+		<p>
+			Inset objects use a secondary background. Nested surfaces inherit the same theme.
+		</p>
+		<div class="flair-example">
+			<article class="demo-card">
+				<h3>Connection information</h3>
+				<div class="demo-inset">
+					<p>Local development environment. No connection is made by this example.</p>
+				</div>
+				<p>Supporting content remains outside the inset area.</p>
+			</article>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;article class="demo-card"&gt;
+	&lt;h3&gt;Connection information&lt;/h3&gt;
+	&lt;div class="demo-inset"&gt;
+		&lt;p&gt;Local development environment. No connection is made by this example.&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;p&gt;Supporting content remains outside the inset area.&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-card {
+	@extend %o-card;
+}
+
+.demo-inset {
+	@extend %o-inset;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="identity" aria-labelledby="identity-title">
+		<h2 id="identity-title">Identity and vertical lists</h2>
+		<p>
+			Avatar initials supplement a visible name. List separators and spacing can be reused
+			independently.
+		</p>
+		<div class="flair-example">
+			<ul class="demo-list">
+				<li>
+					<div class="demo-cluster">
+						<span class="demo-avatar" aria-hidden="true">AB</span>
+						<div>
+							<strong>Alex Brown</strong>
+							<p>Project maintainer</p>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="demo-cluster">
+						<span class="demo-avatar" aria-hidden="true">CJ</span>
+						<div>
+							<strong>Casey Jones</strong>
+							<p>Documentation contributor</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;ul class="demo-list"&gt;
+	&lt;li&gt;
+		&lt;div class="demo-cluster"&gt;
+			&lt;span class="demo-avatar" aria-hidden="true"&gt;AB&lt;/span&gt;
+			&lt;div&gt;
+				&lt;strong&gt;Alex Brown&lt;/strong&gt;
+				&lt;p&gt;Project maintainer&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;div class="demo-cluster"&gt;
+			&lt;span class="demo-avatar" aria-hidden="true"&gt;CJ&lt;/span&gt;
+			&lt;div&gt;
+				&lt;strong&gt;Casey Jones&lt;/strong&gt;
+				&lt;p&gt;Documentation contributor&lt;/p&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-avatar {
+	@extend %o-avatar;
+}
+
+.demo-cluster {
+	@extend %p-cluster;
+}
+
+.demo-list {
+	@extend %p-list;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="narrow" aria-labelledby="narrow-title">
+		<h2 id="narrow-title">Surface inside a narrow container</h2>
+		<p>
+			The same card works in a sidebar-sized area. This width belongs to the example
+			container.
+		</p>
+		<div class="flair-example">
+			<div class="demo-narrow">
+				<article class="demo-card">
+					<h3>Container width</h3>
+					<p>
+						A long identifier stays contained:
+						project_with_a_very_long_identifier_that_cannot_break_at_spaces.
+					</p>
+				</article>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-narrow"&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Container width&lt;/h3&gt;
+		&lt;p&gt;
+			A long identifier stays contained:
+			project_with_a_very_long_identifier_that_cannot_break_at_spaces.
+		&lt;/p&gt;
+	&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-card {
+	@extend %o-card;
+}
+
+.demo-narrow {
+	max-inline-size: 28rem;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

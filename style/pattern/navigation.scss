@@ -1,0 +1,28 @@
+@use "../object/nav-link";
+%p-navigation {
+	> ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--flair-nav-gap, var(--flair-space-2));
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		> li {
+			min-inline-size: 0;
+			margin: 0;
+		}
+		> li > a {
+			@extend %o-nav-link;
+		}
+	}
+}
+%p-side-navigation {
+	@extend %p-navigation;
+	> ul {
+		flex-direction: column;
+	}
+}
+%p-page-tabs {
+	@extend %p-navigation;
+	border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+}

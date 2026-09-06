@@ -1,13 +1,187 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 01</p>
-		<h1>Typography.</h1>
-		<p class="library-description">Headings, paragraphs, lists and the rhythm of readable text.</p>
+		<h1>Typography</h1>
+		<p class="library-description">
+			Text, headings, lists, quotations and supporting information.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" id="text" aria-labelledby="text-title">
+		<h2 id="text-title">Body text and headings</h2>
+		<p>
+			The prose pattern applies scoped element styles. Reading width is a layout decision;
+			this example uses the article layout.
+		</p>
+		<div class="flair-example">
+			<article class="demo-article">
+				<h2>Project documentation</h2>
+				<p>
+					This paragraph contains <strong>important information</strong>,
+					<em>emphasis</em> and a <a href="/library/forms/">link to the form examples</a>.
+					Text wraps within its available width.
+				</p>
+				<h3>Section heading</h3>
+				<p>Headings use their own font family, weight, size and line height.</p>
+				<h4>Subsection heading</h4>
+				<p>Use heading levels to describe the document structure.</p>
+				<h5>Further detail</h5>
+				<p>Small headings remain readable body-sized text.</p>
+				<h6>Reference detail</h6>
+				<p>
+					<small>Supporting text is secondary, but still needs readable contrast.</small>
+				</p>
+			</article>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;article class="demo-article"&gt;
+	&lt;h2&gt;Project documentation&lt;/h2&gt;
+	&lt;p&gt;
+		This paragraph contains &lt;strong&gt;important information&lt;/strong&gt;, &lt;em&gt;emphasis&lt;/em&gt; and
+		a &lt;a href="/library/forms/"&gt;link to the form examples&lt;/a&gt;. Text wraps within its
+		available width.
+	&lt;/p&gt;
+	&lt;h3&gt;Section heading&lt;/h3&gt;
+	&lt;p&gt;Headings use their own font family, weight, size and line height.&lt;/p&gt;
+	&lt;h4&gt;Subsection heading&lt;/h4&gt;
+	&lt;p&gt;Use heading levels to describe the document structure.&lt;/p&gt;
+	&lt;h5&gt;Further detail&lt;/h5&gt;
+	&lt;p&gt;Small headings remain readable body-sized text.&lt;/p&gt;
+	&lt;h6&gt;Reference detail&lt;/h6&gt;
+	&lt;p&gt;&lt;small&gt;Supporting text is secondary, but still needs readable contrast.&lt;/small&gt;&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-article {
+	@extend %l-article;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="lists" aria-labelledby="lists-title">
+		<h2 id="lists-title">Lists and quotations</h2>
+		<p>List markers and quotation markup retain their native meaning.</p>
+		<div class="flair-example">
+			<div class="demo-prose">
+				<ul>
+					<li>Load application defaults.</li>
+					<li>
+						Extend the required objects.
+						<ul>
+							<li>Apply your theme properties.</li>
+							<li>Verify keyboard states.</li>
+						</ul>
+					</li>
+				</ul>
+				<ol>
+					<li>Choose a project.</li>
+					<li>Review its settings.</li>
+					<li>Save the changes.</li>
+				</ol>
+				<blockquote>
+					<p>Styles belong in the stylesheet. Structure belongs in the document.</p>
+					<cite>Example project note</cite>
+				</blockquote>
+				<hr />
+				<p>
+					<mark>Highlighted text</mark> identifies a passage relevant to the current
+					context.
+				</p>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-prose"&gt;
+	&lt;ul&gt;
+		&lt;li&gt;Load application defaults.&lt;/li&gt;
+		&lt;li&gt;
+			Extend the required objects.
+			&lt;ul&gt;
+				&lt;li&gt;Apply your theme properties.&lt;/li&gt;
+				&lt;li&gt;Verify keyboard states.&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;ol&gt;
+		&lt;li&gt;Choose a project.&lt;/li&gt;
+		&lt;li&gt;Review its settings.&lt;/li&gt;
+		&lt;li&gt;Save the changes.&lt;/li&gt;
+	&lt;/ol&gt;
+	&lt;blockquote&gt;
+		&lt;p&gt;Styles belong in the stylesheet. Structure belongs in the document.&lt;/p&gt;
+		&lt;cite&gt;Example project note&lt;/cite&gt;
+	&lt;/blockquote&gt;
+	&lt;hr /&gt;
+	&lt;p&gt;
+		&lt;mark&gt;Highlighted text&lt;/mark&gt; identifies a passage relevant to the current context.
+	&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-prose {
+	@extend %p-prose;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="metadata" aria-labelledby="metadata-title">
+		<h2 id="metadata-title">Descriptions and metadata</h2>
+		<p>
+			A description list pairs terms with values. Long values wrap without widening the
+			page.
+		</p>
+		<div class="flair-example">
+			<dl class="demo-data-list">
+				<div>
+					<dt>Project</dt>
+					<dd>Documentation website</dd>
+				</div>
+				<div>
+					<dt>Last updated</dt>
+					<dd><time datetime="2026-09-06">6 September 2026</time></dd>
+				</div>
+				<div>
+					<dt>Identifier</dt>
+					<dd>documentation_preview_with_a_deliberately_long_unbroken_identifier</dd>
+				</div>
+			</dl>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;dl class="demo-data-list"&gt;
+	&lt;div&gt;
+		&lt;dt&gt;Project&lt;/dt&gt;
+		&lt;dd&gt;Documentation website&lt;/dd&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;dt&gt;Last updated&lt;/dt&gt;
+		&lt;dd&gt;&lt;time datetime="2026-09-06"&gt;6 September 2026&lt;/time&gt;&lt;/dd&gt;
+	&lt;/div&gt;
+	&lt;div&gt;
+		&lt;dt&gt;Identifier&lt;/dt&gt;
+		&lt;dd&gt;documentation_preview_with_a_deliberately_long_unbroken_identifier&lt;/dd&gt;
+	&lt;/div&gt;
+&lt;/dl&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-data-list {
+	@extend %p-data-list;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

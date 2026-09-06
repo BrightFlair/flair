@@ -1,0 +1,19 @@
+%d-stack {
+	display: flex;
+	flex-direction: column;
+	gap: var(--flair-stack-gap, var(--flair-space-4));
+	min-inline-size: 0;
+	> * {
+		min-inline-size: 0;
+		margin-block: 0;
+	}
+}
+%d-cluster {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--flair-cluster-gap, var(--flair-space-3));
+	> * {
+		min-inline-size: 0;
+	}
+}

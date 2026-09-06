@@ -1,0 +1,9 @@
+@use "../decoration/surface";
+@use "stack";
+%p-empty-state {
+	@extend %d-surface;
+	@extend %p-stack;
+	align-items: center;
+	text-align: center;
+	padding: var(--flair-empty-padding, var(--flair-space-8));
+}

@@ -1,13 +1,456 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 07</p>
-		<h1>Tables.</h1>
-		<p class="library-description">Readable rows, columns and collections of information.</p>
+		<h1>Tables</h1>
+		<p class="library-description">
+			Tabular data, numeric alignment, row states and contained overflow.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" id="data" aria-labelledby="data-title">
+		<h2 id="data-title">Data table</h2>
+		<p>
+			Captions, row headings and column headings preserve the relationships between
+			values. Numeric cells align to the end.
+		</p>
+		<div class="flair-example">
+			<div
+				class="demo-table-scroll"
+				role="region"
+				aria-label="Example project usage"
+				tabindex="0"
+			>
+				<table class="demo-table">
+					<caption>
+						Example project usage, September
+					</caption>
+					<thead>
+						<tr>
+							<th scope="col">Project</th>
+							<th scope="col">Status</th>
+							<th scope="col" class="numeric">Requests</th>
+							<th scope="col" class="numeric">Storage (MB)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Documentation</th>
+							<td>Active</td>
+							<td class="numeric">12,400</td>
+							<td class="numeric">256</td>
+						</tr>
+						<tr>
+							<th scope="row">Preview</th>
+							<td>Paused</td>
+							<td class="numeric">860</td>
+							<td class="numeric">48</td>
+						</tr>
+						<tr>
+							<th scope="row">Archive</th>
+							<td>Read only</td>
+							<td class="numeric">2,040</td>
+							<td class="numeric">512</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th scope="row" colspan="2">Total</th>
+							<td class="numeric">15,300</td>
+							<td class="numeric">816</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div
+	class="demo-table-scroll"
+	role="region"
+	aria-label="Example project usage"
+	tabindex="0"
+&gt;
+	&lt;table class="demo-table"&gt;
+		&lt;caption&gt;
+			Example project usage, September
+		&lt;/caption&gt;
+		&lt;thead&gt;
+			&lt;tr&gt;
+				&lt;th scope="col"&gt;Project&lt;/th&gt;
+				&lt;th scope="col"&gt;Status&lt;/th&gt;
+				&lt;th scope="col" class="numeric"&gt;Requests&lt;/th&gt;
+				&lt;th scope="col" class="numeric"&gt;Storage (MB)&lt;/th&gt;
+			&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody&gt;
+			&lt;tr&gt;
+				&lt;th scope="row"&gt;Documentation&lt;/th&gt;
+				&lt;td&gt;Active&lt;/td&gt;
+				&lt;td class="numeric"&gt;12,400&lt;/td&gt;
+				&lt;td class="numeric"&gt;256&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;th scope="row"&gt;Preview&lt;/th&gt;
+				&lt;td&gt;Paused&lt;/td&gt;
+				&lt;td class="numeric"&gt;860&lt;/td&gt;
+				&lt;td class="numeric"&gt;48&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;th scope="row"&gt;Archive&lt;/th&gt;
+				&lt;td&gt;Read only&lt;/td&gt;
+				&lt;td class="numeric"&gt;2,040&lt;/td&gt;
+				&lt;td class="numeric"&gt;512&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/tbody&gt;
+		&lt;tfoot&gt;
+			&lt;tr&gt;
+				&lt;th scope="row" colspan="2"&gt;Total&lt;/th&gt;
+				&lt;td class="numeric"&gt;15,300&lt;/td&gt;
+				&lt;td class="numeric"&gt;816&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/tfoot&gt;
+	&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-table {
+	@extend %o-table;
+}
+
+.demo-table-scroll {
+	@extend %p-table-scroll;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="compact" aria-labelledby="compact-title">
+		<h2 id="compact-title">Compact table</h2>
+		<p>
+			A local density override reduces cell padding without changing the theme or other
+			tables.
+		</p>
+		<div class="flair-example">
+			<div
+				class="demo-table-scroll"
+				role="region"
+				aria-label="Example project usage"
+				tabindex="0"
+			>
+				<table class="demo-table demo-compact-table">
+					<caption>
+						Example project usage, September
+					</caption>
+					<thead>
+						<tr>
+							<th scope="col">Project</th>
+							<th scope="col">Status</th>
+							<th scope="col" class="numeric">Requests</th>
+							<th scope="col" class="numeric">Storage (MB)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Documentation</th>
+							<td>Active</td>
+							<td class="numeric">12,400</td>
+							<td class="numeric">256</td>
+						</tr>
+						<tr>
+							<th scope="row">Preview</th>
+							<td>Paused</td>
+							<td class="numeric">860</td>
+							<td class="numeric">48</td>
+						</tr>
+						<tr>
+							<th scope="row">Archive</th>
+							<td>Read only</td>
+							<td class="numeric">2,040</td>
+							<td class="numeric">512</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th scope="row" colspan="2">Total</th>
+							<td class="numeric">15,300</td>
+							<td class="numeric">816</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div
+	class="demo-table-scroll"
+	role="region"
+	aria-label="Example project usage"
+	tabindex="0"
+&gt;
+	&lt;table class="demo-table demo-compact-table"&gt;
+		&lt;caption&gt;
+			Example project usage, September
+		&lt;/caption&gt;
+		&lt;thead&gt;
+			&lt;tr&gt;
+				&lt;th scope="col"&gt;Project&lt;/th&gt;
+				&lt;th scope="col"&gt;Status&lt;/th&gt;
+				&lt;th scope="col" class="numeric"&gt;Requests&lt;/th&gt;
+				&lt;th scope="col" class="numeric"&gt;Storage (MB)&lt;/th&gt;
+			&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody&gt;
+			&lt;tr&gt;
+				&lt;th scope="row"&gt;Documentation&lt;/th&gt;
+				&lt;td&gt;Active&lt;/td&gt;
+				&lt;td class="numeric"&gt;12,400&lt;/td&gt;
+				&lt;td class="numeric"&gt;256&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;th scope="row"&gt;Preview&lt;/th&gt;
+				&lt;td&gt;Paused&lt;/td&gt;
+				&lt;td class="numeric"&gt;860&lt;/td&gt;
+				&lt;td class="numeric"&gt;48&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+				&lt;th scope="row"&gt;Archive&lt;/th&gt;
+				&lt;td&gt;Read only&lt;/td&gt;
+				&lt;td class="numeric"&gt;2,040&lt;/td&gt;
+				&lt;td class="numeric"&gt;512&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/tbody&gt;
+		&lt;tfoot&gt;
+			&lt;tr&gt;
+				&lt;th scope="row" colspan="2"&gt;Total&lt;/th&gt;
+				&lt;td class="numeric"&gt;15,300&lt;/td&gt;
+				&lt;td class="numeric"&gt;816&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/tfoot&gt;
+	&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-table {
+	@extend %o-table;
+}
+
+.demo-table-scroll {
+	@extend %p-table-scroll;
+}
+
+.demo-compact-table {
+	--flair-table-padding-block: var(--flair-space-1);
+	--flair-table-padding-inline: var(--flair-space-2);
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="overflow" aria-labelledby="overflow-title">
+		<h2 id="overflow-title">Wide table in a narrow container</h2>
+		<p>
+			The named scroll region receives keyboard focus. The table keeps its structure and
+			scrolls inside its container.
+		</p>
+		<div class="flair-example">
+			<div class="demo-narrow">
+				<div
+					class="demo-table-scroll"
+					role="region"
+					aria-label="Wide project usage"
+					tabindex="0"
+				>
+					<table class="demo-table demo-wide-table">
+						<caption>
+							Example project usage, September
+						</caption>
+						<thead>
+							<tr>
+								<th scope="col">Project</th>
+								<th scope="col">Status</th>
+								<th scope="col" class="numeric">Requests</th>
+								<th scope="col" class="numeric">Storage (MB)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Documentation</th>
+								<td>Active</td>
+								<td class="numeric">12,400</td>
+								<td class="numeric">256</td>
+							</tr>
+							<tr>
+								<th scope="row">Preview</th>
+								<td>Paused</td>
+								<td class="numeric">860</td>
+								<td class="numeric">48</td>
+							</tr>
+							<tr>
+								<th scope="row">Archive</th>
+								<td>Read only</td>
+								<td class="numeric">2,040</td>
+								<td class="numeric">512</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th scope="row" colspan="2">Total</th>
+								<td class="numeric">15,300</td>
+								<td class="numeric">816</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-narrow"&gt;
+	&lt;div
+		class="demo-table-scroll"
+		role="region"
+		aria-label="Wide project usage"
+		tabindex="0"
+	&gt;
+		&lt;table class="demo-table demo-wide-table"&gt;
+			&lt;caption&gt;
+				Example project usage, September
+			&lt;/caption&gt;
+			&lt;thead&gt;
+				&lt;tr&gt;
+					&lt;th scope="col"&gt;Project&lt;/th&gt;
+					&lt;th scope="col"&gt;Status&lt;/th&gt;
+					&lt;th scope="col" class="numeric"&gt;Requests&lt;/th&gt;
+					&lt;th scope="col" class="numeric"&gt;Storage (MB)&lt;/th&gt;
+				&lt;/tr&gt;
+			&lt;/thead&gt;
+			&lt;tbody&gt;
+				&lt;tr&gt;
+					&lt;th scope="row"&gt;Documentation&lt;/th&gt;
+					&lt;td&gt;Active&lt;/td&gt;
+					&lt;td class="numeric"&gt;12,400&lt;/td&gt;
+					&lt;td class="numeric"&gt;256&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;th scope="row"&gt;Preview&lt;/th&gt;
+					&lt;td&gt;Paused&lt;/td&gt;
+					&lt;td class="numeric"&gt;860&lt;/td&gt;
+					&lt;td class="numeric"&gt;48&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;th scope="row"&gt;Archive&lt;/th&gt;
+					&lt;td&gt;Read only&lt;/td&gt;
+					&lt;td class="numeric"&gt;2,040&lt;/td&gt;
+					&lt;td class="numeric"&gt;512&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/tbody&gt;
+			&lt;tfoot&gt;
+				&lt;tr&gt;
+					&lt;th scope="row" colspan="2"&gt;Total&lt;/th&gt;
+					&lt;td class="numeric"&gt;15,300&lt;/td&gt;
+					&lt;td class="numeric"&gt;816&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/tfoot&gt;
+		&lt;/table&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-table {
+	@extend %o-table;
+}
+
+.demo-table-scroll {
+	@extend %p-table-scroll;
+}
+
+.demo-narrow {
+	max-inline-size: 28rem;
+}
+
+.demo-wide-table {
+	min-inline-size: 48rem;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="empty" aria-labelledby="empty-title">
+		<h2 id="empty-title">Empty table</h2>
+		<p>
+			An empty data set still identifies the columns. There are no decorative placeholder
+			rows.
+		</p>
+		<div class="flair-example">
+			<div
+				class="demo-table-scroll"
+				role="region"
+				aria-label="Empty projects example"
+				tabindex="0"
+			>
+				<table class="demo-table">
+					<caption>
+						Archived projects
+					</caption>
+					<thead>
+						<tr>
+							<th scope="col">Project</th>
+							<th scope="col">Archived on</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="2">No archived projects.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div
+	class="demo-table-scroll"
+	role="region"
+	aria-label="Empty projects example"
+	tabindex="0"
+&gt;
+	&lt;table class="demo-table"&gt;
+		&lt;caption&gt;
+			Archived projects
+		&lt;/caption&gt;
+		&lt;thead&gt;
+			&lt;tr&gt;
+				&lt;th scope="col"&gt;Project&lt;/th&gt;
+				&lt;th scope="col"&gt;Archived on&lt;/th&gt;
+			&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody&gt;
+			&lt;tr&gt;
+				&lt;td colspan="2"&gt;No archived projects.&lt;/td&gt;
+			&lt;/tr&gt;
+		&lt;/tbody&gt;
+	&lt;/table&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-table {
+	@extend %o-table;
+}
+
+.demo-table-scroll {
+	@extend %p-table-scroll;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

@@ -1,0 +1,15 @@
+%d-typography {
+	color: var(--flair-color-text);
+	font-family: var(--flair-font-body);
+	font-size: var(--flair-font-size);
+	font-weight: var(--flair-font-weight);
+	line-height: var(--flair-text-leading, 1.6);
+	overflow-wrap: anywhere;
+}
+%d-heading {
+	font-family: var(--flair-font-heading, var(--flair-font-body));
+	font-weight: var(--flair-heading-weight, 500);
+	line-height: var(--flair-heading-leading, 1.15);
+	letter-spacing: var(--flair-heading-tracking, normal);
+	overflow-wrap: anywhere;
+}

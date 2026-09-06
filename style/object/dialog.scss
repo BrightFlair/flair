@@ -1,0 +1,18 @@
+@use "../decoration/surface";
+%o-dialog {
+	@extend %d-surface;
+	inline-size: min(
+		var(--flair-dialog-width, 32rem),
+		calc(100% - 2 * var(--flair-space-4))
+	);
+	max-block-size: calc(100% - 2 * var(--flair-space-4));
+	overflow: auto;
+	margin: auto;
+	&[open]:not(:modal) {
+		position: static;
+		margin-inline: 0;
+	}
+	&::backdrop {
+		background: var(--flair-dialog-backdrop, rgb(0 0 0 / 55%));
+	}
+}

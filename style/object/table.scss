@@ -1,0 +1,36 @@
+%o-table {
+	inline-size: 100%;
+	border-collapse: collapse;
+	color: var(--flair-color-text);
+	font-family: var(--flair-font-body);
+	font-size: var(--flair-font-size);
+	line-height: var(--flair-text-leading, 1.6);
+	caption {
+		text-align: start;
+		padding-block-end: var(--flair-space-4);
+		font-weight: var(--flair-heading-weight, 500);
+	}
+	:where(th, td) {
+		padding: var(--flair-table-padding-block, var(--flair-space-3))
+			var(--flair-table-padding-inline, var(--flair-space-4));
+		text-align: start;
+		vertical-align: top;
+		border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+	}
+	thead {
+		background: var(--flair-table-header-background, var(--flair-color-surface-disabled));
+	}
+	tbody > tr:nth-child(even) {
+		background: var(--flair-table-stripe-background, transparent);
+	}
+	tbody > tr:hover {
+		background: var(--flair-table-hover-background, var(--flair-color-surface-disabled));
+	}
+	.numeric {
+		text-align: end;
+		font-variant-numeric: tabular-nums;
+	}
+	tfoot {
+		font-weight: var(--flair-heading-weight, 500);
+	}
+}

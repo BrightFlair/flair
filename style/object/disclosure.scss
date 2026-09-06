@@ -1,0 +1,27 @@
+@use "../decoration/surface";
+@use "../decoration/focus-ring";
+%o-disclosure {
+	@extend %d-surface;
+	padding: 0;
+	> summary {
+		padding: var(--flair-disclosure-padding, var(--flair-space-4));
+		border-radius: inherit;
+		background: var(--flair-disclosure-background, transparent);
+		font-weight: var(--flair-heading-weight, 500);
+		cursor: pointer;
+		&:hover {
+			background: var(--flair-nav-hover-background, var(--flair-color-surface-disabled));
+		}
+		&:focus-visible {
+			@extend %d-focus-ring;
+		}
+	}
+	> .disclosure-content {
+		padding: var(--flair-disclosure-padding, var(--flair-space-4));
+	}
+	&[open] > summary {
+		border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+		border-end-start-radius: 0;
+		border-end-end-radius: 0;
+	}
+}

@@ -1,0 +1,11 @@
+%d-surface {
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--flair-surface-padding, var(--flair-space-6));
+	border: var(--flair-surface-border-width, var(--flair-border-width)) solid
+		var(--flair-color-border);
+	border-radius: var(--flair-surface-radius, var(--flair-radius));
+	background: var(--flair-surface-background, var(--flair-color-surface));
+	color: var(--flair-color-text);
+	box-shadow: var(--flair-surface-shadow, none);
+}

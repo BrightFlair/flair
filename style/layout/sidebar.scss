@@ -1,0 +1,15 @@
+// Side column and content wrap according to the containing block, in DOM order.
+%l-sidebar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--flair-layout-gap, var(--flair-space-6));
+	align-items: flex-start;
+	> aside {
+		flex: 1 1 var(--flair-sidebar-width, 16rem);
+		min-inline-size: 0;
+	}
+	> .layout-content {
+		flex: 999 1 var(--flair-content-min, 28rem);
+		min-inline-size: min(100%, var(--flair-content-min, 28rem));
+	}
+}

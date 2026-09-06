@@ -1,13 +1,597 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 10</p>
-		<h1>Layouts.</h1>
-		<p class="library-description">Sidebars, grids and the relationships between larger pieces.</p>
+		<h1>Layouts</h1>
+		<p class="library-description">
+			Container-driven patterns and composed page structures.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" id="grid" aria-labelledby="grid-title">
+		<h2 id="grid-title">Responsive columns</h2>
+		<p>
+			The grid creates up to three equal columns where its container allows. Minimum
+			column width and gap are variables; the grid has no maximum width of its own.
+		</p>
+		<div class="flair-example">
+			<div class="demo-grid" data-grid-default>
+				<article class="demo-card">
+					<h3>Item 1</h3>
+					<p>Content keeps its source order as columns wrap.</p>
+				</article>
+				<article class="demo-card">
+					<h3>Item 2</h3>
+					<p>Content keeps its source order as columns wrap.</p>
+				</article>
+				<article class="demo-card">
+					<h3>Item 3</h3>
+					<p>Content keeps its source order as columns wrap.</p>
+				</article>
+				<article class="demo-card">
+					<h3>Item 4</h3>
+					<p>Content keeps its source order as columns wrap.</p>
+				</article>
+				<article class="demo-card">
+					<h3>Item 5</h3>
+					<p>Content keeps its source order as columns wrap.</p>
+				</article>
+				<article class="demo-card">
+					<h3>Item 6</h3>
+					<p>Content keeps its source order as columns wrap.</p>
+				</article>
+			</div>
+		</div>
+		<p>
+			<code>--flair-grid-columns</code>: 3; <code>--flair-grid-min</code>: 16rem. A larger
+			column count does not force columns into a small container.
+		</p>
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-grid" data-grid-default&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Item 1&lt;/h3&gt;
+		&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+	&lt;/article&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Item 2&lt;/h3&gt;
+		&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+	&lt;/article&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Item 3&lt;/h3&gt;
+		&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+	&lt;/article&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Item 4&lt;/h3&gt;
+		&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+	&lt;/article&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Item 5&lt;/h3&gt;
+		&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+	&lt;/article&gt;
+	&lt;article class="demo-card"&gt;
+		&lt;h3&gt;Item 6&lt;/h3&gt;
+		&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+	&lt;/article&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-card {
+	@extend %o-card;
+}
+
+.demo-grid {
+	@extend %p-grid;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="nested-grid" aria-labelledby="nested-grid-title">
+		<h2 id="nested-grid-title">Grid inside a narrow container</h2>
+		<p>
+			The same pattern becomes one column here even on a wide screen. A separate example
+			requests up to four columns.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack">
+				<div class="demo-narrow">
+					<div class="demo-grid" data-grid-narrow>
+						<article class="demo-card">
+							<h3>Item 1</h3>
+							<p>Content keeps its source order as columns wrap.</p>
+						</article>
+						<article class="demo-card">
+							<h3>Item 2</h3>
+							<p>Content keeps its source order as columns wrap.</p>
+						</article>
+						<article class="demo-card">
+							<h3>Item 3</h3>
+							<p>Content keeps its source order as columns wrap.</p>
+						</article>
+					</div>
+				</div>
+				<div class="demo-grid demo-four-columns">
+					<article class="demo-card">
+						<h3>Item 1</h3>
+						<p>Content keeps its source order as columns wrap.</p>
+					</article>
+					<article class="demo-card">
+						<h3>Item 2</h3>
+						<p>Content keeps its source order as columns wrap.</p>
+					</article>
+					<article class="demo-card">
+						<h3>Item 3</h3>
+						<p>Content keeps its source order as columns wrap.</p>
+					</article>
+					<article class="demo-card">
+						<h3>Item 4</h3>
+						<p>Content keeps its source order as columns wrap.</p>
+					</article>
+				</div>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack"&gt;
+	&lt;div class="demo-narrow"&gt;
+		&lt;div class="demo-grid" data-grid-narrow&gt;
+			&lt;article class="demo-card"&gt;
+				&lt;h3&gt;Item 1&lt;/h3&gt;
+				&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+			&lt;/article&gt;
+			&lt;article class="demo-card"&gt;
+				&lt;h3&gt;Item 2&lt;/h3&gt;
+				&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+			&lt;/article&gt;
+			&lt;article class="demo-card"&gt;
+				&lt;h3&gt;Item 3&lt;/h3&gt;
+				&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+			&lt;/article&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="demo-grid demo-four-columns"&gt;
+		&lt;article class="demo-card"&gt;
+			&lt;h3&gt;Item 1&lt;/h3&gt;
+			&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+		&lt;/article&gt;
+		&lt;article class="demo-card"&gt;
+			&lt;h3&gt;Item 2&lt;/h3&gt;
+			&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+		&lt;/article&gt;
+		&lt;article class="demo-card"&gt;
+			&lt;h3&gt;Item 3&lt;/h3&gt;
+			&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+		&lt;/article&gt;
+		&lt;article class="demo-card"&gt;
+			&lt;h3&gt;Item 4&lt;/h3&gt;
+			&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+		&lt;/article&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-card {
+	@extend %o-card;
+}
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-grid {
+	@extend %p-grid;
+}
+
+.demo-narrow {
+	max-inline-size: 28rem;
+}
+
+.demo-four-columns {
+	--flair-grid-columns: 4;
+	--flair-grid-min: 12rem;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="sidebar" aria-labelledby="sidebar-title">
+		<h2 id="sidebar-title">Content with a sidebar</h2>
+		<p>
+			The sidebar and content share a wrapping flex layout. Neither is absolutely
+			positioned, and the reading order stays the same at every width.
+		</p>
+		<div class="flair-example">
+			<div class="demo-sidebar">
+				<aside class="demo-card">
+					<nav class="demo-side-navigation" aria-label="Layout example navigation">
+						<ul>
+							<li><a href="#sidebar" aria-current="location">Overview</a></li>
+							<li><a href="#dashboard">Dashboard</a></li>
+							<li><a href="#gallery">Gallery</a></li>
+						</ul>
+					</nav>
+				</aside>
+				<div class="layout-content demo-card">
+					<h3>Project overview</h3>
+					<p>
+						The content region receives the remaining space. If both regions cannot fit,
+						it moves below the sidebar.
+					</p>
+					<div class="demo-grid demo-two-columns">
+						<article class="demo-card">
+							<h3>Item 1</h3>
+							<p>Content keeps its source order as columns wrap.</p>
+						</article>
+						<article class="demo-card">
+							<h3>Item 2</h3>
+							<p>Content keeps its source order as columns wrap.</p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-sidebar"&gt;
+	&lt;aside class="demo-card"&gt;
+		&lt;nav class="demo-side-navigation" aria-label="Layout example navigation"&gt;
+			&lt;ul&gt;
+				&lt;li&gt;&lt;a href="#sidebar" aria-current="location"&gt;Overview&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="#dashboard"&gt;Dashboard&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href="#gallery"&gt;Gallery&lt;/a&gt;&lt;/li&gt;
+			&lt;/ul&gt;
+		&lt;/nav&gt;
+	&lt;/aside&gt;
+	&lt;div class="layout-content demo-card"&gt;
+		&lt;h3&gt;Project overview&lt;/h3&gt;
+		&lt;p&gt;
+			The content region receives the remaining space. If both regions cannot fit, it
+			moves below the sidebar.
+		&lt;/p&gt;
+		&lt;div class="demo-grid demo-two-columns"&gt;
+			&lt;article class="demo-card"&gt;
+				&lt;h3&gt;Item 1&lt;/h3&gt;
+				&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+			&lt;/article&gt;
+			&lt;article class="demo-card"&gt;
+				&lt;h3&gt;Item 2&lt;/h3&gt;
+				&lt;p&gt;Content keeps its source order as columns wrap.&lt;/p&gt;
+			&lt;/article&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-card {
+	@extend %o-card;
+}
+
+.demo-grid {
+	@extend %p-grid;
+}
+
+.demo-side-navigation {
+	@extend %p-side-navigation;
+}
+
+.demo-sidebar {
+	@extend %l-sidebar;
+}
+
+.demo-two-columns {
+	--flair-grid-columns: 2;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="dashboard" aria-labelledby="dashboard-title">
+		<h2 id="dashboard-title">Dashboard composition</h2>
+		<p>
+			A header, metric cards and a table combine existing objects and patterns. The
+			example values are static.
+		</p>
+		<div class="flair-example">
+			<div class="demo-dashboard">
+				<header>
+					<h3>Project activity</h3>
+					<a class="demo-link" href="/library/tables/">View table examples</a>
+				</header>
+				<div class="metrics">
+					<article>
+						<h4>Requests</h4>
+						<strong class="demo-stat">15,300</strong>
+						<p>This month</p>
+					</article>
+					<article>
+						<h4>Projects</h4>
+						<strong class="demo-stat">3</strong>
+						<p>Two active, one archived</p>
+					</article>
+					<article>
+						<h4>Availability</h4>
+						<strong class="demo-stat">99.9%</strong>
+						<p>Example measurement</p>
+					</article>
+				</div>
+				<div
+					class="demo-table-scroll"
+					role="region"
+					aria-label="Example project usage"
+					tabindex="0"
+				>
+					<table class="demo-table">
+						<caption>
+							Example project usage, September
+						</caption>
+						<thead>
+							<tr>
+								<th scope="col">Project</th>
+								<th scope="col">Status</th>
+								<th scope="col" class="numeric">Requests</th>
+								<th scope="col" class="numeric">Storage (MB)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Documentation</th>
+								<td>Active</td>
+								<td class="numeric">12,400</td>
+								<td class="numeric">256</td>
+							</tr>
+							<tr>
+								<th scope="row">Preview</th>
+								<td>Paused</td>
+								<td class="numeric">860</td>
+								<td class="numeric">48</td>
+							</tr>
+							<tr>
+								<th scope="row">Archive</th>
+								<td>Read only</td>
+								<td class="numeric">2,040</td>
+								<td class="numeric">512</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th scope="row" colspan="2">Total</th>
+								<td class="numeric">15,300</td>
+								<td class="numeric">816</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-dashboard"&gt;
+	&lt;header&gt;
+		&lt;h3&gt;Project activity&lt;/h3&gt;
+		&lt;a class="demo-link" href="/library/tables/"&gt;View table examples&lt;/a&gt;
+	&lt;/header&gt;
+	&lt;div class="metrics"&gt;
+		&lt;article&gt;
+			&lt;h4&gt;Requests&lt;/h4&gt;
+			&lt;strong class="demo-stat"&gt;15,300&lt;/strong&gt;
+			&lt;p&gt;This month&lt;/p&gt;
+		&lt;/article&gt;
+		&lt;article&gt;
+			&lt;h4&gt;Projects&lt;/h4&gt;
+			&lt;strong class="demo-stat"&gt;3&lt;/strong&gt;
+			&lt;p&gt;Two active, one archived&lt;/p&gt;
+		&lt;/article&gt;
+		&lt;article&gt;
+			&lt;h4&gt;Availability&lt;/h4&gt;
+			&lt;strong class="demo-stat"&gt;99.9%&lt;/strong&gt;
+			&lt;p&gt;Example measurement&lt;/p&gt;
+		&lt;/article&gt;
+	&lt;/div&gt;
+	&lt;div
+		class="demo-table-scroll"
+		role="region"
+		aria-label="Example project usage"
+		tabindex="0"
+	&gt;
+		&lt;table class="demo-table"&gt;
+			&lt;caption&gt;
+				Example project usage, September
+			&lt;/caption&gt;
+			&lt;thead&gt;
+				&lt;tr&gt;
+					&lt;th scope="col"&gt;Project&lt;/th&gt;
+					&lt;th scope="col"&gt;Status&lt;/th&gt;
+					&lt;th scope="col" class="numeric"&gt;Requests&lt;/th&gt;
+					&lt;th scope="col" class="numeric"&gt;Storage (MB)&lt;/th&gt;
+				&lt;/tr&gt;
+			&lt;/thead&gt;
+			&lt;tbody&gt;
+				&lt;tr&gt;
+					&lt;th scope="row"&gt;Documentation&lt;/th&gt;
+					&lt;td&gt;Active&lt;/td&gt;
+					&lt;td class="numeric"&gt;12,400&lt;/td&gt;
+					&lt;td class="numeric"&gt;256&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;th scope="row"&gt;Preview&lt;/th&gt;
+					&lt;td&gt;Paused&lt;/td&gt;
+					&lt;td class="numeric"&gt;860&lt;/td&gt;
+					&lt;td class="numeric"&gt;48&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;th scope="row"&gt;Archive&lt;/th&gt;
+					&lt;td&gt;Read only&lt;/td&gt;
+					&lt;td class="numeric"&gt;2,040&lt;/td&gt;
+					&lt;td class="numeric"&gt;512&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/tbody&gt;
+			&lt;tfoot&gt;
+				&lt;tr&gt;
+					&lt;th scope="row" colspan="2"&gt;Total&lt;/th&gt;
+					&lt;td class="numeric"&gt;15,300&lt;/td&gt;
+					&lt;td class="numeric"&gt;816&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/tfoot&gt;
+		&lt;/table&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-link {
+	@extend %o-link;
+}
+
+.demo-table {
+	@extend %o-table;
+}
+
+.demo-table-scroll {
+	@extend %p-table-scroll;
+}
+
+.demo-dashboard {
+	@extend %l-dashboard;
+}
+
+.demo-stat {
+	font-size: var(--flair-heading-1, 2.5rem);
+	font-weight: var(--flair-heading-weight, 500);
+	font-variant-numeric: tabular-nums;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="gallery" aria-labelledby="gallery-title">
+		<h2 id="gallery-title">Media gallery</h2>
+		<p>
+			The gallery combines the responsive grid with card surfaces. Images have intrinsic
+			dimensions and captions; their aspect ratio is configurable.
+		</p>
+		<div class="flair-example">
+			<div class="demo-gallery">
+				<figure>
+					<img
+						src="/asset/example/landscape-1.svg"
+						alt=""
+						width="400"
+						height="300"
+						loading="lazy"
+					/>
+					<figcaption>Illustration 1. Locally stored example media.</figcaption>
+				</figure>
+				<figure>
+					<img
+						src="/asset/example/landscape-2.svg"
+						alt=""
+						width="400"
+						height="300"
+						loading="lazy"
+					/>
+					<figcaption>Illustration 2. Locally stored example media.</figcaption>
+				</figure>
+				<figure>
+					<img
+						src="/asset/example/landscape-3.svg"
+						alt=""
+						width="400"
+						height="300"
+						loading="lazy"
+					/>
+					<figcaption>Illustration 3. Locally stored example media.</figcaption>
+				</figure>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-gallery"&gt;
+	&lt;figure&gt;
+		&lt;img
+			src="/asset/example/landscape-1.svg"
+			alt=""
+			width="400"
+			height="300"
+			loading="lazy"
+		/&gt;
+		&lt;figcaption&gt;Illustration 1. Locally stored example media.&lt;/figcaption&gt;
+	&lt;/figure&gt;
+	&lt;figure&gt;
+		&lt;img
+			src="/asset/example/landscape-2.svg"
+			alt=""
+			width="400"
+			height="300"
+			loading="lazy"
+		/&gt;
+		&lt;figcaption&gt;Illustration 2. Locally stored example media.&lt;/figcaption&gt;
+	&lt;/figure&gt;
+	&lt;figure&gt;
+		&lt;img
+			src="/asset/example/landscape-3.svg"
+			alt=""
+			width="400"
+			height="300"
+			loading="lazy"
+		/&gt;
+		&lt;figcaption&gt;Illustration 3. Locally stored example media.&lt;/figcaption&gt;
+	&lt;/figure&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-gallery {
+	@extend %l-gallery;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="article" aria-labelledby="article-title">
+		<h2 id="article-title">Reading layout</h2>
+		<p>
+			This layout deliberately limits text measure to 65ch. The prose pattern itself has
+			no width limit.
+		</p>
+		<div class="flair-example">
+			<article class="demo-article">
+				<h3>Width belongs to the layout</h3>
+				<p>
+					A reading layout limits line length for continuous text. A dashboard may instead
+					use all the available space. Neither decision should be imposed by a button,
+					field or card.
+				</p>
+				<p>
+					Set <code>--flair-prose-measure</code> on the article layout to change its
+					measure. Forms, grids and surfaces inside other layouts remain fluid.
+				</p>
+			</article>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;article class="demo-article"&gt;
+	&lt;h3&gt;Width belongs to the layout&lt;/h3&gt;
+	&lt;p&gt;
+		A reading layout limits line length for continuous text. A dashboard may instead use
+		all the available space. Neither decision should be imposed by a button, field or
+		card.
+	&lt;/p&gt;
+	&lt;p&gt;
+		Set &lt;code&gt;--flair-prose-measure&lt;/code&gt; on the article layout to change its measure.
+		Forms, grids and surfaces inside other layouts remain fluid.
+	&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-article {
+	@extend %l-article;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

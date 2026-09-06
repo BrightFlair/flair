@@ -1,0 +1,8 @@
+@use "../object/disclosure";
+%p-accordion {
+	display: grid;
+	gap: var(--flair-accordion-gap, var(--flair-space-2));
+	> details {
+		@extend %o-disclosure;
+	}
+}

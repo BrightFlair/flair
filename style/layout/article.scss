@@ -1,0 +1,6 @@
+@use "../pattern/prose";
+%l-article {
+	@extend %p-prose;
+	max-inline-size: var(--flair-prose-measure, 65ch);
+	margin-inline: auto;
+}

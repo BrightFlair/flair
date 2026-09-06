@@ -1,0 +1,13 @@
+%o-avatar {
+	display: inline-grid;
+	place-items: center;
+	flex: none;
+	inline-size: var(--flair-avatar-size, 3rem);
+	block-size: var(--flair-avatar-size, 3rem);
+	border-radius: var(--flair-avatar-radius, 50%);
+	background: var(--flair-selected-background, var(--flair-color-surface-disabled));
+	color: var(--flair-selected-text, var(--flair-color-text));
+	font-family: var(--flair-font-body);
+	font-weight: var(--flair-heading-weight, 500);
+	object-fit: cover;
+}

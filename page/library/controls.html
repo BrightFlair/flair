@@ -11,10 +11,9 @@
 		<p>
 			The entry point
 			<code>style/flair.scss</code>
-			loads definitions without emitting any CSS. Include the default variables
-			once, then extend the objects you need. Fonts are supplied by the
-			application; these examples use the Ubuntu files installed on this
-			website.
+			loads definitions without emitting any CSS. Include the default variables once, then
+			extend the objects you need. Fonts are supplied by the application; these examples
+			use the Ubuntu files installed on this website.
 		</p>
 		<ol>
 			<li>
@@ -38,8 +37,8 @@
 				<code>%o-control</code>
 				extends
 				<code>%d-control</code>
-				for text inputs, selects and textareas. It adds full width, placeholder
-				text and read-only presentation.
+				for text inputs, selects and textareas. It adds full width, placeholder text and
+				read-only presentation.
 			</li>
 			<li>
 				<code>%o-button</code>
@@ -53,8 +52,7 @@
 				<code>%o-choice</code>
 				and
 				<code>%o-range</code>
-				retain native checkbox, radio and range appearance and extend the focus
-				ring.
+				retain native checkbox, radio and range appearance and extend the focus ring.
 				<code>%o-color</code>
 				extends the control decoration with a smaller swatch size.
 			</li>
@@ -76,26 +74,21 @@
 		<p>
 			Alternatively, include
 			<code>flair.controls()</code>
-			to apply objects to native tags. At the stylesheet root this emits global
-			element defaults; inside a selector it limits them to that region. Hidden
-			and image inputs are excluded. Checkboxes, radios, range and colour inputs
-			receive their own objects.
+			to apply objects to native tags. At the stylesheet root this emits global element
+			defaults; inside a selector it limits them to that region. Hidden and image inputs
+			are excluded. Checkboxes, radios, range and colour inputs receive their own objects.
 		</p>
 		<pre><code>.search-area {
 	@include flair.controls;
 }</code></pre>
 	</section>
-	<section
-		class="reference-section"
-		aria-labelledby="control-states"
-		data-form-example
-	>
+	<section class="reference-section" aria-labelledby="control-states" data-form-example>
 		<h2 id="control-states">Control states</h2>
 		<p>
-			Use the global theme selector to change the page and its examples. Focus a
-			control using the keyboard to inspect its outline. Invalid and read-only
-			examples have dashed and dotted borders respectively. Error text
-			identifies the problem independently of colour.
+			Use the global theme selector to change the page and its examples. Focus a control
+			using the keyboard to inspect its outline. Invalid and read-only examples have
+			dashed and dotted borders respectively. Error text identifies the problem
+			independently of colour.
 		</p>
 		<div class="demo-settings" hidden>
 			<label>
@@ -179,8 +172,8 @@
 	<section class="reference-section" aria-labelledby="button-examples">
 		<h2 id="button-examples">Buttons and choices</h2>
 		<p>
-			These buttons have no application action. A link styled as a button still
-			navigates. Use native
+			These buttons have no application action. A link styled as a button still navigates.
+			Use native
 			<code>disabled</code>
 			on buttons; styling alone cannot disable a link or prevent an action.
 		</p>
@@ -189,9 +182,7 @@
 				<button class="demo-button" type="button">Default</button>
 				<button class="demo-primary" type="button">Primary</button>
 				<button class="demo-button" type="button" disabled>Disabled</button>
-				<button class="demo-primary" type="button" disabled>
-					Disabled primary
-				</button>
+				<button class="demo-primary" type="button" disabled>Disabled primary</button>
 				<a class="demo-button" href="/library/forms/">Form examples</a>
 			</div>
 			<label class="demo-choice">
@@ -218,16 +209,15 @@
 	<section class="reference-section" aria-labelledby="control-tokens">
 		<h2 id="control-tokens">CSS properties</h2>
 		<p>
-			Set properties on the application root or on a containing element. Objects
-			read these values without assigning local defaults that would override
-			inherited settings. The default mixin should be included once per
-			independent theme scope.
+			Set properties on the application root or on a containing element. Objects read
+			these values without assigning local defaults that would override inherited
+			settings. The default mixin should be included once per independent theme scope.
 		</p>
 		<dl class="token-list">
 			<dt><code>--flair-color-*</code></dt>
 			<dd>
-				Text, muted text, surface, disabled surface, border, accent, on-accent
-				and danger colours.
+				Text, muted text, surface, disabled surface, border, accent, on-accent and danger
+				colours.
 			</dd>
 			<dt>
 				<code>--flair-font-body</code>
@@ -238,9 +228,7 @@
 				,
 				<code>--flair-line-height</code>
 			</dt>
-			<dd>
-				Shared control and field typography. Default: Ubuntu, 1rem, 400, 1.5.
-			</dd>
+			<dd>Shared control and field typography. Default: Ubuntu, 1rem, 400, 1.5.</dd>
 			<dt>
 				<code>--flair-control-padding-block</code>
 				,
@@ -253,8 +241,8 @@
 				<code>--flair-control-radius</code>
 			</dt>
 			<dd>
-				Default minimum height: 2.75rem. Radius falls back to the shared radius,
-				initially zero.
+				Default minimum height: 2.75rem. Radius falls back to the shared radius, initially
+				zero.
 			</dd>
 			<dt>
 				<code>--flair-control-background</code>
@@ -274,8 +262,8 @@
 			<dd>Default: accent colour, 3px width, 2px offset.</dd>
 			<dt><code>--flair-button-*</code></dt>
 			<dd>
-				Button background, text and weight, hover background, and primary-action
-				colours. See the complete reference below.
+				Button background, text and weight, hover background, and primary-action colours.
+				See the complete reference below.
 			</dd>
 		</dl>
 		<p>
@@ -285,5 +273,65 @@
 			<code>docs/forms.md</code>
 			in the repository.
 		</p>
+	</section>
+	<section
+		class="reference-section"
+		id="action-variants"
+		aria-labelledby="action-variants-title"
+	>
+		<h2 id="action-variants-title">Action variants</h2>
+		<p>
+			Secondary, primary and destructive controls share the control decoration. This
+			example button only updates local explanatory text; it never deletes data.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack" data-action-example>
+				<div class="demo-cluster">
+					<a class="demo-button" href="/library/forms/">Secondary link</a
+					><a class="demo-primary" href="/library/layouts/">Primary link</a
+					><button class="demo-danger-button" type="button" data-action-button hidden>
+						Preview destructive action</button
+					><button class="demo-danger-button" type="button" disabled>
+						Unavailable action
+					</button>
+				</div>
+				<p class="demo-output" role="status" data-action-status></p>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack" data-action-example&gt;
+	&lt;div class="demo-cluster"&gt;
+		&lt;a class="demo-button" href="/library/forms/"&gt;Secondary link&lt;/a
+		&gt;&lt;a class="demo-primary" href="/library/layouts/"&gt;Primary link&lt;/a
+		&gt;&lt;button class="demo-danger-button" type="button" data-action-button hidden&gt;
+			Preview destructive action&lt;/button
+		&gt;&lt;button class="demo-danger-button" type="button" disabled&gt;Unavailable action&lt;/button&gt;
+	&lt;/div&gt;
+	&lt;p class="demo-output" role="status" data-action-status&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-cluster {
+	@extend %p-cluster;
+}
+
+.demo-danger-button {
+	@extend %o-button-danger;
+}
+
+.demo-button {
+	@extend %o-button;
+}
+
+.demo-primary {
+	@extend %o-button-primary;
+}</code></pre>
+		</details>
 	</section>
 </main>

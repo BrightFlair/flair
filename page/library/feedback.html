@@ -1,13 +1,292 @@
 <main id="main-content" class="library-page">
 	<header class="library-heading">
 		<p class="eyebrow">Flair library / 08</p>
-		<h1>Feedback.</h1>
-		<p class="library-description">Notices, empty states, progress and useful responses.</p>
+		<h1>Feedback</h1>
+		<p class="library-description">
+			Notices, validation summaries, status labels, progress and empty states.
+		</p>
 	</header>
-	<section class="library-placeholder" aria-labelledby="preview-title">
-		<p class="eyebrow">A space for the essentials</p>
-		<h2 id="preview-title">Starting here.</h2>
-		<p>This section is ready for its first examples. For now, explore the site and make yourself at home.</p>
-		<a href="/#contents">Back to the library index ↗</a>
+	<section class="reference-section" id="notices" aria-labelledby="notices-title">
+		<h2 id="notices-title">Notices</h2>
+		<p>
+			Each message names its meaning in text. Static examples do not use alert roles or
+			announce themselves on page load.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack">
+				<aside class="demo-notice">
+					<strong>Information</strong>
+					<p>This is a preview environment.</p>
+				</aside>
+				<aside class="demo-success">
+					<strong>Success</strong>
+					<p>The example configuration is valid.</p>
+				</aside>
+				<aside class="demo-warning">
+					<strong>Warning</strong>
+					<p>The example storage allocation is nearly full.</p>
+				</aside>
+				<aside class="demo-danger">
+					<strong>Error</strong>
+					<p>The example request could not be completed. Try again later.</p>
+				</aside>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack"&gt;
+	&lt;aside class="demo-notice"&gt;
+		&lt;strong&gt;Information&lt;/strong&gt;
+		&lt;p&gt;This is a preview environment.&lt;/p&gt;
+	&lt;/aside&gt;
+	&lt;aside class="demo-success"&gt;
+		&lt;strong&gt;Success&lt;/strong&gt;
+		&lt;p&gt;The example configuration is valid.&lt;/p&gt;
+	&lt;/aside&gt;
+	&lt;aside class="demo-warning"&gt;
+		&lt;strong&gt;Warning&lt;/strong&gt;
+		&lt;p&gt;The example storage allocation is nearly full.&lt;/p&gt;
+	&lt;/aside&gt;
+	&lt;aside class="demo-danger"&gt;
+		&lt;strong&gt;Error&lt;/strong&gt;
+		&lt;p&gt;The example request could not be completed. Try again later.&lt;/p&gt;
+	&lt;/aside&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-notice {
+	@extend %o-notice;
+}
+
+.demo-success {
+	@extend %o-notice-success;
+}
+
+.demo-warning {
+	@extend %o-notice-warning;
+}
+
+.demo-danger {
+	@extend %o-notice-danger;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="validation" aria-labelledby="validation-title">
+		<h2 id="validation-title">Validation summary</h2>
+		<p>
+			A summary links to the controls needing attention. Validation and submission logic
+			remain application responsibilities.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack">
+				<div class="demo-danger demo-prose">
+					<h3>Two fields need attention</h3>
+					<ul>
+						<li><a href="#feedback-name">Enter your name</a></li>
+						<li><a href="#feedback-email">Enter a valid email address</a></li>
+					</ul>
+				</div>
+				<label class="demo-field"
+					><span>Name</span
+					><input
+						id="feedback-name"
+						aria-invalid="true"
+						aria-describedby="feedback-name-error"
+						autocomplete="name"
+					/><span class="field-error" id="feedback-name-error"
+						>Enter your name.</span
+					></label
+				>
+				<label class="demo-field"
+					><span>Email</span
+					><input
+						id="feedback-email"
+						type="email"
+						value="invalid-address"
+						aria-invalid="true"
+						aria-describedby="feedback-email-error"
+						autocomplete="email"
+					/><span class="field-error" id="feedback-email-error"
+						>Enter a valid email address.</span
+					></label
+				>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack"&gt;
+	&lt;div class="demo-danger demo-prose"&gt;
+		&lt;h3&gt;Two fields need attention&lt;/h3&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;a href="#feedback-name"&gt;Enter your name&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#feedback-email"&gt;Enter a valid email address&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;
+	&lt;label class="demo-field"
+		&gt;&lt;span&gt;Name&lt;/span
+		&gt;&lt;input
+			id="feedback-name"
+			aria-invalid="true"
+			aria-describedby="feedback-name-error"
+			autocomplete="name"
+		/&gt;&lt;span class="field-error" id="feedback-name-error"&gt;Enter your name.&lt;/span&gt;&lt;/label
+	&gt;
+	&lt;label class="demo-field"
+		&gt;&lt;span&gt;Email&lt;/span
+		&gt;&lt;input
+			id="feedback-email"
+			type="email"
+			value="invalid-address"
+			aria-invalid="true"
+			aria-describedby="feedback-email-error"
+			autocomplete="email"
+		/&gt;&lt;span class="field-error" id="feedback-email-error"
+			&gt;Enter a valid email address.&lt;/span
+		&gt;&lt;/label
+	&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-prose {
+	@extend %p-prose;
+}
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-danger {
+	@extend %o-notice-danger;
+}
+
+.demo-field {
+	@extend %o-form-field;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="badges" aria-labelledby="badges-title">
+		<h2 id="badges-title">Status labels</h2>
+		<p>
+			Badges contain text and are not buttons. Use a link or button object if the item
+			performs an action.
+		</p>
+		<div class="flair-example">
+			<div class="demo-cluster">
+				<span class="demo-badge">Active</span><span class="demo-badge">Read only</span
+				><span class="demo-badge">Draft</span><span class="demo-badge">12 updates</span>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-cluster"&gt;
+	&lt;span class="demo-badge"&gt;Active&lt;/span&gt;&lt;span class="demo-badge"&gt;Read only&lt;/span
+	&gt;&lt;span class="demo-badge"&gt;Draft&lt;/span&gt;&lt;span class="demo-badge"&gt;12 updates&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-cluster {
+	@extend %p-cluster;
+}
+
+.demo-badge {
+	@extend %o-badge;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="progress" aria-labelledby="progress-title">
+		<h2 id="progress-title">Progress and status updates</h2>
+		<p>
+			The progress element supplies its accessible value. The optional button changes only
+			this demonstration and announces the new value politely.
+		</p>
+		<div class="flair-example">
+			<div class="demo-stack" data-progress-example>
+				<label
+					><span>Example upload</span
+					><progress class="demo-progress" value="40" max="100">40%</progress></label
+				>
+				<p class="demo-output" role="status" data-progress-status>40% complete</p>
+				<button class="demo-button" type="button" data-progress-step hidden>
+					Advance example by 20%
+				</button>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-stack" data-progress-example&gt;
+	&lt;label
+		&gt;&lt;span&gt;Example upload&lt;/span
+		&gt;&lt;progress class="demo-progress" value="40" max="100"&gt;40%&lt;/progress&gt;&lt;/label
+	&gt;
+	&lt;p class="demo-output" role="status" data-progress-status&gt;40% complete&lt;/p&gt;
+	&lt;button class="demo-button" type="button" data-progress-step hidden&gt;
+		Advance example by 20%
+	&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-stack {
+	@extend %p-stack;
+}
+
+.demo-progress {
+	@extend %o-progress;
+}
+
+.demo-button {
+	@extend %o-button;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="empty" aria-labelledby="empty-title">
+		<h2 id="empty-title">Empty state</h2>
+		<p>Explain why content is absent and provide a useful next destination.</p>
+		<div class="flair-example">
+			<div class="demo-empty-state">
+				<h3>No saved projects</h3>
+				<p>Projects will appear here after they have been created.</p>
+				<a class="demo-button" href="/library/forms/">View the example form</a>
+			</div>
+		</div>
+
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class="demo-empty-state"&gt;
+	&lt;h3&gt;No saved projects&lt;/h3&gt;
+	&lt;p&gt;Projects will appear here after they have been created.&lt;/p&gt;
+	&lt;a class="demo-button" href="/library/forms/"&gt;View the example form&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-empty-state {
+	@extend %p-empty-state;
+}
+
+.demo-button {
+	@extend %o-button;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
 	</section>
 </main>

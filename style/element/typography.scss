@@ -1,0 +1,56 @@
+@use "../decoration/typography";
+@use "../object/link";
+@mixin typography {
+	:where(h1, h2, h3, h4, h5, h6) {
+		@extend %d-heading;
+		margin-block: var(--flair-space-6) var(--flair-space-3);
+	}
+	:where(h1) {
+		font-size: var(--flair-heading-1, 2.5rem);
+	}
+	:where(h2) {
+		font-size: var(--flair-heading-2, 2rem);
+	}
+	:where(h3) {
+		font-size: var(--flair-heading-3, 1.5rem);
+	}
+	:where(h4) {
+		font-size: var(--flair-heading-4, 1.25rem);
+	}
+	:where(h5, h6) {
+		font-size: var(--flair-font-size);
+	}
+	:where(p, ul, ol, dl, blockquote, figure) {
+		margin: 0;
+		margin-block-end: var(--flair-space-4);
+		line-height: inherit;
+	}
+	:where(ul, ol) {
+		padding-inline-start: var(--flair-space-6);
+	}
+	:where(li + li) {
+		margin-block-start: var(--flair-space-2);
+	}
+	:where(a) {
+		@extend %o-link;
+	}
+	:where(blockquote) {
+		padding-inline-start: var(--flair-space-4);
+		border-inline-start: var(--flair-quote-border-width, 4px) solid
+			var(--flair-color-accent);
+		color: var(--flair-color-muted);
+	}
+	:where(small, figcaption) {
+		font-size: var(--flair-small-size, 0.875rem);
+		color: var(--flair-color-muted);
+	}
+	:where(mark) {
+		background: var(--flair-selected-background, var(--flair-color-surface-disabled));
+		color: var(--flair-selected-text, var(--flair-color-text));
+	}
+	:where(hr) {
+		border: 0;
+		border-block-start: var(--flair-border-width) solid var(--flair-color-border);
+		margin-block: var(--flair-space-6);
+	}
+}

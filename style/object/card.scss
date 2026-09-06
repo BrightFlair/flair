@@ -1,0 +1,27 @@
+@use "../decoration/surface";
+@use "../decoration/typography";
+@use "../decoration/flow";
+%o-card {
+	@extend %d-surface;
+	@extend %d-typography;
+	@extend %d-stack;
+	> :where(h2, h3, h4) {
+		@extend %d-heading;
+		font-size: var(--flair-card-title-size, 1.25rem);
+	}
+	> footer {
+		margin-block-start: auto;
+		padding-block-start: var(--flair-space-4);
+		border-block-start: var(--flair-border-width) solid var(--flair-color-border);
+	}
+	> img {
+		inline-size: 100%;
+		block-size: auto;
+		border-radius: var(--flair-radius);
+	}
+}
+%o-inset {
+	@extend %d-surface;
+	background: var(--flair-inset-background, var(--flair-color-surface-disabled));
+	box-shadow: none;
+}
