@@ -450,9 +450,7 @@
 }
 
 .demo-stat {
-	font-size: var(--flair-heading-1, 2.5rem);
-	font-weight: var(--flair-heading-weight, 500);
-	font-variant-numeric: tabular-nums;
+	@extend %o-value;
 }</code></pre>
 		</details>
 	</section>
@@ -593,5 +591,37 @@
 			property fallbacks and behavioural requirements are documented in
 			<code>docs/library.md</code>.
 		</p>
+	</section>
+
+	<section class="reference-section" id="page-frame" aria-labelledby="page-frame-title">
+		<h2 id="page-frame-title">Page frame, header and footer</h2>
+		<p>Use the same frame on the header, content and footer to share gutters and maximum width. Compose it with the existing sidebar pattern.</p>
+		<div class="flair-example"><div class="demo-frame">
+  <header class="demo-page-header"><strong>Example project</strong><a href="#page-frame">Overview</a></header>
+  <div class="demo-sidebar demo-sticky-sidebar">
+    <aside><nav class="demo-side-navigation" aria-label="Page frame example"><ul><li><a href="#page-frame" aria-current="location">Introduction</a></li><li><a href="#dashboard">Dashboard</a></li></ul></nav></aside>
+    <div class="layout-content"><p>The frame sets the available measure. The sidebar wraps in source order.</p></div>
+  </div>
+  <footer class="demo-page-footer"><span>Example footer</span><a href="/library/typography/">Typography</a></footer>
+</div></div>
+		<p>--flair-page-width defaults to 90rem, with --flair-page-gutter and --flair-page-padding-block defaulting to space 6. The optional sticky-sidebar mixin accepts a minimum width and uses --flair-sticky-offset. The application chooses where sufficient space exists for a sticky column.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-frame&quot;&gt;
+  &lt;header class=&quot;demo-page-header&quot;&gt;&lt;strong&gt;Example project&lt;/strong&gt;&lt;a href=&quot;#page-frame&quot;&gt;Overview&lt;/a&gt;&lt;/header&gt;
+  &lt;div class=&quot;demo-sidebar demo-sticky-sidebar&quot;&gt;
+    &lt;aside&gt;&lt;nav class=&quot;demo-side-navigation&quot; aria-label=&quot;Page frame example&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#page-frame&quot; aria-current=&quot;location&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#dashboard&quot;&gt;Dashboard&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;&lt;/aside&gt;
+    &lt;div class=&quot;layout-content&quot;&gt;&lt;p&gt;The frame sets the available measure. The sidebar wraps in source order.&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;footer class=&quot;demo-page-footer&quot;&gt;&lt;span&gt;Example footer&lt;/span&gt;&lt;a href=&quot;/library/typography/&quot;&gt;Typography&lt;/a&gt;&lt;/footer&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-frame { @extend %l-page-frame; --flair-page-width: 60rem; }
+.demo-page-header { @extend %p-page-header; }
+.demo-page-footer { @extend %p-page-footer; }
+.demo-sidebar { @extend %l-sidebar; }
+.demo-side-navigation { @extend %p-side-navigation; }
+.demo-sticky-sidebar { @include flair.sticky-sidebar(70rem); }</code></pre>
+		</details>
 	</section>
 </main>

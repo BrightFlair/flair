@@ -96,6 +96,49 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		await page.locator('[data-copy-button]').click();
 		await page.waitForFunction(() => document.querySelector('[data-copy-status]').textContent.includes('manually'));
 
+		await page.goto(`${baseUrl}/library/feedback/`);
+		const metric = page.locator('[data-metric-example]');
+		await metric.locator('[data-metric-step="1"]').click();
+		assert.equal(await metric.locator('output').textContent(), '3');
+		await metric.locator('[data-metric-step="-1"]').click();
+		assert.equal(await metric.locator('output').textContent(), '2');
+		for(const alignment of ['center', 'end']) {
+			await metric.evaluate((element, value) => element.style.setProperty('--flair-metric-align', value), alignment);
+			assert.equal(await metric.evaluate(element => getComputedStyle(element).textAlign), alignment);
+			assert.equal(await metric.locator('.actions').evaluate(element => getComputedStyle(element).justifyContent), alignment);
+		}
+		const state = page.locator('[data-state-example]');
+		await state.locator('[data-busy-toggle]').click();
+		assert.equal(await state.locator('.demo-state-panel').getAttribute('aria-busy'), 'true');
+		await page.waitForFunction(() => getComputedStyle(document.querySelector('.demo-state-panel')).opacity === '0.55');
+		await state.locator('[data-busy-toggle]').click();
+		await state.locator('[data-drag-toggle]').click();
+		assert.equal(await state.locator('.demo-state-panel').evaluate(element => getComputedStyle(element).outlineStyle), 'dashed');
+		await state.locator('[data-drag-toggle]').click();
+		await page.emulateMedia({reducedMotion: 'reduce'});
+		await state.locator('.demo-reveal').evaluate(element => element.style.setProperty('--flair-reveal-progress', '0'));
+		assert.equal(await state.locator('.demo-reveal').evaluate(element => getComputedStyle(element).opacity), '1');
+		await page.emulateMedia({reducedMotion: 'no-preference'});
+
+		await page.goto(`${baseUrl}/library/surfaces/`);
+		await page.locator('[data-row-toggle]').click();
+		assert.equal(await page.locator('[data-row-example] li').first().getAttribute('data-complete'), 'true');
+		await page.locator('[data-row-toggle]').click();
+		assert.equal(await page.locator('[data-row-example] li').first().getAttribute('data-complete'), 'false');
+
+		await page.goto(`${baseUrl}/library/navigation/`);
+		await page.locator('[data-result-query]').fill('forms');
+		assert.equal(await page.locator('.demo-search-results li:visible').count(), 1);
+		await page.locator('[data-result-query]').fill('missing topic');
+		assert.equal(await page.locator('.demo-search-results li:visible').count(), 0);
+		assert.equal(await page.locator('[data-result-status]').textContent(), 'No topics match your search.');
+		await page.locator('[data-result-query]').fill('');
+		assert.equal(await page.locator('.demo-search-results li:visible').count(), 3);
+		await page.locator('.demo-skip-link').focus();
+		assert.equal(await page.locator('.demo-skip-link').evaluate(element => getComputedStyle(element).transform), 'none');
+		await page.keyboard.press('Enter');
+		assert.equal(await page.evaluate(() => document.activeElement.id), 'accessible-destination');
+
 		// Opening documentation sources must not widen the page either.
 		await page.setViewportSize({width: 320, height: 1000});
 		await page.goto(`${baseUrl}/library/layouts/`);
@@ -118,6 +161,12 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		await staticPage.locator('#contained-form input[name="q"]').fill('layout');
 		await Promise.all([staticPage.waitForNavigation(), staticPage.locator('#contained-form button[type="submit"]').click()]);
 		assert.equal(new URL(staticPage.url()).searchParams.get('q'), 'layout');
+		await staticPage.goto(`${baseUrl}/library/feedback/`);
+		assert.equal(await staticPage.locator('[data-metric-step]:visible').count(), 0);
+		assert.equal(await staticPage.locator('[data-metric-example] output').textContent(), '2');
+		await staticPage.goto(`${baseUrl}/library/navigation/`);
+		assert.equal(await staticPage.locator('.demo-search-results li:visible').count(), 3);
+		assert.ok(await staticPage.locator('[data-result-query]').isDisabled());
 		assert.deepEqual(errors, []);
 		console.log('Passed interactions, theme persistence, source overflow and no-JavaScript fallbacks.');
 	}

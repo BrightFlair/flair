@@ -1,4 +1,6 @@
 @use "../variable";
+@use "../flair";
+@include flair.base;
 
 // The site and its examples share one theme.
 :root {
@@ -26,17 +28,8 @@
 	background: var(--site-paper);
 }
 
-* {
-	box-sizing: border-box;
-}
 html {
 	scroll-behavior: smooth;
-}
-body {
-	margin: 0;
-}
-[hidden] {
-	display: none !important;
 }
 h1,
 h2,
@@ -77,15 +70,4 @@ button {
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
 }
-.skip-link {
-	position: fixed;
-	inset: 0.75rem auto auto 0.75rem;
-	z-index: 100;
-	padding: var(--site-space-small);
-	background: var(--site-ink);
-	color: var(--site-paper);
-	transform: translateY(-200%);
-	&:focus {
-		transform: none;
-	}
-}
+.skip-link { @extend %o-skip-link; }

@@ -173,4 +173,23 @@ asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_
 			<code>docs/library.md</code>.
 		</p>
 	</section>
+
+	<section class="reference-section" id="document-baseline" aria-labelledby="document-baseline-title">
+		<h2 id="document-baseline-title">An explicit document baseline</h2>
+		<p>Applications can opt into box sizing, a margin reset on body, and preservation of the native hidden attribute. The library remains silent on import.</p>
+		<div class="flair-example"><p>The text below has the native hidden attribute and is not displayed.</p>
+<p hidden>This content stays hidden, even when a component defines display.</p>
+<p>Typography and native control styling are separate opt-in mixins.</p></div>
+		<p>Include these at the application root for document-wide behaviour, or scope typography and controls to a container. The base mixin deliberately uses !important for [hidden] so component display rules cannot reveal hidden content.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;p&gt;The text below has the native hidden attribute and is not displayed.&lt;/p&gt;
+&lt;p hidden&gt;This content stays hidden, even when a component defines display.&lt;/p&gt;
+&lt;p&gt;Typography and native control styling are separate opt-in mixins.&lt;/p&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+@include flair.base;
+@include flair.typography;
+@include flair.controls;</code></pre>
+		</details>
+	</section>
 </main>

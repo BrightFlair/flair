@@ -1,0 +1,20 @@
+%l-page-frame {
+	box-sizing: border-box;
+	inline-size: 100%;
+	max-inline-size: var(--flair-page-width, 90rem);
+	margin-inline: auto;
+	padding-block: var(--flair-page-padding-block, var(--flair-space-6));
+	padding-inline: var(--flair-page-gutter, var(--flair-space-6));
+	min-inline-size: 0;
+}
+
+// Opt-in enhancement; keep the ordinary sidebar wrapping behaviour below this width.
+@mixin sticky-sidebar($from: 70rem) {
+	@media (min-width: $from) {
+		> aside {
+			position: sticky;
+			top: var(--flair-sticky-offset, var(--flair-space-6));
+			align-self: flex-start;
+		}
+	}
+}

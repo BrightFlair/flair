@@ -1,0 +1,19 @@
+@use "data-list";
+
+// Ordinary navigation links, not an ARIA listbox or a combobox implementation.
+%p-search-results {
+	@extend %p-list;
+	max-block-size: var(--flair-results-max-height, none);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	> li > a {
+		display: block;
+		overflow-wrap: anywhere;
+		padding: var(--flair-result-link-padding, var(--flair-space-2));
+	}
+	:where(p, .result-detail) {
+		font-size: var(--flair-small-size, 0.875rem);
+		color: var(--flair-color-muted);
+		margin-block: var(--flair-space-1);
+	}
+}

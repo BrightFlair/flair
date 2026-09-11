@@ -166,9 +166,7 @@
 	min-inline-size: 48rem;
 }
 .flair-example .demo-stat {
-	font-size: var(--flair-heading-1, 2.5rem);
-	font-weight: var(--flair-heading-weight, 500);
-	font-variant-numeric: tabular-nums;
+	@extend %o-value;
 }
 .flair-example .demo-output {
 	min-block-size: 1.6em;
@@ -195,3 +193,30 @@
 .flair-example .demo-highlight-wrap {
 	max-inline-size: 20ch;
 }
+
+// Shared patterns demonstrated in the relevant library sections.
+.demo-metric { @extend %p-metric; }
+.demo-metric-end { --flair-metric-align: end; }
+.demo-output-row { @extend %p-output-row; --flair-value-size: 4rem; }
+.demo-action-list { @extend %p-action-list; }
+.demo-action-row { @extend %p-action-row; }
+.demo-action-list [data-complete="true"] .row-content { text-decoration: line-through; }
+.demo-search-results { @extend %p-search-results; --flair-results-max-height: 16rem; }
+.demo-field { @extend %o-form-field; }
+.demo-frame { @extend %l-page-frame; --flair-page-width: 60rem; }
+.demo-page-header { @extend %p-page-header; }
+.demo-page-footer { @extend %p-page-footer; }
+.demo-sidebar { @extend %l-sidebar; }
+.demo-side-navigation { @extend %p-side-navigation; }
+.demo-sticky-sidebar { @include flair.sticky-sidebar(70rem); }
+.demo-page-intro { @extend %p-page-intro; }
+.demo-eyebrow { @extend %d-eyebrow; }
+.demo-lead { @extend %d-lead; }
+.demo-skip-link { @extend %o-skip-link; }
+.demo-visually-hidden { @extend %d-visually-hidden; }
+.demo-stack { @extend %p-stack; }
+.demo-state-actions { @extend %p-form-actions; }
+.demo-state-panel { @extend %o-card; }
+.demo-state-panel[aria-busy="true"] { @extend %d-busy; }
+.demo-state-panel[data-dragging="true"] { @extend %d-dragging; }
+.demo-reveal { @extend %d-reveal; }

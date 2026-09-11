@@ -13,3 +13,14 @@
 	letter-spacing: var(--flair-heading-tracking, normal);
 	overflow-wrap: anywhere;
 }
+
+%d-lead {
+	font-size: var(--flair-lead-size, 1.25rem);
+	max-inline-size: var(--flair-lead-measure, 55ch);
+}
+%d-eyebrow {
+	font-size: var(--flair-eyebrow-size, 0.75rem);
+	font-weight: var(--flair-eyebrow-weight, 700);
+	letter-spacing: var(--flair-eyebrow-tracking, 0.12em);
+	text-transform: uppercase;
+}

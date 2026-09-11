@@ -1,0 +1,17 @@
+@use "stack";
+
+%p-page-header {
+	@extend %p-cluster;
+	justify-content: space-between;
+	padding-block: var(--flair-header-padding-block, var(--flair-space-4));
+	gap: var(--flair-header-gap, var(--flair-space-6));
+	border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+	> p { margin: 0; font-size: var(--flair-small-size, 0.875rem); }
+}
+%p-page-footer {
+	@extend %p-cluster;
+	justify-content: space-between;
+	padding-block: var(--flair-header-padding-block, var(--flair-space-4));
+	border-block-start: var(--flair-border-width) solid var(--flair-color-border);
+	font-size: var(--flair-small-size, 0.875rem);
+}

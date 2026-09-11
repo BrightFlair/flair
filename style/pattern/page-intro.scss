@@ -1,0 +1,11 @@
+@use "../decoration/typography";
+
+%p-page-intro {
+	margin-block-end: var(--flair-intro-space, var(--flair-space-8));
+	> :where(h1, h2, .intro-title) {
+		@extend %d-heading;
+		font-size: var(--flair-intro-title-size, clamp(2.5rem, 5vw, 4.75rem));
+		margin-block: var(--flair-space-3) var(--flair-space-4);
+	}
+	> :where(.lead, p:last-child) { @extend %d-lead; }
+}

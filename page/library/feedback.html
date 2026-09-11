@@ -289,4 +289,75 @@
 			<code>docs/library.md</code>.
 		</p>
 	</section>
+
+	<section class="reference-section" id="metrics" aria-labelledby="metrics-title">
+		<h2 id="metrics-title">Values, totals and controls</h2>
+		<p>A metric keeps its value, supporting text and controls on one alignment. Use output for calculated values, and ordinary text for measurements.</p>
+		<div class="flair-example"><div class="demo-stack"><div class="demo-metric" data-metric-example>
+  <h3>Items selected</h3>
+  <output aria-label="Selected item count" aria-live="polite">2</output>
+  <p class="metric-detail">Change this local example with the buttons.</p>
+  <div class="actions">
+    <button type="button" data-metric-step="-1" hidden>Subtract one</button>
+    <button type="button" data-metric-step="1" hidden>Add one</button>
+  </div>
+</div>
+<p class="demo-output-row">Total: <output aria-label="Example total">42</output></p>
+<div class="demo-metric demo-metric-end">
+  <h3>Energy generated</h3>
+  <strong class="metric-value">12.5 <small class="metric-unit">kWh</small></strong>
+  <p class="metric-detail">An aligned measurement without live announcements.</p>
+</div></div></div>
+		<p>The value uses %o-value, which can also be extended alone. --flair-metric-align defaults to center; use start or end to align the whole group. --flair-value-size defaults to 3rem. Hidden demonstration buttons are revealed by the website script; a real application supplies its own actions.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-stack&quot;&gt;
+&lt;div class=&quot;demo-metric&quot; data-metric-example&gt;
+  &lt;h3&gt;Items selected&lt;/h3&gt;
+  &lt;output aria-label=&quot;Selected item count&quot; aria-live=&quot;polite&quot;&gt;2&lt;/output&gt;
+  &lt;p class=&quot;metric-detail&quot;&gt;Change this local example with the buttons.&lt;/p&gt;
+  &lt;div class=&quot;actions&quot;&gt;
+    &lt;button type=&quot;button&quot; data-metric-step=&quot;-1&quot; hidden&gt;Subtract one&lt;/button&gt;
+    &lt;button type=&quot;button&quot; data-metric-step=&quot;1&quot; hidden&gt;Add one&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p class=&quot;demo-output-row&quot;&gt;Total: &lt;output aria-label=&quot;Example total&quot;&gt;42&lt;/output&gt;&lt;/p&gt;
+&lt;div class=&quot;demo-metric demo-metric-end&quot;&gt;
+  &lt;h3&gt;Energy generated&lt;/h3&gt;
+  &lt;strong class=&quot;metric-value&quot;&gt;12.5 &lt;small class=&quot;metric-unit&quot;&gt;kWh&lt;/small&gt;&lt;/strong&gt;
+  &lt;p class=&quot;metric-detail&quot;&gt;An aligned measurement without live announcements.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-stack { @extend %p-stack; }
+.demo-metric { @extend %p-metric; }
+.demo-metric-end { --flair-metric-align: end; }
+.demo-output-row { @extend %p-output-row; --flair-value-size: 4rem; }</code></pre>
+		</details>
+	</section>
+
+	<section class="reference-section" id="interaction-states" aria-labelledby="interaction-states-title">
+		<h2 id="interaction-states-title">Busy, dragging and reveal treatments</h2>
+		<p>These decorations consume application state. They have no dependency on Flux or another JavaScript library.</p>
+		<div class="flair-example"><div data-state-example>
+  <div class="demo-state-actions"><button type="button" data-busy-toggle aria-pressed="false" hidden>Toggle busy preview</button><button type="button" data-drag-toggle aria-pressed="false" hidden>Toggle dragging preview</button><button type="button" data-reveal-replay hidden>Replay reveal</button></div>
+  <div class="demo-state-panel demo-reveal" aria-busy="false"><p>Preview content stays readable. These controls do not start a request or a drag operation.</p></div>
+  <p role="status" data-state-status></p>
+</div></div>
+		<p>--flair-busy-opacity and --flair-drag-opacity control state intensity. --flair-reveal-progress runs from 0 to 1; distance, duration and minimum opacity are configurable. Reveal effects are removed for reduced motion and printing. A Flux consumer can map --flair-reveal-progress: var(--flux-first-visible, 1).</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div data-state-example&gt;
+  &lt;div class=&quot;demo-state-actions&quot;&gt;&lt;button type=&quot;button&quot; data-busy-toggle aria-pressed=&quot;false&quot; hidden&gt;Toggle busy preview&lt;/button&gt;&lt;button type=&quot;button&quot; data-drag-toggle aria-pressed=&quot;false&quot; hidden&gt;Toggle dragging preview&lt;/button&gt;&lt;button type=&quot;button&quot; data-reveal-replay hidden&gt;Replay reveal&lt;/button&gt;&lt;/div&gt;
+  &lt;div class=&quot;demo-state-panel demo-reveal&quot; aria-busy=&quot;false&quot;&gt;&lt;p&gt;Preview content stays readable. These controls do not start a request or a drag operation.&lt;/p&gt;&lt;/div&gt;
+  &lt;p role=&quot;status&quot; data-state-status&gt;&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-state-actions { @extend %p-form-actions; }
+.demo-state-panel { @extend %o-card; }
+.demo-state-panel[aria-busy=&quot;true&quot;] { @extend %d-busy; }
+.demo-state-panel[data-dragging=&quot;true&quot;] { @extend %d-dragging; }
+.demo-reveal { @extend %d-reveal; }</code></pre>
+		</details>
+	</section>
 </main>

@@ -300,4 +300,41 @@
 			<code>docs/library.md</code>.
 		</p>
 	</section>
+
+	<section class="reference-section" id="action-lists" aria-labelledby="action-lists-title">
+		<h2 id="action-lists-title">Content with trailing actions</h2>
+		<p>Rows wrap when space is limited. The text grows, while actions stay together where they fit. This works for task lists, settings and editable records.</p>
+		<div class="flair-example"><ul class="demo-action-list" data-row-example>
+  <li>
+    <span class="row-content">Review the deployment checklist</span>
+    <div class="row-actions"><button type="button" data-row-toggle hidden>Mark complete</button></div>
+  </li>
+  <li>
+    <span class="row-content">A longer record name wraps without hiding its controls</span>
+    <div class="row-actions"><a href="/library/forms/">Edit form example</a></div>
+  </li>
+</ul>
+<p role="status" data-row-status></p>
+<div class="demo-action-row"><span class="row-content">Standalone record</span><span class="row-actions">Read only</span></div></div>
+		<p>Use .row-content for the flexible content and .row-actions for trailing controls. Optional leading content can precede both. --flair-row-gap, --flair-row-actions-gap and --flair-row-content-min configure spacing. Application code owns completion, reordering and persistence.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;ul class=&quot;demo-action-list&quot; data-row-example&gt;
+  &lt;li&gt;
+    &lt;span class=&quot;row-content&quot;&gt;Review the deployment checklist&lt;/span&gt;
+    &lt;div class=&quot;row-actions&quot;&gt;&lt;button type=&quot;button&quot; data-row-toggle hidden&gt;Mark complete&lt;/button&gt;&lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;span class=&quot;row-content&quot;&gt;A longer record name wraps without hiding its controls&lt;/span&gt;
+    &lt;div class=&quot;row-actions&quot;&gt;&lt;a href=&quot;/library/forms/&quot;&gt;Edit form example&lt;/a&gt;&lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p role=&quot;status&quot; data-row-status&gt;&lt;/p&gt;
+&lt;div class=&quot;demo-action-row&quot;&gt;&lt;span class=&quot;row-content&quot;&gt;Standalone record&lt;/span&gt;&lt;span class=&quot;row-actions&quot;&gt;Read only&lt;/span&gt;&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-action-list { @extend %p-action-list; }
+.demo-action-row { @extend %p-action-row; }
+.demo-action-list [data-complete=&quot;true&quot;] .row-content { text-decoration: line-through; }</code></pre>
+		</details>
+	</section>
 </main>

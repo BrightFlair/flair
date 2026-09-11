@@ -61,3 +61,58 @@ for(const example of document.querySelectorAll("[data-action-example]")) {
 		example.querySelector("[data-action-status]").textContent = "Destructive action preview. No data has been changed.";
 	});
 }
+
+for(const example of document.querySelectorAll("[data-metric-example]")) {
+	const output = example.querySelector("output");
+	for(const button of example.querySelectorAll("[data-metric-step]")) {
+		button.hidden = false;
+		button.addEventListener("click", () => {
+			output.value = String(Number(output.value) + Number(button.dataset.metricStep));
+		});
+	}
+}
+for(const example of document.querySelectorAll("[data-row-example]")) {
+	for(const button of example.querySelectorAll("[data-row-toggle]")) {
+		button.hidden = false;
+		button.addEventListener("click", () => {
+			const row = button.closest("li");
+			const complete = row.dataset.complete !== "true";
+			row.dataset.complete = String(complete);
+			button.textContent = complete ? "Reopen" : "Mark complete";
+			example.nextElementSibling.textContent = complete ? "Task marked complete." : "Task reopened.";
+		});
+	}
+}
+for(const example of document.querySelectorAll("[data-search-example]")) {
+	const input = example.querySelector("input");
+	input.disabled = false;
+	const update = () => {
+		let count = 0;
+		for(const item of example.querySelectorAll("li")) {
+			item.hidden = !item.textContent.toLowerCase().includes(input.value.trim().toLowerCase());
+			if(!item.hidden) count++;
+		}
+		example.querySelector("[data-result-status]").textContent = count ? `${count} matching topics.` : "No topics match your search.";
+	};
+	input.addEventListener("input", update);
+	update();
+}
+for(const example of document.querySelectorAll("[data-state-example]")) {
+	const panel = example.querySelector(".demo-state-panel");
+	const status = example.querySelector("[data-state-status]");
+	for(const button of example.querySelectorAll("button")) button.hidden = false;
+	for(const [selector, attribute, label] of [["[data-busy-toggle]", "aria-busy", "Busy"], ["[data-drag-toggle]", "data-dragging", "Dragging"]]) {
+		const button = example.querySelector(selector);
+		button.addEventListener("click", () => {
+			const active = panel.getAttribute(attribute) !== "true";
+			panel.setAttribute(attribute, String(active));
+			button.setAttribute("aria-pressed", String(active));
+			status.textContent = `${label} preview ${active ? "enabled" : "disabled"}.`;
+		});
+	}
+	example.querySelector("[data-reveal-replay]").addEventListener("click", () => {
+		panel.style.setProperty("--flair-reveal-progress", "0");
+		requestAnimationFrame(() => requestAnimationFrame(() => panel.style.setProperty("--flair-reveal-progress", "1")));
+		status.textContent = "Reveal replayed. Reduced motion preferences are respected.";
+	});
+}

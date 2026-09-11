@@ -117,3 +117,43 @@ test('checklists remain independent of pricing, card surfaces and application fo
 	assert.match(css, /data-available=false/);
 	assert.doesNotMatch(css, /authwave|plan-price|@font-face|Morion|:root/);
 });
+
+test('theme mixins are opt-in and export no website selectors or font downloads', () => {
+	for (const name of ['base', 'ink', 'paper', 'vivid', 'github', 'material']) {
+		const css = compile(`@use "flair"; .theme { @include flair.theme-${name}; }`);
+		assert.match(css, /--flair-color-text/);
+		assert.doesNotMatch(css, /--site-|:root|data-theme|@font-face|url\(/);
+	}
+});
+
+test('metric alignment applies to the value and actions without a fixed viewport breakpoint', () => {
+	const css = compile('@use "flair"; .metric { @extend %p-metric; --flair-metric-align: end; }');
+	assert.match(css, /text-align: var\(--flair-metric-align, center\)/);
+	assert.match(css, /justify-content: var\(--flair-metric-align, center\)/);
+	assert.match(css, /font-variant-numeric: tabular-nums/);
+	assert.doesNotMatch(css, /@media|counter-a|single-counter/);
+});
+
+test('state decorations respect reduced motion and remain independent of Flux', () => {
+	const css = compile('@use "flair"; .busy { @extend %d-busy; } .drag { @extend %d-dragging; } .reveal { @extend %d-reveal; }');
+	assert.match(css, /prefers-reduced-motion: reduce/);
+	assert.match(css, /print/);
+	assert.doesNotMatch(css, /flux|pointer-events|display: none/);
+});
+
+test('all new patterns have live examples and source in the appropriate documentation sections', () => {
+	const fs = require('node:fs');
+	const pages = {
+		feedback: ['metrics', 'interaction-states'], surfaces: ['action-lists'],
+		navigation: ['search-results', 'accessible-helpers'], layouts: ['page-frame'],
+		typography: ['page-intro', 'theme-presets'], code: ['document-baseline'],
+	};
+	for (const [page, ids] of Object.entries(pages)) {
+		const html = fs.readFileSync(path.resolve(__dirname, `../page/library/${page}.html`), 'utf8');
+		for (const id of ids) {
+			const section = html.split(`id="${id}"`)[1]?.split('</section>')[0];
+			assert.ok(section?.includes('class="flair-example"'), `${page}: ${id} live example`);
+			assert.ok(section.includes('HTML and Sass'), `${page}: ${id} source`);
+		}
+	}
+});

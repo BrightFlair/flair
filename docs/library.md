@@ -22,7 +22,7 @@ This pass implements all ten documentation sections. It is a set of Sass definit
 }
 ```
 
-Configure your Sass load path to include Flair's `style` directory. Load fonts in the implementing application. Theme presets currently belong to `style/site/themes.scss`, not the public entry point; copy the relevant `--flair-*` overrides into an application theme. `--site-*` properties, section switching, cookies and demo scripts are website responsibilities.
+Configure your Sass load path to include Flair's `style` directory. Load fonts in the implementing application. Theme presets are exported as opt-in `flair.theme-base`, `flair.theme-ink`, `flair.theme-paper`, `flair.theme-vivid`, `flair.theme-github` and `flair.theme-material` mixins. Include `theme-base` first, followed by one optional preset at the application root. `--site-*` properties, section switching, cookies and demo scripts are website responsibilities.
 
 `@extend` emits the dependencies of the requested definition. Sass does not inspect HTML to prune unused descendant rules. Keep selectors narrow and prefer setting inherited properties over duplicating component CSS. Element typography and controls are opt-in mixins (`flair.typography` and `flair.controls`) that can be included inside an application selector.
 
@@ -100,7 +100,7 @@ Read-only references used for this pass:
 | dhp-logging `style/element/table.scss` | Table cell spacing and alternating rows, with semantic headers and contained scrolling. |
 | www.php.gt `style/decoration/typography.scss`, `syntax.scss` | Scoped prose and explicit syntax colours; reading measure is a separate layout decision. |
 
-No implementing project has been modified or migrated in this pass. Project-specific interactions, fetching, authentication, validation and persistence are outside these definitions.
+Flux consumes the shared definitions, including the metric, actionable-list and search-result patterns. The other reference projects remain design references. Project-specific interactions, fetching, authentication, validation and persistence are outside these definitions.
 
 ## Source inventory
 
@@ -327,7 +327,7 @@ An implementing project can require `"flair": "file:../../BrightFlair/flair"` in
 execute=./node_modules/.bin/sass --load-path=node_modules/flair/style ./style/style.scss www/style.css --source-map --embed-sources --embed-source-map
 ```
 
-Use `@use "flair";` in consuming modules. The package contains only the public Sass entry and library directories. Application fonts, navigation scripts and website themes are not included. Rebuild the implementing project after editing Flair.
+Use `@use "flair";` in consuming modules. The package contains only the public Sass entry and library directories. Application fonts, navigation scripts and website-specific theme tokens are not included; public theme mixins are included. Rebuild the implementing project after editing Flair.
 
 ## Highlight decoration
 
@@ -344,3 +344,25 @@ Use `@use "flair";` in consuming modules. The package contains only the public S
 ```
 
 `--flair-highlight-marker-size` defaults to `0.375rem`. `--flair-highlight-border-width` and `--flair-highlight-border-color` fall back to the standard border tokens. Markers use `currentColor`; they do not intercept pointer events.
+
+## Shared website patterns
+
+These additions are public through `flair.scss`. Every example includes live HTML and its Sass source, and uses the global theme selector.
+
+| Definitions | Interactive documentation | Markup and configuration |
+| --- | --- | --- |
+| `%o-value`, `%p-metric`, `%p-output-row` | Feedback → Values, totals and controls; Layouts → Dashboard | A metric has a heading, `output` or `.metric-value`, optional `.metric-detail`, and `.actions`. `--flair-metric-align` (center/start/end) aligns both value and controls. `--flair-value-size` (3rem), `--flair-value-weight` (700), `--flair-value-unit-size` (0.5em for a child `.metric-unit`), `--flair-value-leading` (1.2), `--flair-metric-gap` (space 4) and `--flair-output-label-size` (1.5rem) configure presentation. Announcements and units belong to the consumer. |
+| `%p-action-row`, `%p-action-list` | Surfaces → Content with trailing actions | Lists contain `li`; rows contain `.row-content` and `.row-actions`, with optional leading content. Rows wrap in source order. `--flair-row-content-min` defaults to 8rem; row and action gaps use space 3 and space 2. `--flair-row-background` defaults to the surface colour. |
+| `%p-search-results` | Navigation → Search result links | Ordinary `ul > li > a` links, with optional `.result-detail`. `--flair-results-max-height` defaults to none, `--flair-result-link-padding` to space 2 and `--flair-list-padding` to space 4. Filtering, announcements and requests are application behaviour. |
+| `%l-page-frame`, `%p-page-header`, `%p-page-footer`, `sticky-sidebar($from: 70rem)` | Layouts → Page frame, header and footer | Frame width defaults to 90rem; `--flair-page-gutter` and `--flair-page-padding-block` default to space 6. Header/footer wrap their contents and use `--flair-header-padding-block` (space 4). Sticky sidebar is optional and uses `--flair-sticky-offset`; choose a threshold suitable for the composition. |
+| `%p-page-intro`, `%d-lead`, `%d-eyebrow` | Typography → Page introductions | Direct h1/h2 or `.intro-title`, followed by a lead paragraph. Set `--flair-intro-title-size`, `--flair-intro-space`, `--flair-lead-size`, `--flair-lead-measure`, and `--flair-eyebrow-size/weight/tracking`. Document heading levels remain the consumer's responsibility. |
+| `%o-skip-link`, `%d-visually-hidden` | Navigation → Skip links and visually hidden text | Real skip-link destination; hidden text must not contain invisible focusable controls. Skip links are visible on focus. `--flair-skip-link-layer` defaults to 100. |
+| `%d-busy`, `%d-dragging`, `%d-reveal` | Feedback → Busy, dragging and reveal treatments | Apply decorations only to the relevant application state. Busy opacity defaults to .55, dragging opacity to .6, and drag outline width to 2px. Reveal progress is 0–1; minimum opacity .12, distance 1.5rem and duration 650ms. Reduced motion and print display revealed content immediately. |
+| `base`, `typography`, `controls` | Code → An explicit document baseline | Mixins must be explicitly included. Base provides border-box sizing, body margin reset and `[hidden]` preservation. |
+| `theme-base`, `theme-ink/paper/vivid/github/material` | Typography → Using the theme presets | Base supplies defaults; select one optional preset. Presets contain reusable tokens and colour-scheme, never website selectors, font downloads or JavaScript. |
+
+`%p-data-list` now accepts `--flair-data-min` (14rem by default). A consumer can choose 100% for a single-column description list without replacing its typography or spacing rules.
+
+Source files follow their layer: `object/value.scss`, `object/skip-link.scss`, `pattern/metric.scss`, `pattern/action-list.scss`, `pattern/search-results.scss`, `pattern/page-header.scss`, `pattern/page-intro.scss`, `layout/page-frame.scss`, `decoration/accessibility.scss`, `decoration/state.scss`, `element/base.scss` and `variable/themes.scss`. Lead and eyebrow definitions extend `decoration/typography.scss`.
+
+Flux maps `--flux-first-visible` to `--flair-reveal-progress` and its waiting/dragging classes to the matching decorations. The public library does not emit Flux selectors or require its runtime. Clock geometry, pointer calculations and gauge illustration remain application examples.

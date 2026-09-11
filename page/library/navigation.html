@@ -233,4 +233,59 @@
 			<code>docs/library.md</code>.
 		</p>
 	</section>
+
+	<section class="reference-section" id="search-results" aria-labelledby="search-results-title">
+		<h2 id="search-results-title">Search result links</h2>
+		<p>A result list is ordinary navigation. Filtering this local example changes only the visible results; Flair does not implement a combobox or perform requests.</p>
+		<div class="flair-example"><div data-search-example>
+  <label class="demo-field"><span>Find a documentation topic</span><input type="search" data-result-query disabled /></label>
+  <ul class="demo-search-results">
+    <li><a href="/library/forms/">Forms<span class="result-detail"> — fields and validation</span></a></li>
+    <li><a href="/library/layouts/">Layouts<span class="result-detail"> — responsive composition</span></a></li>
+    <li><a href="/library/feedback/">Feedback<span class="result-detail"> — notices and progress</span></a></li>
+  </ul>
+  <p role="status" data-result-status>3 topics. Filtering is available with JavaScript.</p>
+</div></div>
+		<p>Keep links keyboard accessible. --flair-results-max-height defaults to none; result spacing uses --flair-list-padding and --flair-result-link-padding. Empty-state wording and announcements are supplied by the application.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div data-search-example&gt;
+  &lt;label class=&quot;demo-field&quot;&gt;&lt;span&gt;Find a documentation topic&lt;/span&gt;&lt;input type=&quot;search&quot; data-result-query disabled /&gt;&lt;/label&gt;
+  &lt;ul class=&quot;demo-search-results&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;/library/forms/&quot;&gt;Forms&lt;span class=&quot;result-detail&quot;&gt; — fields and validation&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/library/layouts/&quot;&gt;Layouts&lt;span class=&quot;result-detail&quot;&gt; — responsive composition&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/library/feedback/&quot;&gt;Feedback&lt;span class=&quot;result-detail&quot;&gt; — notices and progress&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p role=&quot;status&quot; data-result-status&gt;3 topics. Filtering is available with JavaScript.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-search-results { @extend %p-search-results; --flair-results-max-height: 16rem; }
+.demo-field { @extend %o-form-field; }</code></pre>
+		</details>
+	</section>
+
+	<section class="reference-section" id="accessible-helpers" aria-labelledby="accessible-helpers-title">
+		<h2 id="accessible-helpers-title">Skip links and visually hidden text</h2>
+		<p>A skip link becomes visible when focused. Visually hidden text remains available to assistive technology.</p>
+		<div class="flair-example"><div class="demo-stack">
+  <a class="demo-skip-link" href="#accessible-destination">Skip to the example destination</a>
+  <p>Use Tab to focus the skip link above. It appears at the top of the viewport.</p>
+  <a href="#accessible-destination">Read more<span class="demo-visually-hidden"> about accessible navigation</span></a>
+  <div id="accessible-destination" tabindex="-1"><p>Example destination. Focus can move here without adding it to the normal tab order.</p></div>
+</div></div>
+		<p>Give skip links real destinations and keep them early in the page order. Do not use visually hidden styling to conceal focusable controls; the skip-link object handles focus visibility separately.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-stack&quot;&gt;
+  &lt;a class=&quot;demo-skip-link&quot; href=&quot;#accessible-destination&quot;&gt;Skip to the example destination&lt;/a&gt;
+  &lt;p&gt;Use Tab to focus the skip link above. It appears at the top of the viewport.&lt;/p&gt;
+  &lt;a href=&quot;#accessible-destination&quot;&gt;Read more&lt;span class=&quot;demo-visually-hidden&quot;&gt; about accessible navigation&lt;/span&gt;&lt;/a&gt;
+  &lt;div id=&quot;accessible-destination&quot; tabindex=&quot;-1&quot;&gt;&lt;p&gt;Example destination. Focus can move here without adding it to the normal tab order.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-skip-link { @extend %o-skip-link; }
+.demo-visually-hidden { @extend %d-visually-hidden; }
+.demo-stack { @extend %p-stack; }</code></pre>
+		</details>
+	</section>
 </main>
