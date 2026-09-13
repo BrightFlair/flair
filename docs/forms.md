@@ -23,11 +23,11 @@ contact-form form {
 Individual modules can be loaded instead of the aggregate entry point:
 
 ```scss
-@use "path/to/flair/style/variable";
+@use "path/to/flair/style/mixin/defaults";
 @use "path/to/flair/style/object/button";
 
 :root {
-	@include variable.defaults;
+	@include defaults.defaults;
 }
 .download {
 	@extend %o-button;
@@ -52,24 +52,24 @@ Optional element defaults:
 
 | Layer and source | Public definition | Responsibility and dependency |
 | --- | --- | --- |
-| `style/variable/index.scss` | `defaults()` | Monochrome values and shared scales; explicitly emitted by the consumer. |
+| `style/mixin/defaults.scss` | `defaults()` | Monochrome values and shared scales; explicitly emitted by the consumer. |
 | `style/decoration/focus-ring.scss` | `%d-focus-ring` | Outline width, colour and offset. |
 | `style/decoration/control.scss` | `%d-control` | Shared font, padding, border, background, hover, disabled and explicit invalid presentation. Its `:focus-visible` rule extends `%d-focus-ring`. |
 | `style/object/control.scss` | `%o-control` | Extends `%d-control`; full-width text-like controls, placeholder colour, read-only border and resizable textarea. |
-| Same | `%o-choice` | Native checkbox/radio size and accent; extends focus ring on keyboard focus. |
-| Same | `%o-range` | Native full-width range input; extends focus ring on keyboard focus. |
-| Same | `%o-color` | Extends `%d-control`; smaller colour picker. |
+| `style/object/choice.scss` | `%o-choice` | Native checkbox/radio size and accent; extends focus ring on keyboard focus. |
+| `style/object/range.scss` | `%o-range` | Native full-width range input; extends focus ring on keyboard focus. |
+| `style/object/color.scss` | `%o-color` | Extends `%d-control`; smaller colour picker. |
 | `style/object/button.scss` | `%o-button` | Extends `%d-control`; inline button or link presentation, alignment and colours. |
-| Same | `%o-button-primary` | Extends `%o-button`; accent background with contrasting text. |
-| `style/element/controls.scss` | `controls()` | Optional native-tag mappings to the objects above. |
+| `style/object/button-primary.scss` | `%o-button-primary` | Extends `%o-button`; accent background with contrasting text. |
+| `style/mixin/controls.scss` | `controls()` | Optional native-tag mappings to the objects above. |
 | `style/object/form-field.scss` | `%o-form-field` | Label/control/message stack; includes direct-child element mappings. |
-| Same | `%o-choice-field` | Checkbox/radio with wrapping text; extends `%o-choice` on the input. |
-| Same | `%o-fieldset` | Native legend and bordered group; extends field and choice objects on its children. |
+| `style/object/choice-field.scss` | `%o-choice-field` | Checkbox/radio with wrapping text; extends `%o-choice` on the input. |
+| `style/object/fieldset.scss` | `%o-fieldset` | Native legend and bordered group; extends field and choice objects on its children. |
 | `style/pattern/field-row.scss` | `%p-field-row` | Wrapping flex row; extends field objects on direct `.field` or `label` children. |
 | `style/pattern/form-actions.scss` | `%p-form-actions` | Wrapping actions; extends button objects and primary variant. Preserves DOM order. |
 | `style/pattern/form-fields.scss` | `%p-form-fields` | Field stack that composes field, choice, fieldset, row and action definitions. |
 
-Element may depend on Object; Object/form-field may use Element/control mappings. This graph is acyclic: the element module only imports the control and button objects, not the form-field object. Directory order is not dependency order.
+Element mapping mixins may depend on objects, and the form-field object may use the controls mixin. This graph is acyclic: the controls mixin imports control and button objects, not the form-field object. Directory order is not dependency order.
 
 Only placeholders are extended. Pattern classes such as `.field` are structural hooks, not global style classes. No reusable selectors are emitted for the gallery's custom tags or page names.
 
@@ -151,7 +151,7 @@ Call `defaults()` once for each independent root. Calling it on a nested compone
 
 Theme authors should set the native `color-scheme` alongside their colours. Check foreground/background contrast, focus contrast and disabled readability for each theme. The font and colour defaults are monochrome; the example Paper theme is only a demonstration.
 
-The Vivid theme demonstrates a yellow surface, purple text and borders, mint secondary buttons and lime primary buttons. It also changes control padding, field and action spacing, border width, corner radii and label weight. All changes use CSS properties in `style/site/themes.scss`; the markup and library selectors are shared with the other themes. The local Compact option still overrides density settings when selected.
+The Vivid theme demonstrates a yellow surface, purple text and borders, mint secondary buttons and lime primary buttons. It also changes control padding, field and action spacing, border width, corner radii and label weight. All changes use CSS properties in `style/site/root.scss`; the markup and library selectors are shared with the other themes. The local Compact option still overrides density settings when selected.
 
 GitHub uses api.horse's light palette, Mona Sans font, 14px root size, grey control backgrounds, quarter-rem corners, blue focus rings and green primary buttons. Its button hover and pressed colours use the same colour mixing as api.horse. The references are api.horse's `style/variable/palette.scss`, `style/decoration/user-interface.scss`, `style/element/html.scss` and `style/element/button.scss`. Application-specific panel layouts and monospace field overrides are not part of this theme.
 

@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-primary {
+	@extend %o-button-primary;
+}

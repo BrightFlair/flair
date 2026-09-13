@@ -1,6 +1,8 @@
 @use "../pattern/stack";
+@use "../pattern/cluster";
 @use "../pattern/grid";
 @use "../object/card";
+
 %l-dashboard {
 	@extend %p-stack;
 	> header {

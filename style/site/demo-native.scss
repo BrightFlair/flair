@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-native {
+	@include flair.controls;
+}

@@ -1,0 +1,7 @@
+@use "../decoration/surface";
+
+%o-inset {
+	@extend %d-surface;
+	background: var(--flair-inset-background, var(--flair-color-surface-disabled));
+	box-shadow: none;
+}

@@ -1,0 +1,9 @@
+.site-footer {
+	display: flex;
+	justify-content: space-between;
+	gap: var(--site-space-medium);
+	flex-wrap: wrap;
+	padding: var(--site-space-large) var(--site-gutter);
+	border-top: 2px solid var(--site-ink);
+	font: 1rem/1.5 var(--site-font-mono);
+}

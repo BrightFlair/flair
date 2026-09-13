@@ -1,0 +1,6 @@
+@use "notice";
+
+%o-notice-danger {
+	@extend %o-notice;
+	border-inline-start-color: var(--flair-color-danger);
+}

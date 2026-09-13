@@ -1,5 +1,4 @@
 @use "../decoration/control";
-@use "../decoration/focus-ring";
 
 %o-control {
 	@extend %d-control;
@@ -21,39 +20,4 @@
 	&[readonly] {
 		border-style: dotted;
 	}
-}
-
-// Retain native appearance, keyboard behaviour and forced-colour support.
-%o-choice {
-	box-sizing: border-box;
-	inline-size: var(--flair-choice-size);
-	block-size: var(--flair-choice-size);
-	margin: 0;
-	accent-color: var(--flair-color-accent);
-	&:focus-visible {
-		@extend %d-focus-ring;
-	}
-	&:disabled {
-		cursor: not-allowed;
-	}
-}
-
-%o-range {
-	inline-size: 100%;
-	min-inline-size: 0;
-	min-block-size: var(--flair-control-min-height);
-	margin: 0;
-	accent-color: var(--flair-color-accent);
-	&:focus-visible {
-		@extend %d-focus-ring;
-	}
-	&:disabled {
-		cursor: not-allowed;
-	}
-}
-
-%o-color {
-	@extend %d-control;
-	inline-size: var(--flair-color-control-width, 4rem);
-	padding: var(--flair-space-1);
 }

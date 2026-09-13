@@ -1,0 +1,7 @@
+@use "../decoration/control";
+
+%o-color {
+	@extend %d-control;
+	inline-size: var(--flair-color-control-width, 4rem);
+	padding: var(--flair-space-1);
+}

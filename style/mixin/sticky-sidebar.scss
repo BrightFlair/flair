@@ -1,0 +1,10 @@
+// Opt-in enhancement; keep the ordinary sidebar wrapping behaviour below this width.
+@mixin sticky-sidebar($from: 70rem) {
+	@media (min-width: $from) {
+		> aside {
+			position: sticky;
+			top: var(--flair-sticky-offset, var(--flair-space-6));
+			align-self: flex-start;
+		}
+	}
+}

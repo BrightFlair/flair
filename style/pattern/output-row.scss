@@ -1,0 +1,13 @@
+@use "../object/value";
+
+%p-output-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	justify-content: var(--flair-metric-align, center);
+	gap: var(--flair-metric-gap, var(--flair-space-4));
+	text-align: var(--flair-metric-align, center);
+	font-size: var(--flair-output-label-size, 1.5rem);
+	font-weight: var(--flair-value-weight, 700);
+	> :where(output, .metric-value) { @extend %o-value; }
+}

@@ -1,0 +1,7 @@
+@use "../flair";
+
+// Only this directory's index has introductory text and spacing.
+.playground-index {
+	@extend %p-prose;
+	padding: var(--site-space-large) var(--site-gutter);
+}

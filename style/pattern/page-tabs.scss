@@ -1,0 +1,6 @@
+@use "navigation";
+
+%p-page-tabs {
+	@extend %p-navigation;
+	border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+}

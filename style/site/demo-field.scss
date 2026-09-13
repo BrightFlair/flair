@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-field {
+	@extend %o-form-field;
+}

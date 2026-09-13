@@ -1,0 +1,9 @@
+%d-cluster {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--flair-cluster-gap, var(--flair-space-3));
+	> * {
+		min-inline-size: 0;
+	}
+}

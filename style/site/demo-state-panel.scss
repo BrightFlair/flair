@@ -1,0 +1,13 @@
+@use "../flair";
+
+.demo-state-panel {
+	@extend %o-card;
+
+	&[aria-busy="true"] {
+		@extend %d-state-busy;
+	}
+
+	&[data-dragging="true"] {
+		@extend %d-state-dragging;
+	}
+}

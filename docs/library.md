@@ -22,7 +22,7 @@ This pass implements all ten documentation sections. It is a set of Sass definit
 }
 ```
 
-Configure your Sass load path to include Flair's `style` directory. Load fonts in the implementing application. Theme presets are exported as opt-in `flair.theme-base`, `flair.theme-ink`, `flair.theme-paper`, `flair.theme-vivid`, `flair.theme-github` and `flair.theme-material` mixins. Include `theme-base` first, followed by one optional preset at the application root. `--site-*` properties, section switching, cookies and demo scripts are website responsibilities.
+Configure your Sass load path to include Flair's `style` directory. Load fonts in the implementing application. Import `theme` separately with `@use "theme";` to access the opt-in `theme.base`, `theme.ink`, `theme.paper`, `theme.vivid`, `theme.github` and `theme.material` mixins. Include `theme.base` first, followed by one optional preset at the application root. `--site-*` properties, section switching, cookies and demo scripts are website responsibilities.
 
 `@extend` emits the dependencies of the requested definition. Sass does not inspect HTML to prune unused descendant rules. Keep selectors narrow and prefer setting inherited properties over duplicating component CSS. Element typography and controls are opt-in mixins (`flair.typography` and `flair.controls`) that can be included inside an application selector.
 
@@ -104,49 +104,93 @@ Flux consumes the shared definitions, including the metric, actionable-list and 
 
 ## Source inventory
 
-Each file below can be imported independently, or reached through `flair.scss`. Dependencies are explicit `@use` statements in that file.
+Each file below can be imported independently, or reached through `flair.scss`. Dependencies are explicit `@use` statements in that file. Each top-level placeholder lives in a matching file, without the layer prefix: `%d-stack` belongs in `decoration/stack.scss`. Nested selectors and encapsulated variants stay with their owner; unrelated placeholders get separate files. The same rule applies to mixins and website selectors: each definition file owns one root name, while descendants and variants stay nested under that owner. General mixins live in `mixin/<name>.scss` and theme mixins in `theme/<name>.scss`; each font file owns one family. Composition files contain only imports/forwards or the explicit document baseline include.
 
 | File | Public definitions |
 | --- | --- |
+| [`style/decoration/cluster.scss`](../style/decoration/cluster.scss) | `%d-cluster` |
 | [`style/decoration/control.scss`](../style/decoration/control.scss) | `%d-control` |
-| [`style/decoration/flow.scss`](../style/decoration/flow.scss) | `%d-stack`, `%d-cluster` |
 | [`style/decoration/focus-ring.scss`](../style/decoration/focus-ring.scss) | `%d-focus-ring` |
+| [`style/decoration/highlight.scss`](../style/decoration/highlight.scss) | `%d-highlight` |
+| [`style/decoration/stack.scss`](../style/decoration/stack.scss) | `%d-stack` |
+| [`style/decoration/state.scss`](../style/decoration/state.scss) | `%d-state` (`&-busy`, `&-dragging`, `&-reveal`) |
 | [`style/decoration/surface.scss`](../style/decoration/surface.scss) | `%d-surface` |
 | [`style/decoration/syntax.scss`](../style/decoration/syntax.scss) | `%d-syntax` |
-| [`style/decoration/typography.scss`](../style/decoration/typography.scss) | `%d-typography`, `%d-heading` |
-| [`style/element/controls.scss`](../style/element/controls.scss) | `@mixin controls` |
-| [`style/element/typography.scss`](../style/element/typography.scss) | `@mixin typography` |
+| [`style/decoration/typography.scss`](../style/decoration/typography.scss) | `%d-typography` (`&-heading`, `&-lead`, `&-eyebrow`) |
+| [`style/decoration/visually-hidden.scss`](../style/decoration/visually-hidden.scss) | `%d-visually-hidden` |
 | [`style/object/avatar.scss`](../style/object/avatar.scss) | `%o-avatar` |
 | [`style/object/badge.scss`](../style/object/badge.scss) | `%o-badge` |
-| [`style/object/button.scss`](../style/object/button.scss) | `%o-button`, `%o-button-primary`, `%o-button-danger` |
-| [`style/object/card.scss`](../style/object/card.scss) | `%o-card`, `%o-inset` |
-| [`style/object/code.scss`](../style/object/code.scss) | `%o-code`, `%o-key`, `%o-code-block` |
-| [`style/object/control.scss`](../style/object/control.scss) | `%o-control`, `%o-choice`, `%o-range`, `%o-color` |
+| [`style/object/button-danger.scss`](../style/object/button-danger.scss) | `%o-button-danger` |
+| [`style/object/button-primary.scss`](../style/object/button-primary.scss) | `%o-button-primary` |
+| [`style/object/button.scss`](../style/object/button.scss) | `%o-button` |
+| [`style/object/card.scss`](../style/object/card.scss) | `%o-card` |
+| [`style/object/choice-field.scss`](../style/object/choice-field.scss) | `%o-choice-field` |
+| [`style/object/choice.scss`](../style/object/choice.scss) | `%o-choice` |
+| [`style/object/code-block.scss`](../style/object/code-block.scss) | `%o-code-block` |
+| [`style/object/code.scss`](../style/object/code.scss) | `%o-code` |
+| [`style/object/color.scss`](../style/object/color.scss) | `%o-color` |
+| [`style/object/control.scss`](../style/object/control.scss) | `%o-control` |
 | [`style/object/dialog.scss`](../style/object/dialog.scss) | `%o-dialog` |
 | [`style/object/disclosure.scss`](../style/object/disclosure.scss) | `%o-disclosure` |
-| [`style/object/form-field.scss`](../style/object/form-field.scss) | `%o-form-field`, `%o-choice-field`, `%o-fieldset` |
+| [`style/object/fieldset.scss`](../style/object/fieldset.scss) | `%o-fieldset` |
+| [`style/object/form-field.scss`](../style/object/form-field.scss) | `%o-form-field` |
+| [`style/object/inset.scss`](../style/object/inset.scss) | `%o-inset` |
+| [`style/object/key.scss`](../style/object/key.scss) | `%o-key` |
 | [`style/object/link.scss`](../style/object/link.scss) | `%o-link` |
 | [`style/object/nav-link.scss`](../style/object/nav-link.scss) | `%o-nav-link` |
-| [`style/object/notice.scss`](../style/object/notice.scss) | `%o-notice`, `%o-notice-success`, `%o-notice-warning`, `%o-notice-danger` |
+| [`style/object/notice-danger.scss`](../style/object/notice-danger.scss) | `%o-notice-danger` |
+| [`style/object/notice-success.scss`](../style/object/notice-success.scss) | `%o-notice-success` |
+| [`style/object/notice-warning.scss`](../style/object/notice-warning.scss) | `%o-notice-warning` |
+| [`style/object/notice.scss`](../style/object/notice.scss) | `%o-notice` |
 | [`style/object/progress.scss`](../style/object/progress.scss) | `%o-progress` |
+| [`style/object/range.scss`](../style/object/range.scss) | `%o-range` |
+| [`style/object/skip-link.scss`](../style/object/skip-link.scss) | `%o-skip-link` |
 | [`style/object/table.scss`](../style/object/table.scss) | `%o-table` |
+| [`style/object/value.scss`](../style/object/value.scss) | `%o-value` |
 | [`style/pattern/accordion.scss`](../style/pattern/accordion.scss) | `%p-accordion` |
+| [`style/pattern/action-list.scss`](../style/pattern/action-list.scss) | `%p-action-list` |
+| [`style/pattern/action-row.scss`](../style/pattern/action-row.scss) | `%p-action-row` |
 | [`style/pattern/breadcrumbs.scss`](../style/pattern/breadcrumbs.scss) | `%p-breadcrumbs` |
-| [`style/pattern/data-list.scss`](../style/pattern/data-list.scss) | `%p-data-list`, `%p-list` |
+| [`style/pattern/checklist.scss`](../style/pattern/checklist.scss) | `%p-checklist` |
+| [`style/pattern/cluster.scss`](../style/pattern/cluster.scss) | `%p-cluster` |
+| [`style/pattern/data-list.scss`](../style/pattern/data-list.scss) | `%p-data-list` |
 | [`style/pattern/empty-state.scss`](../style/pattern/empty-state.scss) | `%p-empty-state` |
 | [`style/pattern/field-row.scss`](../style/pattern/field-row.scss) | `%p-field-row` |
 | [`style/pattern/form-actions.scss`](../style/pattern/form-actions.scss) | `%p-form-actions` |
 | [`style/pattern/form-fields.scss`](../style/pattern/form-fields.scss) | `%p-form-fields` |
 | [`style/pattern/grid.scss`](../style/pattern/grid.scss) | `%p-grid` |
-| [`style/pattern/navigation.scss`](../style/pattern/navigation.scss) | `%p-navigation`, `%p-side-navigation`, `%p-page-tabs` |
+| [`style/pattern/list.scss`](../style/pattern/list.scss) | `%p-list` |
+| [`style/pattern/metric.scss`](../style/pattern/metric.scss) | `%p-metric` |
+| [`style/pattern/navigation.scss`](../style/pattern/navigation.scss) | `%p-navigation` |
+| [`style/pattern/output-row.scss`](../style/pattern/output-row.scss) | `%p-output-row` |
+| [`style/pattern/page-footer.scss`](../style/pattern/page-footer.scss) | `%p-page-footer` |
+| [`style/pattern/page-header.scss`](../style/pattern/page-header.scss) | `%p-page-header` |
+| [`style/pattern/page-intro.scss`](../style/pattern/page-intro.scss) | `%p-page-intro` |
+| [`style/pattern/page-tabs.scss`](../style/pattern/page-tabs.scss) | `%p-page-tabs` |
 | [`style/pattern/pagination.scss`](../style/pattern/pagination.scss) | `%p-pagination` |
 | [`style/pattern/prose.scss`](../style/pattern/prose.scss) | `%p-prose` |
-| [`style/pattern/stack.scss`](../style/pattern/stack.scss) | `%p-stack`, `%p-cluster` |
+| [`style/pattern/search-results.scss`](../style/pattern/search-results.scss) | `%p-search-results` |
+| [`style/pattern/side-navigation.scss`](../style/pattern/side-navigation.scss) | `%p-side-navigation` |
+| [`style/pattern/stack.scss`](../style/pattern/stack.scss) | `%p-stack` |
 | [`style/pattern/table-scroll.scss`](../style/pattern/table-scroll.scss) | `%p-table-scroll` |
 | [`style/layout/article.scss`](../style/layout/article.scss) | `%l-article` |
 | [`style/layout/dashboard.scss`](../style/layout/dashboard.scss) | `%l-dashboard` |
 | [`style/layout/gallery.scss`](../style/layout/gallery.scss) | `%l-gallery` |
+| [`style/layout/page-frame.scss`](../style/layout/page-frame.scss) | `%l-page-frame` |
 | [`style/layout/sidebar.scss`](../style/layout/sidebar.scss) | `%l-sidebar` |
+| [`style/mixin/base.scss`](../style/mixin/base.scss) | `@mixin base` |
+| [`style/mixin/controls.scss`](../style/mixin/controls.scss) | `@mixin controls` |
+| [`style/mixin/typography.scss`](../style/mixin/typography.scss) | `@mixin typography` |
+| [`style/mixin/defaults.scss`](../style/mixin/defaults.scss) | `@mixin defaults` |
+| [`style/mixin/sticky-sidebar.scss`](../style/mixin/sticky-sidebar.scss) | `@mixin sticky-sidebar` |
+| [`style/theme/base.scss`](../style/theme/base.scss) | `@mixin base` |
+| [`style/theme/ink.scss`](../style/theme/ink.scss) | `@mixin ink` |
+| [`style/theme/paper.scss`](../style/theme/paper.scss) | `@mixin paper` |
+| [`style/theme/vivid.scss`](../style/theme/vivid.scss) | `@mixin vivid` |
+| [`style/theme/github.scss`](../style/theme/github.scss) | `@mixin github` |
+| [`style/theme/material.scss`](../style/theme/material.scss) | `@mixin material` |
+
+For direct module consumers, import the matching file for each placeholder (for example, `decoration/stack` and `decoration/cluster` replace `decoration/flow`; `decoration/visually-hidden` replaces `decoration/accessibility`). Direct mixin imports now use `mixin/<name>`: `mixin/defaults` replaces `variable`, `theme/<name>` replaces the old theme modules, and `mixin/base`, `mixin/controls` and `mixin/typography` replace the element modules. `sticky-sidebar` is imported from `mixin/sticky-sidebar`, separately from `layout/page-frame`. Importing `flair` exposes the general library definitions; themes have their own `theme` namespace. Import `theme` for all presets, or `theme/github` as `theme` for just `theme.github`. Sass uses a single module namespace, so the API is `theme.github`, not `flair.theme.github`. State extensions now use `%d-state-busy`, `%d-state-dragging` and `%d-state-reveal`.
 
 ## Property reference
 
@@ -355,14 +399,14 @@ These additions are public through `flair.scss`. Every example includes live HTM
 | `%p-action-row`, `%p-action-list` | Surfaces → Content with trailing actions | Lists contain `li`; rows contain `.row-content` and `.row-actions`, with optional leading content. Rows wrap in source order. `--flair-row-content-min` defaults to 8rem; row and action gaps use space 3 and space 2. `--flair-row-background` defaults to the surface colour. |
 | `%p-search-results` | Navigation → Search result links | Ordinary `ul > li > a` links, with optional `.result-detail`. `--flair-results-max-height` defaults to none, `--flair-result-link-padding` to space 2 and `--flair-list-padding` to space 4. Filtering, announcements and requests are application behaviour. |
 | `%l-page-frame`, `%p-page-header`, `%p-page-footer`, `sticky-sidebar($from: 70rem)` | Layouts → Page frame, header and footer | Frame width defaults to 90rem; `--flair-page-gutter` and `--flair-page-padding-block` default to space 6. Header/footer wrap their contents and use `--flair-header-padding-block` (space 4). Sticky sidebar is optional and uses `--flair-sticky-offset`; choose a threshold suitable for the composition. |
-| `%p-page-intro`, `%d-lead`, `%d-eyebrow` | Typography → Page introductions | Direct h1/h2 or `.intro-title`, followed by a lead paragraph. Set `--flair-intro-title-size`, `--flair-intro-space`, `--flair-lead-size`, `--flair-lead-measure`, and `--flair-eyebrow-size/weight/tracking`. Document heading levels remain the consumer's responsibility. |
+| `%p-page-intro`, `%d-typography-lead`, `%d-typography-eyebrow` | Typography → Page introductions | Direct h1/h2 or `.intro-title`, followed by a lead paragraph. Set `--flair-intro-title-size`, `--flair-intro-space`, `--flair-lead-size`, `--flair-lead-measure`, and `--flair-eyebrow-size/weight/tracking`. Document heading levels remain the consumer's responsibility. |
 | `%o-skip-link`, `%d-visually-hidden` | Navigation → Skip links and visually hidden text | Real skip-link destination; hidden text must not contain invisible focusable controls. Skip links are visible on focus. `--flair-skip-link-layer` defaults to 100. |
-| `%d-busy`, `%d-dragging`, `%d-reveal` | Feedback → Busy, dragging and reveal treatments | Apply decorations only to the relevant application state. Busy opacity defaults to .55, dragging opacity to .6, and drag outline width to 2px. Reveal progress is 0–1; minimum opacity .12, distance 1.5rem and duration 650ms. Reduced motion and print display revealed content immediately. |
+| `%d-state-busy`, `%d-state-dragging`, `%d-state-reveal` | Feedback → Busy, dragging and reveal treatments | The `state.scss` file owns `%d-state`; its nested `&-busy`, `&-dragging` and `&-reveal` placeholders are extended as `%d-state-busy`, `%d-state-dragging` and `%d-state-reveal`. Apply them only to the relevant application state. Busy opacity defaults to .55, dragging opacity to .6, and drag outline width to 2px. Reveal progress is 0–1; minimum opacity .12, distance 1.5rem and duration 650ms. Reduced motion and print display revealed content immediately. |
 | `base`, `typography`, `controls` | Code → An explicit document baseline | Mixins must be explicitly included. Base provides border-box sizing, body margin reset and `[hidden]` preservation. |
-| `theme-base`, `theme-ink/paper/vivid/github/material` | Typography → Using the theme presets | Base supplies defaults; select one optional preset. Presets contain reusable tokens and colour-scheme, never website selectors, font downloads or JavaScript. |
+| `theme.base`, `theme.ink/paper/vivid/github/material` | Typography → Using the theme presets | Base supplies defaults; select one optional preset. Presets contain reusable tokens and colour-scheme, never website selectors, font downloads or JavaScript. |
 
 `%p-data-list` now accepts `--flair-data-min` (14rem by default). A consumer can choose 100% for a single-column description list without replacing its typography or spacing rules.
 
-Source files follow their layer: `object/value.scss`, `object/skip-link.scss`, `pattern/metric.scss`, `pattern/action-list.scss`, `pattern/search-results.scss`, `pattern/page-header.scss`, `pattern/page-intro.scss`, `layout/page-frame.scss`, `decoration/accessibility.scss`, `decoration/state.scss`, `element/base.scss` and `variable/themes.scss`. Lead and eyebrow definitions extend `decoration/typography.scss`.
+Source files follow their layer: `object/value.scss`, `object/skip-link.scss`, `pattern/metric.scss`, `pattern/action-list.scss`, `pattern/search-results.scss`, `pattern/page-header.scss`, `pattern/page-intro.scss`, `layout/page-frame.scss`, `decoration/visually-hidden.scss`, `decoration/state.scss`, `mixin/base.scss`, `mixin/sticky-sidebar.scss` and the `theme/*.scss` files. Heading, lead and eyebrow definitions are nested under `%d-typography` in `decoration/typography.scss`, and extended as `%d-typography-heading`, `%d-typography-lead` and `%d-typography-eyebrow`.
 
 Flux maps `--flux-first-visible` to `--flair-reveal-progress` and its waiting/dragging classes to the matching decorations. The public library does not emit Flux selectors or require its runtime. Clock geometry, pointer calculations and gauge illustration remain application examples.

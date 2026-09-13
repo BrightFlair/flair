@@ -1,0 +1,5 @@
+@use "../flair";
+
+.skip-link {
+	@extend %o-skip-link;
+}

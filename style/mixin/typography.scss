@@ -1,8 +1,9 @@
 @use "../decoration/typography";
 @use "../object/link";
+
 @mixin typography {
 	:where(h1, h2, h3, h4, h5, h6) {
-		@extend %d-heading;
+		@extend %d-typography-heading;
 		margin-block: var(--flair-space-6) var(--flair-space-3);
 	}
 	:where(h1) {

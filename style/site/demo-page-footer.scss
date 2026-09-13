@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-page-footer {
+	@extend %p-page-footer;
+}

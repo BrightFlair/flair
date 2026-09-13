@@ -94,7 +94,12 @@ test('every public placeholder can be consumed in isolation', () => {
 		for (const file of fs.readdirSync(path.join(root, folder))) {
 			const source = fs.readFileSync(path.join(root, folder, file), 'utf8');
 			for (const match of source.matchAll(/^%([\w-]+)\s*\{/gm)) {
-				placeholders.add(match[1]);
+				const variants = [...source.matchAll(/^\s+&-([\w-]+)\s*\{/gm)];
+				if (variants.length) {
+					for (const variant of variants) placeholders.add(`${match[1]}-${variant[1]}`);
+				} else {
+					placeholders.add(match[1]);
+				}
 			}
 		}
 	}
@@ -105,6 +110,38 @@ test('every public placeholder can be consumed in isolation', () => {
 }`);
 		assert.ok(css.includes('.consumer'), placeholder);
 		assert.doesNotMatch(css, /@font-face|data-theme|section-switcher|!important/, placeholder);
+	}
+});
+
+test('library placeholders have one matching file and explicit dependencies', () => {
+	const fs = require('node:fs');
+	const root = path.resolve(__dirname, '../style');
+	for (const [folder, prefix] of Object.entries({ decoration: 'd', object: 'o', pattern: 'p', layout: 'l' })) {
+		for (const file of fs.readdirSync(path.join(root, folder)).filter(file => file.endsWith('.scss'))) {
+			const source = fs.readFileSync(path.join(root, folder, file), 'utf8');
+			const owner = `${prefix}-${path.basename(file, '.scss')}`;
+			assert.deepEqual([...source.matchAll(/^%([\w-]+)\s*\{/gm)].map(match => match[1]), [owner], `${folder}/${file}`);
+			const variants = [...source.matchAll(/^\s+&-([\w-]+)\s*\{/gm)];
+			const names = variants.length ? variants.map(match => `${owner}-${match[1]}`) : [owner];
+			for (const name of names) {
+				const css = compile(`@use "${folder}/${path.basename(file, '.scss')}"; .consumer { @extend %${name}; }`);
+				assert.ok(css.includes('.consumer'), `${folder}/${file}: ${name}`);
+			}
+		}
+	}
+});
+
+test('typography base and nested variants can be extended independently', () => {
+	const base = compile('@use "decoration/typography"; .copy { @extend %d-typography; }');
+	assert.match(base, /--flair-font-body/);
+	assert.doesNotMatch(base, /--flair-heading|--flair-lead|--flair-eyebrow/);
+	for (const variant of ['heading', 'lead', 'eyebrow']) {
+		const css = compile(`@use "decoration/typography"; .copy { @extend %d-typography-${variant}; }`);
+		assert.ok(css.includes(`--flair-${variant}`), variant);
+		assert.doesNotMatch(css, /--flair-text-leading/);
+		for (const other of ['heading', 'lead', 'eyebrow'].filter(name => name !== variant)) {
+			assert.ok(!css.includes(`--flair-${other}`), `${variant} must not emit ${other}`);
+		}
 	}
 });
 
@@ -119,8 +156,10 @@ test('checklists remain independent of pricing, card surfaces and application fo
 });
 
 test('theme mixins are opt-in and export no website selectors or font downloads', () => {
+	assert.equal(compile('@use "theme";'), '');
 	for (const name of ['base', 'ink', 'paper', 'vivid', 'github', 'material']) {
-		const css = compile(`@use "flair"; .theme { @include flair.theme-${name}; }`);
+		const css = compile(`@use "theme"; .theme { @include theme.${name}; }`);
+		assert.equal(compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`), css);
 		assert.match(css, /--flair-color-text/);
 		assert.doesNotMatch(css, /--site-|:root|data-theme|@font-face|url\(/);
 	}
@@ -135,7 +174,7 @@ test('metric alignment applies to the value and actions without a fixed viewport
 });
 
 test('state decorations respect reduced motion and remain independent of Flux', () => {
-	const css = compile('@use "flair"; .busy { @extend %d-busy; } .drag { @extend %d-dragging; } .reveal { @extend %d-reveal; }');
+	const css = compile('@use "flair"; .busy { @extend %d-state-busy; } .drag { @extend %d-state-dragging; } .reveal { @extend %d-state-reveal; }');
 	assert.match(css, /prefers-reduced-motion: reduce/);
 	assert.match(css, /print/);
 	assert.doesNotMatch(css, /flux|pointer-events|display: none/);

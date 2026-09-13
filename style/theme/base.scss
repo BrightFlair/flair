@@ -1,0 +1,8 @@
+@use "../mixin/defaults";
+
+@mixin base {
+	@include defaults.defaults;
+	--flair-font-heading: "Ubuntu Condensed", sans-serif;
+	--flair-font-mono: "Ubuntu Mono", monospace;
+	--flair-heading-weight: 400;
+}

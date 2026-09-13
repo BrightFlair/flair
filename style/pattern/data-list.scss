@@ -17,15 +17,3 @@
 		overflow-wrap: anywhere;
 	}
 }
-%p-list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	> li {
-		margin: 0;
-		padding-block: var(--flair-list-padding, var(--flair-space-4));
-	}
-	> li + li {
-		border-block-start: var(--flair-border-width) solid var(--flair-color-border);
-	}
-}

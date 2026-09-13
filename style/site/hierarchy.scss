@@ -76,10 +76,8 @@
 			tab-size: 2;
 		}
 	}
-}
 
-@media (min-width: 45rem) {
-	.hierarchy {
+	@media (min-width: 45rem) {
 		.hierarchy-layers > li {
 			grid-template-columns: 3rem minmax(8rem, 1fr) minmax(0, 2fr);
 			gap: var(--site-space-medium);
@@ -92,10 +90,8 @@
 			gap: var(--site-section-space);
 		}
 	}
-}
 
-@media (min-width: 70rem) {
-	.hierarchy {
+	@media (min-width: 70rem) {
 		display: grid;
 		grid-template-columns: var(--site-content-columns);
 		column-gap: var(--site-space-large);

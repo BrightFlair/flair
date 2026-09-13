@@ -1,12 +1,14 @@
-// Consumers map their own state to these decorations; no Flux selectors are emitted.
-%d-busy { opacity: var(--flair-busy-opacity, 0.55); }
-%d-dragging {
-	outline: var(--flair-drag-outline-width, 2px) dashed var(--flair-color-accent);
-	opacity: var(--flair-drag-opacity, 0.6);
-}
-%d-reveal {
-	opacity: calc(var(--flair-reveal-min-opacity, 0.12) + (1 - var(--flair-reveal-min-opacity, 0.12)) * var(--flair-reveal-progress, 1));
-	translate: 0 calc((1 - var(--flair-reveal-progress, 1)) * var(--flair-reveal-distance, 1.5rem));
-	transition: opacity var(--flair-reveal-duration, 650ms) ease, translate var(--flair-reveal-duration, 650ms) ease;
-	@media (prefers-reduced-motion: reduce), print { opacity: 1; translate: none; transition: none; }
+// Consumers map their own state to these nested placeholders.
+%d-state {
+	&-busy { opacity: var(--flair-busy-opacity, 0.55); }
+	&-dragging {
+		outline: var(--flair-drag-outline-width, 2px) dashed var(--flair-color-accent);
+		opacity: var(--flair-drag-opacity, 0.6);
+	}
+	&-reveal {
+		opacity: calc(var(--flair-reveal-min-opacity, 0.12) + (1 - var(--flair-reveal-min-opacity, 0.12)) * var(--flair-reveal-progress, 1));
+		translate: 0 calc((1 - var(--flair-reveal-progress, 1)) * var(--flair-reveal-distance, 1.5rem));
+		transition: opacity var(--flair-reveal-duration, 650ms) ease, translate var(--flair-reveal-duration, 650ms) ease;
+		@media (prefers-reduced-motion: reduce), print { opacity: 1; translate: none; transition: none; }
+	}
 }

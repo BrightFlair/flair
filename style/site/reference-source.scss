@@ -1,0 +1,7 @@
+.reference-source {
+	margin-block-start: var(--site-space-medium);
+	> summary {
+		cursor: pointer;
+		padding-block: var(--site-space-small);
+	}
+}

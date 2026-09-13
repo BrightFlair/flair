@@ -1,9 +1,5 @@
-@use "../decoration/flow";
+@use "../decoration/stack";
 
 %p-stack {
 	@extend %d-stack;
-}
-
-%p-cluster {
-	@extend %d-cluster;
 }

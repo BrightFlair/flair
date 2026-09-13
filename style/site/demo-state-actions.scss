@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-state-actions {
+	@extend %p-form-actions;
+}

@@ -1,4 +1,7 @@
 @use "../object/control";
+@use "../object/choice";
+@use "../object/range";
+@use "../object/color";
 @use "../object/button";
 
 // Include at the root for global defaults, or inside a selector to scope them.

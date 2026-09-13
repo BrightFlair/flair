@@ -1,0 +1,16 @@
+@use "../decoration/focus-ring";
+
+// Retain native appearance, keyboard behaviour and forced-colour support.
+%o-choice {
+	box-sizing: border-box;
+	inline-size: var(--flair-choice-size);
+	block-size: var(--flair-choice-size);
+	margin: 0;
+	accent-color: var(--flair-color-accent);
+	&:focus-visible {
+		@extend %d-focus-ring;
+	}
+	&:disabled {
+		cursor: not-allowed;
+	}
+}

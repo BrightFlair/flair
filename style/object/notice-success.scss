@@ -1,0 +1,6 @@
+@use "notice";
+
+%o-notice-success {
+	@extend %o-notice;
+	border-inline-start-color: var(--flair-color-success, var(--flair-color-text));
+}

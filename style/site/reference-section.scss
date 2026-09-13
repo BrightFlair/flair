@@ -1,43 +1,3 @@
-@use "../flair";
-
-// These selectors and themes belong to the documentation website.
-.flair-example {
-	padding: var(--site-space-medium);
-	border: 1px solid var(--site-line);
-	background: var(--flair-color-surface);
-	color: var(--flair-color-text);
-
-	&[data-density="compact"] {
-		--flair-form-gap: var(--flair-space-3);
-		--flair-field-gap: var(--flair-space-1);
-		--flair-control-padding-block: var(--flair-space-1);
-		--flair-control-padding-inline: var(--flair-space-2);
-		--flair-control-min-height: 2.25rem;
-	}
-}
-
-.demo-field {
-	@extend %o-form-field;
-}
-.demo-choice {
-	@extend %o-choice-field;
-}
-.demo-button {
-	@extend %o-button;
-}
-.demo-primary {
-	@extend %o-button-primary;
-}
-.demo-actions {
-	@extend %p-form-actions;
-}
-.demo-form {
-	@extend %p-form-fields;
-}
-.demo-native {
-	@include flair.controls;
-}
-
 .reference-section {
 	padding-block: var(--site-space-large);
 	border-bottom: 1px solid var(--site-line);
@@ -123,12 +83,15 @@
 	#form-result {
 		margin-top: var(--site-space-medium);
 	}
-}
-@media (min-width: 45rem) {
-	.reference-section .token-list {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-		dd {
-			padding-bottom: var(--site-space-small);
+
+	@media (min-width: 45rem) {
+		& .token-list {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+			dd {
+				padding-bottom: var(--site-space-small);
+			}
 		}
 	}
+
+	scroll-margin-block-start: 8rem;
 }

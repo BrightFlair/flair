@@ -1,0 +1,63 @@
+.hero {
+	min-height: 100svh;
+	display: flex;
+	flex-direction: column;
+	padding: var(--site-space-medium) var(--site-gutter);
+	border-bottom: 2px solid var(--site-ink);
+
+	.hero-heading {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		padding-block: var(--site-space-large);
+	}
+
+	h1 {
+		font-size: min(
+			calc((100vw - 2 * var(--site-gutter)) / var(--site-hero-width-factor)),
+			65svh
+		);
+		line-height: 0.82;
+		letter-spacing: -0.045em;
+		// Centre the visible glyph bounds, accounting for side bearings and tracking.
+		transform: translateX(var(--site-hero-offset));
+		// A deliberate heavy treatment of the regular condensed display face.
+		-webkit-text-stroke: 0.012em currentColor;
+	}
+
+	.hero-subheading {
+		margin-top: clamp(2rem, 5vw, 5rem);
+		font-size: clamp(1.1rem, 2.6vw, 2.5rem);
+		line-height: 1.25;
+		text-align: center;
+	}
+
+	.hero-footer {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: end;
+		gap: var(--site-space-medium);
+		padding-block: var(--site-space-small);
+		font: 0.85rem/1.4 var(--site-font-mono);
+		p {
+			max-width: 40rem;
+			line-height: inherit;
+		}
+	}
+
+	.hero-scroll {
+		white-space: nowrap;
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	@media (min-width: 45rem) {
+		& .hero-footer {
+			font-size: 1rem;
+		}
+	}
+}

@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-skip-link {
+	@extend %o-skip-link;
+}

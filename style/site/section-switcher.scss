@@ -65,12 +65,12 @@ section-switcher {
 	:focus-visible {
 		outline-offset: -4px;
 	}
-}
 
-@media (min-width: 36rem) {
-	section-switcher label {
-		display: flex;
-		gap: var(--site-space-small);
-		padding-top: 0;
+	@media (min-width: 36rem) {
+		& label {
+			display: flex;
+			gap: var(--site-space-small);
+			padding-top: 0;
+		}
 	}
 }

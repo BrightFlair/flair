@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-choice {
+	@extend %o-choice-field;
+}

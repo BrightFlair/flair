@@ -1,0 +1,18 @@
+@use "../mixin/controls";
+@use "choice";
+
+%o-choice-field {
+	display: grid;
+	grid-template-columns: var(--flair-choice-size) minmax(0, 1fr);
+	align-items: start;
+	gap: var(--flair-space-2);
+	min-inline-size: 0;
+	margin: 0;
+	color: var(--flair-color-text);
+	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
+		var(--flair-font-body);
+	> :where(input[type="checkbox"], input[type="radio"]) {
+		@extend %o-choice;
+		margin-block-start: var(--flair-space-1);
+	}
+}

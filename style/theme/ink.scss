@@ -1,0 +1,19 @@
+@mixin ink {
+	--flair-color-text: #f5f5f5;
+	--flair-color-muted: #bbb;
+	--flair-color-surface: #161616;
+	--flair-color-surface-disabled: #303030;
+	--flair-color-border: #999;
+	--flair-color-accent: #fff;
+	--flair-color-on-accent: #111;
+	--flair-color-danger: #fff;
+	color-scheme: dark;
+	--flair-surface-background: #222;
+	--flair-inset-background: #303030;
+	--flair-selected-background: #f5f5f5;
+	--flair-selected-text: #161616;
+	--flair-code-background: #222;
+	--flair-syntax-string: #ddd;
+	--flair-table-stripe-background: #222;
+	--flair-surface-shadow: none;
+}

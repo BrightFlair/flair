@@ -1,0 +1,15 @@
+@use "../decoration/focus-ring";
+
+%o-range {
+	inline-size: 100%;
+	min-inline-size: 0;
+	min-block-size: var(--flair-control-min-height);
+	margin: 0;
+	accent-color: var(--flair-color-accent);
+	&:focus-visible {
+		@extend %d-focus-ring;
+	}
+	&:disabled {
+		cursor: not-allowed;
+	}
+}

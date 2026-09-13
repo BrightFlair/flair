@@ -1,0 +1,8 @@
+@use "navigation";
+
+%p-side-navigation {
+	@extend %p-navigation;
+	> ul {
+		flex-direction: column;
+	}
+}

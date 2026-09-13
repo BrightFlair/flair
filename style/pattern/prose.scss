@@ -1,5 +1,6 @@
+@use "../mixin/typography";
 @use "../decoration/typography" as decoration;
-@use "../element/typography";
+
 %p-prose {
 	@extend %d-typography;
 	@include typography.typography;

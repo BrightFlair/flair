@@ -1,0 +1,28 @@
+@mixin paper {
+	--flair-color-text: #24211d;
+	--flair-color-muted: #59564f;
+	--flair-color-surface: #fffdf5;
+	--flair-color-surface-disabled: #eee8d8;
+	--flair-color-border: #827765;
+	--flair-color-accent: #315c40;
+	--flair-color-on-accent: #fff;
+	--flair-color-danger: #952a20;
+	--flair-radius: 0.4rem;
+	--flair-font-heading: Georgia, serif;
+	--flair-heading-weight: 400;
+	--flair-text-leading: 1.8;
+	--flair-surface-background: #fffaf0;
+	--flair-surface-padding: var(--flair-space-8);
+	--flair-surface-shadow: 0 2px 5px rgb(36 33 29 / 10%);
+	--flair-selected-background: #e2eadc;
+	--flair-selected-text: #24482f;
+	--flair-nav-radius: 0.25rem;
+	--flair-badge-radius: 0.25rem;
+	--flair-code-background: #eee8d8;
+	--flair-syntax-keyword: #315c40;
+	--flair-syntax-string: #7d3321;
+	--flair-table-stripe-background: #f5efdf;
+	--flair-color-success: #315c40;
+	--flair-color-warning: #805400;
+	--flair-disclosure-background: #f5efdf;
+}

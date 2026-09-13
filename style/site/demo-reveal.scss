@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-reveal {
+	@extend %d-state-reveal;
+}

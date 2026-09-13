@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-visually-hidden {
+	@extend %d-visually-hidden;
+}

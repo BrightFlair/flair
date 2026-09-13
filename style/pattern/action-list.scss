@@ -1,20 +1,6 @@
-@use "data-list";
-@use "stack";
-@use "form-actions";
+@use "list";
+@use "action-row";
 
-%p-action-row {
-	@extend %p-cluster;
-	gap: var(--flair-row-gap, var(--flair-space-3));
-	background: var(--flair-row-background, var(--flair-color-surface));
-	> .row-content { flex: 1 1 var(--flair-row-content-min, 8rem); overflow-wrap: anywhere; }
-	> .row-actions {
-		@extend %p-form-actions;
-		margin-block-start: 0;
-		gap: var(--flair-row-actions-gap, var(--flair-space-2));
-		margin-inline-start: auto;
-		> form { margin: 0; }
-	}
-}
 %p-action-list {
 	@extend %p-list;
 	> li { @extend %p-action-row; }

@@ -1,0 +1,27 @@
+@use "button";
+
+%o-button-primary {
+	@extend %o-button;
+	&:not(:disabled) {
+		background: var(--flair-button-primary-background, var(--flair-color-accent));
+		color: var(--flair-button-primary-text, var(--flair-color-on-accent));
+		border-color: var(
+			--flair-button-primary-border,
+			var(--flair-button-primary-background, var(--flair-color-accent))
+		);
+	}
+	&:hover:not(:disabled) {
+		border-color: var(
+			--flair-button-primary-border,
+			var(--flair-button-primary-background, var(--flair-color-accent))
+		);
+		background: var(--flair-button-primary-background-hover, var(--flair-color-text));
+		text-decoration: var(--flair-button-primary-decoration-hover, underline);
+	}
+	&:active:not(:disabled) {
+		background: var(
+			--flair-button-primary-background-active,
+			var(--flair-button-primary-background-hover, var(--flair-color-text))
+		);
+	}
+}

@@ -1,0 +1,9 @@
+@use "../flair";
+
+.demo-action-list {
+	@extend %p-action-list;
+
+	& [data-complete="true"] .row-content {
+		text-decoration: line-through;
+	}
+}

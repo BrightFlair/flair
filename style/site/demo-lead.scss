@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-lead {
+	@extend %d-typography-lead;
+}

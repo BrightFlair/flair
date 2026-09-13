@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-side-navigation {
+	@extend %p-side-navigation;
+}

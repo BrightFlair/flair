@@ -1,0 +1,72 @@
+@use "../flair";
+@use "../theme";
+
+:root {
+	@include flair.defaults;
+	--site-paper: var(--flair-color-surface);
+	--site-ink: var(--flair-color-text);
+	--site-muted: var(--flair-color-muted);
+	--site-line: var(--flair-color-border);
+	--site-font-body: "Ubuntu", sans-serif;
+	--site-font-heading: "Ubuntu Condensed", sans-serif;
+	// Reserve room for the wordmark and its font-specific optical adjustment.
+	--site-hero-width-factor: 2.5;
+	--site-hero-offset: -0.047em;
+	--site-font-mono: "Ubuntu Mono", monospace;
+	--site-gutter: clamp(1.25rem, 4vw, 5rem);
+	--site-library-max-width: 80rem;
+	--site-space-small: 0.75rem;
+	--site-space-medium: 1.5rem;
+	--site-space-large: 3rem;
+	--site-section-space: clamp(4rem, 9vw, 9rem);
+	color-scheme: light;
+	font-family: var(--site-font-body);
+	font-size: var(--site-font-size, 16px);
+	color: var(--site-ink);
+	background: var(--site-paper);
+
+	@include theme.base;
+
+	&[data-theme="ink"] {
+		@include theme.ink;
+	}
+
+	&[data-theme="paper"] {
+		@include theme.paper;
+	}
+
+	&[data-theme="vivid"] {
+		@include theme.vivid;
+	}
+
+	&[data-theme="github"] {
+		@include theme.github;
+	}
+
+	&[data-theme="material"] {
+		@include theme.material;
+	}
+
+	&[data-theme="github"] {
+		--site-font-body: var(--flair-font-body);
+		--site-font-heading: var(--flair-font-body);
+		--site-font-size: 14px;
+		--site-hero-width-factor: 2.7;
+		--site-hero-offset: -0.037em;
+		--site-switcher-border-width: 1px;
+		--site-switcher-border: var(--flair-color-border);
+		--site-switcher-radius: var(--flair-radius);
+		--site-switcher-shadow: 0 1px 0 rgb(31 35 40 / 4%);
+	}
+
+	&[data-theme="material"] {
+		--site-font-body: var(--flair-font-body);
+		--site-font-heading: var(--flair-font-body);
+		--site-switcher-border-width: 1px;
+		--site-switcher-border: #cac4d0;
+		--site-hero-width-factor: 2.5;
+		--site-hero-offset: -0.058em;
+		--site-switcher-radius: var(--flair-radius);
+		--site-switcher-shadow: 0 2px 6px rgb(0 0 0 / 16%);
+	}
+}

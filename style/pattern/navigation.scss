@@ -1,4 +1,5 @@
 @use "../object/nav-link";
+
 %p-navigation {
 	> ul {
 		display: flex;
@@ -15,14 +16,4 @@
 			@extend %o-nav-link;
 		}
 	}
-}
-%p-side-navigation {
-	@extend %p-navigation;
-	> ul {
-		flex-direction: column;
-	}
-}
-%p-page-tabs {
-	@extend %p-navigation;
-	border-block-end: var(--flair-border-width) solid var(--flair-color-border);
 }

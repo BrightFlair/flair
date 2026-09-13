@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-action-row {
+	@extend %p-action-row;
+}

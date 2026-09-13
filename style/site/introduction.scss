@@ -1,0 +1,26 @@
+.introduction {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--site-space-large);
+	padding: var(--site-section-space) var(--site-gutter);
+	scroll-margin-top: var(--site-space-medium);
+	> .eyebrow {
+		grid-column: 1 / -1;
+	}
+	h2 {
+		font-size: clamp(3.5rem, 7vw, 7rem);
+		line-height: 0.95;
+		letter-spacing: -0.025em;
+	}
+	.introduction-copy {
+		max-width: 42rem;
+		font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+		p + p {
+			margin-top: var(--site-space-medium);
+		}
+	}
+
+	@media (min-width: 45rem) {
+		grid-template-columns: var(--site-content-columns);
+	}
+}
