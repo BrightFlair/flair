@@ -16,10 +16,10 @@ aside { @extend %d-sidebar; }
 const flairCss = compile(`
 @use "flair";
 @use "theme/github" as theme;
-:root { @include flair.defaults; @include theme.github; font: 400 14px/normal var(--flair-font-body); }
+:root { @include flair.defaults; @include theme.github; font: 400 14px/normal var(--theme-font-body); }
 @include flair.base;
-body { background: var(--flair-color-surface); color: var(--flair-color-text); }
-global-header { display:block; background:var(--flair-color-surface-disabled); border-bottom:1px solid var(--flair-color-border); }
+body { background: var(--theme-color-surface); color: var(--theme-color-text); }
+global-header { display:block; background:var(--theme-color-surface-disabled); border-bottom:1px solid var(--theme-color-border); }
 global-header nav { @extend %p-page-tabs; margin-inline:1rem; }
 aside { display:block; width:24rem; }
 aside nav { @extend %p-side-navigation; }

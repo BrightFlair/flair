@@ -1,14 +1,14 @@
 // Consumers map their own state to these nested placeholders.
 %d-state {
-	&-busy { opacity: var(--flair-busy-opacity, 0.55); }
+	&-busy { opacity: var(--theme-busy-opacity, 0.55); }
 	&-dragging {
-		outline: var(--flair-drag-outline-width, 2px) dashed var(--flair-color-accent);
-		opacity: var(--flair-drag-opacity, 0.6);
+		outline: var(--theme-drag-outline-width, 2px) dashed var(--theme-color-accent);
+		opacity: var(--theme-drag-opacity, 0.6);
 	}
 	&-reveal {
-		opacity: calc(var(--flair-reveal-min-opacity, 0.12) + (1 - var(--flair-reveal-min-opacity, 0.12)) * var(--flair-reveal-progress, 1));
-		translate: 0 calc((1 - var(--flair-reveal-progress, 1)) * var(--flair-reveal-distance, 1.5rem));
-		transition: opacity var(--flair-reveal-duration, 650ms) ease, translate var(--flair-reveal-duration, 650ms) ease;
+		opacity: calc(var(--theme-reveal-min-opacity, 0.12) + (1 - var(--theme-reveal-min-opacity, 0.12)) * var(--theme-reveal-progress, 1));
+		translate: 0 calc((1 - var(--theme-reveal-progress, 1)) * var(--theme-reveal-distance, 1.5rem));
+		transition: opacity var(--theme-reveal-duration, 650ms) ease, translate var(--theme-reveal-duration, 650ms) ease;
 		@media (prefers-reduced-motion: reduce), print { opacity: 1; translate: none; transition: none; }
 	}
 }

@@ -1,11 +1,11 @@
 %o-skip-link {
 	position: fixed;
-	inset-block-start: var(--flair-space-4);
-	inset-inline-start: var(--flair-space-4);
-	z-index: var(--flair-skip-link-layer, 100);
-	padding: var(--flair-space-4);
-	background: var(--flair-color-surface);
-	color: var(--flair-color-text);
-	transform: translateY(calc(-100% - var(--flair-space-4)));
+	inset-block-start: var(--theme-space-4);
+	inset-inline-start: var(--theme-space-4);
+	z-index: var(--theme-skip-link-layer, 100);
+	padding: var(--theme-space-4);
+	background: var(--theme-color-surface);
+	color: var(--theme-color-text);
+	transform: translateY(calc(-100% - var(--theme-space-4)));
 	&:focus { transform: none; }
 }

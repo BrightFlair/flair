@@ -4,14 +4,14 @@
 	@extend %d-typography;
 	@include flair.typography;
 	> header {
-		background: var(--flair-color-surface-disabled);
-		border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+		background: var(--theme-color-surface-disabled);
+		border-block-end: var(--theme-border-width) solid var(--theme-color-border);
 		> h1 { margin: 0; padding: 1rem 1.5rem; font-size: 1.25rem; }
 		> nav { @extend %p-page-tabs; padding-inline: 1rem; }
 	}
 	> div {
 		@include flair.application-shell($from: 46rem);
-		--flair-sidebar-width: 24rem;
+		--theme-sidebar-width: 24rem;
 		> aside {
 			padding-block: 1rem;
 			> h2, > p { margin-inline: 1rem; }
@@ -27,7 +27,7 @@
 				min-inline-size: 0;
 				max-inline-size: 48rem;
 				padding: 1rem;
-				> h2 { font-size: 1.25rem; border-block-end: var(--flair-border-width) solid var(--flair-color-border); padding-block-end: 1rem; }
+				> h2 { font-size: 1.25rem; border-block-end: var(--theme-border-width) solid var(--theme-color-border); padding-block-end: 1rem; }
 			}
 		}
 	}

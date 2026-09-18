@@ -5,10 +5,10 @@
 	@include flair.typography;
 	@extend %l-page-frame;
 	@include flair.application-shell($content: "> article");
-	--flair-page-width: 96rem;
-	--flair-page-gutter: 0;
-	--flair-page-padding-block: 0;
-	--flair-sidebar-width: 17rem;
+	--theme-page-width: 96rem;
+	--theme-page-gutter: 0;
+	--theme-page-padding-block: 0;
+	--theme-sidebar-width: 17rem;
 	> aside {
 		@extend %d-sidebar-contrast;
 		@include flair.sidebar-bleed($from: 60rem);

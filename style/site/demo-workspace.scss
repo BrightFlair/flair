@@ -1,0 +1,8 @@
+@use "../flair";
+
+.demo-workspace {
+	@extend %l-workspace;
+	--theme-sidebar-width: 12rem;
+	--theme-workspace-panel: 16rem;
+	border: 1px solid var(--theme-color-border);
+}

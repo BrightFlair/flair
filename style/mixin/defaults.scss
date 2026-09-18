@@ -1,37 +1,43 @@
+@use "palette";
+
 // Emits nothing until explicitly included on :root or a theme container.
+// Colours read from the numbered palette; everything else is a literal.
 @mixin defaults {
-	--flair-space-1: 0.25rem;
-	--flair-space-2: 0.5rem;
-	--flair-space-3: 0.75rem;
-	--flair-space-4: 1rem;
-	--flair-space-6: 1.5rem;
-	--flair-space-8: 2rem;
-	--flair-color-text: light-dark(#111, #f5f5f5);
-	--flair-color-muted: light-dark(#525252, #bbb);
-	--flair-color-surface: light-dark(#fff, #161616);
-	--flair-color-surface-disabled: light-dark(#eee, #303030);
-	--flair-color-border: light-dark(#767676, #999);
-	--flair-color-accent: light-dark(#111, #f5f5f5);
-	--flair-color-on-accent: light-dark(#fff, #111);
-	--flair-color-danger: light-dark(#111, #f5f5f5);
-	--flair-font-body: "Ubuntu", sans-serif;
-	--flair-font-size: 1rem;
-	--flair-line-height: 1.5;
-	--flair-font-weight: 400;
-	--flair-label-weight: 500;
-	--flair-border-width: 1px;
-	--flair-radius: 0;
-	--flair-focus-width: 3px;
-	--flair-focus-offset: 2px;
-	--flair-control-min-height: 2.75rem;
-	--flair-choice-size: 1.25rem;
-	--flair-textarea-min-height: 8rem;
-	--flair-field-min-width: 14rem;
+	@include palette.palette;
+
+	--theme-space-1: 0.25rem;
+	--theme-space-2: 0.5rem;
+	--theme-space-3: 0.75rem;
+	--theme-space-4: 1rem;
+	--theme-space-6: 1.5rem;
+	--theme-space-8: 2rem;
+	--theme-color-text: var(--pal-1);
+	--theme-color-surface: var(--pal-2);
+	--theme-color-surface-disabled: var(--pal-3);
+	--theme-color-border: var(--pal-4);
+	--theme-color-muted: var(--pal-5);
+	--theme-color-accent: var(--pal-6);
+	--theme-color-on-accent: var(--pal-7);
+	--theme-color-success: var(--pal-8);
+	--theme-color-danger: var(--pal-9);
+	--theme-font-body: "Ubuntu", sans-serif;
+	--theme-font-size: 1rem;
+	--theme-line-height: 1.5;
+	--theme-font-weight: 400;
+	--theme-label-weight: 500;
+	--theme-border-width: 1px;
+	--theme-radius: 0;
+	--theme-focus-width: 3px;
+	--theme-focus-offset: 2px;
+	--theme-control-min-height: 2.75rem;
+	--theme-choice-size: 1.25rem;
+	--theme-textarea-min-height: 8rem;
+	--theme-field-min-width: 14rem;
 
 	// Coordinated surface and navigation states for the contrast sidebar variant.
-	--flair-sidebar-contrast-background: light-dark(#eee, #303030);
-	--flair-sidebar-contrast-text: light-dark(#111, #f5f5f5);
-	--flair-sidebar-contrast-hover-background: light-dark(#ddd, #444);
-	--flair-sidebar-contrast-current-background: light-dark(#111, #f5f5f5);
-	--flair-sidebar-contrast-current-text: light-dark(#fff, #161616);
+	--theme-sidebar-contrast-background: var(--pal-3);
+	--theme-sidebar-contrast-text: var(--pal-1);
+	--theme-sidebar-contrast-hover-background: light-dark(#ddd, #444);
+	--theme-sidebar-contrast-current-background: var(--pal-1);
+	--theme-sidebar-contrast-current-text: var(--pal-2);
 }

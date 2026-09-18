@@ -1,0 +1,23 @@
+// A message drawn in place of a list that has no items, without needing an
+// extra element in the markup or a class toggled by script. The container
+// names its own subject, and the message is generated from it:
+//
+//   <ul data-term="query parameters"></ul>
+//
+// `%p-empty-state` is the fuller treatment, for a whole region with a heading
+// and an action; this is the one-line version for a collection.
+%d-empty-message {
+	&:empty::before {
+		content: var(--theme-empty-message, "There is nothing here yet.");
+		display: block;
+		padding: var(--theme-empty-message-padding, var(--theme-space-8));
+		color: var(--theme-color-muted);
+		font-style: var(--theme-empty-message-style, italic);
+		text-align: var(--theme-empty-message-align, center);
+	}
+
+	&[data-term]:empty::before {
+		content: var(--theme-empty-message-prefix, "There are no ") attr(data-term)
+			var(--theme-empty-message-suffix, " added yet.");
+	}
+}

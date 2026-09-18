@@ -2,6 +2,6 @@
 
 %o-color {
 	@extend %d-control;
-	inline-size: var(--flair-color-control-width, 4rem);
-	padding: var(--flair-space-1);
+	inline-size: var(--theme-color-control-width, 4rem);
+	padding: var(--theme-space-1);
 }

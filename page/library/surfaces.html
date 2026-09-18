@@ -151,9 +151,9 @@
 		</div>
 		<p>
 			Markers use the text colour; the border inherits the theme’s border colour.
-			Override <code>--flair-highlight-marker-size</code>,
-			<code>--flair-highlight-border-width</code> or
-			<code>--flair-highlight-border-color</code> to adjust them.
+			Override <code>--theme-highlight-marker-size</code>,
+			<code>--theme-highlight-border-width</code> or
+			<code>--theme-highlight-border-color</code> to adjust them.
 			The decoration uses <code>::before</code> and needs space outside its border
 			without clipping by an ancestor.
 		</p>
@@ -172,7 +172,7 @@
 	@extend %d-highlight;
 	display: inline-block;
 	max-inline-size: 100%;
-	padding: var(--flair-space-2);
+	padding: var(--theme-space-2);
 }
 
 .demo-highlight-wrap {
@@ -316,7 +316,7 @@
 </ul>
 <p role="status" data-row-status></p>
 <div class="demo-action-row"><span class="row-content">Standalone record</span><span class="row-actions">Read only</span></div></div>
-		<p>Use .row-content for the flexible content and .row-actions for trailing controls. Optional leading content can precede both. --flair-row-gap, --flair-row-actions-gap and --flair-row-content-min configure spacing. Application code owns completion, reordering and persistence.</p>
+		<p>Use .row-content for the flexible content and .row-actions for trailing controls. Optional leading content can precede both. --theme-row-gap, --theme-row-actions-gap and --theme-row-content-min configure spacing. Application code owns completion, reordering and persistence.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;ul class=&quot;demo-action-list&quot; data-row-example&gt;
   &lt;li&gt;
@@ -335,6 +335,131 @@
 .demo-action-list { @extend %p-action-list; }
 .demo-action-row { @extend %p-action-row; }
 .demo-action-list [data-complete=&quot;true&quot;] .row-content { text-decoration: line-through; }</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="panels" aria-labelledby="panels-title">
+		<h2 id="panels-title">Panels</h2>
+		<p>Where a card is a plain box, a panel divides itself: every heading is separated from the content above it by a rule, so one long editing surface stays readable without extra markup or a wrapper per section.</p>
+		<div class="flair-example">
+			<div class="demo-grid">
+				<request-editor class="demo-panel">
+					<h1>Request editor</h1>
+					<form class="demo-form">
+						<label><span>Name</span><input name="name" value="List all items" autocomplete="off" /></label>
+					</form>
+					<h2>Query parameters <span>2</span></h2>
+					<p>Each heading closes the section above it. The panel sets no maximum width of its own.</p>
+					<h2>Body</h2>
+					<p>Padding, corner shape, border and shadow all come from the theme's surface.</p>
+				</request-editor>
+				<response-viewer class="demo-panel">
+					<h1>Response viewer</h1>
+					<article>
+						<p>An <code>article</code> inside a panel takes the same rhythm as a titled section, without needing a heading.</p>
+					</article>
+					<h2>Timing</h2>
+					<p>Completed in 184 ms.</p>
+				</response-viewer>
+			</div>
+		</div>
+		<p>The two panels here are custom elements, bound to the definition by name. Flair requires no class of its own: <code>--theme-panel-heading-space</code>, <code>--theme-panel-section-space</code> and <code>--theme-panel-subheading-size</code> adjust the divisions.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-grid&quot;&gt;
+	&lt;request-editor class=&quot;demo-panel&quot;&gt;
+		&lt;h1&gt;Request editor&lt;/h1&gt;
+		&lt;form class=&quot;demo-form&quot;&gt;
+			&lt;label&gt;&lt;span&gt;Name&lt;/span&gt;&lt;input name=&quot;name&quot; value=&quot;List all items&quot; autocomplete=&quot;off&quot; /&gt;&lt;/label&gt;
+		&lt;/form&gt;
+		&lt;h2&gt;Query parameters &lt;span&gt;2&lt;/span&gt;&lt;/h2&gt;
+		&lt;p&gt;Each heading closes the section above it. The panel sets no maximum width of its own.&lt;/p&gt;
+		&lt;h2&gt;Body&lt;/h2&gt;
+		&lt;p&gt;Padding, corner shape, border and shadow all come from the theme&#x27;s surface.&lt;/p&gt;
+	&lt;/request-editor&gt;
+	&lt;response-viewer class=&quot;demo-panel&quot;&gt;
+		&lt;h1&gt;Response viewer&lt;/h1&gt;
+		&lt;article&gt;
+			&lt;p&gt;An &lt;code&gt;article&lt;/code&gt; inside a panel takes the same rhythm as a titled section, without needing a heading.&lt;/p&gt;
+		&lt;/article&gt;
+		&lt;h2&gt;Timing&lt;/h2&gt;
+		&lt;p&gt;Completed in 184 ms.&lt;/p&gt;
+	&lt;/response-viewer&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-panel {
+	@extend %p-panel;
+}
+
+.demo-grid {
+	@extend %p-grid;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="row-actions" aria-labelledby="row-actions-title">
+		<h2 id="row-actions-title">Actions revealed by a row</h2>
+		<p>Controls that belong to one row of a list and stay out of the way until that row is being used: a drag handle, a delete button, a reorder field.</p>
+		<p>They appear on hover and whenever focus is inside the row, so a keyboard reaches them in the same order a pointer does. They are faded, never removed from the accessibility tree, so they stay announced and tabbable throughout. Where hover is not available they are always visible, because there would be no way to reveal them.</p>
+		<div class="flair-example">
+			<ul class="demo-action-list">
+				<li class="demo-row-actions">
+					<span>list-all-items</span>
+					<div class="row-actions">
+						<button class="demo-icon-button" type="button" data-icon="grip"><span>Reorder</span></button>
+						<button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button>
+					</div>
+				</li>
+				<li class="demo-row-actions">
+					<span>create-single-item</span>
+					<div class="row-actions">
+						<button class="demo-icon-button" type="button" data-icon="grip"><span>Reorder</span></button>
+						<button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button>
+					</div>
+				</li>
+				<li class="demo-row-actions">
+					<span>delete-single-item</span>
+					<div class="row-actions">
+						<button class="demo-icon-button" type="button" data-icon="grip"><span>Reorder</span></button>
+						<button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<p>Point at a row, then press Tab through the list, to see both routes to the same controls. <code>--theme-row-actions-opacity</code> raises the resting state if the controls should always be partly visible.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;ul class=&quot;demo-action-list&quot;&gt;
+	&lt;li class=&quot;demo-row-actions&quot;&gt;
+		&lt;span&gt;list-all-items&lt;/span&gt;
+		&lt;div class=&quot;row-actions&quot;&gt;
+			&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;grip&quot;&gt;&lt;span&gt;Reorder&lt;/span&gt;&lt;/button&gt;
+			&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li class=&quot;demo-row-actions&quot;&gt;
+		&lt;span&gt;create-single-item&lt;/span&gt;
+		&lt;div class=&quot;row-actions&quot;&gt;
+			&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;grip&quot;&gt;&lt;span&gt;Reorder&lt;/span&gt;&lt;/button&gt;
+			&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+	&lt;li class=&quot;demo-row-actions&quot;&gt;
+		&lt;span&gt;delete-single-item&lt;/span&gt;
+		&lt;div class=&quot;row-actions&quot;&gt;
+			&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;grip&quot;&gt;&lt;span&gt;Reorder&lt;/span&gt;&lt;/button&gt;
+			&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-row-actions {
+	@extend %p-row-actions;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--theme-space-4);
+	padding: var(--theme-space-3);
+	border-bottom: 1px solid var(--theme-color-border);
+}</code></pre>
 		</details>
 	</section>
 </main>

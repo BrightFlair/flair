@@ -248,7 +248,7 @@
   </ul>
   <p role="status" data-result-status>3 topics. Filtering is available with JavaScript.</p>
 </div></div>
-		<p>Keep links keyboard accessible. --flair-results-max-height defaults to none; result spacing uses --flair-list-padding and --flair-result-link-padding. Empty-state wording and announcements are supplied by the application.</p>
+		<p>Keep links keyboard accessible. --theme-results-max-height defaults to none; result spacing uses --theme-list-padding and --theme-result-link-padding. Empty-state wording and announcements are supplied by the application.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;div data-search-example&gt;
   &lt;label class=&quot;demo-field&quot;&gt;&lt;span&gt;Find a documentation topic&lt;/span&gt;&lt;input type=&quot;search&quot; data-result-query disabled /&gt;&lt;/label&gt;
@@ -261,7 +261,7 @@
 &lt;/div&gt;</code></pre>
 			<pre><code>@use &quot;flair&quot;;
 
-.demo-search-results { @extend %p-search-results; --flair-results-max-height: 16rem; }
+.demo-search-results { @extend %p-search-results; --theme-results-max-height: 16rem; }
 .demo-field { @extend %o-form-field; }</code></pre>
 		</details>
 	</section>
@@ -288,6 +288,45 @@
 .demo-skip-link { @extend %o-skip-link; }
 .demo-visually-hidden { @extend %d-visually-hidden; }
 .demo-stack { @extend %p-stack; }</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="navigation-markers" aria-labelledby="navigation-markers-title">
+		<h2 id="navigation-markers-title">Section rules and current-item markers</h2>
+		<p>A sidebar that groups its links asks for the rule in markup, with <code>data-end-of-section</code> on the last item of a group, so the groups can change without the CSS changing.</p>
+		<p>The current link can also carry a marker in the gutter beside it. It is off until a theme gives it a width, so no layout depends on whether a theme wants one.</p>
+		<div class="flair-example">
+			<nav class="demo-marker-navigation" aria-label="Requests">
+				<menu>
+					<li data-end-of-section><a href="#navigation-markers" data-icon="key">Secrets</a></li>
+					<li><a href="#navigation-markers" data-icon="plus">New request</a></li>
+					<li><a href="#navigation-markers" aria-current="page">list-all-items</a></li>
+					<li><a href="#navigation-markers">create-single-item</a></li>
+					<li><a href="#navigation-markers">delete-single-item</a></li>
+				</menu>
+			</nav>
+		</div>
+		<p>Navigation patterns accept <code>menu</code> as well as <code>ul</code>, which is the more accurate element for a list of commands. Current state is read from <code>aria-current</code>, not from a class, so the styling and the announcement can never disagree.</p>
+		<p>The marker is placed with <code>--theme-side-nav-marker-width</code>, <code>-height</code>, <code>-offset</code>, <code>-radius</code> and <code>-color</code>; the rule with <code>--theme-side-nav-separator-space</code> and <code>-width</code>.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;nav class=&quot;demo-marker-navigation&quot; aria-label=&quot;Requests&quot;&gt;
+	&lt;menu&gt;
+		&lt;li data-end-of-section&gt;&lt;a href=&quot;#navigation-markers&quot; data-icon=&quot;key&quot;&gt;Secrets&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#navigation-markers&quot; data-icon=&quot;plus&quot;&gt;New request&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#navigation-markers&quot; aria-current=&quot;page&quot;&gt;list-all-items&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#navigation-markers&quot;&gt;create-single-item&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#navigation-markers&quot;&gt;delete-single-item&lt;/a&gt;&lt;/li&gt;
+	&lt;/menu&gt;
+&lt;/nav&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-marker-navigation {
+	@extend %p-side-navigation;
+	--theme-side-nav-link-margin: 0 0 0 1rem;
+	--theme-side-nav-marker-width: 4px;
+	--theme-side-nav-marker-height: 1.5rem;
+	--theme-side-nav-marker-offset: -0.75rem;
+	--theme-side-nav-current-shadow: none;
+}</code></pre>
 		</details>
 	</section>
 </main>

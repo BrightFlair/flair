@@ -1,0 +1,9 @@
+@use "../flair";
+
+// The same pattern set to read machine output: mono type, one row per line.
+.demo-header-list {
+	@extend %p-key-value-list;
+	--theme-key-value-wrap: nowrap;
+	--theme-key-value-white-space: nowrap;
+	--theme-key-value-padding: var(--theme-space-1) var(--theme-space-2);
+}

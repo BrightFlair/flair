@@ -1,0 +1,22 @@
+// Layout thresholds, as Sass variables because CSS custom properties cannot be
+// read inside a media query. Every definition in the library reads these names
+// instead of repeating a literal, so a consumer moves a breakpoint once:
+//
+//   @use "flair" with ($break-nav: 46rem, $break-shell: 46rem);
+//
+// Configure on the first @use of the library, before any other module loads it.
+// Mixins that take a $from argument default to the matching variable here, so
+// an individual composition can still opt out without changing the library.
+
+// Touch targets relax to their configured height, form actions become a
+// wrapping row, and modal dialogs become centred panels instead of sheets.
+$compact: 40rem !default;
+
+// Navigation and page-tab lists lay out horizontally instead of stacking.
+$nav: 45rem !default;
+
+// Two-column application shells engage, and collapsible menus stop collapsing.
+$shell: 60rem !default;
+
+// Sidebars become sticky alongside a long reading column.
+$wide: 70rem !default;

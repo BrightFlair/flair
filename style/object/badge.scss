@@ -1,14 +1,14 @@
 %o-badge {
 	display: inline-block;
-	padding: var(--flair-badge-padding-block, var(--flair-space-1))
-		var(--flair-badge-padding-inline, var(--flair-space-2));
-	border: var(--flair-border-width) solid
-		var(--flair-badge-border, var(--flair-color-border));
-	border-radius: var(--flair-badge-radius, var(--flair-radius));
-	background: var(--flair-badge-background, var(--flair-color-surface-disabled));
-	color: var(--flair-badge-text, var(--flair-color-text));
-	font-size: var(--flair-small-size, 0.875rem);
-	font-weight: var(--flair-label-weight);
+	padding: var(--theme-badge-padding-block, var(--theme-space-1))
+		var(--theme-badge-padding-inline, var(--theme-space-2));
+	border: var(--theme-border-width) solid
+		var(--theme-badge-border, var(--theme-color-border));
+	border-radius: var(--theme-badge-radius, var(--theme-radius));
+	background: var(--theme-badge-background, var(--theme-color-surface-disabled));
+	color: var(--theme-badge-text, var(--theme-color-text));
+	font-size: var(--theme-small-size, 0.875rem);
+	font-weight: var(--theme-label-weight);
 	line-height: 1.4;
 	overflow-wrap: anywhere;
 }

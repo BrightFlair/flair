@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<p>
-			<code>--flair-grid-columns</code>: 3; <code>--flair-grid-min</code>: 16rem. A larger
+			<code>--theme-grid-columns</code>: 3; <code>--theme-grid-min</code>: 16rem. A larger
 			column count does not force columns into a small container.
 		</p>
 		<details class="reference-source">
@@ -185,8 +185,8 @@
 }
 
 .demo-four-columns {
-	--flair-grid-columns: 4;
-	--flair-grid-min: 12rem;
+	--theme-grid-columns: 4;
+	--theme-grid-min: 12rem;
 }</code></pre>
 		</details>
 	</section>
@@ -276,7 +276,7 @@
 }
 
 .demo-two-columns {
-	--flair-grid-columns: 2;
+	--theme-grid-columns: 2;
 }</code></pre>
 		</details>
 	</section>
@@ -551,7 +551,7 @@
 					field or card.
 				</p>
 				<p>
-					Set <code>--flair-prose-measure</code> on the article layout to change its
+					Set <code>--theme-prose-measure</code> on the article layout to change its
 					measure. Forms, grids and surfaces inside other layouts remain fluid.
 				</p>
 			</article>
@@ -567,7 +567,7 @@
 		card.
 	&lt;/p&gt;
 	&lt;p&gt;
-		Set &lt;code&gt;--flair-prose-measure&lt;/code&gt; on the article layout to change its measure.
+		Set &lt;code&gt;--theme-prose-measure&lt;/code&gt; on the article layout to change its measure.
 		Forms, grids and surfaces inside other layouts remain fluid.
 	&lt;/p&gt;
 &lt;/article&gt;</code></pre>
@@ -604,7 +604,7 @@
   </div>
   <footer class="demo-page-footer"><span>Example footer</span><a href="/library/typography/">Typography</a></footer>
 </div></div>
-		<p>--flair-page-width defaults to 90rem, with --flair-page-gutter and --flair-page-padding-block defaulting to space 6. The optional sticky-sidebar mixin accepts a minimum width and uses --flair-sticky-offset. The application chooses where sufficient space exists for a sticky column.</p>
+		<p>--theme-page-width defaults to 90rem, with --theme-page-gutter and --theme-page-padding-block defaulting to space 6. The optional sticky-sidebar mixin accepts a minimum width and uses --theme-sticky-offset. The application chooses where sufficient space exists for a sticky column.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;div class=&quot;demo-frame&quot;&gt;
   &lt;header class=&quot;demo-page-header&quot;&gt;&lt;strong&gt;Example project&lt;/strong&gt;&lt;a href=&quot;#page-frame&quot;&gt;Overview&lt;/a&gt;&lt;/header&gt;
@@ -616,12 +616,134 @@
 &lt;/div&gt;</code></pre>
 			<pre><code>@use &quot;flair&quot;;
 
-.demo-frame { @extend %l-page-frame; --flair-page-width: 60rem; }
+.demo-frame { @extend %l-page-frame; --theme-page-width: 60rem; }
 .demo-page-header { @extend %p-page-header; }
 .demo-page-footer { @extend %p-page-footer; }
 .demo-sidebar { @extend %l-sidebar; }
 .demo-side-navigation { @extend %p-side-navigation; }
 .demo-sticky-sidebar { @include flair.sticky-sidebar(70rem); }</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="workspace" aria-labelledby="workspace-title">
+		<h2 id="workspace-title">Workspace</h2>
+		<p>A rail beside a field of panels. Where the sidebar layout wraps two columns intrinsically, a workspace holds any number of panels and reflows them as space allows: one panel at a narrow width, side by side when two fit.</p>
+		<p>The rail comes first in source order, so it reads first without JavaScript and the tab order matches the reading order.</p>
+		<div class="flair-example">
+			<div class="demo-workspace">
+				<aside>
+					<nav class="demo-side-navigation" aria-label="Requests">
+						<menu>
+							<li><a href="#workspace" aria-current="page">list-all-items</a></li>
+							<li><a href="#workspace">create-single-item</a></li>
+							<li><a href="#workspace">delete-single-item</a></li>
+						</menu>
+					</nav>
+				</aside>
+				<section>
+					<request-editor class="demo-panel">
+						<h1>Request editor</h1>
+						<p>Panels share the remaining space equally and wrap when there is not enough for another.</p>
+					</request-editor>
+					<response-viewer class="demo-panel">
+						<h1>Response viewer</h1>
+						<p>Adding a third panel needs no change to the layout.</p>
+					</response-viewer>
+				</section>
+			</div>
+		</div>
+		<p><code>--theme-workspace-panel</code> is the width below which a panel stops sharing a row, <code>--theme-workspace-panel-max</code> caps a panel, and <code>--theme-sidebar-width</code> sizes the rail. The rail and the panel field are plain <code>aside</code> and <code>section</code> elements; no class is required.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-workspace&quot;&gt;
+	&lt;aside&gt;
+		&lt;nav class=&quot;demo-side-navigation&quot; aria-label=&quot;Requests&quot;&gt;
+			&lt;menu&gt;
+				&lt;li&gt;&lt;a href=&quot;#workspace&quot; aria-current=&quot;page&quot;&gt;list-all-items&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#workspace&quot;&gt;create-single-item&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#workspace&quot;&gt;delete-single-item&lt;/a&gt;&lt;/li&gt;
+			&lt;/menu&gt;
+		&lt;/nav&gt;
+	&lt;/aside&gt;
+	&lt;section&gt;
+		&lt;request-editor class=&quot;demo-panel&quot;&gt;
+			&lt;h1&gt;Request editor&lt;/h1&gt;
+			&lt;p&gt;Panels share the remaining space equally and wrap when there is not enough for another.&lt;/p&gt;
+		&lt;/request-editor&gt;
+		&lt;response-viewer class=&quot;demo-panel&quot;&gt;
+			&lt;h1&gt;Response viewer&lt;/h1&gt;
+			&lt;p&gt;Adding a third panel needs no change to the layout.&lt;/p&gt;
+		&lt;/response-viewer&gt;
+	&lt;/section&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-workspace {
+	@extend %l-workspace;
+	--theme-sidebar-width: 12rem;
+	--theme-workspace-panel: 16rem;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="fixed-footer" aria-labelledby="fixed-footer-title">
+		<h2 id="fixed-footer-title">A footer held at the bottom</h2>
+		<p>An application whose main region scrolls on its own can hold its footer against the bottom edge instead of letting it follow the content. The fixed treatment is extended alongside the ordinary footer, not instead of it.</p>
+		<div class="flair-example">
+			<footer class="demo-page-footer-fixed">
+				<p>Made with real human passion in Derby, UK</p>
+				<p><a class="demo-link" href="/library/">Powered by Flair</a></p>
+			</footer>
+		</div>
+		<p>The example is held inside its own frame rather than the viewport, so reading this page is not obstructed. In an application the page must reserve the same height below its content, or the last of it ends up underneath the footer. Printing returns the footer to normal flow.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;footer class=&quot;demo-page-footer-fixed&quot;&gt;
+	&lt;p&gt;Made with real human passion in Derby, UK&lt;/p&gt;
+	&lt;p&gt;&lt;a class=&quot;demo-link&quot; href=&quot;/library/&quot;&gt;Powered by Flair&lt;/a&gt;&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-page-footer-fixed {
+	@extend %p-page-footer;
+	@extend %p-page-footer-fixed;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="breakpoints" aria-labelledby="breakpoints-title">
+		<h2 id="breakpoints-title">Moving a breakpoint</h2>
+		<p>A media query cannot read a CSS custom property, so Flair's layout thresholds are Sass variables. Every definition in the library reads the same four names instead of repeating a literal, which means a consuming application moves a breakpoint once and the whole library follows.</p>
+		<div class="flair-example">
+			<dl class="token-list">
+				<dt><code>$break-compact</code></dt>
+				<dd>40rem. Touch targets relax to their configured height, form actions become a wrapping row, and modal dialogs become centred panels instead of sheets.</dd>
+				<dt><code>$break-nav</code></dt>
+				<dd>45rem. Navigation and page-tab lists lay out horizontally instead of stacking.</dd>
+				<dt><code>$break-shell</code></dt>
+				<dd>60rem. Two-column application shells and workspaces engage, and collapsible menus stop collapsing.</dd>
+				<dt><code>$break-wide</code></dt>
+				<dd>70rem. Sidebars become sticky alongside a long reading column.</dd>
+			</dl>
+		</div>
+		<p>Configure them on the first <code>@use</code> of the library, before another module loads it. Mixins that take a <code>$from</code> argument default to the matching variable, so a single composition can still choose its own threshold without changing the library: <code>flair.application-shell($from: 80rem)</code>.</p>
+		<p>All four are overridable Sass variables in <code>style/variable/</code>, alongside <code>$icon-path</code>, <code>$icon-extension</code> and <code>$icon-names</code>. That directory is the only place the library keeps a value a consumer is expected to change in Sass; everything else is a CSS custom property, and inherited.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;dl class=&quot;token-list&quot;&gt;
+	&lt;dt&gt;&lt;code&gt;$break-compact&lt;/code&gt;&lt;/dt&gt;
+	&lt;dd&gt;40rem. Touch targets relax to their configured height, form actions become a wrapping row, and modal dialogs become centred panels instead of sheets.&lt;/dd&gt;
+	&lt;dt&gt;&lt;code&gt;$break-nav&lt;/code&gt;&lt;/dt&gt;
+	&lt;dd&gt;45rem. Navigation and page-tab lists lay out horizontally instead of stacking.&lt;/dd&gt;
+	&lt;dt&gt;&lt;code&gt;$break-shell&lt;/code&gt;&lt;/dt&gt;
+	&lt;dd&gt;60rem. Two-column application shells and workspaces engage, and collapsible menus stop collapsing.&lt;/dd&gt;
+	&lt;dt&gt;&lt;code&gt;$break-wide&lt;/code&gt;&lt;/dt&gt;
+	&lt;dd&gt;70rem. Sidebars become sticky alongside a long reading column.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot; with (
+	$break-compact: 46rem,
+	$break-nav: 46rem,
+	$break-shell: 46rem,
+	$break-wide: 76rem
+);
+
+.workspace {
+	@extend %l-workspace;
+}</code></pre>
 		</details>
 	</section>
 </main>

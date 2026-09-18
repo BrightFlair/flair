@@ -1,5 +1,5 @@
 @use "../flair";
 
 .demo-output-row {
-	@extend %p-output-row; --flair-value-size: 4rem;
+	@extend %p-output-row; --theme-value-size: 4rem;
 }

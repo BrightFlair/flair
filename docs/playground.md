@@ -14,7 +14,7 @@ To add an experiment:
 
 .my-layout {
 	@extend %p-grid;
-	--flair-grid-columns: 3;
+	--theme-grid-columns: 3;
 }
 ```
 
@@ -24,29 +24,51 @@ Your experiment controls its own dimensions, positioning and spacing. The websit
 
 ## Extracted projects
 
-The Authwave experiment now lives in `~/Code/Authwave/www.authwave.com` and consumes Flair through a local npm dependency. Its page, fonts and application styles are maintained there. The shared checklist pattern and highlight decoration remain in Flair.
+The Authwave site lives in `~/Code/Authwave/www.authwave.com` and consumes Flair through a local npm dependency. Its pages, fonts and application styles are maintained there. The checklist pattern and highlight decoration it uses are part of Flair.
 
 ## Application layout proofs
 
 - `/playground/documentation-website/`: a centred 96rem frame, 17rem navigation rail and a separate 54rem article cap. The rail becomes sticky at 60rem.
 - `/playground/dashboard-app/`: a left-aligned 18rem rail at 60rem, with fluid summary grids and a scrollable data table filling the remaining width.
-- `/playground/github-clone/`: a full-width top bar, left-aligned 24rem rail at 46rem and wrapping editor/preview panels capped independently at 48rem including their gutters. Choose GitHub in the theme selector to use Flair's existing preset.
+- `/playground/github-clone/`: a full-width top bar, left-aligned 24rem rail at 46rem and wrapping editor/preview panels capped independently at 48rem including their gutters. Choose GitHub in the theme selector to use Flair's preset.
 
-Each example starts with the currently selected theme (Monochrome for a fresh session). The shared playground controls independently switch the six themes and System/Light/Dark colour scheme, persisting both selections; the Apply button supplies a native GET fallback without JavaScript. No example defines a palette. Application selectors extend Flair components in SCSS; the summary and workspace class names describe application regions, not styling utilities.
+Each example starts with the currently selected theme (Monochrome for a fresh session). The shared playground controls independently switch the six themes and System/Light/Dark colour scheme, persisting both selections; the Apply button supplies a native GET fallback without JavaScript.
 
-### Findings before migration
+### What the proofs establish
 
-The three horizontal models belong to layout configuration, independently of the theme. `flair.application-shell` takes sidebar/content selectors and a breakpoint, so an existing custom element can be bound without adding a library class. It uses a single column on narrow screens and an explicitly sized sidebar plus fluid content on wide screens. The desktop sidebar scrolls within the viewport and stays sticky. `%l-page-frame` now accepts `--flair-page-margin` (default `auto`; use `0` for a capped, left-aligned frame). Existing `%l-sidebar` remains available for intrinsic wrapping.
+The three horizontal models are layout configuration, independent of the theme.
+`flair.application-shell` takes sidebar and content selectors plus a breakpoint,
+so an existing custom element is bound without adding a library class: one
+column on narrow screens, an explicitly sized sidebar and fluid content on wide
+ones, with the desktop sidebar sticky and scrolling within the viewport.
+`%l-page-frame` accepts `--theme-page-margin` (`auto` by default; `0` for a
+capped, left-aligned frame), and `%l-sidebar` handles intrinsic wrapping where
+neither column should be fixed.
 
-The source review also identified work that these generic proofs do not claim to finish:
+No example defines a palette. Application selectors extend Flair definitions in
+SCSS, and the region class names describe parts of the application rather than
+styling utilities.
 
-- **Documentation website:** retain its local Ubuntu typography, lavender navigation surface, syntax colours, search, scroll-triggered header and mobile navigation overlay. Map its palette to Flair theme properties in a local theme mixin; keep the centred outer frame separate from the article width. Its navigation background extends into the left viewport gutter, which remains an application decoration.
-- **Dashboard app:** retain its local blue accents, dark navigation surface, responsive 16/18/20/24px type scale, mobile menu, chart/gauge rendering and live/stale states. Theme chart colours through inherited properties as well as HTML controls. Preserve the app's data and event hooks while replacing card, table and navigation styling. The example demonstrates the fluid layout with generic summaries rather than recreating domain-specific visualisations.
-- **Github clone:** consume `theme.github` from Flair, preserving the existing 14px root size in application configuration. Preserve its navigation, drag ordering, editor state and modal behaviour. The shared GitHub theme now supplies light and dark palettes, following the system preference unless html data-theme explicitly selects light or dark. Its dark rendering still needs comparison with the source during migration. Check sidebar current-item styling and compact panel spacing against the source before replacing those rules.
+The proofs demonstrate structural composition and theme independence. They are
+not reproductions of any particular application, and each keeps its navigation
+visible on narrow screens rather than copying a specific mobile menu. Theme
+fonts, leading, borders and spacing change wrapping and height, so alignment and
+width constraints stay owned by the application's own SCSS.
 
-The examples keep navigation visible on narrow screens. They prove structural composition and theme independence, not exact reproduction of the reference applications' mobile menus. Theme fonts, line heights, borders and spacing may change wrapping and height; the chosen alignment and width constraints stay owned by the application SCSS.
+### Migrating an application onto Flair
 
-For the eventual migrations, keep existing markup, component behaviour and selectors wherever possible. Include Flair defaults and one theme at the application root, then replace layout/component rules incrementally. Put the two custom themes in their applications' own SCSS. Compare representative pages, menu/dialog states and narrow/wide screenshots before removing old CSS. No reference application source was edited in this pass.
+Keep the existing markup, component behaviour and selectors wherever possible.
+Include `flair.defaults` and one theme at the application root, then replace
+layout and component rules a region at a time. A palette that does not match a
+preset becomes a theme mixin in the application's own SCSS, mapping its colours
+onto the nine palette slots. Compare representative pages, menu and dialog
+states, and narrow and wide screenshots, before removing the old CSS.
+
+Two things need particular attention. An application that sets its own root
+font size keeps it in its own configuration, because media-query `rem` values
+follow the browser's initial size rather than that override. And where an
+application signals current state with a class, it moves to `aria-current`,
+which is what the navigation definitions read.
 
 Run `NODE_PATH=/tmp/flair-review/node_modules node test/playground-browser-check.cjs` against the local server for all three examples in all six themes at 320, 768, 1440 and 1920px, desktop accessibility scans, theme persistence, native form/disclosure behaviour and the no-JavaScript theme fallback. Browser tooling uses the optional setup described in [library.md](library.md).
 

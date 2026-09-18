@@ -1,0 +1,7 @@
+@use "../flair";
+
+.demo-syntax-tree {
+	@extend %p-syntax-tree;
+	--theme-syntax-tree-guide-width: 1px;
+	--theme-syntax-tree-guide-space: var(--theme-space-3);
+}

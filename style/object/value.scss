@@ -1,10 +1,10 @@
 // A prominent number or output; its meaning and live announcements belong to HTML.
 %o-value {
-	font-size: var(--flair-value-size, 3rem);
-	font-weight: var(--flair-value-weight, 700);
-	line-height: var(--flair-value-leading, 1.2);
+	font-size: var(--theme-value-size, 3rem);
+	font-weight: var(--theme-value-weight, 700);
+	line-height: var(--theme-value-leading, 1.2);
 	font-variant-numeric: tabular-nums;
 	overflow-wrap: anywhere;
 	min-inline-size: 0;
-	> .metric-unit { font-size: var(--flair-value-unit-size, 0.5em); font-weight: var(--flair-label-weight); }
+	> .metric-unit { font-size: var(--theme-value-unit-size, 0.5em); font-weight: var(--theme-label-weight); }
 }

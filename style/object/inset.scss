@@ -2,6 +2,6 @@
 
 %o-inset {
 	@extend %d-surface;
-	background: var(--flair-inset-background, var(--flair-color-surface-disabled));
+	background: var(--theme-inset-background, var(--theme-color-surface-disabled));
 	box-shadow: none;
 }

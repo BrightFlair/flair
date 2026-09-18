@@ -71,10 +71,20 @@ test('every stylesheet defines one owner whose name matches its filename', () =>
 		const name = path.basename(file, '.scss');
 		const nodes = statements(fs.readFileSync(file, 'utf8'));
 		const owners = definitions(nodes);
+		// The variable layer holds overridable Sass configuration, never rules.
+		if (path.dirname(relative) === 'variable') {
+			assert.equal(owners.length, 0, relative);
+			assert.ok(nodes.every(node => /^(@(use|forward)\b|\$[\w-]+\s*:)/.test(node.header)), relative);
+			assert.ok(nodes.some(node => node.header.startsWith('$')), `${relative}: expected at least one variable`);
+			assert.ok(nodes.filter(node => node.header.startsWith('$'))
+				.every(node => node.header.includes('!default')), `${relative}: every variable must be overridable`);
+			continue;
+		}
 		if (composition.has(relative)) {
 			assert.equal(owners.length, 0, relative);
+			// The website's baseline file is where it opts into library mixins.
 			assert.ok(nodes.every(node => /^@(use|forward)\b/.test(node.header)
-				|| (relative === 'site/base.scss' && node.header === '@include flair.base;')), relative);
+				|| (relative === 'site/base.scss' && /^@include flair\.[\w-]+(\(.*\))?;$/s.test(node.header))), relative);
 			continue;
 		}
 		assert.equal(owners.length, 1, `${relative}: expected exactly one selector, mixin, placeholder or font family`);

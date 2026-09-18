@@ -1,11 +1,11 @@
 %d-surface {
 	box-sizing: border-box;
 	min-inline-size: 0;
-	padding: var(--flair-surface-padding, var(--flair-space-6));
-	border: var(--flair-surface-border-width, var(--flair-border-width)) solid
-		var(--flair-color-border);
-	border-radius: var(--flair-surface-radius, var(--flair-radius));
-	background: var(--flair-surface-background, var(--flair-color-surface));
-	color: var(--flair-color-text);
-	box-shadow: var(--flair-surface-shadow, none);
+	padding: var(--theme-surface-padding, var(--theme-space-6));
+	border: var(--theme-surface-border-width, var(--theme-border-width)) solid
+		var(--theme-color-border);
+	border-radius: var(--theme-surface-radius, var(--theme-radius));
+	background: var(--theme-surface-background, var(--theme-color-surface));
+	color: var(--theme-color-text);
+	box-shadow: var(--theme-surface-shadow, none);
 }

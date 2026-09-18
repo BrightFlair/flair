@@ -1,0 +1,6 @@
+@use "../flair";
+
+.demo-key-value-list {
+	@extend %p-key-value-list;
+	--theme-key-value-name: 12rem;
+}

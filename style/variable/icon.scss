@@ -1,0 +1,12 @@
+// Where masked icon files live, and what they are called. These are Sass
+// variables because a URL is assembled at compile time; CSS cannot build one
+// from an attribute value. Point them at the application's own asset directory:
+//
+//   @use "flair" with ($icon-path: "/img/glyph/", $icon-extension: ".svg");
+//
+// $names registers the set an application actually uses, so `flair.icon` can be
+// included without arguments. Anything not registered emits no rule at all.
+
+$path: "/asset/icon/" !default;
+$extension: ".svg" !default;
+$names: () !default;

@@ -1,20 +1,21 @@
+@use "../variable/break";
 @use "../mixin/controls";
 @use "choice";
 
 %o-choice-field {
 	display: grid;
-	grid-template-columns: var(--flair-choice-size) minmax(0, 1fr);
+	grid-template-columns: var(--theme-choice-size) minmax(0, 1fr);
 	align-items: start;
-	gap: var(--flair-space-2);
+	gap: var(--theme-space-2);
 	min-inline-size: 0;
 	min-block-size: 44px;
 	margin: 0;
-	color: var(--flair-color-text);
-	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
-		var(--flair-font-body);
+	color: var(--theme-color-text);
+	font: var(--theme-font-weight) var(--theme-font-size)/var(--theme-line-height)
+		var(--theme-font-body);
 	> :where(input[type="checkbox"], input[type="radio"]) {
 		@extend %o-choice;
-		margin-block-start: var(--flair-space-1);
+		margin-block-start: var(--theme-space-1);
 	}
-	@media (min-width: 40rem) { min-block-size: 0; }
+	@media (min-width: break.$compact) { min-block-size: 0; }
 }

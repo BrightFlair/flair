@@ -308,7 +308,7 @@
   <strong class="metric-value">12.5 <small class="metric-unit">kWh</small></strong>
   <p class="metric-detail">An aligned measurement without live announcements.</p>
 </div></div></div>
-		<p>The value uses %o-value, which can also be extended alone. --flair-metric-align defaults to center; use start or end to align the whole group. --flair-value-size defaults to 3rem. Hidden demonstration buttons are revealed by the website script; a real application supplies its own actions.</p>
+		<p>The value uses %o-value, which can also be extended alone. --theme-metric-align defaults to center; use start or end to align the whole group. --theme-value-size defaults to 3rem. Hidden demonstration buttons are revealed by the website script; a real application supplies its own actions.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;div class=&quot;demo-stack&quot;&gt;
 &lt;div class=&quot;demo-metric&quot; data-metric-example&gt;
@@ -331,8 +331,8 @@
 
 .demo-stack { @extend %p-stack; }
 .demo-metric { @extend %p-metric; }
-.demo-metric-end { --flair-metric-align: end; }
-.demo-output-row { @extend %p-output-row; --flair-value-size: 4rem; }</code></pre>
+.demo-metric-end { --theme-metric-align: end; }
+.demo-output-row { @extend %p-output-row; --theme-value-size: 4rem; }</code></pre>
 		</details>
 	</section>
 
@@ -344,7 +344,7 @@
   <div class="demo-state-panel demo-reveal" aria-busy="false"><p>Preview content stays readable. These controls do not start a request or a drag operation.</p></div>
   <p role="status" data-state-status></p>
 </div></div>
-		<p>--flair-busy-opacity and --flair-drag-opacity control state intensity. --flair-reveal-progress runs from 0 to 1; distance, duration and minimum opacity are configurable. Reveal effects are removed for reduced motion and printing. A Flux consumer can map --flair-reveal-progress: var(--flux-first-visible, 1).</p>
+		<p>--theme-busy-opacity and --theme-drag-opacity control state intensity. --theme-reveal-progress runs from 0 to 1; distance, duration and minimum opacity are configurable. Reveal effects are removed for reduced motion and printing. A Flux consumer can map --theme-reveal-progress: var(--flux-first-visible, 1).</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;div data-state-example&gt;
   &lt;div class=&quot;demo-state-actions&quot;&gt;&lt;button type=&quot;button&quot; data-busy-toggle aria-pressed=&quot;false&quot; hidden&gt;Toggle busy preview&lt;/button&gt;&lt;button type=&quot;button&quot; data-drag-toggle aria-pressed=&quot;false&quot; hidden&gt;Toggle dragging preview&lt;/button&gt;&lt;button type=&quot;button&quot; data-reveal-replay hidden&gt;Replay reveal&lt;/button&gt;&lt;/div&gt;
@@ -358,6 +358,39 @@
 .demo-state-panel[aria-busy=&quot;true&quot;] { @extend %d-state-busy; }
 .demo-state-panel[data-dragging=&quot;true&quot;] { @extend %d-state-dragging; }
 .demo-reveal { @extend %d-state-reveal; }</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="empty-messages" aria-labelledby="empty-messages-title">
+		<h2 id="empty-messages-title">Empty collections</h2>
+		<p>A list with no items explains itself, with no extra element in the markup and nothing for a script to toggle. The container names its own subject and the message is generated from it.</p>
+		<p>This is the one-line form, for a collection. <code>%p-empty-state</code> remains the fuller treatment, for a whole region with a heading and an action.</p>
+		<div class="flair-example">
+			<div class="demo-stack">
+				<ul class="demo-empty-message" data-term="webhook endpoints"></ul>
+				<ul class="demo-empty-message" data-term="saved responses"></ul>
+				<ul class="demo-empty-message">
+					<li>A list with items in it is left entirely alone.</li>
+				</ul>
+			</div>
+		</div>
+		<p>Because the rule is <code>:empty</code>, the message appears and disappears as the application adds and removes rows, with no class to keep in step. Set <code>--theme-empty-message</code> for a container with no <code>data-term</code>, or <code>--theme-empty-message-prefix</code> and <code>-suffix</code> to reword the generated sentence.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-stack&quot;&gt;
+	&lt;ul class=&quot;demo-empty-message&quot; data-term=&quot;webhook endpoints&quot;&gt;&lt;/ul&gt;
+	&lt;ul class=&quot;demo-empty-message&quot; data-term=&quot;saved responses&quot;&gt;&lt;/ul&gt;
+	&lt;ul class=&quot;demo-empty-message&quot;&gt;
+		&lt;li&gt;A list with items in it is left entirely alone.&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-empty-message {
+	@extend %d-empty-message;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 1px dashed var(--theme-color-border);
+}</code></pre>
 		</details>
 	</section>
 </main>

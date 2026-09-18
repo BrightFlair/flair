@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-compound-field {
+	@extend %p-compound-field;
+}

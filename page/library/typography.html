@@ -194,7 +194,7 @@
   <p class="lead">The summary introduces the page with a readable line length and a larger text size.</p>
 </header>
 <p class="demo-lead">Lead text can also be used independently.</p></div>
-		<p>Use h1 on a real page; this nested documentation example uses .intro-title on h3 to retain the heading hierarchy. --flair-intro-title-size, --flair-intro-space, --flair-lead-size, --flair-lead-measure and --flair-eyebrow-* control the treatment.</p>
+		<p>Use h1 on a real page; this nested documentation example uses .intro-title on h3 to retain the heading hierarchy. --theme-intro-title-size, --theme-intro-space, --theme-lead-size, --theme-lead-measure and --theme-eyebrow-* control the treatment.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;header class=&quot;demo-page-intro&quot;&gt;
   &lt;p class=&quot;demo-eyebrow&quot;&gt;Example project&lt;/p&gt;
@@ -223,6 +223,56 @@
 :root {
   @include theme.base;
   @include theme.paper;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="palette" aria-labelledby="palette-title">
+		<h2 id="palette-title">The palette and the named layer</h2>
+		<p>A theme is built in two layers. Nine numbered slots hold the raw colours, and the named <code>--theme-*</code> properties map them onto meaning. A new theme replaces the nine and inherits every mapping; where a colour does not come from the palette, it sets the named property directly instead.</p>
+		<p>The swatches below are live. Change the theme at the top of the page and watch the same nine slots take new values, while every definition in the library keeps reading the same names.</p>
+		<div class="flair-example">
+			<ol class="demo-palette">
+				<li><code>--pal-1</code> Foreground text</li>
+				<li><code>--pal-2</code> Base surface, behind the page</li>
+				<li><code>--pal-3</code> Raised surface: panels, controls, striped rows</li>
+				<li><code>--pal-4</code> Border</li>
+				<li><code>--pal-5</code> Muted foreground: captions, metadata, placeholders</li>
+				<li><code>--pal-6</code> Accent: links, focus, current state</li>
+				<li><code>--pal-7</code> Foreground on top of the accent</li>
+				<li><code>--pal-8</code> Positive</li>
+				<li><code>--pal-9</code> Negative</li>
+			</ol>
+		</div>
+		<p>Every slot is a <code>light-dark()</code> pair, so one palette serves both schemes without a second block of colours or any JavaScript. A theme needing more than nine adds further slots of its own, and maps them the same way.</p>
+		<p>This is why a layout can be built in black and white and coloured later: the definitions never name a colour, only a role. <code>flair.defaults</code> supplies the monochrome palette and the mapping, and a theme preset replaces it.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;ol class=&quot;demo-palette&quot;&gt;
+	&lt;li&gt;&lt;code&gt;--pal-1&lt;/code&gt; Foreground text&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-2&lt;/code&gt; Base surface, behind the page&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-3&lt;/code&gt; Raised surface: panels, controls, striped rows&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-4&lt;/code&gt; Border&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-5&lt;/code&gt; Muted foreground: captions, metadata, placeholders&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-6&lt;/code&gt; Accent: links, focus, current state&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-7&lt;/code&gt; Foreground on top of the accent&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-8&lt;/code&gt; Positive&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-9&lt;/code&gt; Negative&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+html {
+	@include flair.defaults;
+	@include flair.color-scheme;
+
+	// Nine values are the whole of a theme&#x27;s colour.
+	--pal-1: light-dark(#1f2328, #e6edf3);
+	--pal-2: light-dark(#fff, #0d1117);
+	--pal-3: light-dark(#f6f8fa, #161b22);
+	--pal-4: light-dark(#d8dee4, #30363d);
+	--pal-5: light-dark(#656d76, #9198a1);
+	--pal-6: light-dark(#0969da, #4493f8);
+	--pal-7: light-dark(#fff, #0d1117);
+	--pal-8: light-dark(#1f883d, #3fb950);
+	--pal-9: light-dark(#a40e26, #f85149);
 }</code></pre>
 		</details>
 	</section>

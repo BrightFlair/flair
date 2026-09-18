@@ -1,11 +1,12 @@
+@use "../variable/break";
 @use "../decoration/surface";
 %o-dialog {
 	@extend %d-surface;
 	inline-size: min(
-		var(--flair-dialog-width, 32rem),
-		calc(100% - 2 * var(--flair-space-4))
+		var(--theme-dialog-width, 32rem),
+		calc(100% - 2 * var(--theme-space-4))
 	);
-	max-block-size: calc(100% - 2 * var(--flair-space-4));
+	max-block-size: calc(100% - 2 * var(--theme-space-4));
 	overflow: auto;
 	overscroll-behavior: contain;
 	overflow-wrap: anywhere;
@@ -22,19 +23,19 @@
 		margin: 0;
 		border: 0;
 		border-radius: 0;
-		padding-block: max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-top)) max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-bottom));
-		padding-inline: max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-left)) max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-right));
-		@media (min-width: 40rem) {
-			inline-size: min(var(--flair-dialog-width, 32rem), calc(100% - 2 * var(--flair-space-4)));
+		padding-block: max(var(--theme-surface-padding, var(--theme-space-6)), env(safe-area-inset-top)) max(var(--theme-surface-padding, var(--theme-space-6)), env(safe-area-inset-bottom));
+		padding-inline: max(var(--theme-surface-padding, var(--theme-space-6)), env(safe-area-inset-left)) max(var(--theme-surface-padding, var(--theme-space-6)), env(safe-area-inset-right));
+		@media (min-width: break.$compact) {
+			inline-size: min(var(--theme-dialog-width, 32rem), calc(100% - 2 * var(--theme-space-4)));
 			// Native modal insets are zero; auto would stretch to viewport height.
 			block-size: fit-content;
-			max-block-size: calc(100dvh - 2 * var(--flair-space-4));
+			max-block-size: calc(100dvh - 2 * var(--theme-space-4));
 			margin: auto;
-			border: var(--flair-surface-border-width, var(--flair-border-width)) solid var(--flair-color-border);
-			border-radius: var(--flair-surface-radius, var(--flair-radius));
+			border: var(--theme-surface-border-width, var(--theme-border-width)) solid var(--theme-color-border);
+			border-radius: var(--theme-surface-radius, var(--theme-radius));
 		}
 	}
 	&::backdrop {
-		background: var(--flair-dialog-backdrop, rgb(0 0 0 / 55%));
+		background: var(--theme-dialog-backdrop, rgb(0 0 0 / 55%));
 	}
 }

@@ -1,0 +1,37 @@
+@use "../variable/break";
+
+// Controls that belong to one row of a list and stay out of the way until that
+// row is being used: a drag handle, a delete button, a reorder field. They
+// appear on hover and whenever focus is inside the row, so a keyboard reaches
+// them in the same order a pointer does.
+//
+//   <li>
+//     <a href="/request/1">List all items</a>
+//     <form class="row-actions"><button>Reorder</button></form>
+//   </li>
+//
+// Where hover is not available the controls are always visible, because there
+// is no way to reveal them. They are never removed from the accessibility
+// tree, only faded, so they remain announced and tabbable throughout.
+%p-row-actions {
+	position: relative;
+	> :where(.row-actions, [data-row-actions]) {
+		display: flex;
+		align-items: center;
+		gap: var(--theme-row-actions-gap, var(--theme-space-2));
+		transition: opacity var(--theme-row-actions-duration, 0.1s) ease-in-out;
+	}
+	&:hover > :where(.row-actions, [data-row-actions]),
+	&:focus-within > :where(.row-actions, [data-row-actions]) {
+		opacity: 1;
+	}
+	// Only hide them where they can be brought back by pointing at the row.
+	@media (hover: hover) and (min-width: break.$compact) {
+		> :where(.row-actions, [data-row-actions]) {
+			opacity: var(--theme-row-actions-opacity, 0);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		> :where(.row-actions, [data-row-actions]) { transition: none; }
+	}
+}

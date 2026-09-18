@@ -3,27 +3,27 @@
 %o-form-field {
 	display: grid;
 	align-content: start;
-	gap: var(--flair-field-gap, var(--flair-space-2));
+	gap: var(--theme-field-gap, var(--theme-space-2));
 	min-inline-size: 0;
 	margin: 0;
-	color: var(--flair-color-text);
-	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
-		var(--flair-font-body);
+	color: var(--theme-color-text);
+	font: var(--theme-font-weight) var(--theme-font-size)/var(--theme-line-height)
+		var(--theme-font-body);
 	@include controls.controls("> ");
 	> :where(label, .field-label, span:first-child) {
-		font-weight: var(--flair-label-weight);
-		font-size: var(--flair-label-font-size, var(--flair-font-size));
+		font-weight: var(--theme-label-weight);
+		font-size: var(--theme-label-font-size, var(--theme-font-size));
 	}
 	> :where(.field-help, .field-error) {
 		margin: 0;
 		font: inherit;
-		font-size: var(--flair-message-font-size, var(--flair-font-size));
+		font-size: var(--theme-message-font-size, var(--theme-font-size));
 	}
 	> .field-help {
-		color: var(--flair-color-muted);
+		color: var(--theme-color-muted);
 	}
 	> .field-error {
-		color: var(--flair-color-danger);
-		font-weight: var(--flair-label-weight);
+		color: var(--theme-color-danger);
+		font-weight: var(--theme-label-weight);
 	}
 }

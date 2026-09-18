@@ -2,27 +2,41 @@
 
 @mixin ink {
 	@include color-scheme.color-scheme;
-	--flair-color-text: light-dark(#222, #f5f5f5);
-	--flair-color-muted: light-dark(#555, #bbb);
-	--flair-color-surface: light-dark(#fafafa, #161616);
-	--flair-color-surface-disabled: light-dark(#e8e8e8, #303030);
-	--flair-color-border: light-dark(#767676, #999);
-	--flair-color-accent: light-dark(#111, #fff);
-	--flair-color-on-accent: light-dark(#fff, #111);
-	--flair-color-danger: light-dark(#111, #fff);
-	--flair-surface-background: light-dark(#f2f2f2, #222);
-	--flair-inset-background: light-dark(#e8e8e8, #303030);
-	--flair-selected-background: light-dark(#222, #f5f5f5);
-	--flair-selected-text: light-dark(#fafafa, #161616);
-	--flair-code-background: light-dark(#f2f2f2, #222);
-	--flair-syntax-string: light-dark(#555, #ddd);
-	--flair-table-stripe-background: light-dark(#f2f2f2, #222);
-	--flair-surface-shadow: none;
+
+	--pal-1: light-dark(#222, #f5f5f5);
+	--pal-2: light-dark(#fafafa, #161616);
+	--pal-3: light-dark(#e8e8e8, #303030);
+	--pal-4: light-dark(#767676, #999);
+	--pal-5: light-dark(#555, #bbb);
+	--pal-6: light-dark(#111, #fff);
+	--pal-7: light-dark(#fff, #111);
+	--pal-8: light-dark(#111, #fff);
+	--pal-9: light-dark(#111, #fff);
+	// A single raised tone, used for panels, code and striped rows.
+	--pal-10: light-dark(#f2f2f2, #222);
+
+	--theme-color-text: var(--pal-1);
+	--theme-color-surface: var(--pal-2);
+	--theme-color-surface-disabled: var(--pal-3);
+	--theme-color-border: var(--pal-4);
+	--theme-color-muted: var(--pal-5);
+	--theme-color-accent: var(--pal-6);
+	--theme-color-on-accent: var(--pal-7);
+	--theme-color-success: var(--pal-8);
+	--theme-color-danger: var(--pal-9);
+	--theme-surface-background: var(--pal-10);
+	--theme-inset-background: var(--pal-3);
+	--theme-selected-background: var(--pal-1);
+	--theme-selected-text: var(--pal-2);
+	--theme-code-background: var(--pal-10);
+	--theme-syntax-string: var(--pal-5);
+	--theme-table-stripe-background: var(--pal-10);
+	--theme-surface-shadow: none;
 
 	// Coordinated surface and navigation states for the contrast sidebar variant.
-	--flair-sidebar-contrast-background: light-dark(#f2f2f2, #222);
-	--flair-sidebar-contrast-text: light-dark(#222, #f5f5f5);
-	--flair-sidebar-contrast-hover-background: light-dark(#ddd, #383838);
-	--flair-sidebar-contrast-current-background: light-dark(#222, #f5f5f5);
-	--flair-sidebar-contrast-current-text: light-dark(#fafafa, #161616);
+	--theme-sidebar-contrast-background: var(--pal-10);
+	--theme-sidebar-contrast-text: var(--pal-1);
+	--theme-sidebar-contrast-hover-background: light-dark(#ddd, #383838);
+	--theme-sidebar-contrast-current-background: var(--pal-1);
+	--theme-sidebar-contrast-current-text: var(--pal-2);
 }

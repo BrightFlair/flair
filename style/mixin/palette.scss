@@ -1,0 +1,28 @@
+// The base colours a theme is built from. Nine numbered slots hold the raw
+// values; the named `--theme-*` properties in `defaults` map them onto meaning.
+// A theme replaces these nine and inherits every mapping, or overrides a named
+// property directly where a colour does not come from the palette.
+//
+//   --pal-1  Foreground text
+//   --pal-2  Base surface, behind the page
+//   --pal-3  Raised surface: panels, controls, striped rows
+//   --pal-4  Border
+//   --pal-5  Muted foreground: captions, metadata, placeholders
+//   --pal-6  Accent: links, focus, current state
+//   --pal-7  Foreground on top of the accent
+//   --pal-8  Positive
+//   --pal-9  Negative
+//
+// Each slot is a `light-dark()` pair, so one palette serves both schemes. A
+// theme needing more than nine adds further slots of its own.
+@mixin palette {
+	--pal-1: light-dark(#111, #f5f5f5);
+	--pal-2: light-dark(#fff, #161616);
+	--pal-3: light-dark(#eee, #303030);
+	--pal-4: light-dark(#767676, #999);
+	--pal-5: light-dark(#525252, #bbb);
+	--pal-6: light-dark(#111, #f5f5f5);
+	--pal-7: light-dark(#fff, #111);
+	--pal-8: light-dark(#111, #f5f5f5);
+	--pal-9: light-dark(#111, #f5f5f5);
+}

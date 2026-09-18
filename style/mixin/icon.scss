@@ -1,0 +1,25 @@
+@use "../variable/icon" as variable;
+@use "../pattern/icon" as pattern;
+
+// Bind `data-icon` and `data-icon-end` to the icon pattern, and turn each
+// registered name into a file URL. A URL cannot be built from an attribute
+// value in CSS, so the set in use is named once, in Sass:
+//
+//   @use "flair" with ($icon-names: (trash, share, lock));
+//   .toolbar { @include flair.icon; }
+//
+// Included without a selector, the rules apply document-wide. Included inside
+// one, only that subtree gets them. `$path` and `$extension` say where the
+// files live; an unregistered name emits nothing and shows no glyph.
+@mixin icon($names: variable.$names, $prefix: "") {
+	#{$prefix}[data-icon] { @extend %p-icon; }
+	#{$prefix}[data-icon-end] { @extend %p-icon-end; }
+	@each $name in $names {
+		#{$prefix}[data-icon="#{$name}"] {
+			--theme-icon: url("#{variable.$path}#{$name}#{variable.$extension}");
+		}
+		#{$prefix}[data-icon-end="#{$name}"] {
+			--theme-icon-end: url("#{variable.$path}#{$name}#{variable.$extension}");
+		}
+	}
+}

@@ -1,0 +1,68 @@
+@use "../decoration/empty-message";
+@use "../object/form-field";
+@use "../variable/break";
+
+// A list of identical field groups that an application adds to and removes
+// from: query parameters, headers, endpoints. Only the first row carries
+// visible labels, so the list reads as a table without becoming one, and the
+// labels stay in the markup for assistive technology on every row.
+//
+//   <ul data-term="headers">
+//     <li><form>
+//       <label><span>Key</span><input name="key" /></label>
+//       <label><span>Value</span><input name="value" /></label>
+//       <div class="actions">…</div>
+//     </form></li>
+//   </ul>
+//
+// An empty list explains itself from `data-term`. Adding and removing rows,
+// and the order they appear in, belong to the application.
+%p-repeatable-fields {
+	@extend %d-empty-message;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	> li {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		gap: var(--theme-repeat-gap, var(--theme-space-4));
+		margin-block-end: var(--theme-repeat-row-space, var(--theme-space-2));
+		min-inline-size: 0;
+		> form {
+			display: flex;
+			flex-wrap: wrap;
+			flex-grow: 1;
+			align-items: flex-end;
+			gap: var(--theme-repeat-gap, var(--theme-space-4));
+			min-inline-size: 0;
+		}
+		:where(label, .field) {
+			@extend %o-form-field;
+			flex: 1 1 var(--theme-field-min-width);
+			margin-block-end: 0;
+		}
+		// The actions belong to the control beside them, so they occupy the
+		// same band and centre within it. A theme whose controls are taller
+		// than its buttons then reads as one row rather than a ragged edge.
+		.actions {
+			display: flex;
+			flex-shrink: 0;
+			align-items: center;
+			min-block-size: var(--theme-control-min-height);
+			gap: var(--theme-repeat-actions-gap, var(--theme-space-2));
+		}
+		// Later rows repeat the same fields; their labels stay for screen
+		// readers but are not drawn again.
+		&:not(:first-of-type) :where(label, .field) > span:first-child {
+			@media (min-width: break.$compact) {
+				position: absolute;
+				inline-size: 1px;
+				block-size: 1px;
+				overflow: hidden;
+				clip-path: inset(50%);
+				white-space: nowrap;
+			}
+		}
+	}
+}

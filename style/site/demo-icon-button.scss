@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-icon-button {
+	@extend %o-icon-button;
+}

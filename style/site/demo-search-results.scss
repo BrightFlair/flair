@@ -1,5 +1,5 @@
 @use "../flair";
 
 .demo-search-results {
-	@extend %p-search-results; --flair-results-max-height: 16rem;
+	@extend %p-search-results; --theme-results-max-height: 16rem;
 }

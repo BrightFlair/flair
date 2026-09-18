@@ -2,14 +2,14 @@
 %l-sidebar {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--flair-layout-gap, var(--flair-space-6));
+	gap: var(--theme-layout-gap, var(--theme-space-6));
 	align-items: flex-start;
 	> aside {
-		flex: 1 1 var(--flair-sidebar-width, 16rem);
+		flex: 1 1 var(--theme-sidebar-width, 16rem);
 		min-inline-size: 0;
 	}
 	> .layout-content {
-		flex: 999 1 var(--flair-content-min, 28rem);
-		min-inline-size: min(100%, var(--flair-content-min, 28rem));
+		flex: 999 1 var(--theme-content-min, 28rem);
+		min-inline-size: min(100%, var(--theme-content-min, 28rem));
 	}
 }

@@ -214,53 +214,53 @@
 			settings. The default mixin should be included once per independent theme scope.
 		</p>
 		<dl class="token-list">
-			<dt><code>--flair-color-*</code></dt>
+			<dt><code>--theme-color-*</code></dt>
 			<dd>
 				Text, muted text, surface, disabled surface, border, accent, on-accent and danger
 				colours.
 			</dd>
 			<dt>
-				<code>--flair-font-body</code>
+				<code>--theme-font-body</code>
 				,
-				<code>--flair-font-size</code>
+				<code>--theme-font-size</code>
 				,
-				<code>--flair-font-weight</code>
+				<code>--theme-font-weight</code>
 				,
-				<code>--flair-line-height</code>
+				<code>--theme-line-height</code>
 			</dt>
 			<dd>Shared control and field typography. Default: Ubuntu, 1rem, 400, 1.5.</dd>
 			<dt>
-				<code>--flair-control-padding-block</code>
+				<code>--theme-control-padding-block</code>
 				,
-				<code>--flair-control-padding-inline</code>
+				<code>--theme-control-padding-inline</code>
 			</dt>
 			<dd>Fallback: spacing steps 2 and 3 (0.5rem and 0.75rem).</dd>
 			<dt>
-				<code>--flair-control-min-height</code>
+				<code>--theme-control-min-height</code>
 				,
-				<code>--flair-control-radius</code>
+				<code>--theme-control-radius</code>
 			</dt>
 			<dd>
 				Default minimum height: 2.75rem. Radius falls back to the shared radius, initially
 				zero.
 			</dd>
 			<dt>
-				<code>--flair-control-background</code>
+				<code>--theme-control-background</code>
 				,
-				<code>--flair-control-text</code>
+				<code>--theme-control-text</code>
 				,
-				<code>--flair-control-border</code>
+				<code>--theme-control-border</code>
 			</dt>
 			<dd>Control-specific overrides of the semantic colours.</dd>
 			<dt>
-				<code>--flair-focus-color</code>
+				<code>--theme-focus-color</code>
 				,
-				<code>--flair-focus-width</code>
+				<code>--theme-focus-width</code>
 				,
-				<code>--flair-focus-offset</code>
+				<code>--theme-focus-offset</code>
 			</dt>
 			<dd>Default: accent colour, 3px width, 2px offset.</dd>
-			<dt><code>--flair-button-*</code></dt>
+			<dt><code>--theme-button-*</code></dt>
 			<dd>
 				Button background, text and weight, hover background, and primary-action colours.
 				See the complete reference below.
@@ -331,6 +331,72 @@
 
 .demo-primary {
 	@extend %o-button-primary;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="icons" aria-labelledby="icons-title">
+		<h2 id="icons-title">Icons</h2>
+		<p>A glyph is asked for in markup, by name: <code>data-icon="trash"</code> names the file, and <code>data-icon-end</code> puts one after the content instead. Flair turns the registered names into URLs at compile time, because CSS cannot build a URL from an attribute value.</p>
+		<p>The glyph is a mask filled with <code>currentColor</code>, so it takes the colour of the text beside it and needs no separate rule in a dark scheme. Set the directory and file extension once with <code>$icon-path</code> and <code>$icon-extension</code>.</p>
+		<div class="flair-example">
+			<div class="demo-icons">
+				<button class="demo-button" type="button" data-icon="trash">Delete</button>
+				<button class="demo-button" type="button" data-icon="copy">Copy</button>
+				<button class="demo-primary" type="button" data-icon="plus">New request</button>
+				<a class="demo-link" href="/library/code/" data-icon-end="link-external">Read the code section</a>
+				<span data-icon="lock">Secrets are hidden</span>
+			</div>
+		</div>
+		<p>Registering the set is one line, and an unregistered name emits no rule at all, so an icon directory never becomes dead CSS. <code>--theme-icon-size</code>, <code>--theme-icon-gap</code> and <code>--theme-icon-opacity</code> adjust a glyph without touching the file it comes from.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-icons&quot;&gt;
+	&lt;button class=&quot;demo-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;Delete&lt;/button&gt;
+	&lt;button class=&quot;demo-button&quot; type=&quot;button&quot; data-icon=&quot;copy&quot;&gt;Copy&lt;/button&gt;
+	&lt;button class=&quot;demo-primary&quot; type=&quot;button&quot; data-icon=&quot;plus&quot;&gt;New request&lt;/button&gt;
+	&lt;a class=&quot;demo-link&quot; href=&quot;/library/code/&quot; data-icon-end=&quot;link-external&quot;&gt;Read the code section&lt;/a&gt;
+	&lt;span data-icon=&quot;lock&quot;&gt;Secrets are hidden&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot; with (
+	$icon-path: &quot;/asset/icon/&quot;,
+	$icon-names: (trash, copy, plus, lock, link-external)
+);
+
+.demo-icons {
+	@include flair.icon;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--theme-space-3);
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="icon-buttons" aria-labelledby="icon-buttons-title">
+		<h2 id="icon-buttons-title">Icon-only buttons</h2>
+		<p>A button whose meaning is carried by its glyph still needs its wording. The label stays in the document at all times and is revealed on hover and on keyboard focus, so the button is announced properly and is never a control with no accessible name.</p>
+		<div class="flair-example">
+			<div class="demo-icons">
+				<button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button>
+				<button class="demo-icon-button" type="button" data-icon="copy"><span>Copy to clipboard</span></button>
+				<button class="demo-icon-button" type="button" data-icon="share"><span>Share</span></button>
+				<button class="demo-icon-button" type="button" data-icon="device-desktop"><span>Match the system</span></button>
+				<button class="demo-icon-button" type="button" data-icon="sun"><span>Always light</span></button>
+				<button class="demo-icon-button" type="button" data-icon="moon"><span>Always dark</span></button>
+			</div>
+		</div>
+		<p>Focus each button with Tab to see the same label a pointer reveals. The last three are a light, dark and system control; which of them is current, and what happens when one is pressed, is the application's decision.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-icons&quot;&gt;
+	&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;
+	&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;copy&quot;&gt;&lt;span&gt;Copy to clipboard&lt;/span&gt;&lt;/button&gt;
+	&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;share&quot;&gt;&lt;span&gt;Share&lt;/span&gt;&lt;/button&gt;
+	&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;device-desktop&quot;&gt;&lt;span&gt;Match the system&lt;/span&gt;&lt;/button&gt;
+	&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;sun&quot;&gt;&lt;span&gt;Always light&lt;/span&gt;&lt;/button&gt;
+	&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;moon&quot;&gt;&lt;span&gt;Always dark&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-icon-button {
+	@extend %o-icon-button;
 }</code></pre>
 		</details>
 	</section>

@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-drawer {
+	@extend %o-drawer;
+}

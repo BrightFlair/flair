@@ -238,8 +238,8 @@
 }
 
 .demo-compact-table {
-	--flair-table-padding-block: var(--flair-space-1);
-	--flair-table-padding-inline: var(--flair-space-2);
+	--theme-table-padding-block: var(--theme-space-1);
+	--theme-table-padding-inline: var(--theme-space-2);
 }</code></pre>
 		</details>
 	</section>
@@ -452,5 +452,80 @@
 			property fallbacks and behavioural requirements are documented in
 			<code>docs/library.md</code>.
 		</p>
+	</section>
+	<section class="reference-section" id="key-value-lists" aria-labelledby="key-value-lists-title">
+		<h2 id="key-value-lists-title">Key and value lists</h2>
+		<p>A bordered list of name and value pairs, one row each, with room for a trailing action. Rows alternate shading so a long list stays trackable. This is the editable form: each row owns the control that removes it.</p>
+		<div class="flair-example">
+			<ul class="demo-key-value-list" data-term="secrets">
+				<li>
+					<span>STRIPE_SECRET_KEY</span>
+					<span>&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;4f21</span>
+					<form><button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button></form>
+				</li>
+				<li>
+					<span>GITHUB_TOKEN</span>
+					<span>&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;91ad</span>
+					<form><button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button></form>
+				</li>
+				<li>
+					<span>WEBHOOK_SIGNING_SECRET</span>
+					<span>&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;03be</span>
+					<form><button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button></form>
+				</li>
+			</ul>
+			
+			<p>The same pattern, set to read machine output instead. Only theme properties differ; the layout is unchanged.</p>
+			
+			<ul class="demo-header-list" data-term="response headers">
+				<li><span>content-type</span><span>application/json; charset=utf-8</span></li>
+				<li><span>cache-control</span><span>no-store, max-age=0</span></li>
+				<li><span>x-request-id</span><span>01JQ8Z4M7VYK2R6TQF3H9PWXBN</span></li>
+				<li><span>strict-transport-security</span><span>max-age=63072000; includeSubDomains; preload</span></li>
+			</ul>
+		</div>
+		<p>One definition serves an editor and a viewer because nothing in it decides which it is. <code>--theme-key-value-name</code> fixes the measure of the name column, and an empty list states what is missing from its <code>data-term</code>.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;ul class=&quot;demo-key-value-list&quot; data-term=&quot;secrets&quot;&gt;
+	&lt;li&gt;
+		&lt;span&gt;STRIPE_SECRET_KEY&lt;/span&gt;
+		&lt;span&gt;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;4f21&lt;/span&gt;
+		&lt;form&gt;&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;&lt;/form&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span&gt;GITHUB_TOKEN&lt;/span&gt;
+		&lt;span&gt;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;91ad&lt;/span&gt;
+		&lt;form&gt;&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;&lt;/form&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span&gt;WEBHOOK_SIGNING_SECRET&lt;/span&gt;
+		&lt;span&gt;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;&amp;#8226;03be&lt;/span&gt;
+		&lt;form&gt;&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;&lt;/form&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The same pattern, set to read machine output instead. Only theme properties differ; the layout is unchanged.&lt;/p&gt;
+
+&lt;ul class=&quot;demo-header-list&quot; data-term=&quot;response headers&quot;&gt;
+	&lt;li&gt;&lt;span&gt;content-type&lt;/span&gt;&lt;span&gt;application/json; charset=utf-8&lt;/span&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;span&gt;cache-control&lt;/span&gt;&lt;span&gt;no-store, max-age=0&lt;/span&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;span&gt;x-request-id&lt;/span&gt;&lt;span&gt;01JQ8Z4M7VYK2R6TQF3H9PWXBN&lt;/span&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;span&gt;strict-transport-security&lt;/span&gt;&lt;span&gt;max-age=63072000; includeSubDomains; preload&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-key-value-list {
+	@extend %p-key-value-list;
+	--theme-key-value-name: 12rem;
+}
+
+// Mono type, one row per line, scrolling within its own border.
+.demo-header-list {
+	@extend %p-key-value-list;
+	--theme-key-value-wrap: nowrap;
+	--theme-key-value-white-space: nowrap;
+	--theme-key-value-padding: var(--theme-space-1) var(--theme-space-2);
+}</code></pre>
+		</details>
 	</section>
 </main>

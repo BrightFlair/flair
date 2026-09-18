@@ -4,7 +4,7 @@
 		display: flex;
 		align-items: baseline;
 		flex-wrap: wrap;
-		gap: var(--flair-space-2);
+		gap: var(--theme-space-2);
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -18,7 +18,7 @@
 		}
 	}
 	.separator {
-		margin-inline-end: var(--flair-space-2);
-		color: var(--flair-color-muted);
+		margin-inline-end: var(--theme-space-2);
+		color: var(--theme-color-muted);
 	}
 }

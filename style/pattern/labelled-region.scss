@@ -1,0 +1,38 @@
+@use "../decoration/empty-message";
+
+// A bordered block of output with its own caption resting above the top edge:
+// a response body, a log excerpt, a diff. The caption is generated, so the
+// output element holds nothing but the output itself and can be replaced
+// wholesale without disturbing the frame.
+//
+//   <div class="response-body" data-label="Body">{ "ok": true }</div>
+//
+// Machine output sets `--theme-region-font` to the mono family and keeps its
+// own whitespace. An empty region says so rather than collapsing to a line.
+%p-labelled-region {
+	@extend %d-empty-message;
+	position: relative;
+	display: block;
+	margin-block-start: var(--theme-region-label-space, var(--theme-space-8));
+	padding: var(--theme-region-padding, var(--theme-space-2));
+	border: var(--theme-border-width) solid var(--theme-color-border);
+	border-radius: var(--theme-region-radius, var(--theme-radius));
+	background: var(--theme-region-background, var(--theme-color-surface-disabled));
+	font-family: var(--theme-region-font, inherit);
+	overflow-x: auto;
+	&[data-label]::before {
+		content: attr(data-label);
+		position: absolute;
+		inset-block-end: 100%;
+		inset-inline-start: 0;
+		padding-block-end: var(--theme-space-2);
+		color: var(--theme-color-text);
+		font-family: var(--theme-font-body);
+		font-weight: var(--theme-label-weight);
+	}
+	// With nothing to frame, the border would draw an empty box.
+	&:empty {
+		border-color: transparent;
+		background: none;
+	}
+}

@@ -1,0 +1,55 @@
+@use "../decoration/empty-message";
+
+// A bordered list of name and value pairs, one row each, with room for a
+// trailing action. Rows alternate shading so a long list stays trackable.
+//
+//   <ul data-term="secrets">
+//     <li><span>API_KEY</span><span>••••1234</span><form>…</form></li>
+//   </ul>
+//
+// A read-only list of machine values — HTTP headers, for instance — sets
+// `--theme-key-value-font` to the mono family and `--theme-key-value-wrap` to
+// `nowrap`, which turns the rows into a locally scrolling block. Nothing about
+// the pattern assumes either use.
+%p-key-value-list {
+	@extend %d-empty-message;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: var(--theme-key-value-border-width, var(--theme-border-width))
+		solid var(--theme-color-border);
+	border-radius: var(--theme-key-value-radius, var(--theme-radius));
+	overflow-x: auto;
+	> li {
+		display: flex;
+		flex-wrap: var(--theme-key-value-wrap, wrap);
+		align-items: center;
+		gap: var(--theme-key-value-gap, var(--theme-space-4));
+		padding: var(--theme-key-value-padding, var(--theme-space-4));
+		white-space: var(--theme-key-value-white-space, normal);
+		&:nth-child(even) {
+			background: var(--theme-key-value-stripe-background,
+				var(--theme-table-stripe-background, var(--theme-color-surface-disabled)));
+		}
+		> :where(span, dt, dd, code) {
+			min-inline-size: 0;
+			margin: 0;
+			font-family: var(--theme-key-value-font, var(--theme-font-mono, monospace));
+			overflow-wrap: anywhere;
+		}
+		// The name takes a fixed measure; the value uses what is left.
+		> :first-child {
+			flex-shrink: 0;
+			inline-size: var(--theme-key-value-name, auto);
+			font-weight: var(--theme-label-weight);
+		}
+		> :nth-child(2) {
+			flex-grow: 1;
+			color: var(--theme-key-value-value-text, inherit);
+		}
+		> form {
+			flex-shrink: 0;
+			margin-inline-start: auto;
+		}
+	}
+}

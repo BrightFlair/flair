@@ -111,8 +111,8 @@ for(const example of document.querySelectorAll("[data-state-example]")) {
 		});
 	}
 	example.querySelector("[data-reveal-replay]").addEventListener("click", () => {
-		panel.style.setProperty("--flair-reveal-progress", "0");
-		requestAnimationFrame(() => requestAnimationFrame(() => panel.style.setProperty("--flair-reveal-progress", "1")));
+		panel.style.setProperty("--theme-reveal-progress", "0");
+		requestAnimationFrame(() => requestAnimationFrame(() => panel.style.setProperty("--theme-reveal-progress", "1")));
 		status.textContent = "Reveal replayed. Reduced motion preferences are respected.";
 	});
 }

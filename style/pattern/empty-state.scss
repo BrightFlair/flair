@@ -5,5 +5,5 @@
 	@extend %p-stack;
 	align-items: center;
 	text-align: center;
-	padding: var(--flair-empty-padding, var(--flair-space-8));
+	padding: var(--theme-empty-padding, var(--theme-space-8));
 }

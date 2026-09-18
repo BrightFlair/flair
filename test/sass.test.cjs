@@ -16,7 +16,7 @@ test('a button consumer emits its dependencies without form or element defaults'
 	@extend %o-button;
 }`);
 	assert.match(css, /\.download:focus-visible/);
-	assert.match(css, /--flair-control-padding-inline/);
+	assert.match(css, /--theme-control-padding-inline/);
 	assert.doesNotMatch(css, /field-row|field-help|fieldset|:root|@font-face/);
 	assert.doesNotMatch(css, /^button\s*\{/m);
 });
@@ -50,10 +50,10 @@ test('public overrides remain inherited, not reset on individual controls', () =
 	const css = compile(`@use "flair";
 .profile {
 	@extend %p-form-fields;
-	--flair-control-padding-inline: 2rem;
+	--theme-control-padding-inline: 2rem;
 }`);
-	assert.match(css, /var\(--flair-control-padding-inline, var\(--flair-space-3\)\)/);
-	assert.equal((css.match(/--flair-control-padding-inline:/g) || []).length, 1);
+	assert.match(css, /var\(--theme-control-padding-inline, var\(--theme-space-3\)\)/);
+	assert.equal((css.match(/--theme-control-padding-inline:/g) || []).length, 1);
 });
 
 test('grid consumers do not emit surfaces, navigation or application width limits', () => {
@@ -62,7 +62,7 @@ test('grid consumers do not emit surfaces, navigation or application width limit
 	@extend %p-grid;
 }`);
 	assert.match(css, /repeat\(auto-fit/);
-	assert.match(css, /--flair-grid-columns, 3/);
+	assert.match(css, /--theme-grid-columns, 3/);
 	assert.doesNotMatch(css, /max-inline-size|background|aria-current|:root|@media/);
 });
 
@@ -133,14 +133,14 @@ test('library placeholders have one matching file and explicit dependencies', ()
 
 test('typography base and nested variants can be extended independently', () => {
 	const base = compile('@use "decoration/typography"; .copy { @extend %d-typography; }');
-	assert.match(base, /--flair-font-body/);
-	assert.doesNotMatch(base, /--flair-heading|--flair-lead|--flair-eyebrow/);
+	assert.match(base, /--theme-font-body/);
+	assert.doesNotMatch(base, /--theme-heading|--theme-lead|--theme-eyebrow/);
 	for (const variant of ['heading', 'lead', 'eyebrow']) {
 		const css = compile(`@use "decoration/typography"; .copy { @extend %d-typography-${variant}; }`);
-		assert.ok(css.includes(`--flair-${variant}`), variant);
-		assert.doesNotMatch(css, /--flair-text-leading/);
+		assert.ok(css.includes(`--theme-${variant}`), variant);
+		assert.doesNotMatch(css, /--theme-text-leading/);
 		for (const other of ['heading', 'lead', 'eyebrow'].filter(name => name !== variant)) {
-			assert.ok(!css.includes(`--flair-${other}`), `${variant} must not emit ${other}`);
+			assert.ok(!css.includes(`--theme-${other}`), `${variant} must not emit ${other}`);
 		}
 	}
 });
@@ -160,15 +160,15 @@ test('theme mixins are opt-in and export no website selectors or font downloads'
 	for (const name of ['base', 'ink', 'paper', 'vivid', 'github', 'material']) {
 		const css = compile(`@use "theme"; .theme { @include theme.${name}; }`);
 		assert.equal(compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`), css);
-		assert.match(css, /--flair-color-text/);
+		assert.match(css, /--theme-color-text/);
 		assert.doesNotMatch(css, /--site-|:root|data-flair-theme|@font-face|url\(/);
 	}
 });
 
 test('metric alignment applies to the value and responsive actions', () => {
-	const css = compile('@use "flair"; .metric { @extend %p-metric; --flair-metric-align: end; }');
-	assert.match(css, /text-align: var\(--flair-metric-align, center\)/);
-	assert.match(css, /justify-content: var\(--flair-metric-align, center\)/);
+	const css = compile('@use "flair"; .metric { @extend %p-metric; --theme-metric-align: end; }');
+	assert.match(css, /text-align: var\(--theme-metric-align, center\)/);
+	assert.match(css, /justify-content: var\(--theme-metric-align, center\)/);
 	assert.match(css, /font-variant-numeric: tabular-nums/);
 	assert.doesNotMatch(css, /counter-a|single-counter/);
 });
@@ -183,15 +183,26 @@ test('state decorations respect reduced motion and remain independent of Flux', 
 test('all new patterns have live examples and source in the appropriate documentation sections', () => {
 	const fs = require('node:fs');
 	const pages = {
-		feedback: ['metrics', 'interaction-states'], surfaces: ['action-lists'],
-		navigation: ['search-results', 'accessible-helpers'], layouts: ['page-frame'],
-		typography: ['page-intro', 'theme-presets'], code: ['document-baseline'],
+		feedback: ['metrics', 'interaction-states', 'empty-messages'],
+		surfaces: ['action-lists', 'panels', 'row-actions'],
+		navigation: ['search-results', 'accessible-helpers', 'navigation-markers'],
+		layouts: ['page-frame', 'workspace', 'fixed-footer', 'breakpoints'],
+		typography: ['page-intro', 'theme-presets', 'palette'],
+		code: ['document-baseline', 'syntax-trees', 'labelled-regions'],
+		controls: ['icons', 'icon-buttons'],
+		forms: ['compound-fields', 'repeatable-fields'],
+		disclosures: ['drawers'],
+		tables: ['key-value-lists'],
 	};
 	for (const [page, ids] of Object.entries(pages)) {
 		const html = fs.readFileSync(path.resolve(__dirname, `../page/library/${page}.html`), 'utf8');
+		// Slice on reference-section boundaries; an example may contain its
+		// own sections, so the first closing tag is not the section's end.
+		const sections = html.split('<section class="reference-section"').slice(1);
 		for (const id of ids) {
-			const section = html.split(`id="${id}"`)[1]?.split('</section>')[0];
-			assert.ok(section?.includes('class="flair-example"'), `${page}: ${id} live example`);
+			const section = sections.find(part => new RegExp(`^[^>]*\\bid="${id}"`).test(part));
+			assert.ok(section, `${page}: ${id} section`);
+			assert.ok(section.includes('class="flair-example"'), `${page}: ${id} live example`);
 			assert.ok(section.includes('HTML and Sass'), `${page}: ${id} source`);
 		}
 	}

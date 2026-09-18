@@ -59,7 +59,7 @@
 
 .contact-form {
 	@extend %p-form-fields;
-	--flair-form-gap: 1.5rem;
+	--theme-form-gap: 1.5rem;
 }</code></pre>
 				<button class="demo-button" type="button" data-copy-button hidden>
 					Copy code
@@ -75,7 +75,7 @@
 
 .contact-form {
 	@extend %p-form-fields;
-	--flair-form-gap: 1.5rem;
+	--theme-form-gap: 1.5rem;
 }&lt;/code&gt;&lt;/pre&gt;
 	&lt;button class="demo-button" type="button" data-copy-button hidden&gt;Copy code&lt;/button&gt;
 	&lt;p class="demo-output" data-copy-status role="status"&gt;&lt;/p&gt;
@@ -190,6 +190,116 @@ asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_
 @include flair.base;
 @include flair.typography;
 @include flair.controls;</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="syntax-trees" aria-labelledby="syntax-trees-title">
+		<h2 id="syntax-trees-title">Structured data as a tree</h2>
+		<p>A serialised document drawn as a tree the reader can collapse: a JSON response, an XML body, a configuration file. Every node is a native <code>details</code>, so the whole structure expands, collapses, prints and is reachable by keyboard with no script at all.</p>
+		<p>A closed node draws on one line, summarising what it holds; an open one indents its branch. Token colours come from the syntax decoration, so they follow the theme along with everything else.</p>
+		<div class="flair-example">
+			<div class="demo-syntax-tree" data-language="JSON">
+				<details open>
+					<summary><span class="syntax-punctuation">{</span></summary>
+					<div class="syntax-branch">
+						<span class="syntax-key">status</span><span class="syntax-punctuation">: </span><span class="syntax-string">"ok"</span><span class="syntax-punctuation">,</span>
+						<details open>
+							<summary><span class="syntax-key">items</span><span class="syntax-punctuation">: [</span></summary>
+							<div class="syntax-branch">
+								<details>
+									<summary><span class="syntax-index" data-index="0"></span><span class="syntax-punctuation">{ &#8230; }</span></summary>
+									<div class="syntax-branch">
+										<span class="syntax-key">id</span><span class="syntax-punctuation">: </span><span class="syntax-number">4210</span><span class="syntax-punctuation">,</span>
+										<span class="syntax-key">name</span><span class="syntax-punctuation">: </span><span class="syntax-string">"Bridle"</span><span class="syntax-punctuation">,</span>
+										<span class="syntax-key">archived</span><span class="syntax-punctuation">: </span><span class="syntax-type">false</span>
+									</div>
+								</details>
+								<details>
+									<summary><span class="syntax-index" data-index="1"></span><span class="syntax-punctuation">{ &#8230; }</span></summary>
+									<div class="syntax-branch">
+										<span class="syntax-key">id</span><span class="syntax-punctuation">: </span><span class="syntax-number">4211</span><span class="syntax-punctuation">,</span>
+										<span class="syntax-key">name</span><span class="syntax-punctuation">: </span><span class="syntax-string">"Saddle"</span><span class="syntax-punctuation">,</span>
+										<span class="syntax-key">notes</span><span class="syntax-punctuation">: </span><span class="syntax-type">null</span>
+									</div>
+								</details>
+							</div>
+							<span class="syntax-punctuation">]</span>
+						</details>
+					</div>
+					<span class="syntax-punctuation">}</span>
+				</details>
+			</div>
+		</div>
+		<p>Open and close the nodes, and try it with the keyboard. Parsing the document, deciding what counts as a leaf and choosing which nodes start open are the application's work; the pattern only arranges what it is given.</p>
+		<p>The format is named once, by the container's <code>data-language</code>. <code>--theme-syntax-tree-indent</code>, <code>-guide-width</code>, <code>-guide-color</code> and <code>-guide-space</code> control the indentation and its guide line.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-syntax-tree&quot; data-language=&quot;JSON&quot;&gt;
+	&lt;details open&gt;
+		&lt;summary&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;{&lt;/span&gt;&lt;/summary&gt;
+		&lt;div class=&quot;syntax-branch&quot;&gt;
+			&lt;span class=&quot;syntax-key&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;syntax-string&quot;&gt;&quot;ok&quot;&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;,&lt;/span&gt;
+			&lt;details open&gt;
+				&lt;summary&gt;&lt;span class=&quot;syntax-key&quot;&gt;items&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: [&lt;/span&gt;&lt;/summary&gt;
+				&lt;div class=&quot;syntax-branch&quot;&gt;
+					&lt;details&gt;
+						&lt;summary&gt;&lt;span class=&quot;syntax-index&quot; data-index=&quot;0&quot;&gt;&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;{ &amp;#8230; }&lt;/span&gt;&lt;/summary&gt;
+						&lt;div class=&quot;syntax-branch&quot;&gt;
+							&lt;span class=&quot;syntax-key&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;syntax-number&quot;&gt;4210&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;,&lt;/span&gt;
+							&lt;span class=&quot;syntax-key&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;syntax-string&quot;&gt;&quot;Bridle&quot;&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;,&lt;/span&gt;
+							&lt;span class=&quot;syntax-key&quot;&gt;archived&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;syntax-type&quot;&gt;false&lt;/span&gt;
+						&lt;/div&gt;
+					&lt;/details&gt;
+					&lt;details&gt;
+						&lt;summary&gt;&lt;span class=&quot;syntax-index&quot; data-index=&quot;1&quot;&gt;&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;{ &amp;#8230; }&lt;/span&gt;&lt;/summary&gt;
+						&lt;div class=&quot;syntax-branch&quot;&gt;
+							&lt;span class=&quot;syntax-key&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;syntax-number&quot;&gt;4211&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;,&lt;/span&gt;
+							&lt;span class=&quot;syntax-key&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;syntax-string&quot;&gt;&quot;Saddle&quot;&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;,&lt;/span&gt;
+							&lt;span class=&quot;syntax-key&quot;&gt;notes&lt;/span&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;syntax-type&quot;&gt;null&lt;/span&gt;
+						&lt;/div&gt;
+					&lt;/details&gt;
+				&lt;/div&gt;
+				&lt;span class=&quot;syntax-punctuation&quot;&gt;]&lt;/span&gt;
+			&lt;/details&gt;
+		&lt;/div&gt;
+		&lt;span class=&quot;syntax-punctuation&quot;&gt;}&lt;/span&gt;
+	&lt;/details&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-syntax-tree {
+	@extend %p-syntax-tree;
+	--theme-syntax-tree-guide-width: 1px;
+	--theme-syntax-tree-guide-space: var(--theme-space-3);
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="labelled-regions" aria-labelledby="labelled-regions-title">
+		<h2 id="labelled-regions-title">Labelled output regions</h2>
+		<p>A bordered block of output with its own caption resting above the top edge: a response body, a log excerpt, a diff. The caption is generated from <code>data-label</code>, so the element holds nothing but the output and can be replaced wholesale without disturbing the frame.</p>
+		<div class="flair-example">
+			<div class="demo-stack">
+				<div class="demo-labelled-region" data-label="Body">{
+				"status": "ok",
+				"items": 2
+			}</div>
+				<div class="demo-labelled-region" data-label="Body" data-term="response bodies"></div>
+			</div>
+		</div>
+		<p>The second region is empty. Rather than drawing a box around nothing, it drops its border and says what is missing, using the same empty-message decoration as a list.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-stack&quot;&gt;
+	&lt;div class=&quot;demo-labelled-region&quot; data-label=&quot;Body&quot;&gt;{
+	&quot;status&quot;: &quot;ok&quot;,
+	&quot;items&quot;: 2
+}&lt;/div&gt;
+	&lt;div class=&quot;demo-labelled-region&quot; data-label=&quot;Body&quot; data-term=&quot;response bodies&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-labelled-region {
+	@extend %p-labelled-region;
+	--theme-region-font: var(--theme-font-mono);
+	white-space: pre-wrap;
+}</code></pre>
 		</details>
 	</section>
 </main>

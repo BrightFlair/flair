@@ -3,25 +3,25 @@
 %o-button-primary {
 	@extend %o-button;
 	&:not(:disabled) {
-		background: var(--flair-button-primary-background, var(--flair-color-accent));
-		color: var(--flair-button-primary-text, var(--flair-color-on-accent));
+		background: var(--theme-button-primary-background, var(--theme-color-accent));
+		color: var(--theme-button-primary-text, var(--theme-color-on-accent));
 		border-color: var(
-			--flair-button-primary-border,
-			var(--flair-button-primary-background, var(--flair-color-accent))
+			--theme-button-primary-border,
+			var(--theme-button-primary-background, var(--theme-color-accent))
 		);
 	}
 	&:hover:not(:disabled) {
 		border-color: var(
-			--flair-button-primary-border,
-			var(--flair-button-primary-background, var(--flair-color-accent))
+			--theme-button-primary-border,
+			var(--theme-button-primary-background, var(--theme-color-accent))
 		);
-		background: var(--flair-button-primary-background-hover, var(--flair-color-text));
-		text-decoration: var(--flair-button-primary-decoration-hover, underline);
+		background: var(--theme-button-primary-background-hover, var(--theme-color-text));
+		text-decoration: var(--theme-button-primary-decoration-hover, underline);
 	}
 	&:active:not(:disabled) {
 		background: var(
-			--flair-button-primary-background-active,
-			var(--flair-button-primary-background-hover, var(--flair-color-text))
+			--theme-button-primary-background-active,
+			var(--theme-button-primary-background-hover, var(--theme-color-text))
 		);
 	}
 }

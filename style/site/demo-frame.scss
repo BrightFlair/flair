@@ -1,5 +1,5 @@
 @use "../flair";
 
 .demo-frame {
-	@extend %l-page-frame; --flair-page-width: 60rem;
+	@extend %l-page-frame; --theme-page-width: 60rem;
 }

@@ -4,6 +4,7 @@
 	"sass": "style/flair.scss",
 	"files": [
 		"style/flair.scss",
+		"style/variable/",
 		"style/mixin/",
 		"style/theme/",
 		"style/decoration/",

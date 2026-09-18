@@ -1,0 +1,9 @@
+@use "../flair";
+
+.demo-page-footer-fixed {
+	@extend %p-page-footer;
+	@extend %p-page-footer-fixed;
+	// Held inside the example frame rather than the viewport, so the page
+	// itself is not covered while the treatment is being read.
+	position: sticky;
+}

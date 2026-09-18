@@ -4,18 +4,18 @@
 
 %o-fieldset {
 	display: grid;
-	gap: var(--flair-form-gap, var(--flair-space-4));
+	gap: var(--theme-form-gap, var(--theme-space-4));
 	min-inline-size: 0;
 	margin: 0;
-	padding: var(--flair-fieldset-padding, var(--flair-space-4));
-	border: var(--flair-border-width) solid var(--flair-color-border);
-	border-radius: var(--flair-radius);
-	font: var(--flair-font-weight) var(--flair-font-size)/var(--flair-line-height)
-		var(--flair-font-body);
-	color: var(--flair-color-text);
+	padding: var(--theme-fieldset-padding, var(--theme-space-4));
+	border: var(--theme-border-width) solid var(--theme-color-border);
+	border-radius: var(--theme-radius);
+	font: var(--theme-font-weight) var(--theme-font-size)/var(--theme-line-height)
+		var(--theme-font-body);
+	color: var(--theme-color-text);
 	> legend {
-		padding-inline: var(--flair-space-2);
-		font-weight: var(--flair-label-weight);
+		padding-inline: var(--theme-space-2);
+		font-weight: var(--theme-label-weight);
 	}
 	> :where(.field, label:not(.choice)) {
 		@extend %o-form-field;

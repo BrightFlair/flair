@@ -1,6 +1,6 @@
 # Form foundations
 
-This first implementation covers controls, field objects and `%p-form-fields`. It does not provide application validation, submission logic or data binding. The existing applications have not been migrated.
+Controls, field objects and the patterns that arrange them. Validation, submission and data binding belong to the application; Flair supplies only the presentation and the native behaviour that comes with it.
 
 Review the live examples at `/library/controls/` and `/library/forms/`. The global theme selector and local spacing selectors belong to the website, not the library runtime. The theme selection applies to every page and is stored in a cookie. The server renders the selected theme before styles load; JavaScript applies changes immediately. Without JavaScript, the Apply button submits the theme form.
 
@@ -18,7 +18,7 @@ contact-form form {
 }
 ```
 
-`style/flair.scss` emits no CSS by itself and imports no fonts. `defaults()` emits properties in the selector where it is included. Include it on the application root, or on the root of an independent theme preview. Load the fonts in your application, or override `--flair-font-body`.
+`style/flair.scss` emits no CSS by itself and imports no fonts. `defaults()` emits properties in the selector where it is included. Include it on the application root, or on the root of an independent theme preview. Load the fonts in your application, or override `--theme-font-body`.
 
 Individual modules can be loaded instead of the aggregate entry point:
 
@@ -134,14 +134,14 @@ A disabled fieldset uses native disabled behaviour for its descendants. `aria-di
 ```scss
 :root {
 	@include flair.defaults;
-	--flair-font-body: "Ubuntu", sans-serif;
-	--flair-color-accent: #315c40;
+	--theme-font-body: "Ubuntu", sans-serif;
+	--theme-color-accent: #315c40;
 }
 
 .account-form {
-	--flair-control-radius: .4rem;
-	--flair-form-gap: var(--flair-space-6);
-	--flair-field-min-width: 16rem;
+	--theme-control-radius: .4rem;
+	--theme-form-gap: var(--theme-space-6);
+	--theme-field-min-width: 16rem;
 }
 ```
 
@@ -163,33 +163,33 @@ Both themes apply through the global selector, including without JavaScript. The
 
 | Property | Default |
 | --- | --- |
-| `--flair-space-1` | `.25rem` |
-| `--flair-space-2` | `.5rem` |
-| `--flair-space-3` | `.75rem` |
-| `--flair-space-4` | `1rem` |
-| `--flair-space-6` | `1.5rem` |
-| `--flair-space-8` | `2rem` |
-| `--flair-color-text` | `#111` |
-| `--flair-color-muted` | `#525252` |
-| `--flair-color-surface` | `#fff` |
-| `--flair-color-surface-disabled` | `#eee` |
-| `--flair-color-border` | `#767676` |
-| `--flair-color-accent` | `#111` |
-| `--flair-color-on-accent` | `#fff` |
-| `--flair-color-danger` | `#111` |
-| `--flair-font-body` | `"Ubuntu", sans-serif` |
-| `--flair-font-size` | `1rem` |
-| `--flair-line-height` | `1.5` |
-| `--flair-font-weight` | `400` |
-| `--flair-label-weight` | `500` |
-| `--flair-border-width` | `1px` |
-| `--flair-radius` | `0` |
-| `--flair-focus-width` | `3px` |
-| `--flair-focus-offset` | `2px` |
-| `--flair-control-min-height` | `2.75rem` |
-| `--flair-choice-size` | `1.25rem` |
-| `--flair-textarea-min-height` | `8rem` |
-| `--flair-field-min-width` | `14rem` |
+| `--theme-space-1` | `.25rem` |
+| `--theme-space-2` | `.5rem` |
+| `--theme-space-3` | `.75rem` |
+| `--theme-space-4` | `1rem` |
+| `--theme-space-6` | `1.5rem` |
+| `--theme-space-8` | `2rem` |
+| `--theme-color-text` | `#111` |
+| `--theme-color-muted` | `#525252` |
+| `--theme-color-surface` | `#fff` |
+| `--theme-color-surface-disabled` | `#eee` |
+| `--theme-color-border` | `#767676` |
+| `--theme-color-accent` | `#111` |
+| `--theme-color-on-accent` | `#fff` |
+| `--theme-color-danger` | `#111` |
+| `--theme-font-body` | `"Ubuntu", sans-serif` |
+| `--theme-font-size` | `1rem` |
+| `--theme-line-height` | `1.5` |
+| `--theme-font-weight` | `400` |
+| `--theme-label-weight` | `500` |
+| `--theme-border-width` | `1px` |
+| `--theme-radius` | `0` |
+| `--theme-focus-width` | `3px` |
+| `--theme-focus-offset` | `2px` |
+| `--theme-control-min-height` | `2.75rem` |
+| `--theme-choice-size` | `1.25rem` |
+| `--theme-textarea-min-height` | `8rem` |
+| `--theme-field-min-width` | `14rem` |
 
 ### Optional overrides
 
@@ -197,53 +197,53 @@ These are consumed with fallbacks; they are not assigned by `defaults()`.
 
 | Property | Fallback |
 | --- | --- |
-| `--flair-focus-color` | `var(--flair-color-accent)` |
-| `--flair-control-padding-block` | `var(--flair-space-2)` |
-| `--flair-control-padding-inline` | `var(--flair-space-3)` |
-| `--flair-control-border` | `var(--flair-color-border)` |
-| `--flair-control-radius` | `var(--flair-radius)` |
-| `--flair-control-background` | `var(--flair-color-surface)` |
-| `--flair-control-text` | `var(--flair-color-text)` |
-| `--flair-control-border-hover` | `var(--flair-color-text)` |
-| `--flair-control-background-disabled` | `var(--flair-color-surface-disabled)` |
-| `--flair-control-text-disabled` | `var(--flair-color-muted)` |
-| `--flair-disabled-opacity` | `1` |
-| `--flair-color-control-width` | `4rem` |
-| `--flair-button-background` | `var(--flair-color-surface)` |
-| `--flair-button-text` | `var(--flair-color-text)` |
-| `--flair-button-weight` | `var(--flair-label-weight)` |
-| `--flair-button-background-hover` | `var(--flair-color-surface-disabled)` |
-| `--flair-button-primary-background` | `var(--flair-color-accent)` |
-| `--flair-button-primary-text` | `var(--flair-color-on-accent)` |
-| `--flair-button-primary-background-hover` | `var(--flair-color-text)` |
-| `--flair-field-gap` | `var(--flair-space-2)` |
-| `--flair-form-gap` | `var(--flair-space-4)` |
-| `--flair-fieldset-padding` | `var(--flair-space-4)` |
-| `--flair-actions-align` | `flex-end` |
-| `--flair-actions-gap` | `var(--flair-space-3)` |
-| `--flair-actions-margin` | `var(--flair-space-2)` |
+| `--theme-focus-color` | `var(--theme-color-accent)` |
+| `--theme-control-padding-block` | `var(--theme-space-2)` |
+| `--theme-control-padding-inline` | `var(--theme-space-3)` |
+| `--theme-control-border` | `var(--theme-color-border)` |
+| `--theme-control-radius` | `var(--theme-radius)` |
+| `--theme-control-background` | `var(--theme-color-surface)` |
+| `--theme-control-text` | `var(--theme-color-text)` |
+| `--theme-control-border-hover` | `var(--theme-color-text)` |
+| `--theme-control-background-disabled` | `var(--theme-color-surface-disabled)` |
+| `--theme-control-text-disabled` | `var(--theme-color-muted)` |
+| `--theme-disabled-opacity` | `1` |
+| `--theme-color-control-width` | `4rem` |
+| `--theme-button-background` | `var(--theme-color-surface)` |
+| `--theme-button-text` | `var(--theme-color-text)` |
+| `--theme-button-weight` | `var(--theme-label-weight)` |
+| `--theme-button-background-hover` | `var(--theme-color-surface-disabled)` |
+| `--theme-button-primary-background` | `var(--theme-color-accent)` |
+| `--theme-button-primary-text` | `var(--theme-color-on-accent)` |
+| `--theme-button-primary-background-hover` | `var(--theme-color-text)` |
+| `--theme-field-gap` | `var(--theme-space-2)` |
+| `--theme-form-gap` | `var(--theme-space-4)` |
+| `--theme-fieldset-padding` | `var(--theme-space-4)` |
+| `--theme-actions-align` | `flex-end` |
+| `--theme-actions-gap` | `var(--theme-space-3)` |
+| `--theme-actions-margin` | `var(--theme-space-2)` |
 
 ### Additional theme properties
 
 | Property | Fallback |
 | --- | --- |
-| `--flair-control-background-focus` | Control background, then surface |
-| `--flair-control-focus-offset` | `var(--flair-focus-offset)` |
-| `--flair-control-invalid-border-style` | `dashed` |
-| `--flair-label-font-size` | `var(--flair-font-size)` |
-| `--flair-message-font-size` | `var(--flair-font-size)` |
-| `--flair-button-min-height` | Control minimum height |
-| `--flair-button-padding-block` | Control block padding, then space 2 |
-| `--flair-button-padding-inline` | Control inline padding, then space 3 |
-| `--flair-button-radius` | Control radius, then general radius |
-| `--flair-button-font-size` | `var(--flair-font-size)` |
-| `--flair-button-border` | Control border, then general border |
-| `--flair-button-border-hover` | Control hover border, then text colour |
-| `--flair-button-primary-border` | Primary background, then accent |
-| `--flair-button-primary-decoration-hover` | `underline` |
-| `--flair-button-background-active` | Button hover background, then disabled surface |
-| `--flair-button-primary-background-active` | Primary hover background, then text colour |
-| `--flair-button-shadow-hover` | `none` |
+| `--theme-control-background-focus` | Control background, then surface |
+| `--theme-control-focus-offset` | `var(--theme-focus-offset)` |
+| `--theme-control-invalid-border-style` | `dashed` |
+| `--theme-label-font-size` | `var(--theme-font-size)` |
+| `--theme-message-font-size` | `var(--theme-font-size)` |
+| `--theme-button-min-height` | Control minimum height |
+| `--theme-button-padding-block` | Control block padding, then space 2 |
+| `--theme-button-padding-inline` | Control inline padding, then space 3 |
+| `--theme-button-radius` | Control radius, then general radius |
+| `--theme-button-font-size` | `var(--theme-font-size)` |
+| `--theme-button-border` | Control border, then general border |
+| `--theme-button-border-hover` | Control hover border, then text colour |
+| `--theme-button-primary-border` | Primary background, then accent |
+| `--theme-button-primary-decoration-hover` | `underline` |
+| `--theme-button-background-active` | Button hover background, then disabled surface |
+| `--theme-button-primary-background-active` | Primary hover background, then text colour |
+| `--theme-button-shadow-hover` | `none` |
 
 ## Available width
 
@@ -257,16 +257,17 @@ The documentation website centres library page content and limits it to `--site-
 
 Extensions add selectors at the definition site. An `@extend` does not copy declarations into the location where it is written. Keep dependencies explicit with `@use`/`@forward`, extend simple placeholders, and use ordinary property overrides for application adjustments. Do not extend an outside placeholder from a media query; place responsive CSS property changes there instead.
 
-No cascade layers are introduced in this first implementation. Existing applications use different import orders, so layer adoption needs a separate migration decision. No `!important`, absolute positioning, fixed widths for whole forms or breakpoint-dependent field ordering is used in the library.
+Flair introduces no cascade layers, because a consuming application controls its own import order and adopting layers is its decision to make. The library uses no `!important`, no absolute positioning, no fixed width for a whole form, and no breakpoint-dependent field ordering.
 
-## Relationship to existing applications
+## Composing with an application's own controls
 
-- Hexform's `%d-ui` and dhp-logging's `%d-ui` correspond to `%d-control`, with `%o-control` and `%o-button` supplying role-specific behaviour.
-- api.horse's `%d-user-interface` has the same shared treatment, but its font and palette choices remain application overrides.
-- Hexform/dhp-logging form-field decorators correspond to the form-field object and `%p-form-fields` pattern. api.horse's field rules currently live inside its panel decoration and can be extracted separately.
-- The specialised PHP.GT search input can consume a control object while retaining its search layout, icon and behaviour.
+- A shared control decoration in an application corresponds to `%d-control`, with `%o-control` and `%o-button` supplying the role-specific behaviour on top of it.
+- Font and palette choices stay with the application, as overrides of the inherited properties, rather than being absorbed into the definition.
+- A field decorator that arranges a label, a control and a message corresponds to `%o-form-field`, and the container that stacks several of them to `%p-form-fields`. Field rules living inside a larger panel decoration can be extracted to those two.
+- A specialised input, such as a search field with its own icon and behaviour, can consume the control object while keeping its own layout.
 
-This is a common baseline for review, not a drop-in visual migration. Palette mappings, exact dimensions and application-specific variants must be verified against each application before replacement.
+Dimensions and palette mappings are worth comparing against the application they
+come from before its own rules are removed.
 
 ## Verification
 

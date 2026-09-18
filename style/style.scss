@@ -1,3 +1,8 @@
+// Configure the library once, before any module loads it.
+@use "flair" with (
+	$icon-names: (trash, share, copy, lock, key, plus, grip, sun, moon, device-desktop, link-external)
+);
+
 @use "font/ubuntu";
 @use "font/mona-sans";
 @use "font/roboto";
@@ -57,4 +62,20 @@
 @use "site/demo-state-actions";
 @use "site/demo-state-panel";
 @use "site/demo-reveal";
+@use "site/demo-panel";
+@use "site/demo-key-value-list";
+@use "site/demo-header-list";
+@use "site/demo-repeatable-fields";
+@use "site/demo-compound-field";
+@use "site/demo-labelled-region";
+@use "site/demo-syntax-tree";
+@use "site/demo-row-actions";
+@use "site/demo-drawer";
+@use "site/demo-icon-button";
+@use "site/demo-icons";
+@use "site/demo-workspace";
+@use "site/demo-empty-message";
+@use "site/demo-marker-navigation";
+@use "site/demo-palette";
+@use "site/demo-page-footer-fixed";
 @use "playground";

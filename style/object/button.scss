@@ -1,3 +1,4 @@
+@use "../variable/break";
 @use "../decoration/control";
 
 %o-button {
@@ -5,47 +6,49 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--flair-space-2);
+	gap: var(--theme-space-2);
 	inline-size: auto;
-	min-block-size: max(44px, var(--flair-button-min-height, var(--flair-control-min-height)));
+	// A glyph-only button asks for a square target through this.
+	min-inline-size: var(--theme-button-min-width, auto);
+	min-block-size: max(44px, var(--theme-button-min-height, var(--theme-control-min-height)));
 	padding-block: var(
-		--flair-button-padding-block,
-		var(--flair-control-padding-block, var(--flair-space-2))
+		--theme-button-padding-block,
+		var(--theme-control-padding-block, var(--theme-space-2))
 	);
 	padding-inline: var(
-		--flair-button-padding-inline,
-		var(--flair-control-padding-inline, var(--flair-space-3))
+		--theme-button-padding-inline,
+		var(--theme-control-padding-inline, var(--theme-space-3))
 	);
 	border-radius: var(
-		--flair-button-radius,
-		var(--flair-control-radius, var(--flair-radius))
+		--theme-button-radius,
+		var(--theme-control-radius, var(--theme-radius))
 	);
 	border-color: var(
-		--flair-button-border,
-		var(--flair-control-border, var(--flair-color-border))
+		--theme-button-border,
+		var(--theme-control-border, var(--theme-color-border))
 	);
-	font-size: var(--flair-button-font-size, var(--flair-font-size));
+	font-size: var(--theme-button-font-size, var(--theme-font-size));
 	text-align: center;
 	text-decoration: none;
 	overflow-wrap: anywhere;
 	cursor: pointer;
-	background: var(--flair-button-background, var(--flair-color-surface));
-	color: var(--flair-button-text, var(--flair-color-text));
-	font-weight: var(--flair-button-weight, var(--flair-label-weight));
+	background: var(--theme-button-background, var(--theme-color-surface));
+	color: var(--theme-button-text, var(--theme-color-text));
+	font-weight: var(--theme-button-weight, var(--theme-label-weight));
 	&:hover:not(:disabled) {
 		border-color: var(
-			--flair-button-border-hover,
-			var(--flair-control-border-hover, var(--flair-color-text))
+			--theme-button-border-hover,
+			var(--theme-control-border-hover, var(--theme-color-text))
 		);
-		box-shadow: var(--flair-button-shadow-hover, none);
-		background: var(--flair-button-background-hover, var(--flair-color-surface-disabled));
+		box-shadow: var(--theme-button-shadow-hover, none);
+		background: var(--theme-button-background-hover, var(--theme-color-surface-disabled));
 	}
 	&:active:not(:disabled) {
 		background: var(
-			--flair-button-background-active,
-			var(--flair-button-background-hover, var(--flair-color-surface-disabled))
+			--theme-button-background-active,
+			var(--theme-button-background-hover, var(--theme-color-surface-disabled))
 		);
 		box-shadow: none;
 	}
-	@media (min-width: 40rem) { min-block-size: var(--flair-button-min-height, var(--flair-control-min-height)); }
+	@media (min-width: break.$compact) { min-block-size: var(--theme-button-min-height, var(--theme-control-min-height)); }
 }

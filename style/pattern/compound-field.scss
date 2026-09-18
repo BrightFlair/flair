@@ -1,0 +1,36 @@
+@use "../object/form-field";
+@use "../variable/break";
+
+// Two or more controls that read as a single value: a method beside a URL, a
+// currency beside an amount, a date range. They stack while space is short and
+// form one row when it is not, each keeping its own label and its own share of
+// the width.
+//
+//   <div class="endpoint">
+//     <label data-span="narrow"><span>Method</span><select>…</select></label>
+//     <label><span>Endpoint</span><input type="url" /></label>
+//   </div>
+//
+// `data-span="narrow"` holds a control to its content width instead of letting
+// it grow. Labels remain separate elements, so the pairing is presentational
+// only and each control keeps its own accessible name.
+%p-compound-field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--theme-compound-gap, var(--theme-space-4));
+	min-inline-size: 0;
+	> :where(label, .field) {
+		@extend %o-form-field;
+		min-inline-size: 0;
+	}
+	@media (min-width: break.$compact) {
+		flex-direction: row;
+		align-items: flex-end;
+		> :where(label, .field) {
+			flex: 1 1 var(--theme-field-min-width);
+		}
+		> :where(label, .field)[data-span="narrow"] {
+			flex: 0 0 var(--theme-compound-narrow, 8rem);
+		}
+	}
+}

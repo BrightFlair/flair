@@ -2,12 +2,12 @@
 	display: inline-grid;
 	place-items: center;
 	flex: none;
-	inline-size: var(--flair-avatar-size, 3rem);
-	block-size: var(--flair-avatar-size, 3rem);
-	border-radius: var(--flair-avatar-radius, 50%);
-	background: var(--flair-selected-background, var(--flair-color-surface-disabled));
-	color: var(--flair-selected-text, var(--flair-color-text));
-	font-family: var(--flair-font-body);
-	font-weight: var(--flair-heading-weight, 500);
+	inline-size: var(--theme-avatar-size, 3rem);
+	block-size: var(--theme-avatar-size, 3rem);
+	border-radius: var(--theme-avatar-radius, 50%);
+	background: var(--theme-selected-background, var(--theme-color-surface-disabled));
+	color: var(--theme-selected-text, var(--theme-color-text));
+	font-family: var(--theme-font-body);
+	font-weight: var(--theme-heading-weight, 500);
 	object-fit: cover;
 }

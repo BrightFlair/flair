@@ -4,7 +4,7 @@
 @mixin base {
 	@include color-scheme.color-scheme;
 	@include defaults.defaults;
-	--flair-font-heading: "Ubuntu Condensed", sans-serif;
-	--flair-font-mono: "Ubuntu Mono", monospace;
-	--flair-heading-weight: 400;
+	--theme-font-heading: "Ubuntu Condensed", sans-serif;
+	--theme-font-mono: "Ubuntu Mono", monospace;
+	--theme-heading-weight: 400;
 }

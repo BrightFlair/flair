@@ -3,14 +3,14 @@
 
 %p-metric {
 	display: grid;
-	gap: var(--flair-metric-gap, var(--flair-space-4));
+	gap: var(--theme-metric-gap, var(--theme-space-4));
 	min-inline-size: 0;
-	text-align: var(--flair-metric-align, center);
+	text-align: var(--theme-metric-align, center);
 	> :where(h2, h3, h4, p, output) { margin-block: 0; }
 	> :where(output, .metric-value) { @extend %o-value; }
-	> .metric-detail { color: var(--flair-color-muted); }
+	> .metric-detail { color: var(--theme-color-muted); }
 	> .actions {
 		@extend %p-form-actions;
-		justify-content: var(--flair-metric-align, center);
+		justify-content: var(--theme-metric-align, center);
 	}
 }

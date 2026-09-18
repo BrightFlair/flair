@@ -3,10 +3,10 @@
 %p-field-row {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--flair-form-gap, var(--flair-space-4));
+	gap: var(--theme-form-gap, var(--theme-space-4));
 	min-inline-size: 0;
 	> :where(.field, label) {
 		@extend %o-form-field;
-		flex: 1 1 var(--flair-field-min-width);
+		flex: 1 1 var(--theme-field-min-width);
 	}
 }

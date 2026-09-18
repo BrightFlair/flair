@@ -1,11 +1,12 @@
+@use "../variable/break";
 // Extend the sidebar's surface towards the viewport edge without changing its
 // box or scrollable content. An outer shadow is not clipped by its own overflow.
-@mixin sidebar-bleed($from: 60rem) {
+@mixin sidebar-bleed($from: break.$shell) {
 	@media (min-width: $from) {
-		box-shadow: -100vw 0 0 100vw var(--flair-sidebar-background, var(--flair-color-surface));
+		box-shadow: -100vw 0 0 100vw var(--theme-sidebar-background, var(--theme-color-surface));
 		clip-path: inset(0 0 0 -200vw);
 		&:dir(rtl) {
-			box-shadow: 100vw 0 0 100vw var(--flair-sidebar-background, var(--flair-color-surface));
+			box-shadow: 100vw 0 0 100vw var(--theme-sidebar-background, var(--theme-color-surface));
 			clip-path: inset(0 -200vw 0 0);
 		}
 	}

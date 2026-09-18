@@ -1,28 +1,28 @@
 %d-typography {
-	color: var(--flair-color-text);
-	font-family: var(--flair-font-body);
-	font-size: var(--flair-font-size);
-	font-weight: var(--flair-font-weight);
-	line-height: var(--flair-text-leading, 1.6);
+	color: var(--theme-color-text);
+	font-family: var(--theme-font-body);
+	font-size: var(--theme-font-size);
+	font-weight: var(--theme-font-weight);
+	line-height: var(--theme-text-leading, 1.6);
 	overflow-wrap: anywhere;
 
 	&-heading {
-		font-family: var(--flair-font-heading, var(--flair-font-body));
-		font-weight: var(--flair-heading-weight, 500);
-		line-height: var(--flair-heading-leading, 1.15);
-		letter-spacing: var(--flair-heading-tracking, normal);
+		font-family: var(--theme-font-heading, var(--theme-font-body));
+		font-weight: var(--theme-heading-weight, 500);
+		line-height: var(--theme-heading-leading, 1.15);
+		letter-spacing: var(--theme-heading-tracking, normal);
 		overflow-wrap: anywhere;
 	}
 
 	&-lead {
-		font-size: var(--flair-lead-size, 1.25rem);
-		max-inline-size: var(--flair-lead-measure, 55ch);
+		font-size: var(--theme-lead-size, 1.25rem);
+		max-inline-size: var(--theme-lead-measure, 55ch);
 	}
 
 	&-eyebrow {
-		font-size: var(--flair-eyebrow-size, 0.75rem);
-		font-weight: var(--flair-eyebrow-weight, 700);
-		letter-spacing: var(--flair-eyebrow-tracking, 0.12em);
+		font-size: var(--theme-eyebrow-size, 0.75rem);
+		font-weight: var(--theme-eyebrow-weight, 700);
+		letter-spacing: var(--theme-eyebrow-tracking, 0.12em);
 		text-transform: uppercase;
 	}
 }

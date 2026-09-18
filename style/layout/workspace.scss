@@ -1,0 +1,39 @@
+@use "../variable/break";
+
+// A rail beside a field of panels. Unlike `%l-sidebar`, which wraps two columns
+// intrinsically, the panel field holds any number of children and reflows them
+// as space allows: one panel at a narrow width, side by side when two fit.
+//
+//   <main>
+//     <aside><menu>…</menu></aside>
+//     <section><request-editor /><response-viewer /></section>
+//   </main>
+//
+// The rail comes first in source order, so it reads first without JavaScript.
+%l-workspace {
+	display: flex;
+	flex-direction: column;
+	min-inline-size: 0;
+	> aside {
+		flex-shrink: 0;
+		min-inline-size: 0;
+	}
+	> section {
+		display: flex;
+		flex-wrap: wrap;
+		flex-grow: 1;
+		align-content: flex-start;
+		gap: var(--theme-workspace-gap, var(--theme-space-4));
+		padding: var(--theme-workspace-padding, var(--theme-space-4));
+		min-inline-size: 0;
+		> * {
+			flex: 1 1 var(--theme-workspace-panel, 24rem);
+			min-inline-size: 0;
+			max-inline-size: var(--theme-workspace-panel-max, none);
+		}
+	}
+	@media (min-width: break.$shell) {
+		flex-direction: row;
+		> aside { inline-size: var(--theme-sidebar-width, 18rem); }
+	}
+}

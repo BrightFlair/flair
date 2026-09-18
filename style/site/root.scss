@@ -3,10 +3,10 @@
 
 :root {
 	@include flair.defaults;
-	--site-paper: var(--flair-color-surface);
-	--site-ink: var(--flair-color-text);
-	--site-muted: var(--flair-color-muted);
-	--site-line: var(--flair-color-border);
+	--site-paper: var(--theme-color-surface);
+	--site-ink: var(--theme-color-text);
+	--site-muted: var(--theme-color-muted);
+	--site-line: var(--theme-color-border);
 	--site-font-body: "Ubuntu", sans-serif;
 	--site-font-heading: "Ubuntu Condensed", sans-serif;
 	// Reserve room for the wordmark and its font-specific optical adjustment.
@@ -47,25 +47,25 @@
 	}
 
 	&[data-flair-theme="github"] {
-		--site-font-body: var(--flair-font-body);
-		--site-font-heading: var(--flair-font-body);
+		--site-font-body: var(--theme-font-body);
+		--site-font-heading: var(--theme-font-body);
 		--site-font-size: 14px;
 		--site-hero-width-factor: 2.7;
 		--site-hero-offset: -0.037em;
 		--site-switcher-border-width: 1px;
-		--site-switcher-border: var(--flair-color-border);
-		--site-switcher-radius: var(--flair-radius);
+		--site-switcher-border: var(--theme-color-border);
+		--site-switcher-radius: var(--theme-radius);
 		--site-switcher-shadow: 0 1px 0 rgb(31 35 40 / 4%);
 	}
 
 	&[data-flair-theme="material"] {
-		--site-font-body: var(--flair-font-body);
-		--site-font-heading: var(--flair-font-body);
+		--site-font-body: var(--theme-font-body);
+		--site-font-heading: var(--theme-font-body);
 		--site-switcher-border-width: 1px;
-		--site-switcher-border: var(--flair-color-border);
+		--site-switcher-border: var(--theme-color-border);
 		--site-hero-width-factor: 2.5;
 		--site-hero-offset: -0.058em;
-		--site-switcher-radius: var(--flair-radius);
+		--site-switcher-radius: var(--theme-radius);
 		--site-switcher-shadow: 0 2px 6px rgb(0 0 0 / 16%);
 	}
 }

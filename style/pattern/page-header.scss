@@ -3,8 +3,8 @@
 %p-page-header {
 	@extend %p-cluster;
 	justify-content: space-between;
-	padding-block: var(--flair-header-padding-block, var(--flair-space-4));
-	gap: var(--flair-header-gap, var(--flair-space-6));
-	border-block-end: var(--flair-border-width) solid var(--flair-color-border);
-	> p { margin: 0; font-size: var(--flair-small-size, 0.875rem); }
+	padding-block: var(--theme-header-padding-block, var(--theme-space-4));
+	gap: var(--theme-header-gap, var(--theme-space-6));
+	border-block-end: var(--theme-border-width) solid var(--theme-color-border);
+	> p { margin: 0; font-size: var(--theme-small-size, 0.875rem); }
 }

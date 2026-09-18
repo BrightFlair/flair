@@ -4,7 +4,7 @@
 	@extend %d-typography;
 	@include flair.typography;
 	@include flair.application-shell;
-	--flair-sidebar-width: 18rem;
+	--theme-sidebar-width: 18rem;
 	> aside {
 		padding-block: 1.5rem;
 		@extend %d-sidebar-contrast;
@@ -18,12 +18,12 @@
 	}
 	.summary {
 		@extend %p-grid;
-		--flair-grid-columns: 3;
+		--theme-grid-columns: 3;
 		> article { @extend %o-card; @extend %p-metric; }
 	}
 	.workspaces {
 		@extend %p-grid;
-		--flair-grid-columns: 2;
+		--theme-grid-columns: 2;
 		> article { @extend %o-card; }
 	}
 	progress { @extend %o-progress; display: block; inline-size: 100%; margin-block: 1rem; }

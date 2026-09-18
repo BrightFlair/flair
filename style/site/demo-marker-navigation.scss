@@ -1,0 +1,13 @@
+@use "../flair";
+
+// The gutter marker and the section rule are theme decisions, not layout ones.
+.demo-marker-navigation {
+	@extend %p-side-navigation;
+	--theme-side-nav-link-margin: 0 0 0 1rem;
+	--theme-side-nav-marker-width: 4px;
+	--theme-side-nav-marker-height: 1.5rem;
+	--theme-side-nav-marker-offset: -0.75rem;
+	--theme-side-nav-current-shadow: none;
+	border: 1px solid var(--theme-color-border);
+	padding-block: var(--theme-space-2);
+}

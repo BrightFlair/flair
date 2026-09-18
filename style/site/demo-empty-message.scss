@@ -1,0 +1,9 @@
+@use "../flair";
+
+.demo-empty-message {
+	@extend %d-empty-message;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 1px dashed var(--theme-color-border);
+}

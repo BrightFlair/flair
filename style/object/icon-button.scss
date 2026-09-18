@@ -1,0 +1,69 @@
+@use "button";
+@use "../pattern/icon";
+@use "../variable/break";
+
+// A zero-width space, written as an escape so the source stays readable.
+$strut: "\"\\200b\"";
+
+// A square button whose meaning is carried by a glyph, with its wording shown
+// on hover and on keyboard focus: a theme switch, a delete control, a copy
+// control. The label stays in the document at all times, so the button is
+// announced properly and is never a button with no accessible name.
+//
+//   <button type="button" data-icon="trash"><span>Delete</span></button>
+//
+// The label is positioned, not hidden, which is why it can be revealed without
+// script. Where a caption would be better shown permanently, use `%o-button`
+// with the same `data-icon` attribute instead.
+//
+// Size comes from properties rather than declarations. `@extend` emits a
+// definition's rules at its own source position, so a declaration here cannot
+// be relied on to outrank the same declaration in `%o-button` or `%p-icon`;
+// a property set on the element resolves whichever rule wins.
+//
+// The glyph box holds a zero-width space, so it is one line of text tall: the
+// same line box a button carrying words contains. That makes an icon button
+// exactly as high as its neighbours in every theme and every engine, and
+// square, because its inline padding matches its block padding.
+%o-icon-button {
+	@extend %o-button;
+	@extend %p-icon;
+	// The glyph box holds a zero-width space, so it is a real line of text
+	// tall and the button stands exactly as high as one carrying words.
+	--theme-icon-strut: #{$strut};
+	--theme-icon-ratio: auto;
+	--theme-icon-gap: 0px;
+	// Mirror the minimum the button applies to its height, so a theme with a
+	// touch-target minimum gets a square control rather than a narrow one.
+	--theme-button-min-width: max(44px, var(--theme-button-min-height, var(--theme-control-min-height)));
+	@media (min-width: break.$compact) {
+		--theme-button-min-width: var(--theme-button-min-height, var(--theme-control-min-height));
+	}
+	--theme-button-padding-inline: var(
+		--theme-button-padding-block,
+		var(--theme-control-padding-block, var(--theme-space-2))
+	);
+	position: relative;
+	flex-shrink: 0;
+	> span {
+		position: absolute;
+		inset-block-start: calc(100% + var(--theme-space-2));
+		inset-inline-start: 50%;
+		z-index: var(--theme-icon-button-layer, 2);
+		translate: -50% 0;
+		padding: var(--theme-space-1) var(--theme-space-2);
+		border-radius: var(--theme-badge-radius, var(--theme-radius));
+		background: var(--theme-color-text);
+		color: var(--theme-color-surface);
+		font-size: var(--theme-small-size, 0.875rem);
+		font-weight: var(--theme-label-weight);
+		line-height: 1.2;
+		white-space: nowrap;
+		opacity: 0;
+		pointer-events: none;
+	}
+	&:hover > span,
+	&:focus-visible > span {
+		opacity: 1;
+	}
+}

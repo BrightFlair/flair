@@ -422,4 +422,51 @@
 			<code>docs/library.md</code>.
 		</p>
 	</section>
+	<section class="reference-section" id="drawers" aria-labelledby="drawers-title">
+		<h2 id="drawers-title">Drawers</h2>
+		<p>A dialog that arrives from an edge rather than the centre: a collection switcher, a filter panel, a menu too large to keep on screen. Below 40rem it is a full-width sheet, which is where a narrow screen can show it; above, it is a full-height column pinned to the inline end, leaving the page visible beside it.</p>
+		<div class="flair-example">
+			<div class="demo-stack" data-dialog-example>
+				<button class="demo-button" type="button" data-dialog-open hidden>Open example drawer</button>
+				<dialog class="demo-drawer" aria-labelledby="example-drawer-title" open>
+					<h3 id="example-drawer-title">Collections</h3>
+					<nav class="demo-side-navigation" aria-label="Collections">
+						<menu>
+							<li><a href="#drawers" aria-current="page">Public API</a></li>
+							<li><a href="#drawers">Staging</a></li>
+							<li><a href="#drawers">Webhook receivers</a></li>
+						</menu>
+					</nav>
+					<form method="dialog">
+						<button class="demo-button" data-dialog-close hidden>Close drawer</button>
+					</form>
+				</dialog>
+			</div>
+		</div>
+		<p>Without JavaScript the content stays in normal document flow, as it does for <code>%o-dialog</code>. <code>showModal()</code>, dismissal and focus restoration remain the application's work.</p>
+		<p><code>data-drawer-side="start"</code> pins the drawer to the opposite edge, for a navigation rail rather than a tool panel. <code>--theme-drawer-width</code>, <code>--theme-drawer-sheet-height</code>, <code>--theme-drawer-backdrop</code> and <code>--theme-drawer-backdrop-blur</code> adjust it.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-stack&quot; data-dialog-example&gt;
+	&lt;button class=&quot;demo-button&quot; type=&quot;button&quot; data-dialog-open hidden&gt;Open example drawer&lt;/button&gt;
+	&lt;dialog class=&quot;demo-drawer&quot; aria-labelledby=&quot;example-drawer-title&quot; open&gt;
+		&lt;h3 id=&quot;example-drawer-title&quot;&gt;Collections&lt;/h3&gt;
+		&lt;nav class=&quot;demo-side-navigation&quot; aria-label=&quot;Collections&quot;&gt;
+			&lt;menu&gt;
+				&lt;li&gt;&lt;a href=&quot;#drawers&quot; aria-current=&quot;page&quot;&gt;Public API&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#drawers&quot;&gt;Staging&lt;/a&gt;&lt;/li&gt;
+				&lt;li&gt;&lt;a href=&quot;#drawers&quot;&gt;Webhook receivers&lt;/a&gt;&lt;/li&gt;
+			&lt;/menu&gt;
+		&lt;/nav&gt;
+		&lt;form method=&quot;dialog&quot;&gt;
+			&lt;button class=&quot;demo-button&quot; data-dialog-close hidden&gt;Close drawer&lt;/button&gt;
+		&lt;/form&gt;
+	&lt;/dialog&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-drawer {
+	@extend %o-drawer;
+}</code></pre>
+		</details>
+	</section>
 </main>

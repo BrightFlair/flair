@@ -30,6 +30,29 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 						assert.equal(columns, width === 320 ? 1 : width === 768 ? 2 : 3);
 						assert.equal(await page.locator('[data-grid-narrow]').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), 1);
 					}
+					// An icon button is square and exactly as tall as the text
+					// button beside it, whatever the theme's control metrics.
+					// Its size comes from properties, not declarations, because
+					// @extend gives no control over which rule the cascade picks.
+					if(width === 1440 && route === 'forms') {
+						const row = await page.locator('#repeatable-fields li form').first().evaluate(form => {
+							const box = selector => form.querySelector(selector).getBoundingClientRect();
+							const text = box('.demo-button'), icon = box('.demo-icon-button'), field = box('input');
+							const centre = rect => Math.round(rect.y + rect.height / 2);
+							return {
+								text: Math.round(text.height), iconHeight: Math.round(icon.height),
+								iconWidth: Math.round(icon.width),
+								centres: [centre(field), centre(text), centre(icon)],
+							};
+						});
+						assert.equal(row.iconHeight, row.text, `${theme}: icon button height matches its neighbour`);
+						// Near-square: a theme whose buttons are sized by their
+						// content leaves the glyph box a little narrower than
+						// the line it stands beside.
+						assert.ok(Math.abs(row.iconWidth - row.iconHeight) <= row.iconHeight * 0.1,
+							`${theme}: icon button is square within a tenth (${row.iconWidth}x${row.iconHeight})`);
+						assert.equal(new Set(row.centres).size, 1, `${theme}: field and actions share one centre`);
+					}
 					if(width === 1440) {
 						const result = await new AxeBuilder({page}).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
 						assert.deepEqual(result.violations.map(item => ({id: item.id, targets: item.nodes.map(node => node.target)})), [], `${theme} ${route}`);
@@ -103,7 +126,7 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		await metric.locator('[data-metric-step="-1"]').click();
 		assert.equal(await metric.locator('output').textContent(), '2');
 		for(const alignment of ['center', 'end']) {
-			await metric.evaluate((element, value) => element.style.setProperty('--flair-metric-align', value), alignment);
+			await metric.evaluate((element, value) => element.style.setProperty('--theme-metric-align', value), alignment);
 			assert.equal(await metric.evaluate(element => getComputedStyle(element).textAlign), alignment);
 			assert.equal(await metric.locator('.actions').evaluate(element => getComputedStyle(element).justifyContent), alignment);
 		}
@@ -116,7 +139,7 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		assert.equal(await state.locator('.demo-state-panel').evaluate(element => getComputedStyle(element).outlineStyle), 'dashed');
 		await state.locator('[data-drag-toggle]').click();
 		await page.emulateMedia({reducedMotion: 'reduce'});
-		await state.locator('.demo-reveal').evaluate(element => element.style.setProperty('--flair-reveal-progress', '0'));
+		await state.locator('.demo-reveal').evaluate(element => element.style.setProperty('--theme-reveal-progress', '0'));
 		assert.equal(await state.locator('.demo-reveal').evaluate(element => getComputedStyle(element).opacity), '1');
 		await page.emulateMedia({reducedMotion: 'no-preference'});
 
@@ -151,7 +174,8 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		const nojs = await browser.newContext({javaScriptEnabled: false});
 		const staticPage = await nojs.newPage();
 		await staticPage.goto(`${baseUrl}/library/disclosures/`);
-		assert.equal(await staticPage.locator('dialog[open]').count(), 3);
+		// Three dialog examples and the drawer, all inline without JavaScript.
+		assert.equal(await staticPage.locator('dialog[open]').count(), 4);
 		await staticPage.locator('#single .demo-disclosure > summary').click();
 		assert.equal(await staticPage.locator('#single details[open]').count(), 1);
 		await staticPage.locator('select[name="theme"]').selectOption('github');

@@ -1,48 +1,73 @@
+@use "../variable/break";
 @use "navigation";
 
 %p-side-navigation {
 	@extend %p-navigation;
-	> ul {
+	> :where(ul, menu) {
 		flex-direction: column;
-		margin-block-start: var(--flair-side-nav-margin-block-start, 0);
+		margin-block-start: var(--theme-side-nav-margin-block-start, 0);
 		> li > a {
+			position: relative;
 			display: flex;
 			align-items: flex-start;
-			column-gap: var(--flair-side-nav-icon-gap, 0);
-			margin: var(--flair-side-nav-link-margin, 0);
+			column-gap: var(--theme-side-nav-icon-gap, 0);
+			margin: var(--theme-side-nav-link-margin, 0);
 			&::before {
-				content: var(--flair-side-nav-icon-content, none);
+				content: var(--theme-side-nav-icon-content, none);
 				display: block;
 				flex-shrink: 0;
-				inline-size: var(--flair-side-nav-icon-size, 0);
+				inline-size: var(--theme-side-nav-icon-size, 0);
 				aspect-ratio: 1;
-				opacity: var(--flair-side-nav-icon-opacity, 1);
+				opacity: var(--theme-side-nav-icon-opacity, 1);
 				background-size: 100%;
 			}
-			line-height: var(--flair-side-nav-line-height, inherit);
-			background: var(--flair-side-nav-background, transparent);
+			line-height: var(--theme-side-nav-line-height, inherit);
+			background: var(--theme-side-nav-background, transparent);
 			&:focus-visible:not(:hover) {
-				background: var(--flair-side-nav-focus-background,
-					var(--flair-nav-hover-background, var(--flair-color-surface-disabled)));
+				background: var(--theme-side-nav-focus-background,
+					var(--theme-nav-hover-background, var(--theme-color-surface-disabled)));
 			}
 		}
 		> li:hover > a {
-			background: var(--flair-side-nav-hover-background, var(--flair-nav-hover-background, var(--flair-color-surface-disabled)));
+			background: var(--theme-side-nav-hover-background, var(--theme-nav-hover-background, var(--theme-color-surface-disabled)));
+		}
+		// A rule closing off a group of links, requested by the markup rather
+		// than counted, so the groups can change without the CSS changing.
+		> li[data-end-of-section]::after {
+			content: "";
+			display: block;
+			margin: var(--theme-side-nav-separator-space, var(--theme-space-2)) auto;
+			inline-size: var(--theme-side-nav-separator-width, calc(100% - 2rem));
+			block-size: var(--theme-border-width);
+			background: var(--theme-color-border);
 		}
 		> li > a[aria-current]:not([aria-current="false"]):not([aria-current=""]) {
+			// An optional marker in the gutter beside the current link. Off
+			// until a theme gives it a width, so no layout depends on it.
+			&::after {
+				content: "";
+				position: absolute;
+				inset-block-start: 50%;
+				inset-inline-start: var(--theme-side-nav-marker-offset, 0);
+				translate: 0 -50%;
+				inline-size: var(--theme-side-nav-marker-width, 0);
+				block-size: var(--theme-side-nav-marker-height, 1.5rem);
+				border-radius: var(--theme-side-nav-marker-radius, 999px);
+				background: var(--theme-side-nav-marker-color, var(--theme-color-accent));
+			}
 			&:hover {
-				background: var(--flair-side-nav-current-hover-background, var(--flair-side-nav-hover-background,
-					var(--flair-nav-current-hover-background, var(--flair-nav-current-background,
-						var(--flair-selected-background, var(--flair-color-surface-disabled))))));
+				background: var(--theme-side-nav-current-hover-background, var(--theme-side-nav-hover-background,
+					var(--theme-nav-current-hover-background, var(--theme-nav-current-background,
+						var(--theme-selected-background, var(--theme-color-surface-disabled))))));
 			}
 			&:focus-visible:not(:hover) {
-				background: var(--flair-side-nav-current-focus-background,
-					var(--flair-nav-current-hover-background, var(--flair-nav-current-background,
-						var(--flair-selected-background, var(--flair-color-surface-disabled)))));
+				background: var(--theme-side-nav-current-focus-background,
+					var(--theme-nav-current-hover-background, var(--theme-nav-current-background,
+						var(--theme-selected-background, var(--theme-color-surface-disabled)))));
 			}
-			box-shadow: var(--flair-side-nav-current-shadow,
-				var(--flair-nav-current-shadow, inset 0 -3px var(--flair-color-accent)));
+			box-shadow: var(--theme-side-nav-current-shadow,
+				var(--theme-nav-current-shadow, inset 0 -3px var(--theme-color-accent)));
 		}
 	}
-	@media (min-width: 45rem) { > ul { flex-direction: column; } }
+	@media (min-width: break.$nav) { > :where(ul, menu) { flex-direction: column; } }
 }

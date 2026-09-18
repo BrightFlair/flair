@@ -14,7 +14,7 @@ const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'di
   const context = await browser.newContext({javaScriptEnabled:false, colorScheme:'light'});
   const page = await context.newPage();
   for(const theme of themes) {
-   const css = sass.compileString(`@use "flair"; @use "theme"; html { @include theme.base; ${theme==='base'?'':`@include theme.${theme};`} background:var(--flair-color-surface); color:var(--flair-color-text); } button { @extend %o-button; }`, {loadPaths:[path.resolve('style')]}).css;
+   const css = sass.compileString(`@use "flair"; @use "theme"; html { @include theme.base; ${theme==='base'?'':`@include theme.${theme};`} background:var(--theme-color-surface); color:var(--theme-color-text); } button { @extend %o-button; }`, {loadPaths:[path.resolve('style')]}).css;
    await page.setContent(`<html lang="en"><title>Scheme test</title><style>${css}</style><body><button>Example</button></body></html>`);
    const background = () => page.locator('html').evaluate(e=>getComputedStyle(e).backgroundColor);
    const dimensions = () => page.locator('button').boundingBox();

@@ -3,7 +3,26 @@
 %p-page-footer {
 	@extend %p-cluster;
 	justify-content: space-between;
-	padding-block: var(--flair-header-padding-block, var(--flair-space-4));
-	border-block-start: var(--flair-border-width) solid var(--flair-color-border);
-	font-size: var(--flair-small-size, 0.875rem);
+	padding-block: var(--theme-header-padding-block, var(--theme-space-4));
+	border-block-start: var(--theme-border-width) solid var(--theme-color-border);
+	font-size: var(--theme-small-size, 0.875rem);
+
+	// Held against the bottom of the viewport, for an application whose main
+	// region scrolls on its own. Extended alongside the base footer, not
+	// instead of it. The page reserves the same height below its own content,
+	// so nothing ends up underneath the footer.
+	&-fixed {
+		position: fixed;
+		inset-block-end: 0;
+		inset-inline: 0;
+		z-index: var(--theme-page-footer-layer, 10);
+		justify-content: center;
+		gap: var(--theme-page-footer-gap, var(--theme-space-8));
+		padding-inline: var(--theme-space-4);
+		padding-block-end: max(var(--theme-space-2), env(safe-area-inset-bottom));
+		background: var(--theme-page-footer-background, var(--theme-color-surface-disabled));
+		@media print {
+			position: static;
+		}
+	}
 }

@@ -42,11 +42,11 @@
 	.control-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-		gap: var(--flair-space-6);
+		gap: var(--theme-space-6);
 	}
 	.demo-stack {
 		display: grid;
-		gap: var(--flair-space-6);
+		gap: var(--theme-space-6);
 	}
 	.demo-settings {
 		display: flex;

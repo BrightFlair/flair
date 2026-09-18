@@ -1,20 +1,20 @@
 // Container-driven columns; no viewport breakpoint or width cap on the grid itself.
 %p-grid {
 	display: grid;
-	gap: var(--flair-grid-gap, var(--flair-space-6));
+	gap: var(--theme-grid-gap, var(--theme-space-6));
 	grid-template-columns: repeat(
 		auto-fit,
 		minmax(
 			min(
 				100%,
 				max(
-					var(--flair-grid-min, 16rem),
+					var(--theme-grid-min, 16rem),
 					calc(
 						(
-								100% - (var(--flair-grid-columns, 3) - 1) *
-									var(--flair-grid-gap, var(--flair-space-6))
+								100% - (var(--theme-grid-columns, 3) - 1) *
+									var(--theme-grid-gap, var(--theme-space-6))
 							) /
-							var(--flair-grid-columns, 3)
+							var(--theme-grid-columns, 3)
 					)
 				)
 			),

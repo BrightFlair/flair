@@ -1,16 +1,16 @@
 %o-code-block {
 	margin: 0;
-	padding: var(--flair-code-padding, var(--flair-space-6));
-	border: var(--flair-border-width) solid var(--flair-color-border);
-	border-radius: var(--flair-code-radius, var(--flair-radius));
-	background: var(--flair-code-background, var(--flair-color-surface-disabled));
-	color: var(--flair-code-text, var(--flair-color-text));
-	font-family: var(--flair-font-mono, "Ubuntu Mono", monospace);
-	font-size: var(--flair-code-size, 0.95em);
-	line-height: var(--flair-code-leading, 1.6);
+	padding: var(--theme-code-padding, var(--theme-space-6));
+	border: var(--theme-border-width) solid var(--theme-color-border);
+	border-radius: var(--theme-code-radius, var(--theme-radius));
+	background: var(--theme-code-background, var(--theme-color-surface-disabled));
+	color: var(--theme-code-text, var(--theme-color-text));
+	font-family: var(--theme-font-mono, "Ubuntu Mono", monospace);
+	font-size: var(--theme-code-size, 0.95em);
+	line-height: var(--theme-code-leading, 1.6);
 	white-space: pre-wrap;
 	overflow-wrap: anywhere;
-	tab-size: var(--flair-code-tab-size, 4);
+	tab-size: var(--theme-code-tab-size, 4);
 	> code {
 		font: inherit;
 		background: transparent;

@@ -3,15 +3,15 @@
 .flair-example {
 	padding: var(--site-space-medium);
 	border: 1px solid var(--site-line);
-	background: var(--flair-color-surface);
-	color: var(--flair-color-text);
+	background: var(--theme-color-surface);
+	color: var(--theme-color-text);
 
 	&[data-density="compact"] {
-		--flair-form-gap: var(--flair-space-3);
-		--flair-field-gap: var(--flair-space-1);
-		--flair-control-padding-block: var(--flair-space-1);
-		--flair-control-padding-inline: var(--flair-space-2);
-		--flair-control-min-height: 2.25rem;
+		--theme-form-gap: var(--theme-space-3);
+		--theme-field-gap: var(--theme-space-1);
+		--theme-control-padding-block: var(--theme-space-1);
+		--theme-control-padding-inline: var(--theme-space-2);
+		--theme-control-min-height: 2.25rem;
 	}
 
 	@extend %d-typography;
@@ -166,17 +166,17 @@
 	}
 
 	& .demo-two-columns {
-		--flair-grid-columns: 2;
+		--theme-grid-columns: 2;
 	}
 
 	& .demo-four-columns {
-		--flair-grid-columns: 4;
-		--flair-grid-min: 12rem;
+		--theme-grid-columns: 4;
+		--theme-grid-min: 12rem;
 	}
 
 	& .demo-compact-table {
-		--flair-table-padding-block: var(--flair-space-1);
-		--flair-table-padding-inline: var(--flair-space-2);
+		--theme-table-padding-block: var(--theme-space-1);
+		--theme-table-padding-inline: var(--theme-space-2);
 	}
 
 	& .demo-wide-table {
@@ -199,7 +199,7 @@
 		@extend %d-highlight;
 		display: inline-block;
 		max-inline-size: 100%;
-		padding: var(--flair-space-2);
+		padding: var(--theme-space-2);
 	}
 
 	& .demo-highlight-wrap {

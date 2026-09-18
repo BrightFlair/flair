@@ -1,0 +1,56 @@
+// Geometry and masking for a glyph placed before or after an element's own
+// content. The mask is filled with `currentColor`, so an icon takes the colour
+// of the text it sits beside and needs no separate treatment in a dark scheme.
+//
+// The file that a glyph comes from is named by markup:
+//
+//   <button data-icon="trash"><span>Delete</span></button>
+//   <a href="/docs" data-icon-end="link-external">Documentation</a>
+//
+// `flair.icon` turns those attribute values into URLs. The nested `&-end`
+// variant is extended as `%p-icon-end` when only a trailing glyph is wanted.
+//
+// The glyph box is a square of `--theme-icon-size`. A glyph-only control that
+// must stand as tall as one carrying words puts a zero-width space in
+// `--theme-icon-strut` and sets `--theme-icon-ratio` to `auto`: the box then
+// holds a real line of text and takes its height, which is what the control
+// beside it is measuring too. See `%o-icon-button`.
+//
+// Only real text measures a line box identically in every engine. `1lh` does
+// not: Firefox resolves it against a different metric from the one it renders
+// `line-height: normal` with, leaving a glyph-only control several pixels
+// short of its neighbours.
+%p-icon {
+	&::before {
+		content: var(--theme-icon-strut, "");
+		display: inline-block;
+		flex-shrink: 0;
+		inline-size: var(--theme-icon-size, 1.25rem);
+		aspect-ratio: var(--theme-icon-ratio, 1);
+		margin-inline-end: var(--theme-icon-gap, var(--theme-space-2));
+		background-color: currentColor;
+		opacity: var(--theme-icon-opacity, 1);
+		mask-image: var(--theme-icon, linear-gradient(#0000, #0000));
+		mask-size: var(--theme-icon-scale, 100%);
+		mask-repeat: no-repeat;
+		mask-position: center;
+	}
+
+	// A glyph after the content, from `data-icon-end`.
+	&-end {
+		&::after {
+			content: "";
+			display: inline-block;
+			flex-shrink: 0;
+			inline-size: var(--theme-icon-size, 1.25rem);
+			aspect-ratio: 1;
+			margin-inline-start: var(--theme-icon-gap, var(--theme-space-2));
+			background-color: currentColor;
+			opacity: var(--theme-icon-opacity, 1);
+			mask-image: var(--theme-icon-end, linear-gradient(#0000, #0000));
+			mask-size: var(--theme-icon-scale, 100%);
+			mask-repeat: no-repeat;
+			mask-position: center;
+		}
+	}
+}

@@ -1,16 +1,46 @@
+// Token colours for highlighted source and structured data. The first group
+// covers code, and matches highlight.js class names as well as Flair's own;
+// the second covers the vocabulary of markup and serialised data. Structure —
+// indentation, collapsing, line numbers — belongs to `%p-syntax-tree`.
 %d-syntax {
 	:where(.syntax-keyword, .hljs-keyword) {
-		color: var(--flair-syntax-keyword, var(--flair-color-accent));
+		color: var(--theme-syntax-keyword, var(--theme-color-accent));
 		font-weight: 700;
 	}
 	:where(.syntax-string, .hljs-string) {
-		color: var(--flair-syntax-string, var(--flair-color-text));
+		color: var(--theme-syntax-string, var(--theme-color-text));
 	}
 	:where(.syntax-comment, .hljs-comment) {
-		color: var(--flair-syntax-comment, var(--flair-color-muted));
+		color: var(--theme-syntax-comment, var(--theme-color-muted));
 		font-style: italic;
 	}
 	:where(.syntax-number, .hljs-number) {
-		color: var(--flair-syntax-number, var(--flair-color-accent));
+		color: var(--theme-syntax-number, var(--theme-color-accent));
+	}
+	// Brackets, commas, colons and quotes: present, but never the focus.
+	:where(.syntax-punctuation, .hljs-punctuation) {
+		color: var(--theme-syntax-punctuation, var(--theme-color-muted));
+	}
+	// The name of a property in an object, or a cell's column.
+	:where(.syntax-key, .hljs-attr) {
+		color: var(--theme-syntax-key, var(--theme-color-text));
+		font-weight: 700;
+	}
+	// An element name in markup, and the angle brackets around it.
+	:where(.syntax-tag, .hljs-name) {
+		color: var(--theme-syntax-tag, var(--theme-syntax-keyword, var(--theme-color-accent)));
+		font-weight: 700;
+	}
+	:where(.syntax-attribute, .hljs-attribute) {
+		color: var(--theme-syntax-attribute, var(--theme-color-accent));
+	}
+	:where(.syntax-value, .hljs-string.hljs-attr-value) {
+		color: var(--theme-syntax-value, var(--theme-syntax-string, var(--theme-color-text)));
+	}
+	// A scalar drawn as its type rather than its value: NULL, TRUE, 42.
+	:where(.syntax-type) {
+		color: var(--theme-syntax-type, var(--theme-syntax-number, var(--theme-color-accent)));
+		font-weight: 700;
+		text-transform: uppercase;
 	}
 }

@@ -2,11 +2,11 @@
 
 %o-notice {
 	@extend %d-surface;
-	border-inline-start: var(--flair-notice-border-width, 4px) solid
-		var(--flair-notice-color, var(--flair-color-accent));
+	border-inline-start: var(--theme-notice-border-width, 4px) solid
+		var(--theme-notice-color, var(--theme-color-accent));
 	background: var(
-		--flair-notice-background,
-		var(--flair-surface-background, var(--flair-color-surface))
+		--theme-notice-background,
+		var(--theme-surface-background, var(--theme-color-surface))
 	);
 	> :first-child {
 		margin-block-start: 0;

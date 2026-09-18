@@ -3,15 +3,15 @@
 %o-button-danger {
 	@extend %o-button;
 	&:not(:disabled) {
-		color: var(--flair-color-danger);
-		border-color: var(--flair-color-danger);
+		color: var(--theme-color-danger);
+		border-color: var(--theme-color-danger);
 	}
 	&:hover:not(:disabled) {
-		background: var(--flair-danger-background-hover, var(--flair-color-danger));
-		color: var(--flair-danger-text-hover, var(--flair-color-surface));
+		background: var(--theme-danger-background-hover, var(--theme-color-danger));
+		color: var(--theme-danger-text-hover, var(--theme-color-surface));
 	}
 	&:active:not(:disabled) {
-		background: var(--flair-danger-background-hover, var(--flair-color-danger));
-		color: var(--flair-danger-text-hover, var(--flair-color-surface));
+		background: var(--theme-danger-background-hover, var(--theme-color-danger));
+		color: var(--theme-danger-text-hover, var(--theme-color-surface));
 	}
 }

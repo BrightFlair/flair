@@ -2,5 +2,5 @@
 
 %o-notice-warning {
 	@extend %o-notice;
-	border-inline-start-color: var(--flair-color-warning, var(--flair-color-text));
+	border-inline-start-color: var(--theme-color-warning, var(--theme-color-text));
 }

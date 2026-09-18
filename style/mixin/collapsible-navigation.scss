@@ -1,8 +1,9 @@
+@use "../variable/break";
 @use "../object/button";
 
 // A direct child button controls the following ul. Without enhancement, hide the
 // button with hidden and leave the links available in normal document flow.
-@mixin collapsible-navigation($from: 60rem) {
+@mixin collapsible-navigation($from: break.$shell) {
 	> button {
 		@extend %o-button;
 		inline-size: 100%;

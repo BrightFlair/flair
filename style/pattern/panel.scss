@@ -1,0 +1,40 @@
+@use "../decoration/surface";
+
+// A titled working surface. Where `%o-card` is a plain box, a panel divides
+// itself: each heading is separated from the content above it by a rule, so a
+// long editing surface stays readable without extra markup.
+//
+//   <request-editor>
+//     <h1>Request editor</h1>
+//     <form>…</form>
+//     <h2>Query parameters</h2>
+//     …
+//   </request-editor>
+%p-panel {
+	@extend %d-surface;
+	position: relative;
+	display: block;
+	min-inline-size: 0;
+	> :where(h1, h2, h3, h4, h5, h6) {
+		display: block;
+		margin: 0;
+		margin-block-end: var(--theme-panel-heading-space, var(--theme-space-4));
+		padding-block: var(--theme-panel-heading-space, var(--theme-space-4));
+		border-block-end: var(--theme-border-width) solid var(--theme-color-border);
+		font-family: var(--theme-font-heading, var(--theme-font-body));
+		font-weight: var(--theme-panel-heading-weight, var(--theme-heading-weight, 400));
+		overflow-wrap: anywhere;
+		&:first-child {
+			padding-block-start: 0;
+		}
+		&:not(:first-child) {
+			margin-block-start: var(--theme-panel-section-space, var(--theme-space-8));
+		}
+	}
+	> h2 {
+		font-size: var(--theme-panel-subheading-size, 1.25rem);
+	}
+	> article {
+		margin-block: var(--theme-panel-section-space, var(--theme-space-8));
+	}
+}

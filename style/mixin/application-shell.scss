@@ -1,17 +1,18 @@
+@use "../variable/break";
 // Bind the shell to application-owned selectors; no utility classes required.
-@mixin application-shell($sidebar: "> aside", $content: "> section", $from: 60rem) {
+@mixin application-shell($sidebar: "> aside", $content: "> section", $from: break.$shell) {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr);
-	gap: var(--flair-layout-gap, 0);
-	min-block-size: var(--flair-shell-height, 100svh);
+	gap: var(--theme-layout-gap, 0);
+	min-block-size: var(--theme-shell-height, 100svh);
 	#{$sidebar}, #{$content} { min-inline-size: 0; }
 	@media (min-width: $from) {
-		grid-template-columns: var(--flair-sidebar-width, 18rem) minmax(0, 1fr);
+		grid-template-columns: var(--theme-sidebar-width, 18rem) minmax(0, 1fr);
 		#{$sidebar} {
 			align-self: start;
 			position: sticky;
-			inset-block-start: var(--flair-sticky-offset, 0px);
-			max-block-size: calc(100svh - var(--flair-sticky-offset, 0px));
+			inset-block-start: var(--theme-sticky-offset, 0px);
+			max-block-size: calc(100svh - var(--theme-sticky-offset, 0px));
 			overflow-y: auto;
 		}
 	}

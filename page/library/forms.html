@@ -226,8 +226,8 @@ contact-form form {
 }
 
 contact-form {
-	--flair-form-gap: var(--flair-space-6);
-	--flair-control-radius: .25rem;
+	--theme-form-gap: var(--theme-space-6);
+	--theme-control-radius: .25rem;
 }</code></pre>
 		<h3>Direct children of the pattern</h3>
 		<dl class="token-list">
@@ -275,37 +275,37 @@ contact-form {
 		</p>
 		<h3>Form properties</h3>
 		<dl class="token-list">
-			<dt><code>--flair-form-gap</code></dt>
+			<dt><code>--theme-form-gap</code></dt>
 			<dd>
 				Space between fields and within rows and groups. Falls back to
-				<code>--flair-space-4</code>
+				<code>--theme-space-4</code>
 				(1rem).
 			</dd>
-			<dt><code>--flair-field-gap</code></dt>
+			<dt><code>--theme-field-gap</code></dt>
 			<dd>
 				Space between a label, control and message. Falls back to
-				<code>--flair-space-2</code>
+				<code>--theme-space-2</code>
 				(0.5rem).
 			</dd>
-			<dt><code>--flair-field-min-width</code></dt>
+			<dt><code>--theme-field-min-width</code></dt>
 			<dd>
 				Preferred field width before a row wraps. Default: 14rem. Fields can shrink below
 				this to fit narrow containers.
 			</dd>
-			<dt><code>--flair-label-weight</code></dt>
+			<dt><code>--theme-label-weight</code></dt>
 			<dd>Label, legend and error-text weight. Default: 500.</dd>
-			<dt><code>--flair-fieldset-padding</code></dt>
+			<dt><code>--theme-fieldset-padding</code></dt>
 			<dd>
 				Falls back to
-				<code>--flair-space-4</code>
+				<code>--theme-space-4</code>
 				.
 			</dd>
 			<dt>
-				<code>--flair-actions-align</code>
+				<code>--theme-actions-align</code>
 				,
-				<code>--flair-actions-gap</code>
+				<code>--theme-actions-gap</code>
 				,
-				<code>--flair-actions-margin</code>
+				<code>--theme-actions-margin</code>
 			</dt>
 			<dd>
 				Action justification, gap and block-start margin. Defaults: flex-end, spacing step
@@ -425,6 +425,124 @@ contact-form {
 
 .demo-narrow {
 	max-inline-size: 28rem;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="compound-fields" aria-labelledby="compound-fields-title">
+		<h2 id="compound-fields-title">Compound fields</h2>
+		<p>Two or more controls that read as a single value: a method beside a URL, a currency beside an amount, a date range. They stack while space is short and form one row when it is not.</p>
+		<p>Each control keeps its own label, so the pairing is presentational and every control keeps its own accessible name. <code>data-span="narrow"</code> holds one to its content width instead of letting it grow.</p>
+		<div class="flair-example">
+			<form class="demo-form">
+				<div class="demo-compound-field">
+					<label data-span="narrow">
+						<span>Method</span>
+						<select name="method">
+							<option>GET</option>
+							<option>POST</option>
+							<option>PUT</option>
+							<option>DELETE</option>
+						</select>
+					</label>
+					<label>
+						<span>Endpoint</span>
+						<input type="url" name="endpoint" placeholder="https://api.example.com/items" />
+					</label>
+				</div>
+				<div class="demo-compound-field">
+					<label><span>Valid from</span><input type="date" name="from" /></label>
+					<label><span>Valid until</span><input type="date" name="until" /></label>
+				</div>
+			</form>
+		</div>
+		<p>Narrow the window to watch each pair stack in source order. <code>--theme-compound-narrow</code> sets the fixed measure, and <code>--theme-compound-gap</code> the space between controls.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;form class=&quot;demo-form&quot;&gt;
+	&lt;div class=&quot;demo-compound-field&quot;&gt;
+		&lt;label data-span=&quot;narrow&quot;&gt;
+			&lt;span&gt;Method&lt;/span&gt;
+			&lt;select name=&quot;method&quot;&gt;
+				&lt;option&gt;GET&lt;/option&gt;
+				&lt;option&gt;POST&lt;/option&gt;
+				&lt;option&gt;PUT&lt;/option&gt;
+				&lt;option&gt;DELETE&lt;/option&gt;
+			&lt;/select&gt;
+		&lt;/label&gt;
+		&lt;label&gt;
+			&lt;span&gt;Endpoint&lt;/span&gt;
+			&lt;input type=&quot;url&quot; name=&quot;endpoint&quot; placeholder=&quot;https://api.example.com/items&quot; /&gt;
+		&lt;/label&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;demo-compound-field&quot;&gt;
+		&lt;label&gt;&lt;span&gt;Valid from&lt;/span&gt;&lt;input type=&quot;date&quot; name=&quot;from&quot; /&gt;&lt;/label&gt;
+		&lt;label&gt;&lt;span&gt;Valid until&lt;/span&gt;&lt;input type=&quot;date&quot; name=&quot;until&quot; /&gt;&lt;/label&gt;
+	&lt;/div&gt;
+&lt;/form&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-compound-field {
+	@extend %p-compound-field;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="repeatable-fields" aria-labelledby="repeatable-fields-title">
+		<h2 id="repeatable-fields-title">Repeatable field groups</h2>
+		<p>A list of identical field groups that an application adds to and removes from: query parameters, headers, endpoints. Only the first row draws its labels, so the list reads as a table without becoming one.</p>
+		<p>The labels stay in the markup on every row and are positioned out of view rather than removed, so each control is still named for assistive technology. An empty list explains itself from <code>data-term</code>.</p>
+		<div class="flair-example">
+			<ul class="demo-repeatable-fields" data-term="headers">
+				<li>
+					<form>
+						<label><span>Key</span><input name="key" value="Accept" autocomplete="off" /></label>
+						<label><span>Value</span><input name="value" value="application/json" autocomplete="off" /></label>
+						<div class="actions">
+							<button class="demo-button" type="button">Save</button>
+							<button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button>
+						</div>
+					</form>
+				</li>
+				<li>
+					<form>
+						<label><span>Key</span><input name="key" value="Authorization" autocomplete="off" /></label>
+						<label><span>Value</span><input name="value" value="Bearer {{token}}" autocomplete="off" /></label>
+						<div class="actions">
+							<button class="demo-button" type="button">Save</button>
+							<button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button>
+						</div>
+					</form>
+				</li>
+			</ul>
+			<ul class="demo-repeatable-fields" data-term="query parameters"></ul>
+		</div>
+		<p>The second list is empty, and states what is missing from its own <code>data-term</code> rather than from a message held in the CSS. Adding and removing rows, and the order they appear in, belong to the application.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;ul class=&quot;demo-repeatable-fields&quot; data-term=&quot;headers&quot;&gt;
+	&lt;li&gt;
+		&lt;form&gt;
+			&lt;label&gt;&lt;span&gt;Key&lt;/span&gt;&lt;input name=&quot;key&quot; value=&quot;Accept&quot; autocomplete=&quot;off&quot; /&gt;&lt;/label&gt;
+			&lt;label&gt;&lt;span&gt;Value&lt;/span&gt;&lt;input name=&quot;value&quot; value=&quot;application/json&quot; autocomplete=&quot;off&quot; /&gt;&lt;/label&gt;
+			&lt;div class=&quot;actions&quot;&gt;
+				&lt;button class=&quot;demo-button&quot; type=&quot;button&quot;&gt;Save&lt;/button&gt;
+				&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/form&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;form&gt;
+			&lt;label&gt;&lt;span&gt;Key&lt;/span&gt;&lt;input name=&quot;key&quot; value=&quot;Authorization&quot; autocomplete=&quot;off&quot; /&gt;&lt;/label&gt;
+			&lt;label&gt;&lt;span&gt;Value&lt;/span&gt;&lt;input name=&quot;value&quot; value=&quot;Bearer {{token}}&quot; autocomplete=&quot;off&quot; /&gt;&lt;/label&gt;
+			&lt;div class=&quot;actions&quot;&gt;
+				&lt;button class=&quot;demo-button&quot; type=&quot;button&quot;&gt;Save&lt;/button&gt;
+				&lt;button class=&quot;demo-icon-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/form&gt;
+	&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;demo-repeatable-fields&quot; data-term=&quot;query parameters&quot;&gt;&lt;/ul&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-repeatable-fields {
+	@extend %p-repeatable-fields;
 }</code></pre>
 		</details>
 	</section>

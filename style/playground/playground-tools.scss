@@ -4,7 +4,7 @@ playground-tools {
 	@include flair.controls;
 	display: block;
 	padding: 0.75rem 1rem;
-	border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+	border-block-end: var(--theme-border-width) solid var(--theme-color-border);
 	background: transparent;
 	> nav {
 		@extend %p-cluster;

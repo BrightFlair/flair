@@ -1,9 +1,10 @@
+@use "../variable/break";
 // Opt-in enhancement; keep the ordinary sidebar wrapping behaviour below this width.
-@mixin sticky-sidebar($from: 70rem) {
+@mixin sticky-sidebar($from: break.$wide) {
 	@media (min-width: $from) {
 		> aside {
 			position: sticky;
-			top: var(--flair-sticky-offset, var(--flair-space-6));
+			top: var(--theme-sticky-offset, var(--theme-space-6));
 			align-self: flex-start;
 		}
 	}

@@ -1,0 +1,83 @@
+@use "../decoration/syntax";
+
+// Serialised data drawn as a tree the reader can collapse: a JSON response, an
+// XML document, a configuration file. Every node is a native `<details>`, so
+// the whole structure expands, collapses, prints and is reachable by keyboard
+// with no script at all.
+//
+//   <div class="body" data-language="JSON">
+//     <details open>
+//       <summary><span class="syntax-key">items</span><span
+//         class="syntax-punctuation">[</span></summary>
+//       <div class="syntax-branch">
+//         <details><summary>…</summary>…</details>
+//       </div>
+//       <span class="syntax-punctuation">]</span>
+//     </details>
+//   </div>
+//
+// A closed node draws on one line; an open one indents its branch. Parsing,
+// deciding what is a leaf, and choosing which nodes start open are the
+// application's work. Token colours come from `%d-syntax`.
+%p-syntax-tree {
+	@extend %d-syntax;
+	position: relative;
+	font-family: var(--theme-font-mono, monospace);
+	font-size: var(--theme-code-size, 0.95em);
+	line-height: var(--theme-syntax-tree-leading, 1.6);
+	tab-size: var(--theme-code-tab-size, 4);
+	overflow-x: auto;
+
+	// The format, named once by the container and drawn in the corner.
+	&[data-language]::after {
+		content: attr(data-language);
+		position: absolute;
+		inset-block-start: 0;
+		inset-inline-end: 0;
+		padding: var(--theme-space-1) var(--theme-space-2);
+		border-radius: var(--theme-badge-radius, var(--theme-radius));
+		background: var(--theme-color-muted);
+		color: var(--theme-color-surface);
+		font-family: var(--theme-font-body);
+		font-size: var(--theme-small-size, 0.875rem);
+		font-weight: 700;
+		pointer-events: none;
+	}
+
+	details {
+		> summary {
+			display: block;
+			border-radius: var(--theme-radius);
+			cursor: pointer;
+			&:hover {
+				background: var(--theme-syntax-tree-hover-background,
+					var(--theme-color-surface-disabled));
+			}
+			// The disclosure marker sits in the gutter, outside the content.
+			&::marker {
+				color: var(--theme-color-muted);
+			}
+			> * {
+				display: inline;
+			}
+		}
+		// Closed, a node reads as a single inline summary of what it contains.
+		&:not([open]) > summary {
+			display: list-item;
+		}
+		// Open, its children are indented one step beneath it.
+		> .syntax-branch {
+			display: block;
+			margin-inline-start: var(--theme-syntax-tree-indent, var(--theme-space-4));
+			border-inline-start: var(--theme-syntax-tree-guide-width, 0px) solid
+				var(--theme-syntax-tree-guide-color, var(--theme-color-border));
+			padding-inline-start: var(--theme-syntax-tree-guide-space, 0);
+		}
+	}
+
+	// An element of a sequence, numbered from its own position in the data.
+	.syntax-index::before {
+		content: attr(data-index) ": ";
+		color: var(--theme-color-muted);
+	}
+}

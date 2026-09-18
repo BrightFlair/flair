@@ -1,9 +1,9 @@
 %o-code {
-	font-family: var(--flair-font-mono, "Ubuntu Mono", monospace);
-	font-size: var(--flair-code-size, 0.95em);
-	background: var(--flair-code-background, var(--flair-color-surface-disabled));
-	color: var(--flair-code-text, var(--flair-color-text));
-	border-radius: var(--flair-code-radius, var(--flair-radius));
-	padding: var(--flair-space-1) var(--flair-space-2);
+	font-family: var(--theme-font-mono, "Ubuntu Mono", monospace);
+	font-size: var(--theme-code-size, 0.95em);
+	background: var(--theme-code-background, var(--theme-color-surface-disabled));
+	color: var(--theme-code-text, var(--theme-color-text));
+	border-radius: var(--theme-code-radius, var(--theme-radius));
+	padding: var(--theme-space-1) var(--theme-space-2);
 	overflow-wrap: anywhere;
 }

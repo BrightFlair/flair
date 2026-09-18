@@ -1,0 +1,10 @@
+@use "../flair";
+
+// One include registers every glyph name this page uses.
+.demo-icons {
+	@include flair.icon($names: (trash, share, copy, lock, key, plus, grip, sun, moon, device-desktop, link-external));
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--theme-space-3);
+}

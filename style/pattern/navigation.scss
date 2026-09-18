@@ -1,11 +1,12 @@
+@use "../variable/break";
 @use "../object/nav-link";
 
 %p-navigation {
-	> ul {
+	> :where(ul, menu) {
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-		gap: var(--flair-nav-gap, var(--flair-space-2));
+		gap: var(--theme-nav-gap, var(--theme-space-2));
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -17,5 +18,5 @@
 			@extend %o-nav-link;
 		}
 	}
-	@media (min-width: 45rem) { > ul { flex-direction: row; } }
+	@media (min-width: break.$nav) { > :where(ul, menu) { flex-direction: row; } }
 }

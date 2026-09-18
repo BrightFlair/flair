@@ -4,54 +4,54 @@
 @mixin typography {
 	:where(h1, h2, h3, h4, h5, h6) {
 		@extend %d-typography-heading;
-		margin-block: var(--flair-space-6) var(--flair-space-3);
+		margin-block: var(--theme-space-6) var(--theme-space-3);
 	}
 	:where(h1) {
-		font-size: var(--flair-heading-1, 2.5rem);
+		font-size: var(--theme-heading-1, 2.5rem);
 	}
 	:where(h2) {
-		font-size: var(--flair-heading-2, 2rem);
+		font-size: var(--theme-heading-2, 2rem);
 	}
 	:where(h3) {
-		font-size: var(--flair-heading-3, 1.5rem);
+		font-size: var(--theme-heading-3, 1.5rem);
 	}
 	:where(h4) {
-		font-size: var(--flair-heading-4, 1.25rem);
+		font-size: var(--theme-heading-4, 1.25rem);
 	}
 	:where(h5, h6) {
-		font-size: var(--flair-font-size);
+		font-size: var(--theme-font-size);
 	}
 	:where(p, ul, ol, dl, blockquote, figure) {
 		margin: 0;
-		margin-block-end: var(--flair-space-4);
+		margin-block-end: var(--theme-space-4);
 		line-height: inherit;
 	}
 	:where(ul, ol) {
-		padding-inline-start: var(--flair-space-6);
+		padding-inline-start: var(--theme-space-6);
 	}
 	:where(li + li) {
-		margin-block-start: var(--flair-space-2);
+		margin-block-start: var(--theme-space-2);
 	}
 	:where(a) {
 		@extend %o-link;
 	}
 	:where(blockquote) {
-		padding-inline-start: var(--flair-space-4);
-		border-inline-start: var(--flair-quote-border-width, 4px) solid
-			var(--flair-color-accent);
-		color: var(--flair-color-muted);
+		padding-inline-start: var(--theme-space-4);
+		border-inline-start: var(--theme-quote-border-width, 4px) solid
+			var(--theme-color-accent);
+		color: var(--theme-color-muted);
 	}
 	:where(small, figcaption) {
-		font-size: var(--flair-small-size, 0.875rem);
-		color: var(--flair-color-muted);
+		font-size: var(--theme-small-size, 0.875rem);
+		color: var(--theme-color-muted);
 	}
 	:where(mark) {
-		background: var(--flair-selected-background, var(--flair-color-surface-disabled));
-		color: var(--flair-selected-text, var(--flair-color-text));
+		background: var(--theme-selected-background, var(--theme-color-surface-disabled));
+		color: var(--theme-selected-text, var(--theme-color-text));
 	}
 	:where(hr) {
 		border: 0;
-		border-block-start: var(--flair-border-width) solid var(--flair-color-border);
-		margin-block: var(--flair-space-6);
+		border-block-start: var(--theme-border-width) solid var(--theme-color-border);
+		margin-block: var(--theme-space-6);
 	}
 }

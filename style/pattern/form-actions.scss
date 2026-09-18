@@ -1,3 +1,4 @@
+@use "../variable/break";
 @use "../object/button";
 @use "../object/button-primary";
 
@@ -6,9 +7,9 @@
 	flex-wrap: wrap;
 	flex-direction: column;
 	align-items: stretch;
-	justify-content: var(--flair-actions-align, flex-end);
-	gap: var(--flair-actions-gap, var(--flair-space-3));
-	margin-block-start: var(--flair-actions-margin, var(--flair-space-2));
+	justify-content: var(--theme-actions-align, flex-end);
+	gap: var(--theme-actions-gap, var(--theme-space-3));
+	margin-block-start: var(--theme-actions-margin, var(--theme-space-2));
 	> :where(button, input[type="submit"], input[type="reset"]) {
 		@extend %o-button;
 	}
@@ -18,7 +19,7 @@
 	> .action-start {
 		margin-inline-end: 0;
 	}
-	@media (min-width: 40rem) {
+	@media (min-width: break.$compact) {
 		flex-direction: row;
 		align-items: center;
 		> .action-start { margin-inline-end: auto; }

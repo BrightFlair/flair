@@ -8,16 +8,16 @@
 	@extend %d-stack;
 	> :where(h2, h3, h4) {
 		@extend %d-typography-heading;
-		font-size: var(--flair-card-title-size, 1.25rem);
+		font-size: var(--theme-card-title-size, 1.25rem);
 	}
 	> footer {
 		margin-block-start: auto;
-		padding-block-start: var(--flair-space-4);
-		border-block-start: var(--flair-border-width) solid var(--flair-color-border);
+		padding-block-start: var(--theme-space-4);
+		border-block-start: var(--theme-border-width) solid var(--theme-color-border);
 	}
 	> img {
 		inline-size: 100%;
 		block-size: auto;
-		border-radius: var(--flair-radius);
+		border-radius: var(--theme-radius);
 	}
 }

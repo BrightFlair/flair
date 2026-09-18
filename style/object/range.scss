@@ -3,9 +3,9 @@
 %o-range {
 	inline-size: 100%;
 	min-inline-size: 0;
-	min-block-size: var(--flair-control-min-height);
+	min-block-size: var(--theme-control-min-height);
 	margin: 0;
-	accent-color: var(--flair-color-accent);
+	accent-color: var(--theme-color-accent);
 	&:focus-visible {
 		@extend %d-focus-ring;
 	}

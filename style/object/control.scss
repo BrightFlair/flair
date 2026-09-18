@@ -4,17 +4,17 @@
 	@extend %d-control;
 	inline-size: 100%;
 	&:focus:not(:disabled) {
-		background: var(--flair-control-background-focus, var(--flair-control-background, var(--flair-color-surface)));
+		background: var(--theme-control-background-focus, var(--theme-control-background, var(--theme-color-surface)));
 	}
 	&:focus-visible {
-		outline-offset: var(--flair-control-focus-offset, var(--flair-focus-offset));
+		outline-offset: var(--theme-control-focus-offset, var(--theme-focus-offset));
 	}
 	&::placeholder {
-		color: var(--flair-color-muted);
+		color: var(--theme-color-muted);
 		opacity: 1;
 	}
 	&:where(textarea) {
-		min-block-size: var(--flair-textarea-min-height);
+		min-block-size: var(--theme-textarea-min-height);
 		resize: vertical;
 	}
 	&[readonly] {

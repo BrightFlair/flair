@@ -1,9 +1,9 @@
 %l-page-frame {
 	box-sizing: border-box;
 	inline-size: 100%;
-	max-inline-size: var(--flair-page-width, 90rem);
-	margin-inline: var(--flair-page-margin, auto);
-	padding-block: var(--flair-page-padding-block, var(--flair-space-6));
-	padding-inline: var(--flair-page-gutter, var(--flair-space-6));
+	max-inline-size: var(--theme-page-width, 90rem);
+	margin-inline: var(--theme-page-margin, auto);
+	padding-block: var(--theme-page-padding-block, var(--theme-space-6));
+	padding-inline: var(--theme-page-gutter, var(--theme-space-6));
 	min-inline-size: 0;
 }

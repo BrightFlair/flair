@@ -2,6 +2,6 @@
 
 %o-key {
 	@extend %o-code;
-	border: var(--flair-border-width) solid var(--flair-color-border);
-	box-shadow: 0 2px 0 var(--flair-color-border);
+	border: var(--theme-border-width) solid var(--theme-color-border);
+	box-shadow: 0 2px 0 var(--theme-color-border);
 }

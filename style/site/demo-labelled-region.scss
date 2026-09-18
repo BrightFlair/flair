@@ -1,0 +1,7 @@
+@use "../flair";
+
+.demo-labelled-region {
+	@extend %p-labelled-region;
+	--theme-region-font: var(--theme-font-mono);
+	white-space: pre-wrap;
+}

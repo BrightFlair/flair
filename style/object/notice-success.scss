@@ -2,5 +2,5 @@
 
 %o-notice-success {
 	@extend %o-notice;
-	border-inline-start-color: var(--flair-color-success, var(--flair-color-text));
+	border-inline-start-color: var(--theme-color-success, var(--theme-color-text));
 }
