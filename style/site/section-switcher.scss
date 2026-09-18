@@ -1,8 +1,7 @@
 section-switcher {
 	display: block;
-	position: fixed;
-	inset: max(1rem, env(safe-area-inset-top)) auto auto 50%;
-	transform: translateX(-50%);
+	position: relative;
+	margin: max(1rem, env(safe-area-inset-top)) auto 0;
 	z-index: 20;
 	width: min(54rem, calc(100% - 2rem));
 	border: var(--site-switcher-border-width, 2px) solid var(--site-switcher-border, var(--site-ink));
@@ -37,7 +36,7 @@ section-switcher {
 	}
 
 	.theme-form {
-		border-left: 1px solid var(--site-ink);
+		border-block-start: 1px solid var(--site-ink);
 	}
 
 	select {
@@ -68,6 +67,11 @@ section-switcher {
 	}
 
 	@media (min-width: 60rem) {
+		position: fixed;
+		inset: max(1rem, env(safe-area-inset-top)) auto auto 50%;
+		transform: translateX(-50%);
+		margin: 0;
+		& .theme-form { border-block-start: 0; border-inline-start: 1px solid var(--site-ink); }
 		& nav { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
 		& label {
 			display: flex;

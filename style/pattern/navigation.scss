@@ -3,6 +3,7 @@
 %p-navigation {
 	> ul {
 		display: flex;
+		flex-direction: column;
 		flex-wrap: wrap;
 		gap: var(--flair-nav-gap, var(--flair-space-2));
 		list-style: none;
@@ -16,4 +17,5 @@
 			@extend %o-nav-link;
 		}
 	}
+	@media (min-width: 45rem) { > ul { flex-direction: row; } }
 }

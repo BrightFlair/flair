@@ -105,3 +105,11 @@ test('each mixin can be imported directly and through the public entry point', (
 		assert.doesNotMatch(direct + publicCss, /@font-face|--site-/);
 	}
 });
+
+// Keep mobile defaults in the base rules; wider layouts are enhancements.
+test('responsive styles do not introduce desktop-first width queries', () => {
+	for(const file of styles()) {
+		const source = fs.readFileSync(file, 'utf8');
+		assert.doesNotMatch(source, /@(media|container)[^{]*(?:max-width|width\s*<=?)/, path.relative(root, file));
+	}
+});

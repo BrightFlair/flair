@@ -7,10 +7,32 @@
 	);
 	max-block-size: calc(100% - 2 * var(--flair-space-4));
 	overflow: auto;
+	overscroll-behavior: contain;
+	overflow-wrap: anywhere;
 	margin: auto;
 	&[open]:not(:modal) {
 		position: static;
 		margin-inline: 0;
+	}
+	&:modal {
+		inline-size: 100%;
+		max-inline-size: none;
+		block-size: 100dvh;
+		max-block-size: 100dvh;
+		margin: 0;
+		border: 0;
+		border-radius: 0;
+		padding-block: max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-top)) max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-bottom));
+		padding-inline: max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-left)) max(var(--flair-surface-padding, var(--flair-space-6)), env(safe-area-inset-right));
+		@media (min-width: 40rem) {
+			inline-size: min(var(--flair-dialog-width, 32rem), calc(100% - 2 * var(--flair-space-4)));
+			// Native modal insets are zero; auto would stretch to viewport height.
+			block-size: fit-content;
+			max-block-size: calc(100dvh - 2 * var(--flair-space-4));
+			margin: auto;
+			border: var(--flair-surface-border-width, var(--flair-border-width)) solid var(--flair-color-border);
+			border-radius: var(--flair-surface-radius, var(--flair-radius));
+		}
 	}
 	&::backdrop {
 		background: var(--flair-dialog-backdrop, rgb(0 0 0 / 55%));

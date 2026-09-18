@@ -7,7 +7,7 @@
 	justify-content: center;
 	gap: var(--flair-space-2);
 	inline-size: auto;
-	min-block-size: var(--flair-button-min-height, var(--flair-control-min-height));
+	min-block-size: max(44px, var(--flair-button-min-height, var(--flair-control-min-height)));
 	padding-block: var(
 		--flair-button-padding-block,
 		var(--flair-control-padding-block, var(--flair-space-2))
@@ -47,4 +47,5 @@
 		);
 		box-shadow: none;
 	}
+	@media (min-width: 40rem) { min-block-size: var(--flair-button-min-height, var(--flair-control-min-height)); }
 }

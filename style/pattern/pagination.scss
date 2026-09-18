@@ -1,6 +1,7 @@
 @use "navigation";
 %p-pagination {
 	@extend %p-navigation;
+	> ul { flex-direction: row; }
 	> ul > li > span {
 		display: block;
 		padding: var(--flair-nav-padding-block, var(--flair-space-3))

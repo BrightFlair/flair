@@ -495,3 +495,35 @@ For a custom theme, include `flair.defaults` and `flair.color-scheme` at `html`,
 The demonstration website uses `data-flair-theme` for its preset picker; that attribute is not required by the library or by consuming applications. `data-theme` is reserved for the light/dark override. Demo preferences are stored independently in `flair-theme` and `flair-scheme` cookies, with `?theme=` and `?scheme=system|light|dark` GET fallbacks. The former Dark preset is now labelled Ink and, like every theme, has both schemes.
 
 `test/color-scheme-browser-check.cjs` checks standalone consumers without JavaScript, both system preferences and explicit overrides, live switching and unchanged geometry. It also checks all demo routes in dark mode for overflow/accessibility and exercises persistence with and without JavaScript. Run it with the same optional browser-tool setup as the other browser checks.
+
+## Mobile-first layout
+
+Start with the narrow layout. Add space-dependent enhancements using `min-width` queries; do not use `max-width` queries to repair a desktop default. Intrinsic grids, wrapping rows and locally scrolling tables adapt to their container without needing viewport breakpoints.
+
+Primary navigation stacks by default and becomes horizontal at 45rem. Side navigation remains vertical. Page links with active indicators and pagination remain horizontal, wrapping or locally scrolling. Navigation links have a minimum height of 44px (or 2.75rem if larger) below 45rem. Controls, buttons, labelled choices and disclosure summaries also have a 44px minimum target height below 40rem. Form actions stack in source order, stretching to their container, then form a wrapping row at 40rem.
+
+For a collapsible menu, extend the navigation pattern onto your own selector and include `flair.collapsible-navigation($from: 60rem)` (choose the breakpoint to match your shell). It expects a direct child button followed by a `ul`:
+
+```html
+<nav aria-label="Sections">
+  <button type="button" aria-expanded="false" aria-controls="sections" hidden>Sections menu</button>
+  <ul id="sections"><li><a href="/overview">Overview</a></li></ul>
+</nav>
+```
+
+```scss
+nav {
+  @extend %p-side-navigation;
+  @include flair.collapsible-navigation($from: 60rem);
+}
+```
+
+The application removes `hidden` after installing its click handler, then toggles `aria-expanded`. While the button is hidden, links remain available without JavaScript. At the supplied breakpoint the button disappears and links are always visible, regardless of the mobile expanded state. Keyboard focus must return to the button when closing a menu containing focus; Escape should close it. The website's `data-navigation-toggle` hook and script demonstrate that behaviour; they are not a library requirement. All three playground sidebars use this mixin.
+
+`%o-dialog` uses the full dynamic viewport for native modal dialogs on mobile, with safe-area padding and internal scrolling. From 40rem it becomes a centred, theme-decorated panel constrained by `--flair-dialog-width` and viewport height. Inline nonmodal/no-JavaScript content remains in normal document flow. Applications own `showModal()`, dismissal, validation and focus restoration; the documentation demonstrates them using native dialog forms. Form actions preserve DOM/tab order in both layouts.
+
+The documentation switcher stays in normal flow on mobile so it cannot obscure focused content; fixed positioning is added at 60rem.
+
+Run `NODE_PATH=/tmp/flair-review/node_modules node test/mobile-browser-check.cjs` for touch navigation, keyboard dismissal, breakpoint transitions, full-screen/short-height modal forms, all theme/scheme combinations and no-JavaScript fallback.
+
+The mobile audit also covers fields, cards, grids, metrics, code, tables, sidebars and page headers/footers. These already wrap, stack or scroll within their containers and retain those intrinsic behaviours. Themes supply appearance without deciding layout breakpoints.

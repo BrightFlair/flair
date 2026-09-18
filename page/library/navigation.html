@@ -14,11 +14,12 @@
 		<h2 id="primary-navigation-title">Primary navigation</h2>
 		<p>
 			Use ordinary links for page navigation. The current destination is identified with
-			aria-current.
+			aria-current. On narrow screens, open the menu to reveal its links. Without JavaScript the links remain visible.
 		</p>
 		<div class="flair-example">
 			<nav class="demo-navigation" aria-label="Example library navigation">
-				<ul>
+				<button type="button" aria-expanded="false" aria-controls="example-navigation-links" data-navigation-toggle hidden>Library menu</button>
+				<ul id="example-navigation-links">
 					<li><a href="/library/navigation/" aria-current="page">Navigation</a></li>
 					<li><a href="/library/forms/">Forms</a></li>
 					<li><a href="/library/tables/">Tables</a></li>
@@ -30,7 +31,8 @@
 		<details class="reference-source">
 			<summary>HTML and Sass</summary>
 			<pre><code>&lt;nav class="demo-navigation" aria-label="Example library navigation"&gt;
-	&lt;ul&gt;
+	&lt;button type="button" aria-expanded="false" aria-controls="example-navigation-links" data-navigation-toggle hidden&gt;Library menu&lt;/button&gt;
+	&lt;ul id="example-navigation-links"&gt;
 		&lt;li&gt;&lt;a href="/library/navigation/" aria-current="page"&gt;Navigation&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href="/library/forms/"&gt;Forms&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href="/library/tables/"&gt;Tables&lt;/a&gt;&lt;/li&gt;
@@ -41,6 +43,7 @@
 
 .demo-navigation {
 	@extend %p-navigation;
+	@include flair.collapsible-navigation($from: 45rem);
 }</code></pre>
 		</details>
 	</section>
@@ -95,8 +98,7 @@
 	<section class="reference-section" id="page-tabs" aria-labelledby="page-tabs-title">
 		<h2 id="page-tabs-title">Page navigation with an active indicator</h2>
 		<p>
-			These are links to separate pages, not an interactive tab widget. They wrap without
-			hiding destinations.
+			These are links to separate pages, not an interactive tab widget. They stay horizontal, wrapping or scrolling within the navigation according to the theme.
 		</p>
 		<div class="flair-example">
 			<nav class="demo-page-tabs" aria-label="Related examples">

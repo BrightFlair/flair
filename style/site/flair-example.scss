@@ -58,6 +58,7 @@
 
 	& .demo-navigation {
 		@extend %p-navigation;
+		@include flair.collapsible-navigation($from: 45rem);
 	}
 
 	& .demo-side-navigation {

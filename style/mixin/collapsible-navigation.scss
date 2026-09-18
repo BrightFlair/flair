@@ -1,0 +1,17 @@
+@use "../object/button";
+
+// A direct child button controls the following ul. Without enhancement, hide the
+// button with hidden and leave the links available in normal document flow.
+@mixin collapsible-navigation($from: 60rem) {
+	> button {
+		@extend %o-button;
+		inline-size: 100%;
+		min-block-size: max(44px, 2.75rem);
+	}
+	> button[hidden] { display: none; }
+	> button:not([hidden])[aria-expanded="false"] ~ ul:not(:focus-within) { display: none; }
+	@media (min-width: $from) {
+		> button { display: none; }
+		> button:not([hidden])[aria-expanded="false"] ~ ul:not(:focus-within) { display: flex; }
+	}
+}

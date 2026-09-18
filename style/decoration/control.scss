@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 	min-inline-size: 0;
 	max-inline-size: 100%;
-	min-block-size: var(--flair-control-min-height);
+	min-block-size: max(44px, var(--flair-control-min-height));
 	margin: 0;
 	padding: var(--flair-control-padding-block, var(--flair-space-2))
 		var(--flair-control-padding-inline, var(--flair-space-3));
@@ -38,4 +38,5 @@
 		cursor: not-allowed;
 		opacity: var(--flair-disabled-opacity, 1);
 	}
+	@media (min-width: 40rem) { min-block-size: var(--flair-control-min-height); }
 }

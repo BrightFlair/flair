@@ -116,3 +116,31 @@ for(const example of document.querySelectorAll("[data-state-example]")) {
 		status.textContent = "Reveal replayed. Reduced motion preferences are respected.";
 	});
 }
+
+// Progressive navigation enhancement: links remain visible without JavaScript.
+for(const toggle of document.querySelectorAll("[data-navigation-toggle]")) {
+	const links = document.getElementById(toggle.getAttribute("aria-controls"));
+	if(!links) continue;
+	toggle.hidden = false;
+	const collapse = () => {
+		toggle.focus();
+		toggle.setAttribute("aria-expanded", "false");
+	};
+	toggle.addEventListener("click", () => {
+		toggle.setAttribute("aria-expanded", String(toggle.getAttribute("aria-expanded") !== "true"));
+	});
+	toggle.parentElement.addEventListener("keydown", event => {
+		if(event.key === "Escape" && getComputedStyle(toggle).display !== "none") {
+			collapse();
+			event.preventDefault();
+		}
+	});
+	window.addEventListener("resize", () => {
+		const mobile = getComputedStyle(toggle).display !== "none";
+		if(mobile && links.contains(document.activeElement)) toggle.setAttribute("aria-expanded", "true");
+		else if(!mobile && document.activeElement === toggle) links.querySelector("a")?.focus();
+	});
+	links.addEventListener("click", event => {
+		if(event.target.closest("a") && getComputedStyle(toggle).display !== "none") collapse();
+	});
+}

@@ -2,7 +2,8 @@
 	min-height: 100svh;
 	max-inline-size: calc(var(--site-library-max-width) + 2 * var(--site-gutter));
 	margin-inline: auto;
-	padding: 9rem var(--site-gutter);
+	padding: 2rem var(--site-gutter);
+	@media (min-width: 60rem) { padding-block: 9rem; }
 	.library-heading {
 		padding-bottom: var(--site-space-large);
 		border-bottom: 2px solid var(--site-ink);

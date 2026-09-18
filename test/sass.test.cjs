@@ -165,12 +165,12 @@ test('theme mixins are opt-in and export no website selectors or font downloads'
 	}
 });
 
-test('metric alignment applies to the value and actions without a fixed viewport breakpoint', () => {
+test('metric alignment applies to the value and responsive actions', () => {
 	const css = compile('@use "flair"; .metric { @extend %p-metric; --flair-metric-align: end; }');
 	assert.match(css, /text-align: var\(--flair-metric-align, center\)/);
 	assert.match(css, /justify-content: var\(--flair-metric-align, center\)/);
 	assert.match(css, /font-variant-numeric: tabular-nums/);
-	assert.doesNotMatch(css, /@media|counter-a|single-counter/);
+	assert.doesNotMatch(css, /counter-a|single-counter/);
 });
 
 test('state decorations respect reduced motion and remain independent of Flux', () => {

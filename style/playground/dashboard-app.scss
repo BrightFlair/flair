@@ -9,7 +9,7 @@
 		padding-block: 1.5rem;
 		@extend %d-sidebar-contrast;
 		> header { padding: 1rem; > strong { font-size: 1.75rem; } }
-		> nav { @extend %p-side-navigation; padding: 1rem; }
+		> nav { @extend %p-side-navigation; @include flair.collapsible-navigation($from: 60rem); padding: 1rem; }
 	}
 	> section {
 		@extend %l-dashboard;

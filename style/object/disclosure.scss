@@ -4,6 +4,7 @@
 	@extend %d-surface;
 	padding: 0;
 	> summary {
+		min-block-size: 44px;
 		padding: var(--flair-disclosure-padding, var(--flair-space-4));
 		border-radius: inherit;
 		background: var(--flair-disclosure-background, transparent);
@@ -25,4 +26,5 @@
 		border-end-start-radius: 0;
 		border-end-end-radius: 0;
 	}
+	@media (min-width: 40rem) { > summary { min-block-size: 0; } }
 }

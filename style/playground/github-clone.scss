@@ -16,7 +16,7 @@
 			padding-block: 1rem;
 			> h2, > p { margin-inline: 1rem; }
 			> h2 { font-size: 1rem; }
-			> nav { @extend %p-side-navigation; }
+			> nav { @extend %p-side-navigation; @include flair.collapsible-navigation($from: 46rem); }
 		}
 		> section {
 			display: flex;

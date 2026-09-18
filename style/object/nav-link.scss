@@ -1,6 +1,8 @@
 @use "../decoration/focus-ring";
 %o-nav-link {
 	display: block;
+	box-sizing: border-box;
+	min-block-size: max(44px, 2.75rem);
 	padding: var(--flair-nav-padding-block, var(--flair-space-3))
 		var(--flair-nav-padding-inline, var(--flair-space-4));
 	border-radius: var(--flair-nav-radius, var(--flair-radius));
@@ -34,4 +36,5 @@
 	&:focus-visible {
 		@extend %d-focus-ring;
 	}
+	@media (min-width: 45rem) { min-block-size: 0; }
 }

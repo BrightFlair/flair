@@ -4,6 +4,7 @@
 	@extend %p-navigation;
 	border-block-end: var(--flair-tab-border-width, var(--flair-border-width)) solid var(--flair-color-border);
 	> ul {
+		flex-direction: row;
 		flex-wrap: var(--flair-tab-wrap, wrap);
 		overflow-x: var(--flair-tab-overflow, visible);
 		scrollbar-width: var(--flair-tab-scrollbar, auto);
@@ -32,4 +33,5 @@
 			border-block-end-color: var(--flair-tab-indicator-color, var(--flair-color-accent));
 		}
 	}
+	@media (min-width: 45rem) { > ul { flex-direction: row; } }
 }

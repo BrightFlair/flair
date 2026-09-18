@@ -4,7 +4,8 @@
 %p-form-actions {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
+	flex-direction: column;
+	align-items: stretch;
 	justify-content: var(--flair-actions-align, flex-end);
 	gap: var(--flair-actions-gap, var(--flair-space-3));
 	margin-block-start: var(--flair-actions-margin, var(--flair-space-2));
@@ -15,6 +16,11 @@
 		@extend %o-button-primary;
 	}
 	> .action-start {
-		margin-inline-end: auto;
+		margin-inline-end: 0;
+	}
+	@media (min-width: 40rem) {
+		flex-direction: row;
+		align-items: center;
+		> .action-start { margin-inline-end: auto; }
 	}
 }
