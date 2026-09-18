@@ -2,5 +2,34 @@
 
 %p-page-tabs {
 	@extend %p-navigation;
-	border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+	border-block-end: var(--flair-tab-border-width, var(--flair-border-width)) solid var(--flair-color-border);
+	> ul {
+		flex-wrap: var(--flair-tab-wrap, wrap);
+		overflow-x: var(--flair-tab-overflow, visible);
+		scrollbar-width: var(--flair-tab-scrollbar, auto);
+		gap: var(--flair-tab-gap, var(--flair-nav-gap, var(--flair-space-2)));
+	}
+	> ul > li {
+		border-block-end: var(--flair-tab-indicator-width, 0px) solid transparent;
+		> a {
+			margin: var(--flair-tab-link-margin, 0);
+			font-weight: var(--flair-tab-link-weight, inherit);
+			opacity: var(--flair-tab-link-opacity, 1);
+			transition: var(--flair-tab-link-transition, none);
+			padding-inline: var(--flair-tab-link-padding-inline,
+				var(--flair-nav-padding-inline, var(--flair-space-4)));
+			border-radius: var(--flair-tab-link-radius,
+				var(--flair-nav-radius, var(--flair-radius)));
+			&[aria-current]:not([aria-current="false"]):not([aria-current=""]) {
+				font-weight: var(--flair-tab-current-weight, var(--flair-nav-current-weight, 700));
+				opacity: var(--flair-tab-current-opacity, 1);
+				&:not(:hover):not(:focus-visible) {
+					background: var(--flair-tab-current-background, var(--flair-nav-current-background, var(--flair-selected-background, var(--flair-color-surface-disabled))));
+				}
+			}
+		}
+		&:has(> a[aria-current]:not([aria-current="false"]):not([aria-current=""])) {
+			border-block-end-color: var(--flair-tab-indicator-color, var(--flair-color-accent));
+		}
+	}
 }

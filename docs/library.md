@@ -22,7 +22,7 @@ This pass implements all ten documentation sections. It is a set of Sass definit
 }
 ```
 
-Configure your Sass load path to include Flair's `style` directory. Load fonts in the implementing application. Import `theme` separately with `@use "theme";` to access the opt-in `theme.base`, `theme.ink`, `theme.paper`, `theme.vivid`, `theme.github` and `theme.material` mixins. Include `theme.base` first, followed by one optional preset at the application root. `--site-*` properties, section switching, cookies and demo scripts are website responsibilities.
+Configure your Sass load path to include Flair's `style` directory. Load fonts in the implementing application. Import `theme` separately with `@use "theme";` to access the opt-in `theme.base`, `theme.ink`, `theme.paper`, `theme.vivid`, `theme.github` and `theme.material` mixins. Include `theme.base` first, followed by one optional preset at the application root. Each theme supplies both light and dark colours; the scheme follows the browser unless `html[data-theme="light"]` or `html[data-theme="dark"]` overrides it. `--site-*` properties, section switching, cookies and demo scripts are website responsibilities.
 
 `@extend` emits the dependencies of the requested definition. Sass does not inspect HTML to prune unused descendant rules. Keep selectors narrow and prefer setting inherited properties over duplicating component CSS. Element typography and controls are opt-in mixins (`flair.typography` and `flair.controls`) that can be included inside an application selector.
 
@@ -78,10 +78,10 @@ Forms retain the wrapping-label contract documented in [forms.md](forms.md). IDs
 | Theme | Intended differences |
 | --- | --- |
 | Monochrome | Ubuntu, straight corners, unshadowed surfaces and neutral states. |
-| Dark | Dark raised surfaces, light current-item treatment and light code text. |
+| Ink | Neutral raised surfaces and a strong current-item treatment, with light and dark palettes. |
 | Paper | Serif headings, generous spacing and leading, warm inset areas and subtle shadows. |
 | Vivid | Heavy borders, offset shadows, larger padding, lime selection, pill badges and dark code blocks. |
-| GitHub | api.horse's light palette and Mona Sans; compact panels, coral navigation indicator, grey table stripes and GitHub-style syntax colours. |
+| GitHub | the reference light palette, sans-serif navigation and Mona Sans controls; compact panels, neutral current navigation backgrounds, unmarked sidebar links, thin coral tab indicators, grey table stripes and GitHub-style syntax colours. |
 | Material | Roboto, rounded elevated surfaces, tonal navigation, larger table padding and rounded badges. |
 
 These are presentations of shared semantic markup, not complete replicas of GitHub or Material widgets. Native controls keep browser behaviour. There are no floating-label fields, ripple engine, custom tabs, custom select replacement or theme-specific HTML trees. All new theme differences use inherited CSS properties; local variants demonstrate overriding only a few values.
@@ -410,3 +410,88 @@ These additions are public through `flair.scss`. Every example includes live HTM
 Source files follow their layer: `object/value.scss`, `object/skip-link.scss`, `pattern/metric.scss`, `pattern/action-list.scss`, `pattern/search-results.scss`, `pattern/page-header.scss`, `pattern/page-intro.scss`, `layout/page-frame.scss`, `decoration/visually-hidden.scss`, `decoration/state.scss`, `mixin/base.scss`, `mixin/sticky-sidebar.scss` and the `theme/*.scss` files. Heading, lead and eyebrow definitions are nested under `%d-typography` in `decoration/typography.scss`, and extended as `%d-typography-heading`, `%d-typography-lead` and `%d-typography-eyebrow`.
 
 Flux maps `--flux-first-visible` to `--flair-reveal-progress` and its waiting/dragging classes to the matching decorations. The public library does not emit Flux selectors or require its runtime. Clock geometry, pointer calculations and gauge illustration remain application examples.
+
+### Application shells
+
+`@include flair.application-shell($sidebar: "> aside", $content: "> section", $from: 60rem)` binds a responsive two-column shell to application selectors. Both selectors must identify direct children. Below the supplied breakpoint, children follow document order in one column. Above it, `--flair-sidebar-width` (18rem by default) sets the rail and the content fills the remainder. The rail is sticky and independently scrollable; `--flair-sticky-offset` defaults to 0px. `--flair-shell-height` defaults to 100svh and `--flair-layout-gap` to 0. This mixin applies no colours or components. It is also directly importable from `mixin/application-shell`.
+
+`%l-page-frame` accepts `--flair-page-margin` (default `auto`) for its inline margins. Set it to `0` to anchor a capped frame to the inline start. See [the application layout proofs](playground.md#application-layout-proofs) for centred, capped-panel and fluid examples.
+
+Navigation current-item backgrounds can be set independently of general selection with `--flair-nav-current-background` (falls back to `--flair-selected-background`). Side navigation accepts `--flair-side-nav-current-shadow`, falling back to the standard navigation current shadow. The GitHub preset disables navigation shadows. Page tabs use `--flair-tab-indicator-width` (default `0px`) and `--flair-tab-indicator-color` (default accent colour) for a separate, straight current-item border on the list item. GitHub sets this to 2px coral, leaving the rounded link independent of the indicator.
+
+`--flair-nav-current-hover-background` controls the current navigation link on hover and keyboard focus, falling back to its ordinary current background. GitHub uses the same subtle grey hover background for current and other links.
+
+Page tabs separate link spacing from the indicator container: `--flair-tab-link-margin` defaults to `0`, while `--flair-tab-link-padding-inline`, `--flair-tab-link-radius` and `--flair-tab-gap` fall back to their navigation equivalents. GitHub uses a 0.5rem inset, padding and radius with no gap between list items, so the straight indicator spans the container beneath the smaller hover target.
+
+`--flair-tab-current-weight` overrides selected page-tab weight, falling back to `--flair-nav-current-weight` (700). GitHub sets both ordinary and selected header tabs to 500, while other selected navigation links remain bold.
+
+### GitHub reference checks
+
+The optional `test/github-reference-check.cjs` compiles the original reference SCSS read-only and compares it with Flair using identical, generic fixture text. Run it with `FLAIR_GITHUB_REFERENCE=/path/to/reference NODE_PATH=/tmp/flair-review/node_modules node test/github-reference-check.cjs`. It checks header and sidebar links, inputs, selects, textareas and ordinary/primary buttons at rest, on hover and on keyboard focus. It compares computed colours, opacity, typography, spacing, borders, transitions and dimensions, then checks that the header and sidebar screenshots are byte-identical. Screenshots are written to `/tmp/flair-github-parity/`. The check uses Chromium at 1200px, in light mode, with the shared Mona Sans font loaded; it does not establish parity for app-specific icons, dialogs, editors, dark mode or every viewport.
+
+The source's inactive header links have 0.75 opacity, including their hover background, while selected links use full opacity. Its body/navigation use sans-serif and normal leading; Mona Sans belongs to native controls. These distinctions are represented by the GitHub preset rather than playground overrides. Tab opacity, weight, transition, wrapping, overflow and current background are independently configurable through `--flair-tab-*` properties. Side navigation has separate background, focus, leading, inset and optional pseudo-element icon-slot properties (`--flair-side-nav-*`). Other themes retain their defaults. `--flair-control-font` defaults to the body font; `--flair-control-transition` defaults to none.
+
+Disclosure summaries accept `--flair-disclosure-weight` (falls back to heading weight) and `--flair-disclosure-hover-background` (falls back to navigation hover background). GitHub uses 700 weight and the unchanged summary background on hover. The native disclosure marker is retained.
+
+### Contrasting sidebars
+
+Applications request the visual variant in SCSS; they do not choose a background colour:
+
+```scss
+@use "flair";
+
+.handbook {
+    @include flair.application-shell($content: "> article");
+    > aside { @extend %d-sidebar-contrast; }
+    > aside > nav { @extend %p-side-navigation; }
+}
+```
+
+`%d-sidebar-contrast` is a decoration: it adds no layout, dimensions, padding or HTML classes. It coordinates the sidebar surface, navigation text and resting/hover/focus/current states through inherited properties scoped to that sidebar. Resting links are transparent; hovered and focused links use a theme-defined contrasting fill; selected links retain a distinct background and foreground when hovered or focused. Ordinary sidebars elsewhere retain their theme's normal appearance.
+
+Themes provide `--flair-sidebar-contrast-background`, `--flair-sidebar-contrast-text`, `--flair-sidebar-contrast-hover-background`, `--flair-sidebar-contrast-current-background` and `--flair-sidebar-contrast-current-text`. Defaults supply the monochrome version, and each preset supplies its own coordinated palette. A custom theme can set these five properties at its root. The GitHub variant uses a light grey sidebar, transparent resting links, a darker grey hover and a still darker current-item fill. The ordinary GitHub sidebar remains white.
+
+The documentation and dashboard playground pages opt into this variant; their application SCSS no longer assigns sidebar background colours. The public module can also be imported directly as `decoration/sidebar-contrast`.
+
+### Extending a sidebar surface to the viewport edge
+
+`flair.sidebar-bleed($from: 60rem)` is an optional, responsive decoration for an existing sidebar. It paints the current sidebar surface towards the inline-start viewport edge (left in LTR, right in RTL), preserving the centred page frame, sidebar width and internal scrolling. Apply it alongside the surface variant:
+
+```scss
+.handbook > aside {
+    @extend %d-sidebar-contrast;
+    @include flair.sidebar-bleed($from: 60rem);
+}
+```
+
+The mixin reads `--flair-sidebar-background`, supplied by `%d-sidebar-contrast`, and otherwise falls back to the theme's ordinary surface. There are no theme-specific colours in application SCSS. It uses an outward box shadow and a clip path to restrict painting to the sidebar's height and inline-start side, without creating horizontal scrollable overflow or an interactive overlay. It owns the sidebar's `box-shadow` and `clip-path`; ancestors must not clip the outward painting. Import it directly from `mixin/sidebar-bleed` or through `flair`.
+
+## Theme identity and colour scheme
+
+Choose a theme in SCSS once. Its colours then follow the system preference without JavaScript:
+
+```scss
+@use "flair";
+@use "theme";
+
+html {
+    @include theme.base;
+    @include theme.github;
+    background: var(--flair-color-surface);
+    color: var(--flair-color-text);
+}
+```
+
+```html
+<html lang="en">                    <!-- Follow the system -->
+<html lang="en" data-theme="light"> <!-- Always light -->
+<html lang="en" data-theme="dark">  <!-- Always dark -->
+```
+
+Removing `data-theme` restores the system preference, including live changes. Both modes share typography, dimensions, component structure and layout. The mixins set `color-scheme: light dark` and use CSS `light-dark()` pairs, so native controls and scrollbars follow the selected scheme too. The explicit attribute selects a single `color-scheme`. This requires a browser supporting CSS `light-dark()`.
+
+For a custom theme, include `flair.defaults` and `flair.color-scheme` at `html`, then define paired semantic properties such as `--flair-color-surface: light-dark(#fff, #161616)` and `--flair-color-text: light-dark(#111, #f5f5f5)`. Set the component and contrast-sidebar palettes in that same theme. Colours that work in both modes can remain a single value. The standalone `defaults` mixin supplies colour pairs but leaves opting into system scheme selection to `color-scheme` or a theme mixin.
+
+The demonstration website uses `data-flair-theme` for its preset picker; that attribute is not required by the library or by consuming applications. `data-theme` is reserved for the light/dark override. Demo preferences are stored independently in `flair-theme` and `flair-scheme` cookies, with `?theme=` and `?scheme=system|light|dark` GET fallbacks. The former Dark preset is now labelled Ink and, like every theme, has both schemes.
+
+`test/color-scheme-browser-check.cjs` checks standalone consumers without JavaScript, both system preferences and explicit overrides, live switching and unchanged geometry. It also checks all demo routes in dark mode for overflow/accessibility and exercises persistence with and without JavaScript. Run it with the same optional browser-tool setup as the other browser checks.

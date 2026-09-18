@@ -1,28 +1,38 @@
+@use "../mixin/color-scheme";
+
 @mixin paper {
-	--flair-color-text: #24211d;
-	--flair-color-muted: #59564f;
-	--flair-color-surface: #fffdf5;
-	--flair-color-surface-disabled: #eee8d8;
-	--flair-color-border: #827765;
-	--flair-color-accent: #315c40;
-	--flair-color-on-accent: #fff;
-	--flair-color-danger: #952a20;
+	@include color-scheme.color-scheme;
+	--flair-color-text: light-dark(#24211d, #eee8d8);
+	--flair-color-muted: light-dark(#59564f, #c2b9a8);
+	--flair-color-surface: light-dark(#fffdf5, #201e19);
+	--flair-color-surface-disabled: light-dark(#eee8d8, #343025);
+	--flair-color-border: light-dark(#827765, #a89b83);
+	--flair-color-accent: light-dark(#315c40, #a2c5a3);
+	--flair-color-on-accent: light-dark(#fff, #18251c);
+	--flair-color-danger: light-dark(#952a20, #ffaca0);
 	--flair-radius: 0.4rem;
 	--flair-font-heading: Georgia, serif;
 	--flair-heading-weight: 400;
 	--flair-text-leading: 1.8;
-	--flair-surface-background: #fffaf0;
+	--flair-surface-background: light-dark(#fffaf0, #29261f);
 	--flair-surface-padding: var(--flair-space-8);
 	--flair-surface-shadow: 0 2px 5px rgb(36 33 29 / 10%);
-	--flair-selected-background: #e2eadc;
-	--flair-selected-text: #24482f;
+	--flair-selected-background: light-dark(#e2eadc, #3a4b36);
+	--flair-selected-text: light-dark(#24482f, #d6e9cd);
 	--flair-nav-radius: 0.25rem;
 	--flair-badge-radius: 0.25rem;
-	--flair-code-background: #eee8d8;
-	--flair-syntax-keyword: #315c40;
-	--flair-syntax-string: #7d3321;
-	--flair-table-stripe-background: #f5efdf;
-	--flair-color-success: #315c40;
-	--flair-color-warning: #805400;
-	--flair-disclosure-background: #f5efdf;
+	--flair-code-background: light-dark(#eee8d8, #343025);
+	--flair-syntax-keyword: light-dark(#315c40, #a2c5a3);
+	--flair-syntax-string: light-dark(#7d3321, #ecb19a);
+	--flair-table-stripe-background: light-dark(#f5efdf, #302c24);
+	--flair-color-success: light-dark(#315c40, #a2c5a3);
+	--flair-color-warning: light-dark(#805400, #e3be77);
+	--flair-disclosure-background: light-dark(#f5efdf, #302c24);
+
+	// Coordinated surface and navigation states for the contrast sidebar variant.
+	--flair-sidebar-contrast-background: light-dark(#eee8d8, #343025);
+	--flair-sidebar-contrast-text: light-dark(#24211d, #eee8d8);
+	--flair-sidebar-contrast-hover-background: light-dark(#e4ddc9, #454031);
+	--flair-sidebar-contrast-current-background: light-dark(#d7e3d0, #46553d);
+	--flair-sidebar-contrast-current-text: light-dark(#24482f, #d6e9cd);
 }

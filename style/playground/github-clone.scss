@@ -1,0 +1,39 @@
+@use "../flair";
+
+.github-clone {
+	@extend %d-typography;
+	@include flair.typography;
+	> header {
+		background: var(--flair-color-surface-disabled);
+		border-block-end: var(--flair-border-width) solid var(--flair-color-border);
+		> h1 { margin: 0; padding: 1rem 1.5rem; font-size: 1.25rem; }
+		> nav { @extend %p-page-tabs; padding-inline: 1rem; }
+	}
+	> div {
+		@include flair.application-shell($from: 46rem);
+		--flair-sidebar-width: 24rem;
+		> aside {
+			padding-block: 1rem;
+			> h2, > p { margin-inline: 1rem; }
+			> h2 { font-size: 1rem; }
+			> nav { @extend %p-side-navigation; }
+		}
+		> section {
+			display: flex;
+			flex-wrap: wrap;
+			align-content: start;
+			> article {
+				flex: 1 1 28rem;
+				min-inline-size: 0;
+				max-inline-size: 48rem;
+				padding: 1rem;
+				> h2 { font-size: 1.25rem; border-block-end: var(--flair-border-width) solid var(--flair-color-border); padding-block-end: 1rem; }
+			}
+		}
+	}
+	#editor form { @extend %p-stack; label { @extend %o-form-field; } > button { @extend %o-button-primary; } }
+	details { @extend %o-disclosure; > label { padding: 1rem; } }
+	pre { @extend %o-code-block; }
+	dl { @extend %p-data-list; }
+	#preview > p > span { @extend %o-badge; }
+}

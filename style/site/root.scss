@@ -19,7 +19,6 @@
 	--site-space-medium: 1.5rem;
 	--site-space-large: 3rem;
 	--site-section-space: clamp(4rem, 9vw, 9rem);
-	color-scheme: light;
 	font-family: var(--site-font-body);
 	font-size: var(--site-font-size, 16px);
 	color: var(--site-ink);
@@ -27,27 +26,27 @@
 
 	@include theme.base;
 
-	&[data-theme="ink"] {
+	&[data-flair-theme="ink"] {
 		@include theme.ink;
 	}
 
-	&[data-theme="paper"] {
+	&[data-flair-theme="paper"] {
 		@include theme.paper;
 	}
 
-	&[data-theme="vivid"] {
+	&[data-flair-theme="vivid"] {
 		@include theme.vivid;
 	}
 
-	&[data-theme="github"] {
+	&[data-flair-theme="github"] {
 		@include theme.github;
 	}
 
-	&[data-theme="material"] {
+	&[data-flair-theme="material"] {
 		@include theme.material;
 	}
 
-	&[data-theme="github"] {
+	&[data-flair-theme="github"] {
 		--site-font-body: var(--flair-font-body);
 		--site-font-heading: var(--flair-font-body);
 		--site-font-size: 14px;
@@ -59,11 +58,11 @@
 		--site-switcher-shadow: 0 1px 0 rgb(31 35 40 / 4%);
 	}
 
-	&[data-theme="material"] {
+	&[data-flair-theme="material"] {
 		--site-font-body: var(--flair-font-body);
 		--site-font-heading: var(--flair-font-body);
 		--site-switcher-border-width: 1px;
-		--site-switcher-border: #cac4d0;
+		--site-switcher-border: var(--flair-color-border);
 		--site-hero-width-factor: 2.5;
 		--site-hero-offset: -0.058em;
 		--site-switcher-radius: var(--flair-radius);

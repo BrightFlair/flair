@@ -1,0 +1,32 @@
+@use "../flair";
+
+.documentation-website {
+	@extend %d-typography;
+	@include flair.typography;
+	@extend %l-page-frame;
+	@include flair.application-shell($content: "> article");
+	--flair-page-width: 96rem;
+	--flair-page-gutter: 0;
+	--flair-page-padding-block: 0;
+	--flair-sidebar-width: 17rem;
+	> aside {
+		@extend %d-sidebar-contrast;
+		@include flair.sidebar-bleed($from: 60rem);
+		padding-block: 1.5rem;
+		> header { padding-inline: 1rem; }
+		> header > a { font-size: 2rem; font-weight: bold; }
+		nav[aria-label="Documentation"] { @extend %p-side-navigation; padding: 1rem; }
+	}
+	> article {
+		@extend %p-prose;
+		max-inline-size: 54rem;
+		padding: 2rem 1rem;
+		> section, > footer { margin-block-start: 4rem; }
+		pre { @extend %o-code-block; }
+		details { @extend %o-disclosure; margin-block: 1rem; > p { padding: 1rem; } }
+	}
+	@media (min-width: 60rem) {
+		> aside { min-block-size: 100svh; }
+		> article { padding: 5.5rem 2rem; }
+	}
+}

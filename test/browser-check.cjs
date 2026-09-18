@@ -24,7 +24,7 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 					assert.equal(response.status(), 200, route);
 					await page.evaluate(() => document.fonts.ready);
 					assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${theme} ${width} ${route}: page overflow`);
-					assert.equal(await page.locator('html').getAttribute('data-theme'), theme);
+					assert.equal(await page.locator('html').getAttribute('data-flair-theme'), theme);
 					if(theme === 'base' && route === 'layouts') {
 						const columns = await page.locator('[data-grid-default]').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
 						assert.equal(columns, width === 320 ? 1 : width === 768 ? 2 : 3);
@@ -76,7 +76,7 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		assert.equal(await page.locator('#exclusive .demo-accordion > details[open]').count(), 1);
 
 		await page.goto(`${baseUrl}/library/feedback/`);
-		assert.equal(await page.locator('html').getAttribute('data-theme'), 'material');
+		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'material');
 		for(const value of ['60', '80', '100', '0']) {
 			await page.locator('[data-progress-step]').click();
 			assert.equal(await page.locator('progress').getAttribute('value'), value);
@@ -146,7 +146,7 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
 		await page.locator('select[name="theme"]').selectOption('base');
 		await page.reload();
-		assert.equal(await page.locator('html').getAttribute('data-theme'), 'base');
+		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'base');
 
 		const nojs = await browser.newContext({javaScriptEnabled: false});
 		const staticPage = await nojs.newPage();
@@ -156,8 +156,11 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
 		assert.equal(await staticPage.locator('#single details[open]').count(), 1);
 		await staticPage.locator('select[name="theme"]').selectOption('github');
 		await Promise.all([staticPage.waitForNavigation(), staticPage.locator('.theme-form button').click()]);
-		assert.equal(await staticPage.locator('html').getAttribute('data-theme'), 'github');
+		assert.equal(await staticPage.locator('html').getAttribute('data-flair-theme'), 'github');
 		await staticPage.goto(`${baseUrl}/library/forms/`);
+		// Scroll the long page explicitly: Chromium's offscreen stability wait can
+		// stall here with JavaScript disabled and smooth document scrolling.
+		await staticPage.locator('#contained-form').evaluate(element => element.scrollIntoView({behavior: 'instant', block: 'center'}));
 		await staticPage.locator('#contained-form input[name="q"]').fill('layout');
 		await Promise.all([staticPage.waitForNavigation(), staticPage.locator('#contained-form button[type="submit"]').click()]);
 		assert.equal(new URL(staticPage.url()).searchParams.get('q'), 'layout');

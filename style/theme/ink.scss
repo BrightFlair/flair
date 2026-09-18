@@ -1,19 +1,28 @@
+@use "../mixin/color-scheme";
+
 @mixin ink {
-	--flair-color-text: #f5f5f5;
-	--flair-color-muted: #bbb;
-	--flair-color-surface: #161616;
-	--flair-color-surface-disabled: #303030;
-	--flair-color-border: #999;
-	--flair-color-accent: #fff;
-	--flair-color-on-accent: #111;
-	--flair-color-danger: #fff;
-	color-scheme: dark;
-	--flair-surface-background: #222;
-	--flair-inset-background: #303030;
-	--flair-selected-background: #f5f5f5;
-	--flair-selected-text: #161616;
-	--flair-code-background: #222;
-	--flair-syntax-string: #ddd;
-	--flair-table-stripe-background: #222;
+	@include color-scheme.color-scheme;
+	--flair-color-text: light-dark(#222, #f5f5f5);
+	--flair-color-muted: light-dark(#555, #bbb);
+	--flair-color-surface: light-dark(#fafafa, #161616);
+	--flair-color-surface-disabled: light-dark(#e8e8e8, #303030);
+	--flair-color-border: light-dark(#767676, #999);
+	--flair-color-accent: light-dark(#111, #fff);
+	--flair-color-on-accent: light-dark(#fff, #111);
+	--flair-color-danger: light-dark(#111, #fff);
+	--flair-surface-background: light-dark(#f2f2f2, #222);
+	--flair-inset-background: light-dark(#e8e8e8, #303030);
+	--flair-selected-background: light-dark(#222, #f5f5f5);
+	--flair-selected-text: light-dark(#fafafa, #161616);
+	--flair-code-background: light-dark(#f2f2f2, #222);
+	--flair-syntax-string: light-dark(#555, #ddd);
+	--flair-table-stripe-background: light-dark(#f2f2f2, #222);
 	--flair-surface-shadow: none;
+
+	// Coordinated surface and navigation states for the contrast sidebar variant.
+	--flair-sidebar-contrast-background: light-dark(#f2f2f2, #222);
+	--flair-sidebar-contrast-text: light-dark(#222, #f5f5f5);
+	--flair-sidebar-contrast-hover-background: light-dark(#ddd, #383838);
+	--flair-sidebar-contrast-current-background: light-dark(#222, #f5f5f5);
+	--flair-sidebar-contrast-current-text: light-dark(#fafafa, #161616);
 }

@@ -11,9 +11,11 @@ function go(Element $element, Uri $uri, ServerRequest $request):void {
 			$option->setAttribute("selected", "");
 		}
 	}
-	foreach($element->querySelectorAll(".theme-form option") as $option) {
+	foreach($element->querySelectorAll('.theme-form select[name="theme"] option') as $option) {
 		if($option->value === Theme::current($request)) {
 			$option->setAttribute("selected", "");
 		}
 	}
+	$scheme = Theme::scheme($request);
+	$element->querySelector('select[name="scheme"] option[value="' . $scheme . '"]')->setAttribute("selected", "");
 }

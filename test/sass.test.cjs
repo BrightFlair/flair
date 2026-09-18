@@ -161,7 +161,7 @@ test('theme mixins are opt-in and export no website selectors or font downloads'
 		const css = compile(`@use "theme"; .theme { @include theme.${name}; }`);
 		assert.equal(compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`), css);
 		assert.match(css, /--flair-color-text/);
-		assert.doesNotMatch(css, /--site-|:root|data-theme|@font-face|url\(/);
+		assert.doesNotMatch(css, /--site-|:root|data-flair-theme|@font-face|url\(/);
 	}
 });
 
@@ -195,4 +195,15 @@ test('all new patterns have live examples and source in the appropriate document
 			assert.ok(section.includes('HTML and Sass'), `${page}: ${id} source`);
 		}
 	}
+});
+
+test('application shells accept semantic selectors without emitting utility classes or theme styles', () => {
+ const css = compile(`@use "flair";
+ .workspace { @include flair.application-shell($sidebar: "> header", $content: "> main", $from: 46rem); }
+ `);
+ assert.match(css, /\.workspace > header/);
+ assert.match(css, /\.workspace > main/);
+ assert.match(css, /min-width: 46rem/);
+ assert.match(css, /minmax\(0, 1fr\)/);
+ assert.doesNotMatch(css, /layout-content|background|color:|font-family|:root/);
 });

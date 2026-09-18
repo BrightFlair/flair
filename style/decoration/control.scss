@@ -13,7 +13,8 @@
 	border-radius: var(--flair-control-radius, var(--flair-radius));
 	background: var(--flair-control-background, var(--flair-color-surface));
 	color: var(--flair-control-text, var(--flair-color-text));
-	font-family: var(--flair-font-body);
+	font-family: var(--flair-control-font, var(--flair-font-body));
+	transition: var(--flair-control-transition, none);
 	font-size: var(--flair-font-size);
 	font-weight: var(--flair-font-weight);
 	line-height: var(--flair-line-height);

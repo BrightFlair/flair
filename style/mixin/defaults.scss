@@ -6,14 +6,14 @@
 	--flair-space-4: 1rem;
 	--flair-space-6: 1.5rem;
 	--flair-space-8: 2rem;
-	--flair-color-text: #111;
-	--flair-color-muted: #525252;
-	--flair-color-surface: #fff;
-	--flair-color-surface-disabled: #eee;
-	--flair-color-border: #767676;
-	--flair-color-accent: #111;
-	--flair-color-on-accent: #fff;
-	--flair-color-danger: #111;
+	--flair-color-text: light-dark(#111, #f5f5f5);
+	--flair-color-muted: light-dark(#525252, #bbb);
+	--flair-color-surface: light-dark(#fff, #161616);
+	--flair-color-surface-disabled: light-dark(#eee, #303030);
+	--flair-color-border: light-dark(#767676, #999);
+	--flair-color-accent: light-dark(#111, #f5f5f5);
+	--flair-color-on-accent: light-dark(#fff, #111);
+	--flair-color-danger: light-dark(#111, #f5f5f5);
 	--flair-font-body: "Ubuntu", sans-serif;
 	--flair-font-size: 1rem;
 	--flair-line-height: 1.5;
@@ -27,4 +27,11 @@
 	--flair-choice-size: 1.25rem;
 	--flair-textarea-min-height: 8rem;
 	--flair-field-min-width: 14rem;
+
+	// Coordinated surface and navigation states for the contrast sidebar variant.
+	--flair-sidebar-contrast-background: light-dark(#eee, #303030);
+	--flair-sidebar-contrast-text: light-dark(#111, #f5f5f5);
+	--flair-sidebar-contrast-hover-background: light-dark(#ddd, #444);
+	--flair-sidebar-contrast-current-background: light-dark(#111, #f5f5f5);
+	--flair-sidebar-contrast-current-text: light-dark(#fff, #161616);
 }

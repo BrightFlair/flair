@@ -1,0 +1,38 @@
+@use "../flair";
+
+.dashboard-app {
+	@extend %d-typography;
+	@include flair.typography;
+	@include flair.application-shell;
+	--flair-sidebar-width: 18rem;
+	> aside {
+		padding-block: 1.5rem;
+		@extend %d-sidebar-contrast;
+		> header { padding: 1rem; > strong { font-size: 1.75rem; } }
+		> nav { @extend %p-side-navigation; padding: 1rem; }
+	}
+	> section {
+		@extend %l-dashboard;
+		padding: 1.5rem 1rem;
+		> header { h1, p { margin-block: 0; } }
+	}
+	.summary {
+		@extend %p-grid;
+		--flair-grid-columns: 3;
+		> article { @extend %o-card; @extend %p-metric; }
+	}
+	.workspaces {
+		@extend %p-grid;
+		--flair-grid-columns: 2;
+		> article { @extend %o-card; }
+	}
+	progress { @extend %o-progress; display: block; inline-size: 100%; margin-block: 1rem; }
+	dl { @extend %p-data-list; }
+	#activity > div { @extend %p-table-scroll; }
+	table { @extend %o-table; }
+	@media (min-width: 60rem) {
+		> aside { min-block-size: 100svh; }
+		> section { padding: 2rem; }
+	}
+	@media (min-width: 105rem) { > section { padding-inline: 4rem; } }
+}

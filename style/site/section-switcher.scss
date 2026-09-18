@@ -4,7 +4,7 @@ section-switcher {
 	inset: max(1rem, env(safe-area-inset-top)) auto auto 50%;
 	transform: translateX(-50%);
 	z-index: 20;
-	width: min(40rem, calc(100% - 2rem));
+	width: min(54rem, calc(100% - 2rem));
 	border: var(--site-switcher-border-width, 2px) solid var(--site-switcher-border, var(--site-ink));
 	border-radius: var(--site-switcher-radius, 0);
 	background: var(--site-paper);
@@ -13,12 +13,13 @@ section-switcher {
 
 	nav {
 		display: grid;
-		grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+		grid-template-columns: minmax(0, 1fr);
 	}
 
 	form,
 	label {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
 		min-width: 0;
 	}
@@ -66,7 +67,8 @@ section-switcher {
 		outline-offset: -4px;
 	}
 
-	@media (min-width: 36rem) {
+	@media (min-width: 60rem) {
+		& nav { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
 		& label {
 			display: flex;
 			gap: var(--site-space-small);

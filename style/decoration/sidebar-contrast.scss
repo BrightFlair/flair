@@ -1,0 +1,15 @@
+// A surface context, independent of sidebar dimensions and navigation markup.
+%d-sidebar-contrast {
+	--flair-sidebar-background: var(--flair-sidebar-contrast-background);
+	background: var(--flair-sidebar-background);
+	color: var(--flair-sidebar-contrast-text);
+	--flair-nav-text: var(--flair-sidebar-contrast-text);
+	--flair-nav-current-text: var(--flair-sidebar-contrast-current-text);
+	--flair-side-nav-background: transparent;
+	--flair-side-nav-hover-background: var(--flair-sidebar-contrast-hover-background);
+	--flair-side-nav-focus-background: var(--flair-sidebar-contrast-hover-background);
+	--flair-nav-current-background: var(--flair-sidebar-contrast-current-background);
+	--flair-nav-current-hover-background: var(--flair-sidebar-contrast-current-background);
+	--flair-side-nav-current-hover-background: var(--flair-sidebar-contrast-current-background);
+	--flair-side-nav-current-focus-background: var(--flair-sidebar-contrast-current-background);
+}

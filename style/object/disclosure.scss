@@ -7,10 +7,11 @@
 		padding: var(--flair-disclosure-padding, var(--flair-space-4));
 		border-radius: inherit;
 		background: var(--flair-disclosure-background, transparent);
-		font-weight: var(--flair-heading-weight, 500);
+		font-weight: var(--flair-disclosure-weight, var(--flair-heading-weight, 500));
 		cursor: pointer;
 		&:hover {
-			background: var(--flair-nav-hover-background, var(--flair-color-surface-disabled));
+			background: var(--flair-disclosure-hover-background,
+				var(--flair-nav-hover-background, var(--flair-color-surface-disabled)));
 		}
 		&:focus-visible {
 			@extend %d-focus-ring;
