@@ -4,14 +4,15 @@
 
 %p-form-actions {
 	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	align-items: stretch;
+	flex-wrap: var(--theme-actions-wrap, wrap);
+	flex-direction: var(--theme-actions-direction, column);
+	align-items: var(--theme-actions-align-items, stretch);
 	justify-content: var(--theme-actions-align, flex-end);
 	gap: var(--theme-actions-gap, var(--theme-space-3));
 	margin-block-start: var(--theme-actions-margin, var(--theme-space-2));
 	> :where(button, input[type="submit"], input[type="reset"]) {
 		@extend %o-button;
+		white-space: var(--theme-action-white-space, normal);
 	}
 	> .primary {
 		@extend %o-button-primary;
@@ -20,8 +21,8 @@
 		margin-inline-end: 0;
 	}
 	@media (min-width: break.$compact) {
-		flex-direction: row;
-		align-items: center;
+		flex-direction: var(--theme-actions-compact-direction, row);
+		align-items: var(--theme-actions-compact-align-items, center);
 		> .action-start { margin-inline-end: auto; }
 	}
 }
