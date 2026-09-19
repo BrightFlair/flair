@@ -1,0 +1,37 @@
+@use "../decoration/focus-ring";
+@use "../object/badge";
+
+// The compact facts that identify one HTTP exchange. It is commonly used as
+// a response disclosure summary, but does not depend on `<details>`: status,
+// identifier and time remain ordinary, meaningful document content.
+//
+//   <summary class="response-metadata">
+//     <span class="status">200 OK</span>
+//     <span class="id">RES_01J…</span>
+//     <time>12:04:31</time>
+//   </summary>
+%p-http-metadata {
+	cursor: pointer;
+	overflow-wrap: anywhere;
+	> :where(.status, .id) {
+		@extend %o-badge;
+	}
+	> .status {
+		--theme-badge-background: var(--theme-http-status-background,
+			var(--theme-color-surface-disabled));
+		--theme-badge-text: var(--theme-http-status-text, var(--theme-color-text));
+	}
+	> .id {
+		--theme-badge-background: var(--theme-http-id-background, var(--theme-color-muted));
+		--theme-badge-text: var(--theme-http-id-text, var(--theme-color-surface));
+	}
+	> time {
+		color: var(--theme-http-time-text, var(--theme-color-muted));
+	}
+	> * + * {
+		margin-inline-start: var(--theme-http-metadata-gap, var(--theme-space-2));
+	}
+	&:focus-visible {
+		@extend %d-focus-ring;
+	}
+}

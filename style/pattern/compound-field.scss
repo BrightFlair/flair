@@ -16,7 +16,8 @@
 // only and each control keeps its own accessible name.
 %p-compound-field {
 	display: flex;
-	flex-direction: column;
+	flex-direction: var(--theme-compound-direction, column);
+	align-items: var(--theme-compound-align-items, stretch);
 	gap: var(--theme-compound-gap, var(--theme-space-4));
 	min-inline-size: 0;
 	> :where(label, .field) {
@@ -24,8 +25,8 @@
 		min-inline-size: 0;
 	}
 	@media (min-width: break.$compact) {
-		flex-direction: row;
-		align-items: flex-end;
+		flex-direction: var(--theme-compound-compact-direction, row);
+		align-items: var(--theme-compound-compact-align-items, flex-end);
 		> :where(label, .field) {
 			flex: 1 1 var(--theme-field-min-width);
 		}

@@ -1,0 +1,5 @@
+@use "../flair";
+
+.demo-http-metadata {
+	@extend %p-http-metadata;
+}

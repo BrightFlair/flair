@@ -272,6 +272,36 @@ asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_
 }</code></pre>
 		</details>
 	</section>
+	<section class="reference-section" id="http-metadata" aria-labelledby="http-metadata-title">
+		<h2 id="http-metadata-title">HTTP response metadata</h2>
+		<p>Status, response identifier and time form a compact summary for an HTTP exchange. The badges and muted timestamp inherit their colours from the active theme, and the summary keeps native disclosure behaviour when used inside <code>details</code>.</p>
+		<div class="flair-example">
+			<details open>
+				<summary class="demo-http-metadata">
+					<span class="status">200 OK</span>
+					<span class="id">RES_01J8X4H2M6</span>
+					<time datetime="2026-09-19T12:04:31Z">12:04:31</time>
+				</summary>
+				<p>The response content belongs here.</p>
+			</details>
+		</div>
+		<p><code>--theme-http-status-background</code>, <code>--theme-http-id-background</code>, and <code>--theme-http-metadata-gap</code> adapt the row without changing its structure.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;details open&gt;
+	&lt;summary class=&quot;response-metadata&quot;&gt;
+		&lt;span class=&quot;status&quot;&gt;200 OK&lt;/span&gt;
+		&lt;span class=&quot;id&quot;&gt;RES_01J8X4H2M6&lt;/span&gt;
+		&lt;time datetime=&quot;2026-09-19T12:04:31Z&quot;&gt;12:04:31&lt;/time&gt;
+	&lt;/summary&gt;
+	&lt;p&gt;The response content belongs here.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.response-metadata {
+	@extend %p-http-metadata;
+}</code></pre>
+		</details>
+	</section>
 	<section class="reference-section" id="labelled-regions" aria-labelledby="labelled-regions-title">
 		<h2 id="labelled-regions-title">Labelled output regions</h2>
 		<p>A bordered block of output with its own caption resting above the top edge: a response body, a log excerpt, a diff. The caption is generated from <code>data-label</code>, so the element holds nothing but the output and can be replaced wholesale without disturbing the frame.</p>

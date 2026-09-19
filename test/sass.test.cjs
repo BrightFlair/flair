@@ -188,7 +188,7 @@ test('all new patterns have live examples and source in the appropriate document
 		navigation: ['search-results', 'accessible-helpers', 'navigation-markers', 'side-navigation'],
 		layouts: ['page-frame', 'workspace', 'fixed-footer', 'breakpoints'],
 		typography: ['page-intro', 'theme-presets', 'palette'],
-		code: ['document-baseline', 'syntax-trees', 'labelled-regions'],
+		code: ['document-baseline', 'syntax-trees', 'http-metadata', 'labelled-regions'],
 		controls: ['icons', 'icon-buttons'],
 		forms: ['compound-fields', 'repeatable-fields'],
 		disclosures: ['drawers'],
