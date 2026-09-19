@@ -343,7 +343,10 @@
 		<div class="flair-example">
 			<div class="demo-grid">
 				<request-editor class="demo-panel">
-					<h1>Request editor</h1>
+					<header>
+						<h1>Request editor</h1>
+						<button type="button">Duplicate</button>
+					</header>
 					<form class="demo-form">
 						<label><span>Name</span><input name="name" value="List all items" autocomplete="off" /></label>
 					</form>
@@ -362,11 +365,14 @@
 				</response-viewer>
 			</div>
 		</div>
-		<p>The two panels here are custom elements, bound to the definition by name. Flair requires no class of its own: <code>--theme-panel-heading-space</code>, <code>--theme-panel-section-space</code> and <code>--theme-panel-subheading-size</code> adjust the divisions.</p>
+		<p>The two panels here are custom elements, bound to the definition by name. A direct <code>header</code> aligns its heading and actions on their text baselines. <code>--theme-panel-heading-space</code>, <code>--theme-panel-header-gap</code>, <code>--theme-panel-section-space</code> and <code>--theme-panel-subheading-size</code> adjust the divisions.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;div class=&quot;demo-grid&quot;&gt;
 	&lt;request-editor class=&quot;demo-panel&quot;&gt;
-		&lt;h1&gt;Request editor&lt;/h1&gt;
+		&lt;header&gt;
+			&lt;h1&gt;Request editor&lt;/h1&gt;
+			&lt;button type=&quot;button&quot;&gt;Duplicate&lt;/button&gt;
+		&lt;/header&gt;
 		&lt;form class=&quot;demo-form&quot;&gt;
 			&lt;label&gt;&lt;span&gt;Name&lt;/span&gt;&lt;input name=&quot;name&quot; value=&quot;List all items&quot; autocomplete=&quot;off&quot; /&gt;&lt;/label&gt;
 		&lt;/form&gt;
