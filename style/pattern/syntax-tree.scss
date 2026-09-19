@@ -5,7 +5,7 @@
 // the whole structure expands, collapses, prints and is reachable by keyboard
 // with no script at all.
 //
-//   <div class="body" data-language="JSON">
+//   <div class="body" data-syntax-viewport>
 //     <details open>
 //       <summary><span class="syntax-key">items</span><span
 //         class="syntax-punctuation">[</span></summary>
@@ -27,22 +27,6 @@
 	line-height: var(--theme-syntax-tree-leading, 1.6);
 	tab-size: var(--theme-code-tab-size, 4);
 	overflow-x: auto;
-
-	// The format, named once by the container and drawn in the corner.
-	&[data-language]::after {
-		content: attr(data-language);
-		position: absolute;
-		inset-block-start: 0;
-		inset-inline-end: 0;
-		padding: var(--theme-space-1) var(--theme-space-2);
-		border-radius: var(--theme-badge-radius, var(--theme-radius));
-		background: var(--theme-color-muted);
-		color: var(--theme-color-surface);
-		font-family: var(--theme-font-body);
-		font-size: var(--theme-small-size, 0.875rem);
-		font-weight: 700;
-		pointer-events: none;
-	}
 
 	details {
 		> summary {

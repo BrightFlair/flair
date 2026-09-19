@@ -197,7 +197,8 @@ asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_
 		<p>A serialised document drawn as a tree the reader can collapse: a JSON response, an XML body, a configuration file. Every node is a native <code>details</code>, so the whole structure expands, collapses, prints and is reachable by keyboard with no script at all.</p>
 		<p>A closed node draws on one line, summarising what it holds; an open one indents its branch. Token colours come from the syntax decoration, so they follow the theme along with everything else.</p>
 		<div class="flair-example">
-			<div class="demo-syntax-tree" data-language="JSON">
+			<div class="demo-syntax-frame" data-language="JSON">
+			<div class="demo-syntax-tree" data-syntax-viewport>
 				<details open>
 					<summary><span class="syntax-punctuation">{</span></summary>
 					<div class="syntax-branch">
@@ -228,11 +229,13 @@ asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_
 					<span class="syntax-punctuation">}</span>
 				</details>
 			</div>
+			</div>
 		</div>
 		<p>Open and close the nodes, and try it with the keyboard. Parsing the document, deciding what counts as a leaf and choosing which nodes start open are the application's work; the pattern only arranges what it is given.</p>
-		<p>The format is named once, by the container's <code>data-language</code>. <code>--theme-syntax-tree-indent</code>, <code>-guide-width</code>, <code>-guide-color</code> and <code>-guide-space</code> control the indentation and its guide line.</p>
+		<p>The frame names the format once with <code>data-language</code>, and the nested <code>data-syntax-viewport</code> owns horizontal scrolling. This keeps the badge fixed while long lines move beneath it. <code>--theme-syntax-tree-indent</code>, <code>-guide-width</code>, <code>-guide-color</code> and <code>-guide-space</code> control the indentation and its guide line.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
-			<pre><code>&lt;div class=&quot;demo-syntax-tree&quot; data-language=&quot;JSON&quot;&gt;
+			<pre><code>&lt;div class=&quot;demo-syntax-frame&quot; data-language=&quot;JSON&quot;&gt;
+	&lt;div class=&quot;demo-syntax-tree&quot; data-syntax-viewport&gt;
 	&lt;details open&gt;
 		&lt;summary&gt;&lt;span class=&quot;syntax-punctuation&quot;&gt;{&lt;/span&gt;&lt;/summary&gt;
 		&lt;div class=&quot;syntax-branch&quot;&gt;
@@ -262,8 +265,13 @@ asset: documentation_preview_with_a_deliberately_long_filename_for_testing_wrap_
 		&lt;/div&gt;
 		&lt;span class=&quot;syntax-punctuation&quot;&gt;}&lt;/span&gt;
 	&lt;/details&gt;
+	&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 			<pre><code>@use &quot;flair&quot;;
+
+.demo-syntax-frame {
+	@extend %p-syntax-frame;
+}
 
 .demo-syntax-tree {
 	@extend %p-syntax-tree;

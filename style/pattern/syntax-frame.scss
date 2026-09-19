@@ -1,0 +1,32 @@
+@use "../object/badge";
+
+// A fixed frame around horizontally scrollable syntax. The frame owns the
+// language marker, while its viewport owns scrolling, so the marker stays in
+// the top-right corner as long lines move beneath it.
+//
+//   <div class="syntax-frame" data-language="HTML">
+//     <div data-syntax-viewport>…</div>
+//   </div>
+%p-syntax-frame {
+	position: relative;
+	overflow: hidden;
+
+	&[data-language]::after {
+		@extend %o-badge;
+		content: attr(data-language);
+		position: absolute;
+		inset-block-start: var(--theme-syntax-label-inset-block, 0);
+		inset-inline-end: var(--theme-syntax-label-inset-inline, 0);
+		z-index: 1;
+		--theme-badge-background: var(--theme-syntax-label-background, var(--theme-color-muted));
+		--theme-badge-border: var(--theme-syntax-label-border, var(--theme-color-muted));
+		--theme-badge-text: var(--theme-syntax-label-text, var(--theme-color-surface));
+		font-family: var(--theme-font-body);
+		pointer-events: none;
+	}
+
+	> [data-syntax-viewport] {
+		max-inline-size: 100%;
+		overflow-x: auto;
+	}
+}
