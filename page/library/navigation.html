@@ -6,11 +6,7 @@
 			Page links, section navigation, breadcrumbs and pagination.
 		</p>
 	</header>
-	<section
-		class="reference-section"
-		id="primary-navigation"
-		aria-labelledby="primary-navigation-title"
-	>
+	<section class="reference-section" id="primary-navigation" aria-labelledby="primary-navigation-title">
 		<h2 id="primary-navigation-title">Primary navigation</h2>
 		<p>
 			Use ordinary links for page navigation. The current destination is identified with
@@ -47,51 +43,75 @@
 }</code></pre>
 		</details>
 	</section>
-	<section
-		class="reference-section"
-		id="side-navigation"
-		aria-labelledby="side-navigation-title"
-	>
+	<section class="reference-section" id="side-navigation" aria-labelledby="side-navigation-title">
 		<h2 id="side-navigation-title">Side navigation</h2>
 		<p>
 			This vertical pattern remains in document flow. Its parent layout supplies its
 			width.
 		</p>
+		<p>
+			The same list, twice. On the left it has no indent: the label starts where the link
+			starts. On the right a column is reserved for a glyph on every link, so labels line
+			up whether or not a given link carries one. Only the last two do, and all four still
+			align, because the reserved box is a minimum rather than a fixed size.
+		</p>
 		<div class="flair-example">
-			<div class="demo-narrow">
-				<nav class="demo-side-navigation" aria-label="Example section navigation">
+			<div class="reference-grid">
+				<nav class="demo-side-navigation" aria-label="Sections">
 					<ul>
 						<li><a href="#primary-navigation">Primary navigation</a></li>
-						<li>
-							<a href="#side-navigation" aria-current="location">Side navigation</a>
-						</li>
+						<li><a href="#side-navigation" aria-current="location">Side navigation</a></li>
 						<li><a href="#breadcrumbs">Breadcrumbs</a></li>
 						<li><a href="#pagination">Pagination</a></li>
 					</ul>
 				</nav>
+				<nav class="demo-icon-navigation" aria-label="Sections, with an icon column">
+					<ul>
+						<li><a href="#primary-navigation">Primary navigation</a></li>
+						<li><a href="#side-navigation" aria-current="location">Side navigation</a></li>
+						<li><a href="#breadcrumbs" data-icon="key">Breadcrumbs</a></li>
+						<li><a href="#pagination" data-icon="share">Pagination</a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
+		<p>
+			Reserving that column is a layout decision the composition makes. A theme never makes
+			it, because a theme cannot know whether the application has glyphs to put there.
+			<code>--theme-side-nav-icon-size</code>, <code>--theme-side-nav-icon-gap</code> and
+			<code>--theme-side-nav-icon-opacity</code> size and shade it.
+		</p>
 
 		<details class="reference-source">
 			<summary>HTML and Sass</summary>
-			<pre><code>&lt;div class="demo-narrow"&gt;
-	&lt;nav class="demo-side-navigation" aria-label="Example section navigation"&gt;
+			<pre><code>&lt;div class=&quot;reference-grid&quot;&gt;
+	&lt;nav class=&quot;demo-side-navigation&quot; aria-label=&quot;Sections&quot;&gt;
 		&lt;ul&gt;
-			&lt;li&gt;&lt;a href="#primary-navigation"&gt;Primary navigation&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="#side-navigation" aria-current="location"&gt;Side navigation&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="#breadcrumbs"&gt;Breadcrumbs&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="#pagination"&gt;Pagination&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#primary-navigation&quot;&gt;Primary navigation&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation&quot; aria-current=&quot;location&quot;&gt;Side navigation&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#breadcrumbs&quot;&gt;Breadcrumbs&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#pagination&quot;&gt;Pagination&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/nav&gt;
+	&lt;nav class=&quot;demo-icon-navigation&quot; aria-label=&quot;Sections, with an icon column&quot;&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;a href=&quot;#primary-navigation&quot;&gt;Primary navigation&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation&quot; aria-current=&quot;location&quot;&gt;Side navigation&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#breadcrumbs&quot; data-icon=&quot;key&quot;&gt;Breadcrumbs&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#pagination&quot; data-icon=&quot;share&quot;&gt;Pagination&lt;/a&gt;&lt;/li&gt;
 		&lt;/ul&gt;
 	&lt;/nav&gt;
 &lt;/div&gt;</code></pre>
-			<pre><code>@use "flair";
+			<pre><code>@use &quot;flair&quot;;
 
 .demo-side-navigation {
 	@extend %p-side-navigation;
 }
 
-.demo-narrow {
-	max-inline-size: 28rem;
+// The icon column is extended alongside the base, not instead of it.
+.demo-icon-navigation {
+	@extend %p-side-navigation;
+	@extend %p-side-navigation-icons;
 }</code></pre>
 		</details>
 	</section>
@@ -178,7 +198,7 @@
 		<div class="flair-example">
 			<nav class="demo-pagination" aria-label="Example sections">
 				<ul>
-					<li><span aria-disabled="true">Previous</span></li>
+					<li><span>Previous</span></li>
 					<li>
 						<a
 							href="/library/navigation/"
@@ -200,7 +220,7 @@
 			<summary>HTML and Sass</summary>
 			<pre><code>&lt;nav class="demo-pagination" aria-label="Example sections"&gt;
 	&lt;ul&gt;
-		&lt;li&gt;&lt;span aria-disabled="true"&gt;Previous&lt;/span&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;span&gt;Previous&lt;/span&gt;&lt;/li&gt;
 		&lt;li&gt;
 			&lt;a
 				href="/library/navigation/"
@@ -326,64 +346,6 @@
 	--theme-side-nav-marker-height: 1.5rem;
 	--theme-side-nav-marker-offset: -0.75rem;
 	--theme-side-nav-current-shadow: none;
-}</code></pre>
-		</details>
-	</section>
-	<section class="reference-section" id="side-navigation-icons" aria-labelledby="side-navigation-icons-title">
-		<h2 id="side-navigation-icons-title">Side navigation, with and without an icon column</h2>
-		<p>The same list of links, twice. On the left, plain: the label starts where the link starts. On the right, a column is reserved for a glyph on every link, so labels line up whether or not a given link carries one.</p>
-		<p>Reserving that column is a layout decision the composition makes. A theme never makes it, because a theme cannot know whether the application has icons to put there.</p>
-		<div class="flair-example">
-			<div class="reference-grid">
-				<nav class="demo-plain-navigation" aria-label="Plain">
-					<menu>
-						<li><a href="#side-navigation-icons">Overview</a></li>
-						<li><a href="#side-navigation-icons" aria-current="page">Requests</a></li>
-						<li><a href="#side-navigation-icons">Secrets</a></li>
-						<li><a href="#side-navigation-icons">Webhooks</a></li>
-					</menu>
-				</nav>
-				<nav class="demo-icon-navigation" aria-label="With an icon column">
-					<menu>
-						<li><a href="#side-navigation-icons">Overview</a></li>
-						<li><a href="#side-navigation-icons" aria-current="page">Requests</a></li>
-						<li><a href="#side-navigation-icons" data-icon="key">Secrets</a></li>
-						<li><a href="#side-navigation-icons" data-icon="share">Webhooks</a></li>
-					</menu>
-				</nav>
-			</div>
-		</div>
-		<p>Only two links on the right carry <code>data-icon</code>, and all four still align, because the reserved box is a minimum rather than a fixed size: a link with a glyph paints into the same space instead of adding a second one.</p>
-		<p><code>--theme-side-nav-icon-size</code> (1.25rem), <code>--theme-side-nav-icon-gap</code> and <code>--theme-side-nav-icon-opacity</code> size and shade the column.</p>
-		<details class="reference-source"><summary>HTML and Sass</summary>
-			<pre><code>&lt;div class=&quot;reference-grid&quot;&gt;
-	&lt;nav class=&quot;demo-plain-navigation&quot; aria-label=&quot;Plain&quot;&gt;
-		&lt;menu&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; aria-current=&quot;page&quot;&gt;Requests&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Secrets&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Webhooks&lt;/a&gt;&lt;/li&gt;
-		&lt;/menu&gt;
-	&lt;/nav&gt;
-	&lt;nav class=&quot;demo-icon-navigation&quot; aria-label=&quot;With an icon column&quot;&gt;
-		&lt;menu&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; aria-current=&quot;page&quot;&gt;Requests&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; data-icon=&quot;key&quot;&gt;Secrets&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; data-icon=&quot;share&quot;&gt;Webhooks&lt;/a&gt;&lt;/li&gt;
-		&lt;/menu&gt;
-	&lt;/nav&gt;
-&lt;/div&gt;</code></pre>
-			<pre><code>@use &quot;flair&quot;;
-
-.demo-plain-navigation {
-	@extend %p-side-navigation;
-}
-
-// Extended alongside the base, not instead of it.
-.demo-icon-navigation {
-	@extend %p-side-navigation;
-	@extend %p-side-navigation-icons;
 }</code></pre>
 		</details>
 	</section>
