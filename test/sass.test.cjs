@@ -185,7 +185,7 @@ test('all new patterns have live examples and source in the appropriate document
 	const pages = {
 		feedback: ['metrics', 'interaction-states', 'empty-messages'],
 		surfaces: ['action-lists', 'panels', 'row-actions'],
-		navigation: ['search-results', 'accessible-helpers', 'navigation-markers'],
+		navigation: ['search-results', 'accessible-helpers', 'navigation-markers', 'side-navigation-icons'],
 		layouts: ['page-frame', 'workspace', 'fixed-footer', 'breakpoints'],
 		typography: ['page-intro', 'theme-presets', 'palette'],
 		code: ['document-baseline', 'syntax-trees', 'labelled-regions'],

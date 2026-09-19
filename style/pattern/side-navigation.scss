@@ -10,17 +10,7 @@
 			position: relative;
 			display: flex;
 			align-items: flex-start;
-			column-gap: var(--theme-side-nav-icon-gap, 0);
 			margin: var(--theme-side-nav-link-margin, 0);
-			&::before {
-				content: var(--theme-side-nav-icon-content, none);
-				display: block;
-				flex-shrink: 0;
-				inline-size: var(--theme-side-nav-icon-size, 0);
-				aspect-ratio: 1;
-				opacity: var(--theme-side-nav-icon-opacity, 1);
-				background-size: 100%;
-			}
 			line-height: var(--theme-side-nav-line-height, inherit);
 			background: var(--theme-side-nav-background, transparent);
 			&:focus-visible:not(:hover) {
@@ -67,6 +57,34 @@
 			}
 			box-shadow: var(--theme-side-nav-current-shadow,
 				var(--theme-nav-current-shadow, inset 0 -3px var(--theme-color-accent)));
+		}
+	}
+
+	// A column reserved for glyphs on every link, so labels line up whether or
+	// not a given link has one. Extended alongside the base, not instead of
+	// it. Without it a side navigation has no indent at all, which is what a
+	// list of plain links wants: reserving the column is a layout decision the
+	// composition makes, never one a theme makes for it.
+	//
+	//   nav { @extend %p-side-navigation; @extend %p-side-navigation-icons; }
+	//
+	// The reserved box is a minimum, so a link carrying `data-icon` paints its
+	// glyph into the same space rather than adding a second one.
+	&-icons {
+		// The column owns the spacing, so a link carrying `data-icon` does not
+		// add a second gap of its own and fall out of line with the rest.
+		--theme-icon-gap: 0px;
+		> :where(ul, menu) > li > a {
+			column-gap: var(--theme-side-nav-icon-gap, var(--theme-space-2));
+			&::before {
+				content: "";
+				display: block;
+				flex-shrink: 0;
+				min-inline-size: var(--theme-side-nav-icon-size, 1.25rem);
+				aspect-ratio: 1;
+				opacity: var(--theme-side-nav-icon-opacity, 1);
+				background-size: 100%;
+			}
 		}
 	}
 	@media (min-width: break.$nav) { > :where(ul, menu) { flex-direction: column; } }

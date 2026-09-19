@@ -256,7 +256,7 @@ that owns them, so a message has no separate element to keep in step.
 | `%p-data-list` | `dl > div > dt + dd`; groups wrap into available columns. `--theme-data-min` (14rem) can be set to 100% for a single column. |
 | `%p-list` | A `ul` or `ol` with direct `li` children; separators only between items. |
 | `%p-key-value-list` | A `ul` or `dl` whose rows hold a name, a value, and optionally a trailing `form`. `data-term` names the subject for the empty case. Rows alternate shading. |
-| `%p-navigation`, `%p-side-navigation`, `%p-page-tabs` | `nav > ul > li > a`, where `menu` is accepted in place of `ul`. Set `aria-current="page"` or `"location"` on the current destination only. Page tabs are links, not an ARIA tab widget. Side navigation draws a rule after any `li[data-end-of-section]`. |
+| `%p-navigation`, `%p-side-navigation`, `%p-page-tabs` | `nav > ul > li > a`, where `menu` is accepted in place of `ul`. Set `aria-current="page"` or `"location"` on the current destination only. Page tabs are links, not an ARIA tab widget. Side navigation draws a rule after any `li[data-end-of-section]`, and `%p-side-navigation-icons` reserves a glyph column on every link. |
 | `%p-breadcrumbs` | `nav > ol > li`; explicit `.separator` spans use `aria-hidden="true"`. The current item can be plain text. |
 | `%p-pagination` | Navigation structure; unavailable destinations are `span` elements, not actionable links. Give the nav an accessible label. |
 | `%p-row-actions` | A row containing a `.row-actions` element. The actions fade in on hover and on focus within the row, and are never removed from the accessibility tree. |
@@ -337,6 +337,31 @@ so no theme-specific colour appears in application Sass. It uses an outward box
 shadow with a clip path, so it creates no horizontal overflow and no interactive
 overlay. It owns the sidebar's `box-shadow` and `clip-path`; ancestors must not
 clip the outward painting.
+
+### Side navigation with an icon column
+
+A side navigation has no indent of its own. Where the application has glyphs to
+put beside its links, `%p-side-navigation-icons` reserves a column for one on
+every link, so labels line up whether or not a given link carries a glyph:
+
+```scss
+nav {
+	@extend %p-side-navigation;
+	@extend %p-side-navigation-icons;
+}
+```
+
+It is extended alongside the base, not instead of it. The reserved box is a
+minimum rather than a fixed size, so a link carrying `data-icon` paints its
+glyph into the same space instead of adding a second one, and the column owns
+the spacing so the two kinds of link stay in line. `--theme-side-nav-icon-size`
+(1.25rem), `--theme-side-nav-icon-gap` and `--theme-side-nav-icon-opacity` size
+and shade it.
+
+Reserving the column is a layout decision the composition makes. A theme never
+makes it, because a theme cannot know whether the application has icons to put
+there; a theme that indented every side navigation would leave an empty gutter
+in every application that does not.
 
 ### Collapsible menus
 
@@ -486,7 +511,7 @@ contain only imports and forwards.
 | [`style/pattern/repeatable-fields.scss`](../style/pattern/repeatable-fields.scss) | `%p-repeatable-fields` |
 | [`style/pattern/row-actions.scss`](../style/pattern/row-actions.scss) | `%p-row-actions` |
 | [`style/pattern/search-results.scss`](../style/pattern/search-results.scss) | `%p-search-results` |
-| [`style/pattern/side-navigation.scss`](../style/pattern/side-navigation.scss) | `%p-side-navigation` |
+| [`style/pattern/side-navigation.scss`](../style/pattern/side-navigation.scss) | `%p-side-navigation` (`&-icons`) |
 | [`style/pattern/stack.scss`](../style/pattern/stack.scss) | `%p-stack` |
 | [`style/pattern/syntax-tree.scss`](../style/pattern/syntax-tree.scss) | `%p-syntax-tree` |
 | [`style/pattern/table-scroll.scss`](../style/pattern/table-scroll.scss) | `%p-table-scroll` |
@@ -730,10 +755,9 @@ foundational value or a literal.
 | `--theme-side-nav-current-shadow` | `var(--theme-nav-current-shadow, inset 0 -3px var(--theme-color-accent))` |
 | `--theme-side-nav-focus-background` | `var(--theme-nav-hover-background, var(--theme-color-surface-disabled))` |
 | `--theme-side-nav-hover-background` | `var(--theme-nav-current-hover-background, var(--theme-nav-current-background, var(--theme-selected-background, var(--theme-color-surface-disabled))))` / `var(--theme-nav-hover-background, var(--theme-color-surface-disabled))` |
-| `--theme-side-nav-icon-content` | `none` |
-| `--theme-side-nav-icon-gap` | `0` |
+| `--theme-side-nav-icon-gap` | `var(--theme-space-2)` |
 | `--theme-side-nav-icon-opacity` | `1` |
-| `--theme-side-nav-icon-size` | `0` |
+| `--theme-side-nav-icon-size` | `1.25rem` |
 | `--theme-side-nav-line-height` | `inherit` |
 | `--theme-side-nav-link-margin` | `0` |
 | `--theme-side-nav-margin-block-start` | `0` |

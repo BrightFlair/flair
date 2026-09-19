@@ -3,6 +3,7 @@
 // The gutter marker and the section rule are theme decisions, not layout ones.
 .demo-marker-navigation {
 	@extend %p-side-navigation;
+	@extend %p-side-navigation-icons;
 	--theme-side-nav-link-margin: 0 0 0 1rem;
 	--theme-side-nav-marker-width: 4px;
 	--theme-side-nav-marker-height: 1.5rem;

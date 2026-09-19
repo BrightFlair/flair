@@ -1,0 +1,10 @@
+@use "../flair";
+
+// The same list, opting into the reserved glyph column.
+.demo-icon-navigation {
+	@extend %p-side-navigation;
+	@extend %p-side-navigation-icons;
+	--theme-side-nav-link-margin: 0 0 0 1rem;
+	border: 1px solid var(--theme-color-border);
+	padding-block: var(--theme-space-2);
+}

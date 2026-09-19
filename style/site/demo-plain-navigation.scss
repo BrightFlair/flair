@@ -1,0 +1,8 @@
+@use "../flair";
+
+.demo-plain-navigation {
+	@extend %p-side-navigation;
+	--theme-side-nav-link-margin: 0 0 0 1rem;
+	border: 1px solid var(--theme-color-border);
+	padding-block: var(--theme-space-2);
+}

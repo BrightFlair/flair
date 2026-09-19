@@ -329,4 +329,62 @@
 }</code></pre>
 		</details>
 	</section>
+	<section class="reference-section" id="side-navigation-icons" aria-labelledby="side-navigation-icons-title">
+		<h2 id="side-navigation-icons-title">Side navigation, with and without an icon column</h2>
+		<p>The same list of links, twice. On the left, plain: the label starts where the link starts. On the right, a column is reserved for a glyph on every link, so labels line up whether or not a given link carries one.</p>
+		<p>Reserving that column is a layout decision the composition makes. A theme never makes it, because a theme cannot know whether the application has icons to put there.</p>
+		<div class="flair-example">
+			<div class="reference-grid">
+				<nav class="demo-plain-navigation" aria-label="Plain">
+					<menu>
+						<li><a href="#side-navigation-icons">Overview</a></li>
+						<li><a href="#side-navigation-icons" aria-current="page">Requests</a></li>
+						<li><a href="#side-navigation-icons">Secrets</a></li>
+						<li><a href="#side-navigation-icons">Webhooks</a></li>
+					</menu>
+				</nav>
+				<nav class="demo-icon-navigation" aria-label="With an icon column">
+					<menu>
+						<li><a href="#side-navigation-icons">Overview</a></li>
+						<li><a href="#side-navigation-icons" aria-current="page">Requests</a></li>
+						<li><a href="#side-navigation-icons" data-icon="key">Secrets</a></li>
+						<li><a href="#side-navigation-icons" data-icon="share">Webhooks</a></li>
+					</menu>
+				</nav>
+			</div>
+		</div>
+		<p>Only two links on the right carry <code>data-icon</code>, and all four still align, because the reserved box is a minimum rather than a fixed size: a link with a glyph paints into the same space instead of adding a second one.</p>
+		<p><code>--theme-side-nav-icon-size</code> (1.25rem), <code>--theme-side-nav-icon-gap</code> and <code>--theme-side-nav-icon-opacity</code> size and shade the column.</p>
+		<details class="reference-source"><summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;reference-grid&quot;&gt;
+	&lt;nav class=&quot;demo-plain-navigation&quot; aria-label=&quot;Plain&quot;&gt;
+		&lt;menu&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; aria-current=&quot;page&quot;&gt;Requests&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Secrets&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Webhooks&lt;/a&gt;&lt;/li&gt;
+		&lt;/menu&gt;
+	&lt;/nav&gt;
+	&lt;nav class=&quot;demo-icon-navigation&quot; aria-label=&quot;With an icon column&quot;&gt;
+		&lt;menu&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; aria-current=&quot;page&quot;&gt;Requests&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; data-icon=&quot;key&quot;&gt;Secrets&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href=&quot;#side-navigation-icons&quot; data-icon=&quot;share&quot;&gt;Webhooks&lt;/a&gt;&lt;/li&gt;
+		&lt;/menu&gt;
+	&lt;/nav&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use &quot;flair&quot;;
+
+.demo-plain-navigation {
+	@extend %p-side-navigation;
+}
+
+// Extended alongside the base, not instead of it.
+.demo-icon-navigation {
+	@extend %p-side-navigation;
+	@extend %p-side-navigation-icons;
+}</code></pre>
+		</details>
+	</section>
 </main>
