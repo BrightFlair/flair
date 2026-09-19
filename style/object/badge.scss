@@ -1,8 +1,15 @@
 %o-badge {
 	display: inline-flex;
 	align-items: center;
-	padding: var(--theme-badge-padding-block, var(--theme-space-1))
-		var(--theme-badge-padding-inline, var(--theme-space-2));
+	padding-block-start: calc(
+		var(--theme-badge-padding-block, var(--theme-space-1))
+		+ var(--theme-badge-optical-offset, 0.1em)
+	);
+	padding-block-end: calc(
+		var(--theme-badge-padding-block, var(--theme-space-1))
+		- var(--theme-badge-optical-offset, 0.1em)
+	);
+	padding-inline: var(--theme-badge-padding-inline, var(--theme-space-2));
 	border: var(--theme-border-width) solid
 		var(--theme-badge-border, var(--theme-color-border));
 	border-radius: var(--theme-badge-radius, var(--theme-radius));
@@ -10,6 +17,6 @@
 	color: var(--theme-badge-text, var(--theme-color-text));
 	font-size: var(--theme-small-size, 0.875rem);
 	font-weight: var(--theme-label-weight);
-	line-height: var(--theme-badge-line-height, 1);
+	line-height: var(--theme-badge-line-height, 1.4);
 	overflow-wrap: anywhere;
 }
