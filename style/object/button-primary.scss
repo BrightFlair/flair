@@ -16,7 +16,10 @@
 			var(--theme-button-primary-background, var(--theme-color-accent))
 		);
 		background: var(--theme-button-primary-background-hover, var(--theme-color-text));
-		text-decoration: var(--theme-button-primary-decoration-hover, underline);
+		text-decoration: var(
+			--theme-button-primary-decoration-hover,
+			var(--theme-button-decoration-hover, var(--theme-button-decoration, none))
+		);
 	}
 	&:active:not(:disabled) {
 		background: var(

@@ -35,6 +35,13 @@
 	background: var(--theme-button-background, var(--theme-color-surface));
 	color: var(--theme-button-text, var(--theme-color-text));
 	font-weight: var(--theme-button-weight, var(--theme-label-weight));
+	// Prose styles anchors as links after object extensions are resolved. The
+	// link state gives an anchor-button enough specificity to retain button
+	// decoration while still allowing a theme to opt into another treatment.
+	&:any-link {
+		color: var(--theme-button-text, var(--theme-color-text));
+		text-decoration: var(--theme-button-decoration, none);
+	}
 	&:hover:not(:disabled) {
 		border-color: var(
 			--theme-button-border-hover,
@@ -42,6 +49,10 @@
 		);
 		box-shadow: var(--theme-button-shadow-hover, none);
 		background: var(--theme-button-background-hover, var(--theme-color-surface-disabled));
+		text-decoration: var(
+			--theme-button-decoration-hover,
+			var(--theme-button-decoration, none)
+		);
 	}
 	&:active:not(:disabled) {
 		background: var(

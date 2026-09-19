@@ -16,9 +16,21 @@ test('a button consumer emits its dependencies without form or element defaults'
 	@extend %o-button;
 }`);
 	assert.match(css, /\.download:focus-visible/);
+	assert.match(css, /\.download:any-link/);
+	assert.match(css, /--theme-button-decoration, none/);
 	assert.match(css, /--theme-control-padding-inline/);
 	assert.doesNotMatch(css, /field-row|field-help|fieldset|:root|@font-face/);
 	assert.doesNotMatch(css, /^button\s*\{/m);
+});
+
+test('button links only use text decoration when a theme requests it', () => {
+	const css = compile(`@use "flair";
+.sponsor {
+	@extend %o-button-primary;
+}`);
+	assert.match(css, /\.sponsor:any-link/);
+	assert.match(css, /--theme-button-decoration, none/);
+	assert.doesNotMatch(css, /--theme-button-primary-decoration-hover, underline/);
 });
 
 test('form extension includes fields, rows, actions and native disabled state', () => {
