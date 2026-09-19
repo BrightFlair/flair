@@ -25,6 +25,7 @@
 		flex-wrap: var(--theme-key-value-wrap, wrap);
 		align-items: center;
 		gap: var(--theme-key-value-gap, var(--theme-space-4));
+		margin: 0;
 		padding: var(--theme-key-value-padding, var(--theme-space-4));
 		white-space: var(--theme-key-value-white-space, normal);
 		&:nth-child(even) {
