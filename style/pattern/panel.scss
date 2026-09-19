@@ -1,4 +1,5 @@
 @use "../decoration/surface";
+@use "../variable/break";
 
 // A titled working surface. Where `%o-card` is a plain box, a panel divides
 // itself: each heading is separated from the content above it by a rule, so a
@@ -17,7 +18,8 @@
 	min-inline-size: 0;
 	> header {
 		display: flex;
-		align-items: baseline;
+		flex-direction: var(--theme-panel-header-direction, row);
+		align-items: var(--theme-panel-header-align-items, baseline);
 		gap: var(--theme-panel-header-gap, var(--theme-space-3));
 		margin-block-end: var(--theme-panel-heading-space, var(--theme-space-4));
 		padding-block: var(--theme-panel-header-padding-block-start, 0)
@@ -31,6 +33,10 @@
 			overflow-wrap: anywhere;
 		}
 		> :not(:where(h1, h2, h3, h4, h5, h6)) { flex: 0 0 auto; }
+		@media (min-width: break.$compact) {
+			flex-direction: var(--theme-panel-header-compact-direction, row);
+			align-items: var(--theme-panel-header-compact-align-items, baseline);
+		}
 	}
 	> :where(h1, h2, h3, h4, h5, h6) {
 		display: block;

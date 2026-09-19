@@ -9,7 +9,7 @@
 		> li > a {
 			position: relative;
 			display: flex;
-			align-items: flex-start;
+			align-items: center;
 			margin: var(--theme-side-nav-link-margin, 0);
 			line-height: var(--theme-side-nav-line-height, inherit);
 			background: var(--theme-side-nav-background, transparent);
@@ -87,5 +87,10 @@
 			}
 		}
 	}
-	@media (min-width: break.$nav) { > :where(ul, menu) { flex-direction: column; } }
+	@media (min-width: break.$nav) {
+		> :where(ul, menu) {
+			flex-direction: column;
+			> li > a { align-items: flex-start; }
+		}
+	}
 }
