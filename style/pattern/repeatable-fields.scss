@@ -24,14 +24,14 @@
 	padding: 0;
 	> li {
 		display: flex;
-		flex-wrap: wrap;
+		flex-wrap: var(--theme-repeat-row-wrap, wrap);
 		align-items: flex-end;
 		gap: var(--theme-repeat-gap, var(--theme-space-4));
 		margin-block-end: var(--theme-repeat-row-space, var(--theme-space-2));
 		min-inline-size: 0;
 		> form {
 			display: flex;
-			flex-wrap: wrap;
+			flex-wrap: var(--theme-repeat-field-wrap, wrap);
 			flex-grow: 1;
 			align-items: flex-end;
 			gap: var(--theme-repeat-gap, var(--theme-space-4));

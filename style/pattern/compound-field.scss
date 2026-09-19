@@ -22,7 +22,11 @@
 	min-inline-size: 0;
 	> :where(label, .field) {
 		@extend %o-form-field;
+		flex: var(--theme-compound-field-flex, 0 1 auto);
 		min-inline-size: 0;
+	}
+	> :where(label, .field)[data-span="narrow"] {
+		flex: var(--theme-compound-narrow-flex, var(--theme-compound-field-flex, 0 1 auto));
 	}
 	@media (min-width: break.$compact) {
 		flex-direction: var(--theme-compound-compact-direction, row);

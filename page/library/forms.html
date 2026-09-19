@@ -460,7 +460,7 @@ contact-form {
 				</div>
 			</form>
 		</div>
-		<p>Narrow the window to watch each pair stack in source order. <code>--theme-compound-narrow</code> sets the fixed measure, and <code>--theme-compound-gap</code> the space between controls. Applications whose controls must remain joined can set <code>--theme-compound-direction: row</code>; the compact layout remains independently configurable through <code>--theme-compound-compact-direction</code> and <code>--theme-compound-compact-align-items</code>.</p>
+		<p>Narrow the window to watch each pair stack in source order. <code>--theme-compound-narrow</code> sets the fixed measure, and <code>--theme-compound-gap</code> the space between controls. Applications whose controls must remain joined can set <code>--theme-compound-direction: row</code>, then assign their mobile shares with <code>--theme-compound-field-flex</code> and <code>--theme-compound-narrow-flex</code>. The compact layout remains independently configurable through <code>--theme-compound-compact-direction</code> and <code>--theme-compound-compact-align-items</code>.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;form class=&quot;demo-form&quot;&gt;
 	&lt;div class=&quot;demo-compound-field&quot;&gt;
@@ -519,7 +519,7 @@ contact-form {
 			</ul>
 			<ul class="demo-repeatable-fields" data-term="query parameters"></ul>
 		</div>
-		<p>The second list is empty, and states what is missing from its own <code>data-term</code> rather than from a message held in the CSS. Adding and removing rows, and the order they appear in, belong to the application.</p>
+		<p>The second list is empty, and states what is missing from its own <code>data-term</code> rather than from a message held in the CSS. Adding and removing rows, and the order they appear in, belong to the application. <code>--theme-repeat-field-wrap: nowrap</code> keeps every row's fields and actions together when the controls can shrink to fit; <code>--theme-repeat-row-wrap</code> independently controls wrapping around the row form.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;ul class=&quot;demo-repeatable-fields&quot; data-term=&quot;headers&quot;&gt;
 	&lt;li&gt;
