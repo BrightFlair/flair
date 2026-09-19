@@ -12,6 +12,9 @@
 		gap: var(--theme-tab-gap, var(--theme-nav-gap, var(--theme-space-2)));
 	}
 	> :where(ul, menu) > li {
+		// Tab labels stay intact when a themed tab bar scrolls horizontally.
+		// A wrapping bar still wraps whole tabs at available breakpoints.
+		flex: 0 0 auto;
 		border-block-end: var(--theme-tab-indicator-width, 0px) solid transparent;
 		> a {
 			margin: var(--theme-tab-link-margin, 0);
