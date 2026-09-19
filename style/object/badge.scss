@@ -1,5 +1,6 @@
 %o-badge {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
 	padding: var(--theme-badge-padding-block, var(--theme-space-1))
 		var(--theme-badge-padding-inline, var(--theme-space-2));
 	border: var(--theme-border-width) solid
@@ -9,6 +10,6 @@
 	color: var(--theme-badge-text, var(--theme-color-text));
 	font-size: var(--theme-small-size, 0.875rem);
 	font-weight: var(--theme-label-weight);
-	line-height: 1.4;
+	line-height: var(--theme-badge-line-height, 1);
 	overflow-wrap: anywhere;
 }
