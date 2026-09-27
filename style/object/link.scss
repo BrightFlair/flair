@@ -1,6 +1,6 @@
 @use "../decoration/focus-ring";
 %o-link {
-	color: var(--theme-color-accent);
+	color: var(--theme-link-color, var(--theme-color-accent));
 	text-decoration: underline;
 	text-underline-offset: var(--theme-link-offset, 0.2em);
 	text-decoration-thickness: var(--theme-link-thickness, 1px);

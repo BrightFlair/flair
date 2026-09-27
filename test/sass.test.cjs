@@ -169,7 +169,7 @@ test('checklists remain independent of pricing, card surfaces and application fo
 
 test('theme mixins are opt-in and export no website selectors or font downloads', () => {
 	assert.equal(compile('@use "theme";'), '');
-	for (const name of ['base', 'ink', 'paper', 'vivid', 'github', 'material']) {
+	for (const name of ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard']) {
 		const css = compile(`@use "theme"; .theme { @include theme.${name}; }`);
 		assert.equal(compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`), css);
 		assert.match(css, /--theme-color-text/);

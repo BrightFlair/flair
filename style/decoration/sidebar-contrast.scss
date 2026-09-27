@@ -3,6 +3,7 @@
 	--theme-sidebar-background: var(--theme-sidebar-contrast-background);
 	background: var(--theme-sidebar-background);
 	color: var(--theme-sidebar-contrast-text);
+	--theme-link-color: var(--theme-sidebar-contrast-link, var(--theme-sidebar-contrast-text));
 	--theme-nav-text: var(--theme-sidebar-contrast-text);
 	--theme-nav-current-text: var(--theme-sidebar-contrast-current-text);
 	--theme-side-nav-background: transparent;

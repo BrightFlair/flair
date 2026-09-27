@@ -11,5 +11,8 @@ playground-tools {
 		justify-content: space-between;
 	}
 	form, label { @extend %p-cluster; }
-	select { max-inline-size: 100%; }
+	select {
+		max-inline-size: 100%;
+		color: var(--theme-control-text, var(--theme-color-text));
+	}
 }

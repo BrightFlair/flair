@@ -46,6 +46,16 @@
 		@include theme.material;
 	}
 
+	&[data-flair-theme="clean-dashboard"] {
+		@include theme.clean-dashboard;
+		--site-font-body: var(--theme-font-body);
+		--site-font-heading: var(--theme-font-heading);
+		--site-switcher-border-width: 1px;
+		--site-switcher-border: var(--theme-color-border);
+		--site-switcher-radius: var(--theme-radius);
+		--site-switcher-shadow: none;
+	}
+
 	&[data-flair-theme="github"] {
 		--site-font-body: var(--theme-font-body);
 		--site-font-heading: var(--theme-font-body);

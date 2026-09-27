@@ -4,7 +4,7 @@ const AxeBuilder = require('@axe-core/playwright').default;
 const assert = require('node:assert/strict');
 const baseUrl = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
 const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'disclosures', 'tables', 'feedback', 'code', 'layouts'];
-const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
+const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
 
 (async () => {
 	const browser = await chromium.launch({

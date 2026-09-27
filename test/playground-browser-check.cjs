@@ -4,7 +4,7 @@ const AxeBuilder = require('@axe-core/playwright').default;
 const assert = require('node:assert/strict');
 const base = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
 const routes = ['documentation-website', 'dashboard-app', 'github-clone'];
-const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
+const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
 (async () => {
  const browser = await chromium.launch({executablePath: process.env.FLAIR_CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox']});
  try {
@@ -87,6 +87,26 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
    await page.reload();
    assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'ink');
   }
+  await page.goto(`${base}/playground/dashboard-app/?theme=clean-dashboard&scheme=light`);
+  await page.setViewportSize({width: 1440, height: 1000});
+  const cleanDashboardPresentation = await page.evaluate(() => {
+   const style = selector => getComputedStyle(document.querySelector(selector));
+   const sidebar = style('.dashboard-app > aside');
+   const card = style('.dashboard-app .summary > article');
+   const select = style('playground-tools select');
+   return {
+    font: style('.dashboard-app').fontFamily,
+    sidebar: sidebar.backgroundColor,
+    card: {background: card.backgroundColor, border: card.borderColor, width: card.borderWidth, radius: card.borderRadius, shadow: card.boxShadow},
+    select: {color: select.color, background: select.backgroundColor},
+   };
+  });
+  assert.deepEqual(cleanDashboardPresentation, {
+   font: 'Ubuntu, sans-serif',
+   sidebar: 'rgb(60, 59, 55)',
+   card: {background: 'rgb(255, 255, 255)', border: 'rgb(216, 220, 226)', width: '2px', radius: '8px', shadow: 'none'},
+   select: {color: 'rgb(60, 59, 55)', background: 'rgb(255, 255, 255)'},
+  });
   await page.goto(`${base}/playground/github-clone/?theme=vivid`);
   await page.locator('select[name=theme]').selectOption('github');
   const sidebarCurrent = page.locator('aside nav a[aria-current]');

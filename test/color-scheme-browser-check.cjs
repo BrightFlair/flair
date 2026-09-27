@@ -5,7 +5,7 @@ const sass = require('sass');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const base = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
-const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material'];
+const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
 const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'disclosures', 'tables', 'feedback', 'code', 'layouts'].map(x => `/library/${x}/`).concat(['documentation-website','dashboard-app','github-clone'].map(x => `/playground/${x}/`));
 (async () => {
  const browser = await chromium.launch({executablePath:process.env.FLAIR_CHROMIUM_PATH || '/usr/bin/chromium',args:['--no-sandbox']});

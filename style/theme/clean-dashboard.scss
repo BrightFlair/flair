@@ -1,0 +1,89 @@
+@use "../mixin/color-scheme";
+
+// A compact monitoring interface: cool white panels, blue controls and a
+// charcoal navigation rail. Fonts remain the consuming application's concern.
+@mixin clean-dashboard {
+	@include color-scheme.color-scheme;
+
+	--pal-1: light-dark(#3c3b37, #f3f4f6);
+	--pal-2: light-dark(#fff, #1f2023);
+	--pal-3: light-dark(#f3f5f8, #2b2d31);
+	--pal-4: light-dark(#d8dce2, #626b78);
+	--pal-5: light-dark(#64748b, #b8c2d0);
+	--pal-6: light-dark(#204698, #8eafff);
+	--pal-7: light-dark(#fff, #17203a);
+	--pal-8: light-dark(#059669, #5ee0b1);
+	--pal-9: light-dark(#dc2626, #ff8585);
+	// Navigation rail and warm attention colour.
+	--pal-10: light-dark(#3c3b37, #17181a);
+	--pal-11: light-dark(#fd7347, #ff9a78);
+
+	--theme-color-text: var(--pal-1);
+	--theme-color-surface: var(--pal-2);
+	--theme-color-surface-disabled: var(--pal-3);
+	--theme-color-border: var(--pal-4);
+	--theme-color-muted: var(--pal-5);
+	--theme-color-accent: var(--pal-6);
+	--theme-color-on-accent: var(--pal-7);
+	--theme-color-success: var(--pal-8);
+	--theme-color-danger: var(--pal-9);
+	--theme-color-warning: var(--pal-11);
+
+	--theme-font-body: "Ubuntu", sans-serif;
+	--theme-font-heading: "Ubuntu Condensed", sans-serif;
+	--theme-font-weight: 300;
+	--theme-heading-weight: 400;
+	--theme-label-weight: 400;
+	--theme-text-leading: 1.5;
+	--theme-heading-1: 2.5rem;
+	--theme-heading-2: 1.75rem;
+	--theme-radius: 0.25rem;
+	--theme-focus-width: 2px;
+	--theme-focus-offset: 2px;
+	--theme-focus-color: color-mix(in srgb, var(--pal-6), transparent 50%);
+
+	--theme-control-min-height: 2.5rem;
+	--theme-control-padding-block: var(--theme-space-2);
+	--theme-control-padding-inline: var(--theme-space-2);
+	--theme-control-border: var(--pal-6);
+	--theme-control-border-hover: var(--pal-6);
+	--theme-control-background: var(--pal-2);
+	--theme-control-radius: 0.25rem;
+	--theme-button-weight: 300;
+	--theme-button-background: color-mix(in srgb, var(--pal-6), var(--pal-2) 90%);
+	--theme-button-background-hover: color-mix(in srgb, var(--pal-6), var(--pal-2) 80%);
+	--theme-button-background-active: color-mix(in srgb, var(--pal-6), var(--pal-2) 50%);
+	--theme-button-border: var(--pal-6);
+	--theme-button-border-hover: var(--pal-6);
+	--theme-button-primary-background: color-mix(in srgb, var(--pal-8), var(--pal-2) 60%);
+	--theme-button-primary-background-hover: color-mix(in srgb, var(--pal-8), var(--pal-2) 45%);
+	--theme-button-primary-text: var(--pal-1);
+	--theme-button-primary-decoration-hover: none;
+
+	--theme-surface-background: var(--pal-2);
+	--theme-surface-padding: var(--theme-space-4);
+	--theme-surface-border-width: 2px;
+	--theme-surface-radius: 0.5rem;
+	--theme-surface-shadow: none;
+	--theme-grid-gap: var(--theme-space-4);
+	--theme-value-weight: 700;
+	--theme-progress-height: 0.5rem;
+	--theme-table-header-background: var(--pal-3);
+	--theme-table-stripe-background: color-mix(in srgb, var(--pal-6), transparent 95%);
+	--theme-table-hover-background: color-mix(in srgb, var(--pal-6), transparent 90%);
+	--theme-table-padding-block: var(--theme-space-2);
+	--theme-table-padding-inline: var(--theme-space-2);
+
+	--theme-nav-radius: 0;
+	--theme-nav-padding-block: var(--theme-space-2);
+	--theme-nav-padding-inline: var(--theme-space-4);
+	--theme-nav-current-weight: 700;
+	--theme-nav-current-shadow: inset -0.25rem 0 var(--pal-2);
+	--theme-side-nav-current-shadow: var(--theme-nav-current-shadow);
+	--theme-sidebar-contrast-background: var(--pal-10);
+	--theme-sidebar-contrast-text: light-dark(#fff, #f3f4f6);
+	--theme-sidebar-contrast-hover-background: color-mix(in srgb, var(--pal-2), transparent 95%);
+	--theme-sidebar-contrast-current-background: color-mix(in srgb, var(--pal-2), transparent 90%);
+	--theme-sidebar-contrast-current-text: light-dark(#fff, #f3f4f6);
+	--theme-sidebar-contrast-link: light-dark(#fff, #f3f4f6);
+}

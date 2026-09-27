@@ -33,8 +33,8 @@ example shows its own HTML and Sass under **HTML and Sass**.
 
 Add Flair's `style` directory to the Sass load path. Fonts are loaded by the
 application. Themes live in their own namespace: `@use "theme";` gives
-`theme.base`, `theme.ink`, `theme.paper`, `theme.vivid`, `theme.github` and
-`theme.material`. Include `theme.base` at the document root, then at most one
+`theme.base`, `theme.ink`, `theme.paper`, `theme.vivid`, `theme.github`,
+`theme.material` and `theme.clean-dashboard`. Include `theme.base` at the document root, then at most one
 preset. Sass has a single module namespace, so the API is `theme.github`, not
 `flair.theme.github`; `@use "theme/github" as theme;` imports one preset alone.
 
@@ -160,6 +160,7 @@ live changes. This requires a browser supporting CSS `light-dark()`.
 | Vivid | Heavy borders, offset shadows, larger padding, lime selection, pill badges, dark code blocks. |
 | GitHub | Sans-serif navigation with Mona Sans controls, compact panels, neutral current-navigation backgrounds, thin coral tab indicators, grey table stripes. |
 | Material | Roboto, rounded elevated surfaces, tonal navigation, larger table padding, rounded badges. |
+| Clean dashboard | Ubuntu, charcoal navigation, cool white monitoring panels, blue controls, compact tables and restrained status colours. |
 
 These are presentations of the same semantic markup, not reproductions of
 another design system's widgets. Native controls keep their browser behaviour:
@@ -533,6 +534,7 @@ contain only imports and forwards.
 | [`style/mixin/sticky-sidebar.scss`](../style/mixin/sticky-sidebar.scss) | `@mixin sticky-sidebar` |
 | [`style/mixin/typography.scss`](../style/mixin/typography.scss) | `@mixin typography` |
 | [`style/theme/base.scss`](../style/theme/base.scss) | `@mixin base` |
+| [`style/theme/clean-dashboard.scss`](../style/theme/clean-dashboard.scss) | `@mixin clean-dashboard` |
 | [`style/theme/github.scss`](../style/theme/github.scss) | `@mixin github` |
 | [`style/theme/ink.scss`](../style/theme/ink.scss) | `@mixin ink` |
 | [`style/theme/material.scss`](../style/theme/material.scss) | `@mixin material` |
@@ -691,6 +693,7 @@ foundational value or a literal.
 | `--theme-lead-measure` | `55ch` |
 | `--theme-lead-size` | `1.25rem` |
 | `--theme-link-hover-thickness` | `var(--theme-link-thickness, 1px)` |
+| `--theme-link-color` | `var(--theme-color-accent)`; contrast sidebars use their text colour unless `--theme-sidebar-contrast-link` is set. |
 | `--theme-link-offset` | `0.2em` |
 | `--theme-link-thickness` | `1px` |
 | `--theme-list-padding` | `var(--theme-space-4)` |

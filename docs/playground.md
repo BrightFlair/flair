@@ -29,10 +29,10 @@ The Authwave site lives in `~/Code/Authwave/www.authwave.com` and consumes Flair
 ## Application layout proofs
 
 - `/playground/documentation-website/`: a centred 96rem frame, 17rem navigation rail and a separate 54rem article cap. The rail becomes sticky at 60rem.
-- `/playground/dashboard-app/`: a left-aligned 18rem rail at 60rem, with fluid summary grids and a scrollable data table filling the remaining width.
+- `/playground/dashboard-app/`: a left-aligned 18rem rail at 60rem, with fluid summary grids and a scrollable data table filling the remaining width. Choose Clean dashboard to see the compact industrial monitoring presentation.
 - `/playground/github-clone/`: a full-width top bar, left-aligned 24rem rail at 46rem and wrapping editor/preview panels capped independently at 48rem including their gutters. Choose GitHub in the theme selector to use Flair's preset.
 
-Each example starts with the currently selected theme (Monochrome for a fresh session). The shared playground controls independently switch the six themes and System/Light/Dark colour scheme, persisting both selections; the Apply button supplies a native GET fallback without JavaScript.
+Each example starts with the currently selected theme (Monochrome for a fresh session). The shared playground controls independently switch the seven themes and System/Light/Dark colour scheme, persisting both selections; the Apply button supplies a native GET fallback without JavaScript.
 
 ### What the proofs establish
 
@@ -70,7 +70,7 @@ follow the browser's initial size rather than that override. And where an
 application signals current state with a class, it moves to `aria-current`,
 which is what the navigation definitions read.
 
-Run `NODE_PATH=/tmp/flair-review/node_modules node test/playground-browser-check.cjs` against the local server for all three examples in all six themes at 320, 768, 1440 and 1920px, desktop accessibility scans, theme persistence, native form/disclosure behaviour and the no-JavaScript theme fallback. Browser tooling uses the optional setup described in [library.md](library.md).
+Run `NODE_PATH=/tmp/flair-review/node_modules node test/playground-browser-check.cjs` against the local server for all three examples in all seven themes at 320, 768, 1440 and 1920px, desktop accessibility scans, theme persistence, native form/disclosure behaviour and the no-JavaScript theme fallback. Browser tooling uses the optional setup described in [library.md](library.md).
 
 The documentation and dashboard sidebars extend `%d-sidebar-contrast`. Their contrast is requested semantically in SCSS; the active theme defines the background, text and navigation states together. The Github clone retains the ordinary sidebar treatment. No styling classes or attributes are needed in the HTML.
 
