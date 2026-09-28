@@ -2,7 +2,9 @@
 
 .demo-palette {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+	// Nine palette slots read most clearly as a balanced grid rather than a
+	// long first row with two orphaned swatches beneath it.
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
 	gap: var(--theme-space-3);
 	list-style: none;
 	margin: 0;
@@ -15,6 +17,9 @@
 		font-family: var(--site-font-mono);
 		font-size: 0.8125rem;
 		line-height: 1.4;
+		// The reference page adds a prose margin to adjacent list items. A
+		// palette is a grid, so every swatch must start on the same row line.
+		& + li:not(:first-child) { margin-block-start: 0; }
 
 		&::before {
 			content: "";

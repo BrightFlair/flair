@@ -24,7 +24,9 @@
 	--theme-color-surface-disabled: var(--pal-3);
 	--theme-color-border: var(--pal-4);
 	--theme-color-muted: var(--pal-5);
-	--theme-color-accent: var(--pal-6);
+	--theme-color-tint: light-dark(#786000, #e8d46e);
+	--theme-color-primary: var(--pal-6);
+	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
 	--theme-color-success: var(--pal-8);
 	--theme-color-danger: var(--pal-9);
@@ -54,11 +56,11 @@
 	--theme-button-font-size: 0.875rem;
 	--theme-button-weight: 500;
 	--theme-button-text: var(--theme-color-accent);
-	--theme-button-background-hover: color-mix(in srgb, var(--pal-2), var(--pal-6) 8%);
-	--theme-button-background-active: color-mix(in srgb, var(--pal-2), var(--pal-6) 12%);
+	--theme-button-background-hover: color-mix(in srgb, var(--pal-2), var(--theme-color-tint) 8%);
+	--theme-button-background-active: color-mix(in srgb, var(--pal-2), var(--theme-color-tint) 12%);
 	--theme-button-border-hover: var(--theme-color-border);
-	--theme-button-primary-background-hover: color-mix(in srgb, var(--pal-6), white 8%);
-	--theme-button-primary-background-active: color-mix(in srgb, var(--pal-6), white 12%);
+	--theme-button-primary-background-hover: color-mix(in srgb, var(--theme-color-primary), white 8%);
+	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-color-primary), white 12%);
 	--theme-button-primary-decoration-hover: none;
 	--theme-button-shadow-hover: 0 1px 2px rgb(0 0 0 / 20%);
 	--theme-font-heading: var(--theme-font-body);
@@ -83,7 +85,7 @@
 	--theme-disclosure-background: var(--pal-11);
 	--theme-accordion-gap: var(--theme-space-3);
 	--theme-code-background: var(--pal-11);
-	--theme-syntax-keyword: var(--pal-6);
+	--theme-syntax-keyword: var(--theme-color-tint);
 	--theme-syntax-string: var(--pal-8);
 	--theme-syntax-comment: var(--pal-5);
 	--theme-syntax-number: light-dark(#7d5260, #efb8c8);

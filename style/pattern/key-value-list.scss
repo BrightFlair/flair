@@ -20,6 +20,9 @@
 		solid var(--theme-color-border);
 	border-radius: var(--theme-key-value-radius, var(--theme-radius));
 	overflow-x: auto;
+	// Rows may intentionally scroll sideways, but the list never needs a
+	// second scroll axis. This also prevents a fractional-height scrollbar.
+	overflow-y: hidden;
 	> li {
 		display: flex;
 		flex-wrap: var(--theme-key-value-wrap, wrap);

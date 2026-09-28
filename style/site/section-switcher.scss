@@ -15,38 +15,93 @@ section-switcher {
 		grid-template-columns: minmax(0, 1fr);
 	}
 
-	form,
-	label {
+	form {
 		display: flex;
+		align-items: stretch;
 		flex-wrap: wrap;
-		align-items: center;
 		min-width: 0;
 	}
 
-	label {
+	form > label {
 		display: grid;
-		padding-top: var(--site-space-small);
+		grid-template-columns: minmax(0, 1fr);
+		align-content: center;
+		min-width: 0;
 		flex: 1;
-		gap: 0;
-		padding-inline: var(--site-space-small);
+		padding: var(--site-space-small);
+		gap: var(--site-space-small);
 	}
 
-	label span {
-		white-space: nowrap;
-	}
-
-	.theme-form {
-		border-block-start: 1px solid var(--site-ink);
-	}
+	.theme-form { border-block-start: 1px solid var(--site-ink); }
 
 	select {
+		box-sizing: border-box;
 		min-width: 0;
 		width: 100%;
-		min-height: 3rem;
-		padding-block: var(--site-space-small);
+		min-height: 2.75rem;
+		padding: 0;
 		border: 0;
 		background: transparent;
 	}
+
+	.appearance-control {
+		display: grid;
+		grid-template-columns: repeat(2, 2rem);
+		grid-template-rows: repeat(2, 2rem);
+		gap: 0.25rem;
+		place-items: center;
+		align-self: center;
+		padding: 0.5rem;
+		border-inline-start: 1px solid var(--site-ink);
+	}
+
+	.scheme-choice, .colour-choice {
+		position: relative;
+		display: grid;
+		place-items: center;
+		cursor: pointer;
+		border-radius: 50%;
+	}
+
+	.scheme-choice {
+		box-sizing: border-box;
+		inline-size: 2rem;
+		block-size: 2rem;
+		border: 1px solid color-mix(in srgb, var(--site-ink), transparent 55%);
+		font-size: 1.5rem;
+		line-height: 1;
+		input {
+			position: absolute;
+			inline-size: 1px;
+			block-size: 1px;
+			clip-path: inset(50%);
+			overflow: hidden;
+		}
+		&:has(input:checked) { border-color: var(--site-ink); background: var(--site-ink); color: var(--site-paper); }
+		&:hover { border-color: var(--site-ink); }
+	}
+
+	.scheme-choice:has(input:focus-visible), .colour-choice:has(input:focus-visible) {
+		outline: 2px solid var(--site-ink);
+		outline-offset: -2px;
+	}
+
+	input[type="color"] {
+		appearance: none;
+		box-sizing: border-box;
+		inline-size: 2rem;
+		block-size: 2rem;
+		padding: 0;
+		border: 1px solid var(--site-ink);
+		border-radius: 50%;
+		overflow: hidden;
+		background: transparent;
+		cursor: pointer;
+		&::-webkit-color-swatch-wrapper { padding: 0; }
+		&::-webkit-color-swatch { border: 0; border-radius: 50%; }
+		&::-moz-color-swatch { border: 0; border-radius: 50%; }
+	}
+	.tint-choice input { inline-size: 1.25rem; block-size: 1.25rem; }
 
 	button {
 		min-height: 3rem;
@@ -73,10 +128,5 @@ section-switcher {
 		margin: 0;
 		& .theme-form { border-block-start: 0; border-inline-start: 1px solid var(--site-ink); }
 		& nav { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
-		& label {
-			display: flex;
-			gap: var(--site-space-small);
-			padding-top: 0;
-		}
 	}
 }

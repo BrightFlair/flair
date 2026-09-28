@@ -1,6 +1,6 @@
 # Playground
 
-Open `/playground/` from the global section selector. `/playground/blank/` is a blank starter: its main element fills the viewport height and has no padding, margin or maximum width. Playground pages keep the shared fonts, theme variables, baseline element styles, and skip link. The section switcher is removed on every playground page. They do not use `.library-page` or `.flair-example`, and the website footer is removed within this directory.
+Open `/playground/` from the global section selector. The index retains that selector so the playground remains connected to the rest of the site. `/playground/blank/` is a blank starter: its main element fills the viewport height and has no padding, margin or maximum width. Playground examples keep the shared fonts, theme variables, baseline element styles, and skip link. Their global section switcher is replaced by a fixed “Close example” link back to the index. They do not use `.library-page` or `.flair-example`, and the website footer is removed within this directory.
 
 To add an experiment:
 
@@ -29,10 +29,11 @@ The Authwave site lives in `~/Code/Authwave/www.authwave.com` and consumes Flair
 ## Application layout proofs
 
 - `/playground/documentation-website/`: a centred 96rem frame, 17rem navigation rail and a separate 54rem article cap. The rail becomes sticky at 60rem.
-- `/playground/dashboard-app/`: a left-aligned 18rem rail at 60rem, with fluid summary grids and a scrollable data table filling the remaining width. Choose Clean dashboard to see the compact industrial monitoring presentation.
+- `/playground/dashboard-app/`: a left-aligned 18rem rail at 60rem, with fluid summary grids and a scrollable data table filling the remaining width. Choose Clean dashboard to see its warm, raised product interface.
+- `/playground/settings-pages/`: responsive Appearance and Integrations views, with an expanded settings sidebar, compact integrations rail, functional controls and stacked mobile layouts. It opens with the Clean dashboard theme from the playground index.
 - `/playground/github-clone/`: a full-width top bar, left-aligned 24rem rail at 46rem and wrapping editor/preview panels capped independently at 48rem including their gutters. Choose GitHub in the theme selector to use Flair's preset.
 
-Each example starts with the currently selected theme (Monochrome for a fresh session). The shared playground controls independently switch the seven themes and System/Light/Dark colour scheme, persisting both selections; the Apply button supplies a native GET fallback without JavaScript.
+Each example starts with the currently selected theme (Monochrome for a fresh session). The shared playground controls independently switch the six themes, custom tint, custom primary colour and System/Light/Dark colour scheme, persisting each selection. Changing theme restores its CSS-defined tint and primary defaults; the Apply button supplies a native GET fallback without JavaScript.
 
 ### What the proofs establish
 
@@ -70,7 +71,7 @@ follow the browser's initial size rather than that override. And where an
 application signals current state with a class, it moves to `aria-current`,
 which is what the navigation definitions read.
 
-Run `NODE_PATH=/tmp/flair-review/node_modules node test/playground-browser-check.cjs` against the local server for all three examples in all seven themes at 320, 768, 1440 and 1920px, desktop accessibility scans, theme persistence, native form/disclosure behaviour and the no-JavaScript theme fallback. Browser tooling uses the optional setup described in [library.md](library.md).
+Run `NODE_PATH=/tmp/flair-review/node_modules node test/playground-browser-check.cjs` against the local server for the application examples in all six themes at 320, 768, 1440 and 1920px, desktop accessibility scans, theme persistence, native form/disclosure behaviour and the no-JavaScript theme fallback. Browser tooling uses the optional setup described in [library.md](library.md).
 
 The documentation and dashboard sidebars extend `%d-sidebar-contrast`. Their contrast is requested semantically in SCSS; the active theme defines the background, text and navigation states together. The Github clone retains the ordinary sidebar treatment. No styling classes or attributes are needed in the HTML.
 

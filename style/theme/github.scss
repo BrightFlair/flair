@@ -23,7 +23,9 @@
 	--theme-color-surface-disabled: var(--pal-3);
 	--theme-color-border: var(--pal-4);
 	--theme-color-muted: var(--pal-5);
-	--theme-color-accent: var(--pal-6);
+	--theme-color-tint: var(--pal-6);
+	--theme-color-primary: var(--pal-8);
+	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
 	--theme-color-success: var(--pal-8);
 	--theme-color-danger: var(--pal-9);
@@ -49,9 +51,14 @@
 	--theme-button-background-hover: color-mix(in srgb, var(--pal-3), var(--pal-1) 5%);
 	--theme-button-background-active: color-mix(in srgb, var(--pal-3), var(--pal-1) 20%);
 	--theme-button-border-hover: var(--theme-color-border);
-	--theme-button-primary-background: var(--pal-8);
-	--theme-button-primary-background-hover: color-mix(in srgb, var(--pal-8), white 5%);
-	--theme-button-primary-background-active: color-mix(in srgb, var(--pal-8), white 20%);
+	--theme-button-primary-background: var(--theme-color-primary);
+	// GitHub's green is dark enough in the light scheme to need white text;
+	// the brighter dark-scheme green retains its established dark foreground.
+	--theme-button-primary-text: light-dark(#fff, #0d1117);
+	--theme-color-ui-background: var(--theme-color-primary);
+	--theme-color-ui-preferred: #0d1117;
+	--theme-button-primary-background-hover: color-mix(in srgb, var(--theme-color-primary), white 5%);
+	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-color-primary), white 20%);
 	--theme-button-primary-border: var(--pal-11);
 	--theme-button-primary-decoration-hover: none;
 	--theme-font-heading: var(--theme-font-body);

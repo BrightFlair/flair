@@ -2,6 +2,11 @@
 %p-pagination {
 	@extend %p-navigation;
 	> :where(ul, menu) { flex-direction: row; }
+	> :where(ul, menu) > li > a {
+		// A one-digit page is at least as wide as its one-line hit target is tall.
+		min-inline-size: max(44px, calc(1lh + 2 * var(--theme-nav-padding-block, var(--theme-space-3))));
+		text-align: center;
+	}
 	> :where(ul, menu) > li > span {
 		display: block;
 		padding: var(--theme-nav-padding-block, var(--theme-space-3))

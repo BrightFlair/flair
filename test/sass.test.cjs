@@ -58,6 +58,30 @@ test('native element rules and default properties are explicitly opt-in', () => 
 	assert.doesNotMatch(css, /field-row|field-help/);
 });
 
+test('primary buttons use an independent colour with tint-aware contrast', () => {
+	const defaults = compile(`@use "flair";
+:root {
+	@include flair.defaults;
+}`);
+	const button = compile(`@use "flair";
+.save {
+	@extend %o-button-primary;
+}`);
+	assert.match(defaults, /--theme-color-primary:\s*var\(--pal-6\)/);
+	assert.match(defaults, /--theme-color-ui-background:\s*var\(--theme-color-primary\)/);
+	assert.match(defaults, /--theme-color-ui-preferred:\s*var\(--theme-color-on-accent\)/);
+	assert.match(defaults, /--theme-color-ui-contrast:\s*var\(--theme-color-ui-preferred\)/);
+	assert.match(defaults, /contrast-color\(var\(--theme-color-ui-background\)\) 80%/);
+	assert.match(defaults, /var\(--theme-color-ui-preferred\)/);
+	assert.match(button, /var\(--theme-button-primary-text, var\(--theme-color-ui-contrast\)\)/);
+	assert.match(button, /var\(--theme-button-primary-background, var\(--theme-color-primary\)\)/);
+	const github = compile('@use "theme"; .theme { @include theme.github; }');
+	assert.match(github, /--theme-color-tint:\s*var\(--pal-6\)/);
+	assert.match(github, /--theme-color-primary:\s*var\(--pal-8\)/);
+	assert.match(github, /--theme-color-ui-background:\s*var\(--theme-color-primary\)/);
+	assert.match(github, /--theme-color-ui-preferred:\s*#0d1117/);
+});
+
 test('public overrides remain inherited, not reset on individual controls', () => {
 	const css = compile(`@use "flair";
 .profile {
@@ -173,6 +197,9 @@ test('theme mixins are opt-in and export no website selectors or font downloads'
 		const css = compile(`@use "theme"; .theme { @include theme.${name}; }`);
 		assert.equal(compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`), css);
 		assert.match(css, /--theme-color-text/);
+		assert.match(css, /--theme-color-tint/);
+		assert.match(css, /--theme-color-primary/);
+		assert.match(css, /--theme-color-accent:\s*var\(--theme-color-tint\)/);
 		assert.doesNotMatch(css, /--site-|:root|data-flair-theme|@font-face|url\(/);
 	}
 });

@@ -4,6 +4,7 @@
 %p-page-tabs {
 	@extend %p-navigation;
 	border-block-end: var(--theme-tab-border-width, var(--theme-border-width)) solid var(--theme-color-border);
+	padding-block-end: var(--theme-tab-border-gap, var(--theme-space-2));
 	> :where(ul, menu) {
 		flex-direction: row;
 		flex-wrap: var(--theme-tab-wrap, wrap);

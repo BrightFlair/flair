@@ -214,7 +214,7 @@
 		<h2 id="theme-presets-title">Using the theme presets in a project</h2>
 		<p>The theme selector on this website uses the same exported mixins available to consumers. Theme imports emit no CSS or font downloads until included.</p>
 		<div class="flair-example"><div class="demo-card"><h3>Shared theme settings</h3><p>Choose a theme in the site controls to see all examples change together.</p><a href="/library/controls/">Inspect themed controls</a></div></div>
-			<p>Available overrides are theme.ink (Ink), theme.paper, theme.vivid, theme.github, theme.material and theme.clean-dashboard. theme.base supplies the Monochrome defaults. Include base first and then one optional override. Each theme provides light and dark colours. Set html data-theme to light or dark to override the system preference, or omit the attribute to follow the browser.</p>
+			<p>Available overrides are theme.ink (the user-facing Monochrome theme), theme.paper, theme.vivid, theme.github, theme.material and theme.clean-dashboard. theme.base supplies the internal defaults. Include base first and then one optional override. Each theme provides light and dark colours. Set html data-theme to light or dark to override the system preference, or omit the attribute to follow the browser.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;div class=&quot;demo-card&quot;&gt;&lt;h3&gt;Shared theme settings&lt;/h3&gt;&lt;p&gt;Choose a theme in the site controls to see all examples change together.&lt;/p&gt;&lt;a href=&quot;/library/controls/&quot;&gt;Inspect themed controls&lt;/a&gt;&lt;/div&gt;</code></pre>
 			<pre><code>@use &quot;theme&quot;;
@@ -228,7 +228,7 @@
 	</section>
 	<section class="reference-section" id="palette" aria-labelledby="palette-title">
 		<h2 id="palette-title">The palette and the named layer</h2>
-		<p>A theme is built in two layers. Nine numbered slots hold the raw colours, and the named <code>--theme-*</code> properties map them onto meaning. A new theme replaces the nine and inherits every mapping; where a colour does not come from the palette, it sets the named property directly instead.</p>
+		<p>A theme is built in two layers. Nine numbered slots hold the raw colours, and the named <code>--theme-*</code> properties map them onto meaning. A new theme replaces the nine and inherits every mapping; where a colour does not come from the palette, it sets the named property directly instead. <code>--theme-color-tint</code> reads slot six, and the accent token aliases that tint so an application can recolour links, focus and current states with one override. <code>--theme-color-primary</code> separately controls primary button backgrounds.</p>
 		<p>The swatches below are live. Change the theme at the top of the page and watch the same nine slots take new values, while every definition in the library keeps reading the same names.</p>
 		<div class="flair-example">
 			<ol class="demo-palette">
@@ -237,7 +237,7 @@
 				<li><code>--pal-3</code> Raised surface: panels, controls, striped rows</li>
 				<li><code>--pal-4</code> Border</li>
 				<li><code>--pal-5</code> Muted foreground: captions, metadata, placeholders</li>
-				<li><code>--pal-6</code> Accent: links, focus, current state</li>
+				<li><code>--pal-6</code> Preset tint: links, focus, current state</li>
 				<li><code>--pal-7</code> Foreground on top of the accent</li>
 				<li><code>--pal-8</code> Positive</li>
 				<li><code>--pal-9</code> Negative</li>
@@ -252,7 +252,7 @@
 	&lt;li&gt;&lt;code&gt;--pal-3&lt;/code&gt; Raised surface: panels, controls, striped rows&lt;/li&gt;
 	&lt;li&gt;&lt;code&gt;--pal-4&lt;/code&gt; Border&lt;/li&gt;
 	&lt;li&gt;&lt;code&gt;--pal-5&lt;/code&gt; Muted foreground: captions, metadata, placeholders&lt;/li&gt;
-	&lt;li&gt;&lt;code&gt;--pal-6&lt;/code&gt; Accent: links, focus, current state&lt;/li&gt;
+	&lt;li&gt;&lt;code&gt;--pal-6&lt;/code&gt; Preset tint: links, focus, current state&lt;/li&gt;
 	&lt;li&gt;&lt;code&gt;--pal-7&lt;/code&gt; Foreground on top of the accent&lt;/li&gt;
 	&lt;li&gt;&lt;code&gt;--pal-8&lt;/code&gt; Positive&lt;/li&gt;
 	&lt;li&gt;&lt;code&gt;--pal-9&lt;/code&gt; Negative&lt;/li&gt;

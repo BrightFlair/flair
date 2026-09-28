@@ -4,6 +4,9 @@
 %o-disclosure {
 	@extend %d-surface;
 	padding: 0;
+	// Summary hover and focus backgrounds inherit the outer radius. Clip them
+	// to the disclosure so their square paint area cannot escape its corners.
+	overflow: hidden;
 	> summary {
 		min-block-size: 44px;
 		padding: var(--theme-disclosure-padding, var(--theme-space-4));

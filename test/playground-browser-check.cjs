@@ -4,7 +4,7 @@ const AxeBuilder = require('@axe-core/playwright').default;
 const assert = require('node:assert/strict');
 const base = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
 const routes = ['documentation-website', 'dashboard-app', 'github-clone'];
-const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
 (async () => {
  const browser = await chromium.launch({executablePath: process.env.FLAIR_CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox']});
  try {
@@ -12,6 +12,39 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-da
   const page = await browserContext.newPage();
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
+  for(const width of [320, 1440]) {
+   await page.setViewportSize({width, height: 1000});
+   const response = await page.goto(`${base}/playground/?theme=ink&scheme=light`);
+   assert.equal(response.status(), 200);
+   assert.ok(await page.locator('section-switcher').isVisible());
+   assert.equal(await page.locator('select[name=section]').inputValue(), 'playground');
+   assert.equal(await page.locator('.playground-close').count(), 0);
+   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `playground index ${width}: overflow`);
+   const switcherBox = await page.locator('section-switcher').boundingBox();
+   const headingBox = await page.getByRole('heading', {name: 'Playground'}).boundingBox();
+   assert.ok(headingBox.y >= switcherBox.y + switcherBox.height, `playground index ${width}: controls must not cover the heading`);
+  }
+  const indexResult = await new AxeBuilder({page}).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+  assert.deepEqual(indexResult.violations.map(item => ({id:item.id, targets:item.nodes.map(node=>node.target)})), [], 'playground index');
+  await page.goto(`${base}/playground/?theme=base&scheme=light`);
+  assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'ink');
+  assert.equal(await page.locator('select[name=theme]').inputValue(), 'ink');
+  assert.equal(await page.locator('select[name=theme] option[value=base]').count(), 0);
+  assert.equal(await page.locator('select[name=theme] option[value=ink]').textContent(), 'Monochrome');
+  for(const route of [...routes, 'blank', 'settings-pages']) {
+   await page.goto(`${base}/playground/${route}/?theme=ink&scheme=light`);
+   assert.equal(await page.locator('section-switcher').count(), 0, `${route}: global controls are removed`);
+   const close = page.getByRole('link', {name: 'Close example'});
+   assert.ok(await close.isVisible(), `${route}: close link is visible`);
+   assert.equal(await close.getAttribute('href'), '/playground/');
+   assert.equal(await page.getByRole('link', {name: 'All examples'}).count(), 0);
+  }
+  await Promise.all([
+   page.waitForURL(url => url.pathname === '/playground/'),
+   page.getByRole('link', {name: 'Close example'}).click(),
+  ]);
+  assert.ok(await page.locator('section-switcher').isVisible());
+  console.log('Passed playground index controls and example exit navigation.');
   for(const route of routes) {
    for(const theme of themes) {
     for(const width of [320, 768, 1440, 1920]) {
@@ -102,11 +135,33 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-da
    };
   });
   assert.deepEqual(cleanDashboardPresentation, {
-   font: 'Ubuntu, sans-serif',
-   sidebar: 'rgb(60, 59, 55)',
-   card: {background: 'rgb(255, 255, 255)', border: 'rgb(216, 220, 226)', width: '2px', radius: '8px', shadow: 'none'},
-   select: {color: 'rgb(60, 59, 55)', background: 'rgb(255, 255, 255)'},
+   font: '"Mona Sans", sans-serif',
+   sidebar: 'rgb(251, 249, 248)',
+   card: {background: 'rgb(255, 255, 255)', border: 'rgb(221, 214, 210)', width: '1px', radius: '12px', shadow: 'rgba(45, 39, 36, 0.07) 0px 1px 3px 0px'},
+   select: {color: 'rgb(45, 39, 36)', background: 'rgba(0, 0, 0, 0)'},
   });
+  for(const scheme of ['light', 'dark']) {
+   for(const view of ['appearance', 'integrations']) {
+    for(const width of [320, 375, 768, 1440]) {
+     await page.setViewportSize({width, height: 1000});
+     const response = await page.goto(`${base}/playground/settings-pages/?theme=clean-dashboard&scheme=${scheme}&width=${width}#${view}`);
+     assert.equal(response.status(), 200);
+     assert.equal(await page.locator('.settings-pages').getAttribute('data-settings-current'), view);
+     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${scheme} ${view} ${width}: settings overflow`);
+    }
+    const result = await new AxeBuilder({page}).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+    assert.deepEqual(result.violations.map(item => ({id:item.id, targets:item.nodes.map(node=>node.target)})), [], `${scheme} ${view}`);
+   }
+  }
+  await page.setViewportSize({width: 375, height: 1000});
+  await page.goto(`${base}/playground/settings-pages/?theme=clean-dashboard&scheme=light#appearance`);
+  await page.locator('[data-settings-view-select]').selectOption('integrations');
+  await page.waitForFunction(() => document.querySelector('.settings-pages').dataset.settingsCurrent === 'integrations');
+  assert.ok(await page.locator('[data-settings-view="integrations"]').isVisible());
+  await page.locator('[data-settings-menu-toggle]').click();
+  assert.ok(await page.locator('#settings-sidebar').isVisible());
+  assert.equal(await page.locator('[data-settings-menu-toggle]').getAttribute('aria-expanded'), 'true');
+  console.log('Passed responsive settings views, light/dark accessibility and navigation.');
   await page.goto(`${base}/playground/github-clone/?theme=vivid`);
   await page.locator('select[name=theme]').selectOption('github');
   const sidebarCurrent = page.locator('aside nav a[aria-current]');
@@ -152,18 +207,86 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-da
   }
   await page.locator('select[name=theme]').selectOption('vivid');
   assert.equal((await presentation(sidebarCurrent)).background, 'rgb(199, 255, 84)');
-  await page.goto(`${base}/playground/github-clone/?theme=base`);
+  await page.goto(`${base}/playground/github-clone/?theme=ink`);
   await page.locator('#properties > summary').click();
   assert.ok(await page.locator('#properties').evaluate(e => e.open));
   await page.locator('input[name=title]').fill('Edited example');
   await Promise.all([page.waitForURL('**/*title=Edited*'), page.getByRole('button', {name:'Save example'}).click()]);
   assert.equal(new URL(page.url()).searchParams.get('title'), 'Edited example');
+  const presetTints = {
+   ink: '#666666', paper: '#8a4168', vivid: '#6025d6',
+   github: '#0969da', material: '#786000', 'clean-dashboard': '#6854c5',
+  };
+  const presetPrimaryColours = {
+   ink: '#111111', paper: '#315c40', vivid: '#c7ff54',
+   github: '#1f883d', material: '#6750a4', 'clean-dashboard': '#a918b8',
+  };
+  for(const [theme, tint] of Object.entries(presetTints)) {
+   const primary = presetPrimaryColours[theme];
+   await page.goto(`${base}/playground/?theme=${theme}&scheme=light&tint=%23123456&primary=%23654321`);
+   assert.equal(await page.locator('input[name=tint]').inputValue(), '#123456');
+   assert.equal(await page.locator('input[name=tint]').getAttribute('data-custom'), 'true');
+   assert.equal(await page.locator('input[name=primary]').inputValue(), '#654321');
+   assert.equal(await page.locator('input[name=primary]').getAttribute('data-custom'), 'true');
+   assert.deepEqual(await page.locator('html').evaluate(element => {
+    const style = getComputedStyle(element);
+    return {
+     tint: style.getPropertyValue('--theme-color-tint').trim(),
+     accent: style.getPropertyValue('--theme-color-accent').trim(),
+     primary: style.getPropertyValue('--theme-color-primary').trim(),
+    };
+   }), {tint: '#123456', accent: '#123456', primary: '#654321'}, `${theme}: custom colours reach their semantic tokens`);
+   await page.goto(`${base}/playground/?theme=${theme}&scheme=light&tint=invalid&primary=invalid`);
+   assert.equal(await page.locator('input[name=tint]').inputValue(), tint);
+   assert.equal(await page.locator('input[name=tint]').getAttribute('data-custom'), 'false');
+   assert.equal(await page.locator('input[name=primary]').inputValue(), primary);
+   assert.equal(await page.locator('input[name=primary]').getAttribute('data-custom'), 'false');
+  }
+  await page.goto(`${base}/playground/?theme=ink&scheme=light&tint=invalid&primary=invalid`);
+  const tintInput = page.locator('input[name=tint]');
+  const primaryInput = page.locator('input[name=primary]');
+  await tintInput.fill('#e11d48');
+  await primaryInput.fill('#16a34a');
+  await page.locator('select[name=theme]').selectOption('github');
+  assert.equal(await tintInput.inputValue(), '#0969da');
+  assert.equal(await primaryInput.inputValue(), '#1f883d');
+  assert.equal(await page.locator('html').evaluate(element => element.style.getPropertyValue('--theme-color-tint')), '');
+  assert.equal(await page.locator('html').evaluate(element => element.style.getPropertyValue('--theme-color-primary')), '');
+  await tintInput.fill('#e11d48');
+  await primaryInput.fill('#16a34a');
+  assert.equal(await page.locator('.playground-index a').first().evaluate(element => getComputedStyle(element).color), 'rgb(225, 29, 72)');
+  await page.reload();
+  assert.equal(await tintInput.inputValue(), '#e11d48');
+  assert.equal(await primaryInput.inputValue(), '#16a34a');
+  assert.equal(await page.locator('html').getAttribute('style'), '--theme-color-tint: #e11d48; --theme-color-primary: #16a34a;');
+  await page.goto(`${base}/playground/github-clone/`);
+  const customPrimaryButton = page.locator('#editor form > button[type="submit"]');
+  assert.equal(await customPrimaryButton.evaluate(element => getComputedStyle(element).backgroundColor), 'rgb(22, 163, 74)');
+  await customPrimaryButton.focus();
+  assert.equal(await customPrimaryButton.evaluate(element => getComputedStyle(element).outlineColor), 'rgb(225, 29, 72)');
+  console.log('Passed CSS-derived defaults, theme resets, validation and persistent custom colours.');
   const context = await browser.newContext({javaScriptEnabled:false});
   const nojs = await context.newPage();
   await nojs.goto(`${base}/playground/dashboard-app/`);
   await nojs.locator('select[name=theme]').selectOption('github');
+	  await nojs.locator('input[name=tint]').fill('#123456');
+	  await nojs.locator('input[name=primary]').fill('#654321');
   await Promise.all([nojs.waitForURL(url => url.searchParams.get('theme') === 'github'), nojs.getByRole('button', {name:'Apply'}).click()]);
   assert.equal(await nojs.locator('html').getAttribute('data-flair-theme'), 'github');
+  assert.equal(new URL(nojs.url()).searchParams.get('tint'), '#123456');
+	  assert.equal(new URL(nojs.url()).searchParams.get('primary'), '#654321');
+	  assert.equal(await nojs.locator('html').getAttribute('style'), '--theme-color-tint: #123456; --theme-color-primary: #654321');
+	  const presetContext = await browser.newContext({javaScriptEnabled:false});
+	  const presetPage = await presetContext.newPage();
+	  await presetPage.goto(`${base}/playground/dashboard-app/?theme=github&scheme=light`);
+	  await presetPage.locator('select[name=scheme]').selectOption('dark');
+	  await Promise.all([presetPage.waitForURL(url => url.searchParams.get('scheme') === 'dark'), presetPage.getByRole('button', {name:'Apply'}).click()]);
+	  assert.equal(await presetPage.locator('html').getAttribute('style'), null);
+	  assert.equal(await presetPage.locator('input[name=tint]').inputValue(), '#4493f8');
+	  assert.equal(await presetPage.locator('input[name=tint]').getAttribute('data-custom'), 'false');
+	  assert.equal(await presetPage.locator('input[name=primary]').inputValue(), '#3fb950');
+	  assert.equal(await presetPage.locator('input[name=primary]').getAttribute('data-custom'), 'false');
+	  await presetContext.close();
   assert.deepEqual(errors, []);
   console.log('Passed theme persistence, native disclosure/form and no-JavaScript theme switching.');
  } finally { await browser.close(); }

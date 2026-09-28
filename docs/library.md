@@ -114,7 +114,7 @@ the named `--theme-*` properties map them onto meaning:
 | `--pal-3` | Raised surface: panels, controls, striped rows |
 | `--pal-4` | Border |
 | `--pal-5` | Muted foreground: captions, metadata, placeholders |
-| `--pal-6` | Accent: links, focus, current state |
+| `--pal-6` | Preset tint: links, focus, current state |
 | `--pal-7` | Foreground on top of the accent |
 | `--pal-8` | Positive |
 | `--pal-9` | Negative |
@@ -123,6 +123,12 @@ the named `--theme-*` properties map them onto meaning:
 theme replaces the nine slots and inherits every mapping; where a colour does
 not come from the palette, it sets the named property directly instead. A theme
 needing more than nine adds further slots of its own and maps them the same way.
+`--theme-color-tint` reads slot six, and `--theme-color-accent` aliases that
+named tint. Override the tint on a theme container to recolour links, focus
+rings, current states and components which use the theme accent.
+`--theme-color-primary` independently controls primary button backgrounds. It
+also reads slot six by default, while themes such as GitHub and Vivid map it to
+their green and lime palette slots.
 
 Every slot is a `light-dark()` pair, so one palette serves both schemes without
 a second block of colours and without JavaScript.
@@ -154,13 +160,12 @@ live changes. This requires a browser supporting CSS `light-dark()`.
 
 | Theme | Character |
 | --- | --- |
-| Monochrome | Ubuntu, straight corners, unshadowed surfaces, neutral states. The default. |
-| Ink | Neutral raised surfaces and a strong current-item treatment. |
+| Monochrome | Neutral raised surfaces, strong current-item treatment and a restrained black-and-white palette. The default. |
 | Paper | Serif headings, generous spacing and leading, warm insets, subtle shadows. |
 | Vivid | Heavy borders, offset shadows, larger padding, lime selection, pill badges, dark code blocks. |
 | GitHub | Sans-serif navigation with Mona Sans controls, compact panels, neutral current-navigation backgrounds, thin coral tab indicators, grey table stripes. |
 | Material | Roboto, rounded elevated surfaces, tonal navigation, larger table padding, rounded badges. |
-| Clean dashboard | Ubuntu, charcoal navigation, cool white monitoring panels, blue controls, compact tables and restrained status colours. |
+| Clean dashboard | Mona Sans, warm raised surfaces, crisp borders, magenta controls and subtle button gradients. |
 
 These are presentations of the same semantic markup, not reproductions of
 another design system's widgets. Native controls keep their browser behaviour:
@@ -577,12 +582,12 @@ foundational value or a literal.
 | `--theme-button-min-width` | `auto` |
 | `--theme-button-padding-block` | `var(--theme-control-padding-block, var(--theme-space-2))` |
 | `--theme-button-padding-inline` | `var(--theme-control-padding-inline, var(--theme-space-3))` |
-| `--theme-button-primary-background` | `var(--theme-color-accent)` |
-| `--theme-button-primary-background-active` | `var(--theme-button-primary-background-hover, var(--theme-color-text))` |
-| `--theme-button-primary-background-hover` | `var(--theme-color-text)` |
-| `--theme-button-primary-border` | `var(--theme-button-primary-background, var(--theme-color-accent))` |
+| `--theme-button-primary-background` | `var(--theme-color-primary)` |
+| `--theme-button-primary-background-active` | Primary hover background, or primary mixed 25% toward its contrast colour |
+| `--theme-button-primary-background-hover` | Primary mixed 15% toward its contrast colour |
+| `--theme-button-primary-border` | `var(--theme-button-primary-background, var(--theme-color-primary))` |
 | `--theme-button-primary-decoration-hover` | `underline` |
-| `--theme-button-primary-text` | `var(--theme-color-on-accent)` |
+| `--theme-button-primary-text` | `var(--theme-color-ui-contrast)` |
 | `--theme-button-radius` | `var(--theme-control-radius, var(--theme-radius))` |
 | `--theme-button-shadow-hover` | `none` |
 | `--theme-button-text` | `var(--theme-color-text)` |
@@ -599,6 +604,11 @@ foundational value or a literal.
 | `--theme-code-tab-size` | `4` |
 | `--theme-code-text` | `var(--theme-color-text)` |
 | `--theme-color-control-width` | `4rem` |
+| `--theme-color-primary` | `var(--pal-6)` |
+| `--theme-color-tint` | `var(--pal-6)` |
+| `--theme-color-ui-background` | `var(--theme-color-primary)` |
+| `--theme-color-ui-preferred` | `var(--theme-color-on-accent)` |
+| `--theme-color-ui-contrast` | Preferred colour fallback; otherwise 80% contrasting colour mixed with the preferred colour |
 | `--theme-color-success` | `var(--theme-color-text)` |
 | `--theme-color-warning` | `var(--theme-color-text)` |
 | `--theme-compound-gap` | `var(--theme-space-4)` |
@@ -930,8 +940,16 @@ The website is a consumer of the library, not part of it. `--site-*` properties,
 the section switcher, cookies and the demo scripts belong to it. Its preset
 picker uses `data-flair-theme`, which the library does not require;
 `data-theme` is reserved for the light and dark override. Preferences are stored
-in `flair-theme` and `flair-scheme` cookies, with `?theme=` and
-`?scheme=system|light|dark` as fallbacks.
+in `flair-theme`, `flair-scheme`, `flair-tint` and `flair-primary` cookies,
+with matching query parameters as fallbacks. The colour pickers write six-digit
+hexadecimal values to `--theme-color-tint` and `--theme-color-primary`. Changing
+the theme clears both custom colours and reads the new defaults from the theme's
+computed CSS properties.
+
+The global switcher groups appearance controls into a 2×2 grid: sun and moon
+radios above a large primary colour circle and a smaller tint circle. Selecting
+the active scheme again returns to the system default; pressing Space on the
+selected radio does the same. Neither radio is checked in system mode.
 
 Library content is capped at 80rem with gutters outside that measure. At the
 GitHub theme's 14px root that is 1120px, and at a 16px root, 1280px. Demo narrow

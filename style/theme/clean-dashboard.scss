@@ -1,89 +1,101 @@
 @use "../mixin/color-scheme";
 
-// A compact monitoring interface: cool white panels, blue controls and a
-// charcoal navigation rail. Fonts remain the consuming application's concern.
+// A warm product dashboard with soft raised surfaces, crisp borders and a
+// saturated magenta accent. It is designed to work in either colour scheme.
 @mixin clean-dashboard {
 	@include color-scheme.color-scheme;
 
-	--pal-1: light-dark(#3c3b37, #f3f4f6);
-	--pal-2: light-dark(#fff, #1f2023);
-	--pal-3: light-dark(#f3f5f8, #2b2d31);
-	--pal-4: light-dark(#d8dce2, #626b78);
-	--pal-5: light-dark(#64748b, #b8c2d0);
-	--pal-6: light-dark(#204698, #8eafff);
-	--pal-7: light-dark(#fff, #17203a);
-	--pal-8: light-dark(#059669, #5ee0b1);
-	--pal-9: light-dark(#dc2626, #ff8585);
-	// Navigation rail and warm attention colour.
-	--pal-10: light-dark(#3c3b37, #17181a);
-	--pal-11: light-dark(#fd7347, #ff9a78);
+	--pal-1: light-dark(#2d2724, #f4efec);
+	--pal-2: light-dark(#fff, #2a2422);
+	--pal-3: light-dark(#f7f4f2, #342d2a);
+	--pal-4: light-dark(#ddd6d2, #5c514c);
+	--pal-5: light-dark(#756a64, #c7bdb8);
+	--pal-6: light-dark(#a918b8, #f06bf5);
+	--pal-7: #241d22;
+	--pal-8: light-dark(#08784a, #72d7a5);
+	--pal-9: light-dark(#b92b3a, #ff929a);
+	--pal-10: light-dark(#fbf9f8, #241f1d);
+	--pal-11: light-dark(#9a5b16, #efb462);
 
 	--theme-color-text: var(--pal-1);
 	--theme-color-surface: var(--pal-2);
 	--theme-color-surface-disabled: var(--pal-3);
 	--theme-color-border: var(--pal-4);
 	--theme-color-muted: var(--pal-5);
-	--theme-color-accent: var(--pal-6);
+	--theme-color-tint: light-dark(#6854c5, #c4b7ff);
+	--theme-color-primary: var(--pal-6);
+	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
 	--theme-color-success: var(--pal-8);
 	--theme-color-danger: var(--pal-9);
 	--theme-color-warning: var(--pal-11);
 
-	--theme-font-body: "Ubuntu", sans-serif;
-	--theme-font-heading: "Ubuntu Condensed", sans-serif;
-	--theme-font-weight: 300;
-	--theme-heading-weight: 400;
-	--theme-label-weight: 400;
+	--theme-font-body: "Mona Sans", sans-serif;
+	--theme-font-heading: "Mona Sans", sans-serif;
+	--theme-font-weight: 400;
+	--theme-heading-weight: 600;
+	--theme-label-weight: 600;
 	--theme-text-leading: 1.5;
-	--theme-heading-1: 2.5rem;
-	--theme-heading-2: 1.75rem;
-	--theme-radius: 0.25rem;
+	--theme-heading-1: 2.25rem;
+	--theme-heading-2: 1.5rem;
+	--theme-radius: 0.625rem;
 	--theme-focus-width: 2px;
 	--theme-focus-offset: 2px;
-	--theme-focus-color: color-mix(in srgb, var(--pal-6), transparent 50%);
+	--theme-focus-color: color-mix(in srgb, var(--theme-color-tint), transparent 38%);
 
-	--theme-control-min-height: 2.5rem;
-	--theme-control-padding-block: var(--theme-space-2);
-	--theme-control-padding-inline: var(--theme-space-2);
-	--theme-control-border: var(--pal-6);
-	--theme-control-border-hover: var(--pal-6);
-	--theme-control-background: var(--pal-2);
-	--theme-control-radius: 0.25rem;
-	--theme-button-weight: 300;
-	--theme-button-background: color-mix(in srgb, var(--pal-6), var(--pal-2) 90%);
-	--theme-button-background-hover: color-mix(in srgb, var(--pal-6), var(--pal-2) 80%);
-	--theme-button-background-active: color-mix(in srgb, var(--pal-6), var(--pal-2) 50%);
-	--theme-button-border: var(--pal-6);
-	--theme-button-border-hover: var(--pal-6);
-	--theme-button-primary-background: color-mix(in srgb, var(--pal-8), var(--pal-2) 60%);
-	--theme-button-primary-background-hover: color-mix(in srgb, var(--pal-8), var(--pal-2) 45%);
-	--theme-button-primary-text: var(--pal-1);
+	--theme-control-min-height: 3rem;
+	--theme-control-padding-block: 0.625rem;
+	--theme-control-padding-inline: 0.875rem;
+	--theme-control-border: var(--pal-4);
+	--theme-control-border-hover: color-mix(in srgb, var(--theme-color-tint), var(--pal-4) 35%);
+	--theme-control-background: linear-gradient(180deg, var(--pal-2), color-mix(in srgb, var(--pal-3), var(--pal-2) 45%));
+	--theme-control-radius: 0.625rem;
+	--theme-button-weight: 600;
+	--theme-button-background: linear-gradient(180deg, color-mix(in srgb, var(--pal-2), #fff 5%), color-mix(in srgb, var(--pal-3), var(--pal-2) 30%));
+	--theme-button-background-hover: linear-gradient(180deg, color-mix(in srgb, var(--pal-2), #fff 9%), color-mix(in srgb, var(--pal-3), var(--pal-2) 8%));
+	--theme-button-background-active: color-mix(in srgb, var(--pal-3), var(--pal-2) 18%);
+	--theme-button-border: var(--pal-4);
+	--theme-button-border-hover: color-mix(in srgb, var(--pal-5), var(--pal-4) 30%);
+	--theme-button-shadow: 0 1px 2px light-dark(rgb(45 39 36 / 10%), rgb(0 0 0 / 28%)), inset 0 1px rgb(255 255 255 / 10%);
+	--theme-button-shadow-hover: 0 2px 5px light-dark(rgb(45 39 36 / 14%), rgb(0 0 0 / 36%)), inset 0 1px rgb(255 255 255 / 14%);
+	--theme-button-primary-background: linear-gradient(180deg, color-mix(in srgb, var(--theme-color-primary), white 12%), var(--theme-color-primary));
+	--theme-button-primary-background-hover: linear-gradient(180deg, color-mix(in srgb, var(--theme-color-primary), white 20%), color-mix(in srgb, var(--theme-color-primary), white 6%));
+	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-color-primary), black 10%);
+	--theme-button-primary-border: color-mix(in srgb, var(--theme-color-primary), black 16%);
+	// Keep the light-scheme label quiet against the vivid pink. In dark mode
+	// the established near-black foreground has the intended contrast.
+	--theme-button-primary-text: light-dark(#f8f5f8, #241d22);
+	--theme-color-ui-preferred: #241d22;
+	--theme-button-primary-shadow: 0 1px 2px color-mix(in srgb, var(--theme-color-primary), transparent 58%), inset 0 1px rgb(255 255 255 / 28%);
+	--theme-button-primary-shadow-hover: 0 3px 8px color-mix(in srgb, var(--theme-color-primary), transparent 52%), inset 0 1px rgb(255 255 255 / 32%);
 	--theme-button-primary-decoration-hover: none;
 
 	--theme-surface-background: var(--pal-2);
-	--theme-surface-padding: var(--theme-space-4);
-	--theme-surface-border-width: 2px;
-	--theme-surface-radius: 0.5rem;
-	--theme-surface-shadow: none;
-	--theme-grid-gap: var(--theme-space-4);
-	--theme-value-weight: 700;
+	--theme-surface-padding: 1.5rem;
+	--theme-surface-border-width: 1px;
+	--theme-surface-radius: 0.75rem;
+	--theme-surface-shadow: 0 1px 3px light-dark(rgb(45 39 36 / 7%), rgb(0 0 0 / 18%));
+	--theme-grid-gap: 1rem;
+	--theme-value-weight: 600;
 	--theme-progress-height: 0.5rem;
 	--theme-table-header-background: var(--pal-3);
-	--theme-table-stripe-background: color-mix(in srgb, var(--pal-6), transparent 95%);
-	--theme-table-hover-background: color-mix(in srgb, var(--pal-6), transparent 90%);
-	--theme-table-padding-block: var(--theme-space-2);
-	--theme-table-padding-inline: var(--theme-space-2);
+	--theme-table-stripe-background: color-mix(in srgb, var(--theme-color-tint), transparent 97%);
+	--theme-table-hover-background: color-mix(in srgb, var(--theme-color-tint), transparent 92%);
+	--theme-table-padding-block: 0.75rem;
+	--theme-table-padding-inline: 0.75rem;
 
-	--theme-nav-radius: 0;
-	--theme-nav-padding-block: var(--theme-space-2);
-	--theme-nav-padding-inline: var(--theme-space-4);
-	--theme-nav-current-weight: 700;
-	--theme-nav-current-shadow: inset -0.25rem 0 var(--pal-2);
-	--theme-side-nav-current-shadow: var(--theme-nav-current-shadow);
+	--theme-nav-radius: 0.5rem;
+	--theme-nav-padding-block: 0.625rem;
+	--theme-nav-padding-inline: 0.75rem;
+	--theme-nav-current-weight: 600;
+	--theme-nav-hover-background: color-mix(in srgb, var(--theme-color-tint), transparent 94%);
+	--theme-nav-current-background: color-mix(in srgb, var(--theme-color-tint), transparent 88%);
+	--theme-nav-current-shadow: none;
+	--theme-side-nav-current-shadow: none;
 	--theme-sidebar-contrast-background: var(--pal-10);
-	--theme-sidebar-contrast-text: light-dark(#fff, #f3f4f6);
-	--theme-sidebar-contrast-hover-background: color-mix(in srgb, var(--pal-2), transparent 95%);
-	--theme-sidebar-contrast-current-background: color-mix(in srgb, var(--pal-2), transparent 90%);
-	--theme-sidebar-contrast-current-text: light-dark(#fff, #f3f4f6);
-	--theme-sidebar-contrast-link: light-dark(#fff, #f3f4f6);
+	--theme-sidebar-contrast-text: var(--pal-1);
+	--theme-sidebar-contrast-hover-background: color-mix(in srgb, var(--theme-color-tint), transparent 94%);
+	--theme-sidebar-contrast-current-background: color-mix(in srgb, var(--theme-color-tint), transparent 88%);
+	--theme-sidebar-contrast-current-text: var(--pal-1);
+	--theme-sidebar-contrast-link: var(--pal-1);
 }

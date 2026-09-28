@@ -23,7 +23,9 @@
 	--theme-color-surface-disabled: var(--pal-3);
 	--theme-color-border: var(--pal-4);
 	--theme-color-muted: var(--pal-5);
-	--theme-color-accent: var(--pal-6);
+	--theme-color-tint: var(--pal-6);
+	--theme-color-primary: var(--pal-10);
+	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
 	--theme-color-success: var(--pal-8);
 	--theme-color-danger: var(--pal-9);
@@ -32,9 +34,10 @@
 	--theme-control-border-hover: var(--pal-12);
 	--theme-button-background: light-dark(#e1fbec, #203d36);
 	--theme-button-background-hover: light-dark(#c4f3d8, #2d5447);
-	--theme-button-primary-background: var(--pal-10);
-	--theme-button-primary-background-hover: #b0ed35;
-	--theme-button-primary-text: light-dark(#29134d, #29134d);
+	--theme-button-primary-background: var(--theme-color-primary);
+	--theme-button-primary-background-hover: color-mix(in srgb, var(--theme-color-primary), black 8%);
+	--theme-color-ui-background: var(--theme-color-primary);
+	--theme-color-ui-preferred: light-dark(#29134d, #29134d);
 	--theme-focus-color: var(--pal-12);
 	--theme-border-width: 2px;
 	--theme-radius: 1.25rem;

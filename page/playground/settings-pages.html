@@ -1,0 +1,94 @@
+<main id="main-content" class="settings-pages" data-settings-current="appearance">
+	<header class="settings-mobile-header">
+		<a class="settings-brand" href="#appearance" aria-label="Authwave home"><span>A</span><strong>Authwave</strong></a>
+		<button type="button" aria-expanded="false" aria-controls="settings-sidebar" data-settings-menu-toggle><span aria-hidden="true">☰</span><span class="visually-hidden">Open navigation</span></button>
+	</header>
+	<aside id="settings-sidebar">
+		<header><a class="settings-brand" href="#appearance" aria-label="Authwave home"><span>A</span><strong>Authwave</strong></a><button type="button" aria-label="Collapse navigation">‹</button></header>
+		<nav aria-label="Application">
+			<ul>
+				<li><a href="#dashboard" aria-label="Dashboard"><span aria-hidden="true">⌂</span><span>Dashboard</span></a></li>
+				<li><a href="#people" aria-label="People"><span aria-hidden="true">♙</span><span>People</span></a></li>
+				<li><a href="#security" aria-label="Security"><span aria-hidden="true">◇</span><span>Security</span></a></li>
+				<li><a href="#reports" aria-label="Reports"><span aria-hidden="true">▥</span><span>Reports</span></a></li>
+				<li><a href="#branding" aria-label="Branding"><span aria-hidden="true">✦</span><span>Branding</span></a></li>
+			</ul>
+			<p>Workspace</p>
+			<ul>
+				<li><a href="#members" aria-label="Members"><span aria-hidden="true">♧</span><span>Members</span></a></li>
+				<li><a href="#billing" aria-label="Billing"><span aria-hidden="true">▱</span><span>Billing</span></a></li>
+				<li><a href="#appearance" aria-label="Settings" data-settings-view-link="appearance" aria-current="page"><span aria-hidden="true">⚙</span><span>Settings</span></a></li>
+				<li><a href="#integrations" aria-label="Integrations" data-settings-view-link="integrations"><span aria-hidden="true">⌁</span><span>Integrations</span></a></li>
+			</ul>
+		</nav>
+		<section class="verification-card"><span aria-hidden="true">✓</span><div><strong>Complete verification</strong><p>Confirm your company information.</p><a href="#verify">Verify now →</a></div></section>
+		<footer><span class="avatar">JD</span><div><strong>Jamie Doe</strong><span>jamie@example.com</span></div><button type="button" aria-label="Account menu">•••</button></footer>
+	</aside>
+
+	<section class="settings-workspace">
+		<header class="settings-heading">
+			<h1>Settings</h1>
+			<label class="settings-search"><span aria-hidden="true">⌕</span><span class="visually-hidden">Search settings</span><input type="search" placeholder="Search settings"><kbd>⌘ K</kbd></label>
+		</header>
+		<label class="settings-page-select"><span class="visually-hidden">Settings page</span><select data-settings-view-select><option value="appearance">Appearance</option><option value="integrations">Integrations</option></select></label>
+		<nav class="settings-tabs" aria-label="Settings pages">
+			<a href="#general">General</a><a href="#security-settings">Security</a><a href="#notifications">Notifications</a><a href="#billing-settings">Billing</a><a href="#team">Team</a><a href="#appearance" data-settings-view-link="appearance" aria-current="page">Appearance</a><a href="#integrations" data-settings-view-link="integrations">Integrations</a><a href="#api">API</a><a href="#webhooks">Webhooks</a>
+		</nav>
+
+		<section class="settings-view appearance-view" data-settings-view="appearance">
+			<header class="view-intro"><div><h2>Appearance</h2><p>Customize the look and feel of your workspace.</p></div></header>
+			<form>
+				<section class="setting-row">
+					<header><h3>Company logo</h3><p>This will appear in your workspace and emails.</p></header>
+					<div class="logo-control"><span class="company-logo" aria-hidden="true">D</span><div><button type="button">Replace logo</button><p>SVG, PNG, JPG or GIF (max. 2MB)</p></div></div>
+				</section>
+				<section class="setting-row">
+					<header><h3>Brand color</h3><p>Choose an accent colour for buttons and links.</p></header>
+					<fieldset class="brand-colors"><legend class="visually-hidden">Brand color</legend><label style="--swatch:#7357eb"><input type="radio" name="brand-color" value="purple" aria-label="Purple" checked><span></span></label><label style="--swatch:#ea4c89"><input type="radio" name="brand-color" value="pink" aria-label="Pink"><span></span></label><label style="--swatch:#e7473d"><input type="radio" name="brand-color" value="red" aria-label="Red"><span></span></label><label style="--swatch:#f2a62b"><input type="radio" name="brand-color" value="orange" aria-label="Orange"><span></span></label><label style="--swatch:#22a877"><input type="radio" name="brand-color" value="green" aria-label="Green"><span></span></label><label style="--swatch:#2f80ed"><input type="radio" name="brand-color" value="blue" aria-label="Blue"><span></span></label><label class="custom-color"><span>Custom</span><input type="text" value="#7357EB" aria-label="Custom brand colour"></label></fieldset>
+				</section>
+				<section class="setting-row display-row">
+					<header><h3>Display</h3><p>Choose how Authwave looks on this device.</p></header>
+					<fieldset class="display-options"><legend class="visually-hidden">Display mode</legend>
+						<label><input type="radio" name="display" value="system" checked><span class="mini-preview system-preview"><i></i><i></i><i></i></span><strong>System preference</strong></label>
+						<label><input type="radio" name="display" value="light"><span class="mini-preview light-preview"><i></i><i></i><i></i></span><strong>Light</strong></label>
+						<label><input type="radio" name="display" value="dark"><span class="mini-preview dark-preview"><i></i><i></i><i></i></span><strong>Dark</strong></label>
+					</fieldset>
+				</section>
+				<section class="setting-row compact-row">
+					<header><h3>Reduce motion</h3><p>Reduce animations and motion effects.</p></header>
+					<label class="switch"><input type="checkbox"><span></span><b>Off</b></label>
+				</section>
+				<section class="setting-row compact-row">
+					<header><h3>Language</h3><p>Select the language used in the interface.</p></header>
+					<label class="language-select"><span class="visually-hidden">Language</span><select><option>English (United States)</option><option>English (United Kingdom)</option><option>Français</option></select></label>
+				</section>
+				<section class="setting-row banner-row">
+					<header><h3>Dashboard banner</h3><p>Choose a background for your dashboard.</p></header>
+					<fieldset class="banner-options"><legend class="visually-hidden">Dashboard banner</legend>
+						<label><input type="radio" name="banner" value="purple" checked><span class="banner-preview banner-purple"><i></i></span><strong>Gradient</strong></label>
+						<label><input type="radio" name="banner" value="waves"><span class="banner-preview banner-waves"><i></i></span><strong>Waves</strong></label>
+						<label><input type="radio" name="banner" value="minimal"><span class="banner-preview banner-minimal"><i></i></span><strong>Minimal</strong></label>
+					</fieldset>
+				</section>
+				<footer class="form-actions"><button type="reset" class="reset-button">Reset to default</button><div><button type="button">Cancel</button><button type="submit" class="primary-button">Save changes</button></div></footer>
+			</form>
+		</section>
+
+		<section class="settings-view integrations-view" data-settings-view="integrations" hidden>
+			<header class="view-intro"><div><h2>Integrations</h2><p>Connect your favorite tools to streamline your workflow.</p></div><button type="button">Request integration</button></header>
+			<nav class="integration-tabs" aria-label="Integration categories"><button type="button" aria-pressed="true">All integrations</button><button type="button">Productivity</button><button type="button">Communication</button><button type="button">Developer tools</button><button type="button">Storage</button></nav>
+			<div class="integration-grid">
+				<article><div class="integration-card-heading"><span class="integration-icon linear">L</span><label class="switch"><input type="checkbox" checked aria-label="Linear integration"><span></span></label></div><h3>Linear</h3><p>Sync issues and projects with your workspace.</p><footer><span class="connected"><i></i>Connected</span><button type="button">Configure</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon github">●</span><label class="switch"><input type="checkbox" checked aria-label="GitHub integration"><span></span></label></div><h3>GitHub</h3><p>Link repositories, pull requests, and commits.</p><footer><span class="connected"><i></i>Connected</span><button type="button">Configure</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon figma">F</span><label class="switch"><input type="checkbox" checked aria-label="Figma integration"><span></span></label></div><h3>Figma</h3><p>Embed designs and receive activity updates.</p><footer><span class="connected"><i></i>Connected</span><button type="button">Configure</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon zapier">✦</span><label class="switch"><input type="checkbox" aria-label="Zapier integration"><span></span></label></div><h3>Zapier</h3><p>Automate workflows across thousands of apps.</p><footer><span>Automation</span><button type="button">Connect</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon notion">N</span><label class="switch"><input type="checkbox" checked aria-label="Notion integration"><span></span></label></div><h3>Notion</h3><p>Keep documents and projects in sync.</p><footer><span class="connected"><i></i>Connected</span><button type="button">Configure</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon slack">S</span><label class="switch"><input type="checkbox" checked aria-label="Slack integration"><span></span></label></div><h3>Slack</h3><p>Send notifications directly to your channels.</p><footer><span class="connected"><i></i>Connected</span><button type="button">Configure</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon zendesk">Z</span><label class="switch"><input type="checkbox" checked aria-label="Zendesk integration"><span></span></label></div><h3>Zendesk</h3><p>Bring customer support tickets into your flow.</p><footer><span class="connected"><i></i>Connected</span><button type="button">Configure</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon jira">J</span><label class="switch"><input type="checkbox" aria-label="Jira integration"><span></span></label></div><h3>Atlassian JIRA</h3><p>Track engineering issues and project progress.</p><footer><span>Developer tools</span><button type="button">Connect</button></footer></article>
+				<article><div class="integration-card-heading"><span class="integration-icon dropbox">D</span><label class="switch"><input type="checkbox" checked aria-label="Dropbox integration"><span></span></label></div><h3>Dropbox</h3><p>Access and share files from your workspace.</p><footer><span class="connected"><i></i>Connected</span><button type="button">Configure</button></footer></article>
+			</div>
+		</section>
+	</section>
+	<details class="settings-preview-controls"><summary>Theme</summary><playground-tools></playground-tools></details>
+</main>

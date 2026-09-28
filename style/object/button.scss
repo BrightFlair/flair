@@ -34,6 +34,7 @@
 	cursor: pointer;
 	background: var(--theme-button-background, var(--theme-color-surface));
 	color: var(--theme-button-text, var(--theme-color-text));
+	box-shadow: var(--theme-button-shadow, none);
 	font-weight: var(--theme-button-weight, var(--theme-label-weight));
 	// Prose styles anchors as links after object extensions are resolved. The
 	// link state gives an anchor-button enough specificity to retain button
@@ -59,7 +60,7 @@
 			--theme-button-background-active,
 			var(--theme-button-background-hover, var(--theme-color-surface-disabled))
 		);
-		box-shadow: none;
+		box-shadow: var(--theme-button-shadow-active, none);
 	}
 	@media (min-width: break.$compact) { min-block-size: var(--theme-button-min-height, var(--theme-control-min-height)); }
 }

@@ -1,12 +1,11 @@
 <nav aria-label="Playground controls">
-	<a href="/playground/">All examples</a>
 	<form method="get">
 		<label><span>Theme</span><select name="theme">
-			<option value="base">Monochrome</option><option value="ink">Ink</option>
+			<option value="ink">Monochrome</option>
 			<option value="paper">Paper</option><option value="vivid">Vivid</option>
 			<option value="github">GitHub</option><option value="material">Material</option>
 			<option value="clean-dashboard">Clean dashboard</option>
-		</select></label><label><span>Colour scheme</span><select name="scheme">
+		</select></label><label><span>Tint</span><input type="color" name="tint" value="#111111"></label><input type="hidden" name="tint-preset" value="#111111"><label><span>Primary</span><input type="color" name="primary" value="#111111"></label><input type="hidden" name="primary-preset" value="#111111"><label><span>Colour scheme</span><select name="scheme">
 			<option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option>
 		</select></label><button type="submit">Apply</button>
 	</form>

@@ -17,5 +17,19 @@ function go(Element $element, Uri $uri, ServerRequest $request):void {
 		}
 	}
 	$scheme = Theme::scheme($request);
-	$element->querySelector('select[name="scheme"] option[value="' . $scheme . '"]')->setAttribute("selected", "");
+	if($scheme !== "system") {
+		$element->querySelector('input[type="radio"][value="' . $scheme . '"]')->setAttribute("checked", "");
+	}
+	$tint = Theme::tint($request);
+	$tintInput = $element->querySelector('input[name="tint"]');
+	$presetTint = Theme::presetTint(Theme::current($request), $scheme);
+	$tintInput->setAttribute("value", $tint ?? $presetTint);
+	$tintInput->setAttribute("data-custom", $tint ? "true" : "false");
+	$element->querySelector('input[name="tint-preset"]')->setAttribute("value", $presetTint);
+	$primary = Theme::primary($request);
+	$primaryInput = $element->querySelector('input[name="primary"]');
+	$presetPrimary = Theme::presetPrimary(Theme::current($request), $scheme);
+	$primaryInput->setAttribute("value", $primary ?? $presetPrimary);
+	$primaryInput->setAttribute("data-custom", $primary ? "true" : "false");
+	$element->querySelector('input[name="primary-preset"]')->setAttribute("value", $presetPrimary);
 }

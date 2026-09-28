@@ -4,4 +4,7 @@
 .playground-index {
 	@extend %p-prose;
 	padding: var(--site-space-large) var(--site-gutter);
+	@media (min-width: 60rem) {
+		padding-block-start: 8rem;
+	}
 }

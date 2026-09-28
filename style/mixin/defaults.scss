@@ -5,6 +5,7 @@
 @mixin defaults {
 	@include palette.palette;
 
+	// TODO: Define a base spacing, then multiply it for the theme's numbered spacing. Also, why missing 5 and 7?
 	--theme-space-1: 0.25rem;
 	--theme-space-2: 0.5rem;
 	--theme-space-3: 0.75rem;
@@ -16,8 +17,21 @@
 	--theme-color-surface-disabled: var(--pal-3);
 	--theme-color-border: var(--pal-4);
 	--theme-color-muted: var(--pal-5);
-	--theme-color-accent: var(--pal-6);
+	--theme-color-tint: var(--pal-6);
+	--theme-color-primary: var(--pal-6);
+	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
+	--theme-color-ui-background: var(--theme-color-primary);
+	--theme-color-ui-preferred: var(--theme-color-on-accent);
+	--theme-color-ui-contrast: var(--theme-color-ui-preferred);
+
+	@supports (color: contrast-color(white)) {
+		--theme-color-ui-contrast: color-mix(
+			in srgb,
+			contrast-color(var(--theme-color-ui-background)) 80%,
+			var(--theme-color-ui-preferred)
+		);
+	}
 	--theme-color-success: var(--pal-8);
 	--theme-color-danger: var(--pal-9);
 	--theme-font-body: "Ubuntu", sans-serif;

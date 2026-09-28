@@ -5,7 +5,8 @@ const sass = require('sass');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const base = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
-const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const standaloneThemes = ['base', ...themes];
 const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'disclosures', 'tables', 'feedback', 'code', 'layouts'].map(x => `/library/${x}/`).concat(['documentation-website','dashboard-app','github-clone'].map(x => `/playground/${x}/`));
 (async () => {
  const browser = await chromium.launch({executablePath:process.env.FLAIR_CHROMIUM_PATH || '/usr/bin/chromium',args:['--no-sandbox']});
@@ -13,7 +14,7 @@ const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'di
   // Test a consuming application with no demo attributes, cookies or JavaScript.
   const context = await browser.newContext({javaScriptEnabled:false, colorScheme:'light'});
   const page = await context.newPage();
-  for(const theme of themes) {
+  for(const theme of standaloneThemes) {
    const css = sass.compileString(`@use "flair"; @use "theme"; html { @include theme.base; ${theme==='base'?'':`@include theme.${theme};`} background:var(--theme-color-surface); color:var(--theme-color-text); } button { @extend %o-button; }`, {loadPaths:[path.resolve('style')]}).css;
    await page.setContent(`<html lang="en"><title>Scheme test</title><style>${css}</style><body><button>Example</button></body></html>`);
    const background = () => page.locator('html').evaluate(e=>getComputedStyle(e).backgroundColor);
@@ -65,16 +66,26 @@ const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'di
   }
   await demo.goto(`${base}/playground/github-clone/?theme=github&scheme=system`);
   const bg=()=>demo.locator('html').evaluate(e=>getComputedStyle(e).backgroundColor);
+  const tint=demo.locator('input[name=tint]');
+  const primary=demo.locator('input[name=primary]');
+  assert.equal(await tint.inputValue(),'#4493f8');
+  assert.equal(await primary.inputValue(),'#3fb950');
   const dark=await bg();
   await demo.locator('select[name=scheme]').selectOption('light');
   assert.equal(await demo.locator('html').getAttribute('data-theme'),'light');
+  assert.equal(await tint.inputValue(),'#0969da');
+  assert.equal(await primary.inputValue(),'#1f883d');
   assert.notEqual(await bg(),dark);
   await demo.reload();
   assert.equal(await demo.locator('html').getAttribute('data-theme'),'light');
   await demo.locator('select[name=theme]').selectOption('paper');
   assert.equal(await demo.locator('html').getAttribute('data-theme'),'light');
+	  assert.equal(await tint.inputValue(),'#8a4168');
+  assert.equal(await primary.inputValue(),'#315c40');
   await demo.locator('select[name=scheme]').selectOption('system');
   assert.equal(await demo.locator('html').getAttribute('data-theme'),null);
+	  assert.equal(await tint.inputValue(),'#e0a8c5');
+  assert.equal(await primary.inputValue(),'#a2c5a3');
   await demo.reload();
   assert.equal(await demo.locator('html').getAttribute('data-theme'),null);
   const nojs=await browser.newContext({javaScriptEnabled:false,colorScheme:'light'});

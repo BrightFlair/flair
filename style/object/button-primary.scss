@@ -3,19 +3,24 @@
 %o-button-primary {
 	@extend %o-button;
 	&:not(:disabled) {
-		background: var(--theme-button-primary-background, var(--theme-color-accent));
-		color: var(--theme-button-primary-text, var(--theme-color-on-accent));
+		background: var(--theme-button-primary-background, var(--theme-color-primary));
+		color: var(--theme-button-primary-text, var(--theme-color-ui-contrast));
 		border-color: var(
 			--theme-button-primary-border,
-			var(--theme-button-primary-background, var(--theme-color-accent))
+			var(--theme-button-primary-background, var(--theme-color-primary))
 		);
+		box-shadow: var(--theme-button-primary-shadow, var(--theme-button-shadow, none));
 	}
 	&:hover:not(:disabled) {
 		border-color: var(
 			--theme-button-primary-border,
-			var(--theme-button-primary-background, var(--theme-color-accent))
+			var(--theme-button-primary-background, var(--theme-color-primary))
 		);
-		background: var(--theme-button-primary-background-hover, var(--theme-color-text));
+		background: var(
+			--theme-button-primary-background-hover,
+			color-mix(in srgb, var(--theme-color-primary), var(--theme-color-ui-contrast) 15%)
+		);
+		box-shadow: var(--theme-button-primary-shadow-hover, var(--theme-button-shadow-hover, none));
 		text-decoration: var(
 			--theme-button-primary-decoration-hover,
 			var(--theme-button-decoration-hover, var(--theme-button-decoration, none))
@@ -24,7 +29,11 @@
 	&:active:not(:disabled) {
 		background: var(
 			--theme-button-primary-background-active,
-			var(--theme-button-primary-background-hover, var(--theme-color-text))
+			var(
+				--theme-button-primary-background-hover,
+				color-mix(in srgb, var(--theme-color-primary), var(--theme-color-ui-contrast) 25%)
+			)
 		);
+		box-shadow: var(--theme-button-primary-shadow-active, none);
 	}
 }

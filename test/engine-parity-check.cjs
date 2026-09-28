@@ -8,7 +8,7 @@
 const playwright = require('playwright');
 const assert = require('node:assert/strict');
 const baseUrl = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
-const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
 const engines = [
 	['chromium', {executablePath: process.env.FLAIR_CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox']}],
 	['firefox', {}],

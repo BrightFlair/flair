@@ -23,8 +23,7 @@
 		<label>
 			<span>Theme</span>
 			<select name="theme">
-				<option value="base">Monochrome</option>
-				<option value="ink">Ink</option>
+				<option value="ink">Monochrome</option>
 				<option value="paper">Paper</option>
 				<option value="vivid">Vivid</option>
 				<option value="github">GitHub</option>
@@ -32,8 +31,25 @@
 				<option value="clean-dashboard">Clean dashboard</option>
 			</select>
 		</label>
-		<label><span>Colour scheme</span><select name="scheme">
-			<option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option>
-		</select></label><button type="submit">Apply</button>
+		<div class="appearance-control" role="group" aria-label="Colour scheme and colours">
+			<input type="hidden" name="scheme" value="system">
+			<label class="scheme-choice" title="Light mode — select again for system default">
+				<input type="radio" name="scheme" value="light" aria-label="Light mode">
+				<span aria-hidden="true">☀</span>
+			</label>
+			<label class="scheme-choice" title="Dark mode — select again for system default">
+				<input type="radio" name="scheme" value="dark" aria-label="Dark mode">
+				<span aria-hidden="true">☾</span>
+			</label>
+			<label class="colour-choice primary-choice" title="Primary colour — button backgrounds">
+				<input type="color" name="primary" value="#111111" aria-label="Primary colour">
+			</label>
+			<label class="colour-choice tint-choice" title="Tint colour — outlines and accents">
+				<input type="color" name="tint" value="#111111" aria-label="Tint colour">
+			</label>
+		</div>
+		<input type="hidden" name="tint-preset" value="#111111">
+		<input type="hidden" name="primary-preset" value="#111111">
+		<button type="submit">Apply</button>
 	</form>
 </nav>

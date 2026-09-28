@@ -135,7 +135,7 @@ A disabled fieldset uses native disabled behaviour for its descendants. `aria-di
 :root {
 	@include flair.defaults;
 	--theme-font-body: "Ubuntu", sans-serif;
-	--theme-color-accent: #315c40;
+	--theme-color-tint: #8a4168;
 }
 
 .account-form {
@@ -174,8 +174,13 @@ Both themes apply through the global selector, including without JavaScript. The
 | `--theme-color-surface` | `#fff` |
 | `--theme-color-surface-disabled` | `#eee` |
 | `--theme-color-border` | `#767676` |
+| `--theme-color-tint` | `var(--pal-6)` |
 | `--theme-color-accent` | `#111` |
 | `--theme-color-on-accent` | `#fff` |
+| `--theme-color-primary` | `var(--pal-6)` |
+| `--theme-color-ui-background` | `var(--theme-color-primary)` |
+| `--theme-color-ui-preferred` | `var(--theme-color-on-accent)` |
+| `--theme-color-ui-contrast` | `var(--theme-color-ui-preferred)`, or an 80% contrasting colour mixed with the preferred colour when supported |
 | `--theme-color-danger` | `#111` |
 | `--theme-font-body` | `"Ubuntu", sans-serif` |
 | `--theme-font-size` | `1rem` |
@@ -213,9 +218,9 @@ These are consumed with fallbacks; they are not assigned by `defaults()`.
 | `--theme-button-text` | `var(--theme-color-text)` |
 | `--theme-button-weight` | `var(--theme-label-weight)` |
 | `--theme-button-background-hover` | `var(--theme-color-surface-disabled)` |
-| `--theme-button-primary-background` | `var(--theme-color-accent)` |
-| `--theme-button-primary-text` | `var(--theme-color-on-accent)` |
-| `--theme-button-primary-background-hover` | `var(--theme-color-text)` |
+| `--theme-button-primary-background` | `var(--theme-color-primary)` |
+| `--theme-button-primary-text` | `var(--theme-color-ui-contrast)` |
+| `--theme-button-primary-background-hover` | Primary mixed 15% toward its contrast colour |
 | `--theme-field-gap` | `var(--theme-space-2)` |
 | `--theme-form-gap` | `var(--theme-space-4)` |
 | `--theme-fieldset-padding` | `var(--theme-space-4)` |
@@ -239,10 +244,10 @@ These are consumed with fallbacks; they are not assigned by `defaults()`.
 | `--theme-button-font-size` | `var(--theme-font-size)` |
 | `--theme-button-border` | Control border, then general border |
 | `--theme-button-border-hover` | Control hover border, then text colour |
-| `--theme-button-primary-border` | Primary background, then accent |
+| `--theme-button-primary-border` | Primary background, then primary colour |
 | `--theme-button-primary-decoration-hover` | `underline` |
 | `--theme-button-background-active` | Button hover background, then disabled surface |
-| `--theme-button-primary-background-active` | Primary hover background, then text colour |
+| `--theme-button-primary-background-active` | Primary hover background, or primary mixed 25% toward its contrast colour |
 | `--theme-button-shadow-hover` | `none` |
 
 ## Available width

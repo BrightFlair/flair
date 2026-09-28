@@ -4,7 +4,7 @@ const AxeBuilder = require('@axe-core/playwright').default;
 const assert = require('node:assert/strict');
 const baseUrl = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
 const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'disclosures', 'tables', 'feedback', 'code', 'layouts'];
-const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
 
 (async () => {
 	const browser = await chromium.launch({
@@ -25,7 +25,7 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-da
 					await page.evaluate(() => document.fonts.ready);
 					assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${theme} ${width} ${route}: page overflow`);
 					assert.equal(await page.locator('html').getAttribute('data-flair-theme'), theme);
-					if(theme === 'base' && route === 'layouts') {
+					if(theme === 'ink' && route === 'layouts') {
 						const columns = await page.locator('[data-grid-default]').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
 						assert.equal(columns, width === 320 ? 1 : width === 768 ? 2 : 3);
 						assert.equal(await page.locator('[data-grid-narrow]').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), 1);
@@ -167,9 +167,9 @@ const themes = ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-da
 		await page.goto(`${baseUrl}/library/layouts/`);
 		await page.locator('.reference-source').evaluateAll(elements => elements.forEach(element => { element.open = true; }));
 		assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-		await page.locator('select[name="theme"]').selectOption('base');
+		await page.locator('select[name="theme"]').selectOption('ink');
 		await page.reload();
-		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'base');
+		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'ink');
 
 		const nojs = await browser.newContext({javaScriptEnabled: false});
 		const staticPage = await nojs.newPage();

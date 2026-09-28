@@ -6,6 +6,9 @@
 	> :where(ul, menu) {
 		flex-direction: column;
 		margin-block-start: var(--theme-side-nav-margin-block-start, 0);
+		// Documentation prose styles adjacent list items. The navigation owns
+		// its vertical rhythm through `gap`, so cancel that inherited margin.
+		> li + li:not(:first-child) { margin-block-start: 0; }
 		> li > a {
 			position: relative;
 			display: flex;
