@@ -467,18 +467,18 @@
 	&[data-settings-current="integrations"] { grid-template-columns: 5.5rem minmax(0, 1fr); }
 	.settings-mobile-header { display: none; }
 	#settings-sidebar {
-		position: sticky;
-		inset-block-start: 0;
+		position: fixed;
+		z-index: 1;
+		inset: 3rem auto 0 0;
+		inline-size: 21.5rem;
 		display: flex;
 		flex-direction: column;
-		block-size: 100svh;
 		overflow: hidden;
-	}
-	&[data-menu-open="true"] #settings-sidebar {
-		position: sticky;
-		inset: 0 auto auto;
+		transition: inline-size 180ms ease;
+		> nav { min-block-size: 0; overflow-y: auto; }
 	}
 	&[data-settings-current="integrations"] #settings-sidebar {
+		inline-size: 5.5rem;
 		> header { justify-content: center; padding-inline: 0; .settings-brand strong, > button { display: none; } }
 		> nav {
 			padding-inline: 0.65rem;
@@ -488,7 +488,7 @@
 		.verification-card, > footer > div, > footer > button { display: none; }
 		> footer { justify-content: center; padding-inline: 0; }
 	}
-	.settings-workspace { padding: 0 3rem 5rem; }
+	.settings-workspace { grid-column: 2; padding: 0 3rem 5rem; }
 	.settings-heading { min-block-size: 5.25rem; }
 	.settings-heading h1 { font-size: 1.5rem; }
 	.settings-search { display: flex; }

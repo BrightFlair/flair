@@ -16,7 +16,14 @@
 			padding-block: 1rem;
 			> h2, > p { margin-inline: 1rem; }
 			> h2 { font-size: 1rem; }
-			> nav { @extend %p-side-navigation; @include flair.collapsible-navigation($from: 46rem); }
+			> nav {
+				@extend %p-side-navigation;
+				@include flair.collapsible-navigation($from: 46rem);
+				// This example's collection links align with its heading and
+				// description in every theme. The inset belongs here, rather
+				// than in a theme, so it is applied exactly once.
+				--theme-side-nav-link-margin: 0 1rem;
+			}
 		}
 		> section {
 			display: flex;
