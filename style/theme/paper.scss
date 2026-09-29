@@ -18,13 +18,40 @@
 	--pal-12: light-dark(#f5efdf, #302c24);
 	--pal-13: light-dark(#805400, #e3be77);
 
-	--theme-color-text: var(--pal-1);
-	--theme-color-surface: var(--pal-2);
-	--theme-color-surface-disabled: var(--pal-3);
-	--theme-color-border: var(--pal-4);
-	--theme-color-muted: var(--pal-5);
 	--theme-color-tint: light-dark(#8a4168, #e0a8c5);
 	--theme-color-primary: var(--pal-6);
+	// The paper stock, ink and wash all take a small amount of the selected
+	// primary. A custom colour therefore changes the whole printed palette,
+	// while the default green keeps the original natural-paper character.
+	--theme-paper-ink: light-dark(
+		color-mix(in srgb, #24211d 88%, var(--theme-color-primary)),
+		color-mix(in srgb, #eee8d8 88%, var(--theme-color-primary))
+	);
+	--theme-paper-surface: light-dark(
+		color-mix(in srgb, #fffdf5 88%, var(--theme-color-primary)),
+		color-mix(in srgb, #201e19 84%, var(--theme-color-primary))
+	);
+	--theme-paper-raised: light-dark(
+		color-mix(in srgb, #eee8d8 78%, var(--theme-color-primary)),
+		color-mix(in srgb, #343025 76%, var(--theme-color-primary))
+	);
+	--theme-paper-inset: light-dark(
+		color-mix(in srgb, #f5efdf 84%, var(--theme-color-primary)),
+		color-mix(in srgb, #302c24 78%, var(--theme-color-primary))
+	);
+	--theme-paper-border: light-dark(
+		color-mix(in srgb, #827765 72%, var(--theme-color-primary)),
+		color-mix(in srgb, #a89b83 72%, var(--theme-color-primary))
+	);
+	--theme-paper-muted: light-dark(
+		color-mix(in srgb, #59564f 82%, var(--theme-color-primary)),
+		color-mix(in srgb, #c2b9a8 82%, var(--theme-color-primary))
+	);
+	--theme-color-text: var(--theme-paper-ink);
+	--theme-color-surface: var(--theme-paper-surface);
+	--theme-color-surface-disabled: var(--theme-paper-raised);
+	--theme-color-border: var(--theme-paper-border);
+	--theme-color-muted: var(--theme-paper-muted);
 	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
 	--theme-color-success: var(--pal-8);
@@ -34,23 +61,25 @@
 	--theme-font-heading: Georgia, serif;
 	--theme-heading-weight: 400;
 	--theme-text-leading: 1.8;
-	--theme-surface-background: light-dark(#fffaf0, #29261f);
+	--theme-surface-background: var(--theme-paper-inset);
 	--theme-surface-padding: var(--theme-space-8);
 	--theme-surface-shadow: 0 2px 5px rgb(36 33 29 / 10%);
-	--theme-selected-background: var(--pal-10);
-	--theme-selected-text: var(--pal-11);
+	--theme-selected-background: var(--theme-color-primary);
+	--theme-selected-text: var(--theme-color-ui-contrast);
 	--theme-nav-radius: 0.25rem;
+	--theme-badge-background: var(--theme-color-primary);
+	--theme-badge-text: var(--theme-color-ui-contrast);
 	--theme-badge-radius: 0.25rem;
-	--theme-code-background: var(--pal-3);
+	--theme-code-background: var(--theme-paper-raised);
 	--theme-syntax-keyword: var(--theme-color-tint);
 	--theme-syntax-string: light-dark(#7d3321, #ecb19a);
-	--theme-table-stripe-background: var(--pal-12);
-	--theme-disclosure-background: var(--pal-12);
+	--theme-table-stripe-background: var(--theme-paper-inset);
+	--theme-disclosure-background: var(--theme-paper-inset);
 
 	// Coordinated surface and navigation states for the contrast sidebar variant.
-	--theme-sidebar-contrast-background: var(--pal-3);
-	--theme-sidebar-contrast-text: var(--pal-1);
-	--theme-sidebar-contrast-hover-background: light-dark(#e4ddc9, #454031);
-	--theme-sidebar-contrast-current-background: light-dark(#d7e3d0, #46553d);
-	--theme-sidebar-contrast-current-text: var(--pal-11);
+	--theme-sidebar-contrast-background: var(--theme-paper-raised);
+	--theme-sidebar-contrast-text: var(--theme-color-text);
+	--theme-sidebar-contrast-hover-background: var(--theme-paper-inset);
+	--theme-sidebar-contrast-current-background: var(--theme-color-primary);
+	--theme-sidebar-contrast-current-text: var(--theme-color-ui-contrast);
 }

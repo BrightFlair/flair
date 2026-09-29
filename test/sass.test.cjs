@@ -95,6 +95,34 @@ test('material derives its tonal surfaces from the primary colour', () => {
 	assert.match(material, /color-mix\(in srgb, #141218, var\(--theme-color-primary\)/);
 });
 
+test('vivid derives its primary and companion tones from the primary colour', () => {
+	const vivid = compile('@use "theme"; .theme { @include theme.vivid; }');
+	for(const token of [
+		'--theme-vivid-ink', '--theme-vivid-surface', '--theme-vivid-raised',
+		'--theme-vivid-inset', '--theme-vivid-border', '--theme-vivid-muted',
+	]) {
+		assert.match(vivid, new RegExp(`${token}:\\s*light-dark\\(`), token);
+	}
+	assert.match(vivid, /--theme-selected-background:\s*var\(--theme-color-primary\)/);
+	assert.match(vivid, /--theme-sidebar-contrast-current-background:\s*var\(--theme-color-primary\)/);
+	assert.match(vivid, /--theme-selected-text:\s*var\(--theme-color-ui-contrast\)/);
+	assert.match(vivid, /--theme-badge-text:\s*var\(--theme-color-ui-contrast\)/);
+	assert.match(vivid, /color-mix\(in srgb, #fff6b0 75%, var\(--theme-color-primary\)\)/);
+});
+
+test('paper derives its stock and selected states from the primary colour', () => {
+	const paper = compile('@use "theme"; .theme { @include theme.paper; }');
+	for(const token of [
+		'--theme-paper-ink', '--theme-paper-surface', '--theme-paper-raised',
+		'--theme-paper-inset', '--theme-paper-border', '--theme-paper-muted',
+	]) {
+		assert.match(paper, new RegExp(`${token}:\\s*light-dark\\(`), token);
+	}
+	assert.match(paper, /--theme-selected-background:\s*var\(--theme-color-primary\)/);
+	assert.match(paper, /--theme-selected-text:\s*var\(--theme-color-ui-contrast\)/);
+	assert.match(paper, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
+});
+
 test('public overrides remain inherited, not reset on individual controls', () => {
 	const css = compile(`@use "flair";
 .profile {

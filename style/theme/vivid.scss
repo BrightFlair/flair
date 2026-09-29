@@ -18,27 +18,54 @@
 	--pal-12: light-dark(#005e65, #81eed5);
 	--pal-13: light-dark(#865000, #ffcf87);
 
-	--theme-color-text: var(--pal-1);
-	--theme-color-surface: var(--pal-2);
-	--theme-color-surface-disabled: var(--pal-3);
-	--theme-color-border: var(--pal-4);
-	--theme-color-muted: var(--pal-5);
 	--theme-color-tint: var(--pal-6);
 	--theme-color-primary: var(--pal-10);
+	// Vivid has two voices: a primary field and a complementary companion.
+	// Mixing the chosen primary into both the warm and violet bases preserves
+	// the default lime/purple character while recolouring the full theme.
+	--theme-vivid-ink: light-dark(
+		color-mix(in srgb, #29134d 85%, var(--theme-color-primary)),
+		color-mix(in srgb, #f4eaff 85%, var(--theme-color-primary))
+	);
+	--theme-vivid-surface: light-dark(
+		color-mix(in srgb, #fff6b0 75%, var(--theme-color-primary)),
+		color-mix(in srgb, #1c1229 80%, var(--theme-color-primary))
+	);
+	--theme-vivid-raised: light-dark(
+		color-mix(in srgb, #e8ddf0 75%, var(--theme-color-primary)),
+		color-mix(in srgb, #32213f 75%, var(--theme-color-primary))
+	);
+	--theme-vivid-inset: light-dark(
+		color-mix(in srgb, #fffdf7 88%, var(--theme-color-primary)),
+		color-mix(in srgb, #271a35 78%, var(--theme-color-primary))
+	);
+	--theme-vivid-border: light-dark(
+		color-mix(in srgb, #603bb2 72%, var(--theme-color-primary)),
+		color-mix(in srgb, #ac88ec 72%, var(--theme-color-primary))
+	);
+	--theme-vivid-muted: light-dark(
+		color-mix(in srgb, #60456e 82%, var(--theme-color-primary)),
+		color-mix(in srgb, #c8b6d6 82%, var(--theme-color-primary))
+	);
+	--theme-color-text: var(--theme-vivid-ink);
+	--theme-color-surface: var(--theme-vivid-surface);
+	--theme-color-surface-disabled: var(--theme-vivid-raised);
+	--theme-color-border: var(--theme-vivid-border);
+	--theme-color-muted: var(--theme-vivid-muted);
 	--theme-color-accent: var(--theme-color-tint);
-	--theme-color-on-accent: var(--pal-7);
+	--theme-color-on-accent: var(--theme-color-text);
 	--theme-color-success: var(--pal-8);
 	--theme-color-danger: var(--pal-9);
 	--theme-color-warning: var(--pal-13);
-	--theme-control-background: var(--pal-11);
-	--theme-control-border-hover: var(--pal-12);
-	--theme-button-background: light-dark(#e1fbec, #203d36);
-	--theme-button-background-hover: light-dark(#c4f3d8, #2d5447);
+	--theme-control-background: var(--theme-vivid-inset);
+	--theme-control-border-hover: var(--theme-color-primary);
+	--theme-button-background: var(--theme-vivid-inset);
+	--theme-button-background-hover: color-mix(in srgb, var(--theme-vivid-inset), var(--theme-color-primary) 12%);
 	--theme-button-primary-background: var(--theme-color-primary);
 	--theme-button-primary-background-hover: color-mix(in srgb, var(--theme-color-primary), black 8%);
 	--theme-color-ui-background: var(--theme-color-primary);
-	--theme-color-ui-preferred: light-dark(#29134d, #29134d);
-	--theme-focus-color: var(--pal-12);
+	--theme-color-ui-preferred: var(--theme-color-text);
+	--theme-focus-color: var(--theme-color-primary);
 	--theme-border-width: 2px;
 	--theme-radius: 1.25rem;
 	--theme-control-radius: 0.75rem;
@@ -54,38 +81,38 @@
 	--theme-heading-weight: 700;
 	--theme-heading-tracking: -0.035em;
 	--theme-heading-1: 3rem;
-	--theme-surface-background: var(--pal-11);
+	--theme-surface-background: var(--theme-vivid-inset);
 	--theme-surface-padding: var(--theme-space-8);
 	--theme-surface-shadow: 5px 5px 0 var(--pal-4);
-	--theme-selected-background: var(--pal-10);
-	--theme-selected-text: light-dark(#29134d, #29134d);
+	--theme-selected-background: var(--theme-color-primary);
+	--theme-selected-text: var(--theme-color-ui-contrast);
 	--theme-nav-radius: 0.75rem;
-	--theme-nav-current-shadow: inset 0 -4px var(--pal-4);
+	--theme-nav-current-shadow: inset 0 -4px var(--theme-color-border);
 	--theme-nav-padding-block: var(--theme-space-4);
-	--theme-badge-background: var(--pal-10);
-	--theme-badge-text: light-dark(#29134d, #29134d);
+	--theme-badge-background: var(--theme-color-primary);
+	--theme-badge-text: var(--theme-color-ui-contrast);
 	--theme-badge-radius: 999px;
 	--theme-avatar-radius: 0.75rem;
-	--theme-code-background: light-dark(#29134d, #160d26);
-	--theme-code-text: light-dark(#fff6b0, #fff6b0);
-	--theme-syntax-keyword: var(--pal-10);
+	--theme-code-background: var(--theme-vivid-raised);
+	--theme-code-text: var(--theme-color-text);
+	--theme-syntax-keyword: var(--theme-color-primary);
 	--theme-syntax-string: #81eed5;
 	--theme-syntax-comment: #dfc3f1;
 	--theme-syntax-number: #ffb5cb;
-	--theme-table-header-background: light-dark(#c7ff54, #49365c);
-	--theme-table-stripe-background: light-dark(#f3e7ff, #352343);
-	--theme-table-hover-background: light-dark(#e1fbec, #203d36);
+	--theme-table-header-background: var(--theme-color-primary);
+	--theme-table-stripe-background: var(--theme-vivid-raised);
+	--theme-table-hover-background: var(--theme-vivid-inset);
 	--theme-table-padding-block: var(--theme-space-4);
-	--theme-disclosure-background: light-dark(#e1fbec, #203d36);
+	--theme-disclosure-background: var(--theme-vivid-inset);
 	--theme-accordion-gap: var(--theme-space-4);
 	--theme-grid-gap: var(--theme-space-8);
 	--theme-progress-height: 1rem;
 	--theme-notice-border-width: 6px;
 
 	// Coordinated surface and navigation states for the contrast sidebar variant.
-	--theme-sidebar-contrast-background: var(--pal-3);
-	--theme-sidebar-contrast-text: var(--pal-1);
-	--theme-sidebar-contrast-hover-background: light-dark(#dcd0e8, #493257);
-	--theme-sidebar-contrast-current-background: var(--pal-10);
-	--theme-sidebar-contrast-current-text: light-dark(#29134d, #29134d);
+	--theme-sidebar-contrast-background: var(--theme-vivid-raised);
+	--theme-sidebar-contrast-text: var(--theme-color-text);
+	--theme-sidebar-contrast-hover-background: var(--theme-vivid-inset);
+	--theme-sidebar-contrast-current-background: var(--theme-color-primary);
+	--theme-sidebar-contrast-current-text: var(--theme-color-ui-contrast);
 }
