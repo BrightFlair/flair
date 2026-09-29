@@ -82,6 +82,19 @@ test('primary buttons use an independent colour with tint-aware contrast', () =>
 	assert.match(github, /--theme-color-ui-preferred:\s*#0d1117/);
 });
 
+test('material derives its tonal surfaces from the primary colour', () => {
+	const material = compile('@use "theme"; .theme { @include theme.material; }');
+	for(const token of [
+		'--theme-color-surface', '--theme-color-surface-disabled',
+		'--theme-control-background', '--theme-surface-background',
+		'--theme-inset-background', '--theme-selected-background',
+	]) {
+		assert.match(material, new RegExp(`${token}:\\s*light-dark\\(`), token);
+	}
+	assert.match(material, /color-mix\(in srgb, #fff, var\(--theme-color-primary\)/);
+	assert.match(material, /color-mix\(in srgb, #141218, var\(--theme-color-primary\)/);
+});
+
 test('public overrides remain inherited, not reset on individual controls', () => {
 	const css = compile(`@use "flair";
 .profile {

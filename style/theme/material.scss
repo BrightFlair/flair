@@ -20,9 +20,21 @@
 	--pal-14: light-dark(#785900, #e6c36f);
 
 	--theme-color-text: var(--pal-1);
-	--theme-color-surface: var(--pal-2);
-	--theme-color-surface-disabled: var(--pal-3);
-	--theme-color-border: var(--pal-4);
+	// Material's tonal surfaces are derived from the primary seed. The default
+	// purple therefore retains its familiar cast, while a user-selected primary
+	// recolours the page and its containers as one coordinated system.
+	--theme-color-surface: light-dark(
+		color-mix(in srgb, #fff, var(--theme-color-primary) 5%),
+		color-mix(in srgb, #141218, var(--theme-color-primary) 7%)
+	);
+	--theme-color-surface-disabled: light-dark(
+		color-mix(in srgb, #fff, var(--theme-color-primary) 14%),
+		color-mix(in srgb, #141218, var(--theme-color-primary) 16%)
+	);
+	--theme-color-border: light-dark(
+		color-mix(in srgb, #79747e 70%, var(--theme-color-primary)),
+		color-mix(in srgb, #938f99 70%, var(--theme-color-primary))
+	);
 	--theme-color-muted: var(--pal-5);
 	--theme-color-tint: light-dark(#786000, #e8d46e);
 	--theme-color-primary: var(--pal-6);
@@ -32,7 +44,10 @@
 	--theme-color-danger: var(--pal-9);
 	--theme-color-warning: var(--pal-14);
 	--theme-font-body: "Roboto", sans-serif;
-	--theme-control-background: light-dark(#fff, #211f26);
+	--theme-control-background: light-dark(
+		color-mix(in srgb, #fff, var(--theme-color-primary) 2%),
+		color-mix(in srgb, #141218, var(--theme-color-primary) 10%)
+	);
 	--theme-control-min-height: 3.5rem;
 	--theme-control-padding-block: 0.9375rem;
 	--theme-control-padding-inline: var(--theme-space-4);
@@ -56,8 +71,8 @@
 	--theme-button-font-size: 0.875rem;
 	--theme-button-weight: 500;
 	--theme-button-text: var(--theme-color-accent);
-	--theme-button-background-hover: color-mix(in srgb, var(--pal-2), var(--theme-color-tint) 8%);
-	--theme-button-background-active: color-mix(in srgb, var(--pal-2), var(--theme-color-tint) 12%);
+	--theme-button-background-hover: color-mix(in srgb, var(--theme-color-surface), var(--theme-color-primary) 8%);
+	--theme-button-background-active: color-mix(in srgb, var(--theme-color-surface), var(--theme-color-primary) 12%);
 	--theme-button-border-hover: var(--theme-color-border);
 	--theme-button-primary-background-hover: color-mix(in srgb, var(--theme-color-primary), white 8%);
 	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-color-primary), white 12%);
@@ -67,40 +82,49 @@
 	--theme-heading-weight: 400;
 	--theme-heading-1: 2.75rem;
 	--theme-heading-leading: 1.2;
-	--theme-surface-background: var(--pal-10);
+	--theme-surface-background: light-dark(
+		color-mix(in srgb, #fff, var(--theme-color-primary) 9%),
+		color-mix(in srgb, #141218, var(--theme-color-primary) 10%)
+	);
 	--theme-surface-padding: var(--theme-space-6);
 	--theme-surface-radius: 1rem;
 	--theme-surface-border-width: 0px;
 	--theme-surface-shadow: 0 1px 3px rgb(29 27 32 / 20%);
-	--theme-inset-background: var(--pal-11);
-	--theme-selected-background: var(--pal-12);
+	--theme-inset-background: light-dark(
+		color-mix(in srgb, #fff, var(--theme-color-primary) 12%),
+		color-mix(in srgb, #141218, var(--theme-color-primary) 14%)
+	);
+	--theme-selected-background: light-dark(
+		color-mix(in srgb, #fff, var(--theme-color-primary) 16%),
+		color-mix(in srgb, #141218, var(--theme-color-primary) 25%)
+	);
 	--theme-selected-text: var(--pal-13);
 	--theme-nav-radius: 999px;
 	--theme-nav-padding-block: var(--theme-space-4);
 	--theme-nav-current-shadow: none;
 	--theme-nav-current-weight: 500;
-	--theme-badge-background: var(--pal-12);
+	--theme-badge-background: var(--theme-selected-background);
 	--theme-badge-text: var(--pal-13);
 	--theme-badge-radius: 0.5rem;
-	--theme-disclosure-background: var(--pal-11);
+	--theme-disclosure-background: var(--theme-inset-background);
 	--theme-accordion-gap: var(--theme-space-3);
-	--theme-code-background: var(--pal-11);
+	--theme-code-background: var(--theme-inset-background);
 	--theme-syntax-keyword: var(--theme-color-tint);
 	--theme-syntax-string: var(--pal-8);
 	--theme-syntax-comment: var(--pal-5);
 	--theme-syntax-number: light-dark(#7d5260, #efb8c8);
-	--theme-table-header-background: var(--pal-12);
-	--theme-table-stripe-background: var(--pal-10);
-	--theme-table-hover-background: var(--pal-11);
+	--theme-table-header-background: var(--theme-selected-background);
+	--theme-table-stripe-background: var(--theme-surface-background);
+	--theme-table-hover-background: var(--theme-inset-background);
 	--theme-table-padding-block: var(--theme-space-4);
 	--theme-notice-border-width: 4px;
 	--theme-progress-height: 0.5rem;
 	--theme-grid-gap: var(--theme-space-6);
 
 	// Coordinated surface and navigation states for the contrast sidebar variant.
-	--theme-sidebar-contrast-background: var(--pal-10);
+	--theme-sidebar-contrast-background: var(--theme-surface-background);
 	--theme-sidebar-contrast-text: var(--pal-1);
-	--theme-sidebar-contrast-hover-background: var(--pal-11);
-	--theme-sidebar-contrast-current-background: var(--pal-12);
+	--theme-sidebar-contrast-hover-background: var(--theme-inset-background);
+	--theme-sidebar-contrast-current-background: var(--theme-selected-background);
 	--theme-sidebar-contrast-current-text: var(--pal-13);
 }
