@@ -1,3 +1,7 @@
+@use "../flair";
+
+@include flair.icon($names: (sun, moon), $prefix: "section-switcher .scheme-choice > span");
+
 section-switcher {
 	display: block;
 	position: relative;
@@ -79,6 +83,11 @@ section-switcher {
 		}
 		&:has(input:checked) { border-color: var(--site-ink); background: var(--site-ink); color: var(--site-paper); }
 		&:hover { border-color: var(--site-ink); }
+		> span[data-icon] {
+			--theme-icon-gap: 0;
+			--theme-icon-size: 1rem;
+			line-height: 0;
+		}
 	}
 
 	.scheme-choice:has(input:focus-visible), .colour-choice:has(input:focus-visible) {
