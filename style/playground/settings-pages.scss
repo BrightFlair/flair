@@ -338,7 +338,10 @@
 		transition: 150ms ease;
 		&::after { content: ""; position: absolute; inset: 0.17rem auto auto 0.18rem; inline-size: 1.05rem; aspect-ratio: 1; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 26%); transition: 150ms ease; }
 	}
-	input:checked + span { border-color: #b417c1; background: linear-gradient(180deg, #dc3be5, #ba17c7); }
+	input:checked + span {
+		border-color: color-mix(in srgb, var(--theme-color-primary), black 16%);
+		background: linear-gradient(180deg, color-mix(in srgb, var(--theme-color-primary), white 12%), var(--theme-color-primary));
+	}
 	input:checked + span::after { transform: translateX(1.08rem); }
 	input:focus-visible + span { outline: 2px solid var(--theme-focus-color); outline-offset: 2px; }
 	b { color: var(--settings-muted); font-size: 0.78rem; font-weight: 500; }

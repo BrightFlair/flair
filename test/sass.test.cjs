@@ -136,6 +136,21 @@ test('monochrome derives restrained neutral tones from the primary colour', () =
 	assert.match(ink, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
 });
 
+test('clean dashboard derives its product surfaces from the primary colour', () => {
+	const dashboard = compile('@use "theme"; .theme { @include theme.clean-dashboard; }');
+	for(const token of [
+		'--theme-clean-dashboard-ink', '--theme-clean-dashboard-surface',
+		'--theme-clean-dashboard-raised', '--theme-clean-dashboard-inset',
+		'--theme-clean-dashboard-border', '--theme-clean-dashboard-muted',
+	]) {
+		assert.match(dashboard, new RegExp(`${token}:\\s*light-dark\\(`), token);
+	}
+	assert.match(dashboard, /--theme-sidebar-contrast-current-background:\s*var\(--theme-color-primary\)/);
+	assert.match(dashboard, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
+	assert.match(dashboard, /--theme-button-primary-text:\s*var\(--theme-color-ui-contrast\)/);
+	assert.match(dashboard, /--theme-table-stripe-background:\s*color-mix\(in srgb, var\(--theme-color-primary\)/);
+});
+
 test('public overrides remain inherited, not reset on individual controls', () => {
 	const css = compile(`@use "flair";
 .profile {

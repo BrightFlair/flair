@@ -17,13 +17,39 @@
 	--pal-10: light-dark(#fbf9f8, #241f1d);
 	--pal-11: light-dark(#9a5b16, #efb462);
 
-	--theme-color-text: var(--pal-1);
-	--theme-color-surface: var(--pal-2);
-	--theme-color-surface-disabled: var(--pal-3);
-	--theme-color-border: var(--pal-4);
-	--theme-color-muted: var(--pal-5);
 	--theme-color-tint: light-dark(#6854c5, #c4b7ff);
 	--theme-color-primary: var(--pal-6);
+	// The dashboard keeps its soft product feel, while a selected primary lends
+	// its hue to the page, cards and graphite details.
+	--theme-clean-dashboard-ink: light-dark(
+		color-mix(in srgb, #2d2724 88%, var(--theme-color-primary)),
+		color-mix(in srgb, #f4efec 88%, var(--theme-color-primary))
+	);
+	--theme-clean-dashboard-surface: light-dark(
+		color-mix(in srgb, #fff 94%, var(--theme-color-primary)),
+		color-mix(in srgb, #2a2422 84%, var(--theme-color-primary))
+	);
+	--theme-clean-dashboard-raised: light-dark(
+		color-mix(in srgb, #f7f4f2 84%, var(--theme-color-primary)),
+		color-mix(in srgb, #342d2a 78%, var(--theme-color-primary))
+	);
+	--theme-clean-dashboard-inset: light-dark(
+		color-mix(in srgb, #fbf9f8 90%, var(--theme-color-primary)),
+		color-mix(in srgb, #241f1d 82%, var(--theme-color-primary))
+	);
+	--theme-clean-dashboard-border: light-dark(
+		color-mix(in srgb, #ddd6d2 78%, var(--theme-color-primary)),
+		color-mix(in srgb, #5c514c 74%, var(--theme-color-primary))
+	);
+	--theme-clean-dashboard-muted: light-dark(
+		color-mix(in srgb, #756a64 84%, var(--theme-color-primary)),
+		color-mix(in srgb, #c7bdb8 84%, var(--theme-color-primary))
+	);
+	--theme-color-text: var(--theme-clean-dashboard-ink);
+	--theme-color-surface: var(--theme-clean-dashboard-surface);
+	--theme-color-surface-disabled: var(--theme-clean-dashboard-raised);
+	--theme-color-border: var(--theme-clean-dashboard-border);
+	--theme-color-muted: var(--theme-clean-dashboard-muted);
 	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
 	--theme-color-success: var(--pal-8);
@@ -46,31 +72,31 @@
 	--theme-control-min-height: 3rem;
 	--theme-control-padding-block: 0.625rem;
 	--theme-control-padding-inline: 0.875rem;
-	--theme-control-border: var(--pal-4);
-	--theme-control-border-hover: color-mix(in srgb, var(--theme-color-tint), var(--pal-4) 35%);
-	--theme-control-background: linear-gradient(180deg, var(--pal-2), color-mix(in srgb, var(--pal-3), var(--pal-2) 45%));
+	--theme-control-border: var(--theme-color-border);
+	--theme-control-border-hover: color-mix(in srgb, var(--theme-color-tint), var(--theme-color-border) 35%);
+	--theme-control-background: linear-gradient(180deg, var(--theme-color-surface), color-mix(in srgb, var(--theme-clean-dashboard-raised), var(--theme-color-surface) 45%));
 	--theme-control-radius: 0.625rem;
 	--theme-button-weight: 600;
-	--theme-button-background: linear-gradient(180deg, color-mix(in srgb, var(--pal-2), #fff 5%), color-mix(in srgb, var(--pal-3), var(--pal-2) 30%));
-	--theme-button-background-hover: linear-gradient(180deg, color-mix(in srgb, var(--pal-2), #fff 9%), color-mix(in srgb, var(--pal-3), var(--pal-2) 8%));
-	--theme-button-background-active: color-mix(in srgb, var(--pal-3), var(--pal-2) 18%);
-	--theme-button-border: var(--pal-4);
-	--theme-button-border-hover: color-mix(in srgb, var(--pal-5), var(--pal-4) 30%);
+	--theme-button-background: linear-gradient(180deg, color-mix(in srgb, var(--theme-color-surface), #fff 5%), color-mix(in srgb, var(--theme-clean-dashboard-raised), var(--theme-color-surface) 30%));
+	--theme-button-background-hover: linear-gradient(180deg, color-mix(in srgb, var(--theme-color-surface), #fff 9%), color-mix(in srgb, var(--theme-clean-dashboard-raised), var(--theme-color-surface) 8%));
+	--theme-button-background-active: color-mix(in srgb, var(--theme-clean-dashboard-raised), var(--theme-color-surface) 18%);
+	--theme-button-border: var(--theme-color-border);
+	--theme-button-border-hover: color-mix(in srgb, var(--theme-color-muted), var(--theme-color-border) 30%);
 	--theme-button-shadow: 0 1px 2px light-dark(rgb(45 39 36 / 10%), rgb(0 0 0 / 28%)), inset 0 1px rgb(255 255 255 / 10%);
 	--theme-button-shadow-hover: 0 2px 5px light-dark(rgb(45 39 36 / 14%), rgb(0 0 0 / 36%)), inset 0 1px rgb(255 255 255 / 14%);
 	--theme-button-primary-background: linear-gradient(180deg, color-mix(in srgb, var(--theme-color-primary), white 12%), var(--theme-color-primary));
 	--theme-button-primary-background-hover: linear-gradient(180deg, color-mix(in srgb, var(--theme-color-primary), white 20%), color-mix(in srgb, var(--theme-color-primary), white 6%));
 	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-color-primary), black 10%);
 	--theme-button-primary-border: color-mix(in srgb, var(--theme-color-primary), black 16%);
-	// Keep the light-scheme label quiet against the vivid pink. In dark mode
-	// the established near-black foreground has the intended contrast.
-	--theme-button-primary-text: light-dark(#f8f5f8, #241d22);
+	// This remains softly tinted against the stock pink, while adapting to a
+	// user-selected primary that may be much lighter or darker.
+	--theme-button-primary-text: var(--theme-color-ui-contrast);
 	--theme-color-ui-preferred: #241d22;
 	--theme-button-primary-shadow: 0 1px 2px color-mix(in srgb, var(--theme-color-primary), transparent 58%), inset 0 1px rgb(255 255 255 / 28%);
 	--theme-button-primary-shadow-hover: 0 3px 8px color-mix(in srgb, var(--theme-color-primary), transparent 52%), inset 0 1px rgb(255 255 255 / 32%);
 	--theme-button-primary-decoration-hover: none;
 
-	--theme-surface-background: var(--pal-2);
+	--theme-surface-background: var(--theme-color-surface);
 	--theme-surface-padding: 1.5rem;
 	--theme-surface-border-width: 1px;
 	--theme-surface-radius: 0.75rem;
@@ -78,9 +104,9 @@
 	--theme-grid-gap: 1rem;
 	--theme-value-weight: 600;
 	--theme-progress-height: 0.5rem;
-	--theme-table-header-background: var(--pal-3);
-	--theme-table-stripe-background: color-mix(in srgb, var(--theme-color-tint), transparent 97%);
-	--theme-table-hover-background: color-mix(in srgb, var(--theme-color-tint), transparent 92%);
+	--theme-table-header-background: var(--theme-clean-dashboard-raised);
+	--theme-table-stripe-background: color-mix(in srgb, var(--theme-color-primary), transparent 97%);
+	--theme-table-hover-background: color-mix(in srgb, var(--theme-color-primary), transparent 92%);
 	--theme-table-padding-block: 0.75rem;
 	--theme-table-padding-inline: 0.75rem;
 
@@ -88,14 +114,14 @@
 	--theme-nav-padding-block: 0.625rem;
 	--theme-nav-padding-inline: 0.75rem;
 	--theme-nav-current-weight: 600;
-	--theme-nav-hover-background: color-mix(in srgb, var(--theme-color-tint), transparent 94%);
-	--theme-nav-current-background: color-mix(in srgb, var(--theme-color-tint), transparent 88%);
+	--theme-nav-hover-background: color-mix(in srgb, var(--theme-color-primary), transparent 94%);
+	--theme-nav-current-background: color-mix(in srgb, var(--theme-color-primary), transparent 88%);
 	--theme-nav-current-shadow: none;
 	--theme-side-nav-current-shadow: none;
-	--theme-sidebar-contrast-background: var(--pal-10);
-	--theme-sidebar-contrast-text: var(--pal-1);
-	--theme-sidebar-contrast-hover-background: color-mix(in srgb, var(--theme-color-tint), transparent 94%);
-	--theme-sidebar-contrast-current-background: color-mix(in srgb, var(--theme-color-tint), transparent 88%);
-	--theme-sidebar-contrast-current-text: var(--pal-1);
-	--theme-sidebar-contrast-link: var(--pal-1);
+	--theme-sidebar-contrast-background: var(--theme-clean-dashboard-inset);
+	--theme-sidebar-contrast-text: var(--theme-color-text);
+	--theme-sidebar-contrast-hover-background: color-mix(in srgb, var(--theme-color-primary), transparent 94%);
+	--theme-sidebar-contrast-current-background: var(--theme-color-primary);
+	--theme-sidebar-contrast-current-text: var(--theme-color-ui-contrast);
+	--theme-sidebar-contrast-link: var(--theme-color-text);
 }
