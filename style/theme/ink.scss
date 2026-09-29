@@ -15,30 +15,58 @@
 	// A single raised tone, used for panels, code and striped rows.
 	--pal-10: light-dark(#f2f2f2, #222);
 
-	--theme-color-text: var(--pal-1);
-	--theme-color-surface: var(--pal-2);
-	--theme-color-surface-disabled: var(--pal-3);
-	--theme-color-border: var(--pal-4);
-	--theme-color-muted: var(--pal-5);
 	--theme-color-tint: light-dark(#666, #aaa);
 	--theme-color-primary: var(--pal-6);
+	// A primary remains understated in Monochrome: it lends a small amount of
+	// colour to the paper and graphite tones while preserving the quiet default.
+	--theme-ink-text: light-dark(
+		color-mix(in srgb, #222 85%, var(--theme-color-primary)),
+		color-mix(in srgb, #f5f5f5 85%, var(--theme-color-primary))
+	);
+	--theme-ink-surface: light-dark(
+		color-mix(in srgb, #fafafa 92%, var(--theme-color-primary)),
+		color-mix(in srgb, #161616 88%, var(--theme-color-primary))
+	);
+	--theme-ink-raised: light-dark(
+		color-mix(in srgb, #e8e8e8 82%, var(--theme-color-primary)),
+		color-mix(in srgb, #303030 80%, var(--theme-color-primary))
+	);
+	--theme-ink-panel: light-dark(
+		color-mix(in srgb, #f2f2f2 88%, var(--theme-color-primary)),
+		color-mix(in srgb, #222 82%, var(--theme-color-primary))
+	);
+	--theme-ink-border: light-dark(
+		color-mix(in srgb, #767676 76%, var(--theme-color-primary)),
+		color-mix(in srgb, #999 76%, var(--theme-color-primary))
+	);
+	--theme-ink-muted: light-dark(
+		color-mix(in srgb, #555 82%, var(--theme-color-primary)),
+		color-mix(in srgb, #bbb 82%, var(--theme-color-primary))
+	);
+	--theme-color-text: var(--theme-ink-text);
+	--theme-color-surface: var(--theme-ink-surface);
+	--theme-color-surface-disabled: var(--theme-ink-raised);
+	--theme-color-border: var(--theme-ink-border);
+	--theme-color-muted: var(--theme-ink-muted);
 	--theme-color-accent: var(--theme-color-tint);
 	--theme-color-on-accent: var(--pal-7);
 	--theme-color-success: var(--pal-8);
 	--theme-color-danger: var(--pal-9);
-	--theme-surface-background: var(--pal-10);
-	--theme-inset-background: var(--pal-3);
-	--theme-selected-background: var(--pal-1);
-	--theme-selected-text: var(--pal-2);
-	--theme-code-background: var(--pal-10);
+	--theme-surface-background: var(--theme-ink-panel);
+	--theme-inset-background: var(--theme-ink-raised);
+	--theme-selected-background: var(--theme-color-primary);
+	--theme-selected-text: var(--theme-color-ui-contrast);
+	--theme-badge-background: var(--theme-color-primary);
+	--theme-badge-text: var(--theme-color-ui-contrast);
+	--theme-code-background: var(--theme-ink-panel);
 	--theme-syntax-string: var(--pal-5);
-	--theme-table-stripe-background: var(--pal-10);
+	--theme-table-stripe-background: var(--theme-ink-panel);
 	--theme-surface-shadow: none;
 
 	// Coordinated surface and navigation states for the contrast sidebar variant.
-	--theme-sidebar-contrast-background: var(--pal-10);
-	--theme-sidebar-contrast-text: var(--pal-1);
-	--theme-sidebar-contrast-hover-background: light-dark(#ddd, #383838);
-	--theme-sidebar-contrast-current-background: var(--pal-1);
-	--theme-sidebar-contrast-current-text: var(--pal-2);
+	--theme-sidebar-contrast-background: var(--theme-ink-panel);
+	--theme-sidebar-contrast-text: var(--theme-color-text);
+	--theme-sidebar-contrast-hover-background: var(--theme-ink-raised);
+	--theme-sidebar-contrast-current-background: var(--theme-color-primary);
+	--theme-sidebar-contrast-current-text: var(--theme-color-ui-contrast);
 }

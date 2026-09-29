@@ -123,6 +123,19 @@ test('paper derives its stock and selected states from the primary colour', () =
 	assert.match(paper, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
 });
 
+test('monochrome derives restrained neutral tones from the primary colour', () => {
+	const ink = compile('@use "theme"; .theme { @include theme.ink; }');
+	for(const token of [
+		'--theme-ink-text', '--theme-ink-surface', '--theme-ink-raised',
+		'--theme-ink-panel', '--theme-ink-border', '--theme-ink-muted',
+	]) {
+		assert.match(ink, new RegExp(`${token}:\\s*light-dark\\(`), token);
+	}
+	assert.match(ink, /--theme-selected-background:\s*var\(--theme-color-primary\)/);
+	assert.match(ink, /--theme-selected-text:\s*var\(--theme-color-ui-contrast\)/);
+	assert.match(ink, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
+});
+
 test('public overrides remain inherited, not reset on individual controls', () => {
 	const css = compile(`@use "flair";
 .profile {
