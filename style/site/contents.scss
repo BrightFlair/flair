@@ -7,7 +7,7 @@
 		justify-content: space-between;
 		gap: var(--site-space-medium);
 		padding-bottom: var(--site-space-large);
-		h2 {
+		:is(h1, h2) {
 			font-size: clamp(3rem, 6vw, 6rem);
 			line-height: 1;
 		}

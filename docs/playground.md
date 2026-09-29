@@ -1,6 +1,6 @@
 # Playground
 
-Open `/playground/` from the global section selector. The index retains that selector so the playground remains connected to the rest of the site. `/playground/blank/` is a blank starter: its main element fills the viewport height and has no padding, margin or maximum width. Playground examples keep the shared fonts, theme variables, baseline element styles, and skip link. Their global section switcher is replaced by a fixed “Close example” link back to the index. They do not use `.library-page` or `.flair-example`, and the website footer is removed within this directory.
+Open `/playground/` from the global section selector. The index retains that selector so the playground remains connected to the rest of the site. `/playground/blank/` is a blank starter: its main element fills the viewport height and has no padding, margin or maximum width. Playground examples keep the shared fonts, theme variables, baseline element styles, and skip link. Their global section switcher is replaced by a sticky top “Exit example” banner back to the index. It is outside the example design, occupies its own page row and remains visible while the page scrolls. They do not use `.library-page` or `.flair-example`, and the website footer is removed within this directory.
 
 To add an experiment:
 
@@ -33,7 +33,7 @@ The Authwave site lives in `~/Code/Authwave/www.authwave.com` and consumes Flair
 - `/playground/settings-pages/`: responsive Appearance and Integrations views, with an expanded settings sidebar, compact integrations rail, functional controls and stacked mobile layouts. It opens with the Clean dashboard theme from the playground index.
 - `/playground/github-clone/`: a full-width top bar, left-aligned 24rem rail at 46rem and wrapping editor/preview panels capped independently at 48rem including their gutters. Choose GitHub in the theme selector to use Flair's preset.
 
-Each example starts with the currently selected theme (Monochrome for a fresh session). The shared playground controls independently switch the six themes, custom tint, custom primary colour and System/Light/Dark colour scheme, persisting each selection. Changing theme restores its CSS-defined tint and primary defaults; the Apply button supplies a native GET fallback without JavaScript.
+Each example starts with the currently selected theme (Monochrome for a fresh session). The shared top bar contains a Theme disclosure that independently switches the six themes, custom tint, custom primary colour and System/Light/Dark colour scheme, persisting each selection. Changing theme restores its CSS-defined tint and primary defaults; the Apply button supplies a native GET fallback without JavaScript.
 
 ### What the proofs establish
 

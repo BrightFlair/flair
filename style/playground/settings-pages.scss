@@ -437,25 +437,6 @@
 	&.dropbox { background: linear-gradient(145deg, #2e80ff, #075bd8); }
 }
 
-.settings-preview-controls {
-	position: fixed;
-	z-index: 10;
-	inset: auto 1rem 1rem auto;
-	max-inline-size: calc(100vw - 2rem);
-	border: 1px solid var(--settings-line);
-	border-radius: 0.7rem;
-	background: var(--settings-page);
-	box-shadow: 0 8px 28px rgb(20 14 12 / 20%);
-	summary {
-		min-inline-size: 3.5rem;
-		padding: 0.65rem 0.85rem;
-		cursor: pointer;
-		font-size: 0.75rem;
-		font-weight: 600;
-	}
-	playground-tools { max-inline-size: 32rem; border-block-start: 1px solid var(--settings-line); border-block-end: 0; }
-}
-
 &[data-menu-open="true"] {
 		#settings-sidebar {
 			position: fixed;
@@ -468,7 +449,6 @@
 		}
 }
 .view-intro > button { padding-inline: 0.65rem; font-size: 0.76rem; }
-.settings-preview-controls[open] { inset-inline: 1rem; playground-tools { max-inline-size: none; } }
 
 @media (min-width: 42rem) {
 	.settings-workspace { padding-inline: 2rem; }
@@ -519,7 +499,6 @@
 		> div { margin-inline-start: auto; > button { flex: none; } }
 		.reset-button { align-self: auto; }
 	}
-	.settings-preview-controls[open] { inset-inline: auto 1rem; }
 	.integration-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 	.integration-grid > article { min-block-size: 15rem; }
 }

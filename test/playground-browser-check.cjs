@@ -34,14 +34,17 @@ const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'
   for(const route of [...routes, 'blank', 'settings-pages']) {
    await page.goto(`${base}/playground/${route}/?theme=ink&scheme=light`);
    assert.equal(await page.locator('section-switcher').count(), 0, `${route}: global controls are removed`);
-   const close = page.getByRole('link', {name: 'Close example'});
-   assert.ok(await close.isVisible(), `${route}: close link is visible`);
+   const close = page.getByRole('link', {name: 'Exit example'});
+   assert.ok(await close.isVisible(), `${route}: exit banner is visible`);
    assert.equal(await close.getAttribute('href'), '/playground/');
+   assert.equal(await page.locator('.playground-bar').evaluate(element => getComputedStyle(element).position), 'sticky');
+   assert.equal(await page.locator('main playground-tools').count(), 0, `${route}: controls are outside the example`);
+   assert.equal(await page.locator('.playground-bar playground-tools').count(), 1, `${route}: one shared control set`);
    assert.equal(await page.getByRole('link', {name: 'All examples'}).count(), 0);
   }
   await Promise.all([
    page.waitForURL(url => url.pathname === '/playground/'),
-   page.getByRole('link', {name: 'Close example'}).click(),
+	 page.getByRole('link', {name: 'Exit example'}).click(),
   ]);
   assert.ok(await page.locator('section-switcher').isVisible());
   console.log('Passed playground index controls and example exit navigation.');
