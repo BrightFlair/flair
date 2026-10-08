@@ -13,7 +13,7 @@ To add an experiment:
 @use "../flair";
 
 .my-layout {
-	@extend %p-grid;
+	@extend %l-grid;
 	--theme-grid-columns: 3;
 }
 ```

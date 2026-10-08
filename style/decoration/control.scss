@@ -1,36 +1,30 @@
-@use "../variable/break";
-@use "focus-ring";
+@use "focus";
 
 %d-control {
-	box-sizing: border-box;
-	min-inline-size: 0;
-	max-inline-size: 100%;
-	min-block-size: max(44px, var(--theme-control-min-height));
-	margin: 0;
-	padding: var(--theme-control-padding-block, var(--theme-space-2))
-		var(--theme-control-padding-inline, var(--theme-space-3));
+	@extend %d-focus;
 	border: var(--theme-border-width) solid
 		var(--theme-control-border, var(--theme-color-border));
 	border-radius: var(--theme-control-radius, var(--theme-radius));
-	background: var(--theme-control-background, var(--theme-color-surface));
+	background-color: var(--theme-control-background, var(--theme-color-surface));
 	color: var(--theme-control-text, var(--theme-color-text));
 	font-family: var(--theme-control-font, var(--theme-font-body));
+	box-shadow: var(--theme-control-shadow);
 	transition: var(--theme-control-transition, none);
 	font-size: var(--theme-font-size);
 	font-weight: var(--theme-font-weight);
 	line-height: var(--theme-line-height);
 
-	&:hover:not(:disabled) {
+	&:hover:not(:disabled, [aria-disabled="true"]) {
 		border-color: var(--theme-control-border-hover, var(--theme-color-text));
 	}
-	&:focus-visible {
-		@extend %d-focus-ring;
+	&:active:not(:disabled, [aria-disabled="true"]) {
+		background-color: var(--theme-control-background-active, var(--theme-color-surface-disabled));
 	}
 	&[aria-invalid="true"] {
 		border-color: var(--theme-color-danger);
 		border-style: var(--theme-control-invalid-border-style, dashed);
 	}
-	&:disabled {
+	&:is(:disabled, [aria-disabled="true"]) {
 		background: var(
 			--theme-control-background-disabled,
 			var(--theme-color-surface-disabled)
@@ -39,5 +33,5 @@
 		cursor: not-allowed;
 		opacity: var(--theme-disabled-opacity, 1);
 	}
-	@media (min-width: break.$compact) { min-block-size: var(--theme-control-min-height); }
+	@media (prefers-reduced-motion: reduce) { transition: none; --theme-motion-duration: 0s; }
 }

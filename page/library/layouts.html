@@ -79,7 +79,7 @@
 }
 
 .demo-grid {
-	@extend %p-grid;
+	@extend %l-grid;
 }</code></pre>
 		</details>
 	</section>
@@ -177,7 +177,7 @@
 }
 
 .demo-grid {
-	@extend %p-grid;
+	@extend %l-grid;
 }
 
 .demo-narrow {
@@ -264,7 +264,7 @@
 }
 
 .demo-grid {
-	@extend %p-grid;
+	@extend %l-grid;
 }
 
 .demo-side-navigation {
@@ -746,4 +746,12 @@
 }</code></pre>
 		</details>
 	</section>
+
+<section class="reference-section" id="split-layout" aria-labelledby="split-layout-title">
+	<h2 id="split-layout-title">Split regions</h2>
+	<p>Main and secondary regions wrap intrinsically. Their widths and alignment remain independent of surface design.</p>
+	<div class="flair-example"><section class="demo-split"><article class="demo-card"><h3>Main region</h3><p>Content determines height.</p></article><aside class="demo-card"><h3>Secondary region</h3><p>Moves below when space is limited.</p></aside></section></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;section class=&quot;demo-split&quot;&gt;&lt;article class=&quot;demo-card&quot;&gt;&lt;h3&gt;Main region&lt;/h3&gt;&lt;p&gt;Content determines height.&lt;/p&gt;&lt;/article&gt;&lt;aside class=&quot;demo-card&quot;&gt;&lt;h3&gt;Secondary region&lt;/h3&gt;&lt;p&gt;Moves below when space is limited.&lt;/p&gt;&lt;/aside&gt;&lt;/section&gt;</code></pre><pre><code>@use "flair";
+.demo-split { @extend %l-split; --theme-split-main: 24rem; }</code></pre></details>
+</section>
 </main>

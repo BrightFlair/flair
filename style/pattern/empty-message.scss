@@ -6,7 +6,7 @@
 //
 // `%p-empty-state` is the fuller treatment, for a whole region with a heading
 // and an action; this is the one-line version for a collection.
-%d-empty-message {
+%p-empty-message {
 	&:empty::before {
 		content: var(--theme-empty-message, "There is nothing here yet.");
 		display: block;

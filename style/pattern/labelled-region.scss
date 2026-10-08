@@ -1,4 +1,4 @@
-@use "../decoration/empty-message";
+@use "../pattern/empty-message";
 
 // A bordered block of output with its own caption resting above the top edge:
 // a response body, a log excerpt, a diff. The caption is generated, so the
@@ -10,7 +10,7 @@
 // Machine output sets `--theme-region-font` to the mono family and keeps its
 // own whitespace. An empty region says so rather than collapsing to a line.
 %p-labelled-region {
-	@extend %d-empty-message;
+	@extend %p-empty-message;
 	position: relative;
 	display: block;
 	margin-block-start: var(--theme-region-label-space, var(--theme-space-8));

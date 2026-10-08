@@ -1,7 +1,4 @@
 %d-surface {
-	box-sizing: border-box;
-	min-inline-size: 0;
-	padding: var(--theme-surface-padding, var(--theme-space-6));
 	border: var(--theme-surface-border-width, var(--theme-border-width)) solid
 		var(--theme-color-border);
 	border-radius: var(--theme-surface-radius, var(--theme-radius));

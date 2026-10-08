@@ -1,5 +1,5 @@
 %o-code {
-	font-family: var(--theme-font-mono, "Ubuntu Mono", monospace);
+	font-family: var(--theme-font-mono, ui-monospace, monospace);
 	font-size: var(--theme-code-size, 0.95em);
 	background: var(--theme-code-background, var(--theme-color-surface-disabled));
 	color: var(--theme-code-text, var(--theme-color-text));

@@ -17,12 +17,12 @@
 		> header { h1, p { margin-block: 0; } }
 	}
 	.summary {
-		@extend %p-grid;
+		@extend %l-grid;
 		--theme-grid-columns: 3;
 		> article { @extend %o-card; @extend %p-metric; }
 	}
 	.workspaces {
-		@extend %p-grid;
+		@extend %l-grid;
 		--theme-grid-columns: 2;
 		> article { @extend %o-card; }
 	}

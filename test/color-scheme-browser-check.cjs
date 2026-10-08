@@ -5,9 +5,14 @@ const sass = require('sass');
 const path = require('node:path');
 const assert = require('node:assert/strict');
 const base = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
-const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const themes = ['base', 'bright', 'github', 'clean', 'gt'];
 const standaloneThemes = ['base', ...themes];
 const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'disclosures', 'tables', 'feedback', 'code', 'layouts'].map(x => `/library/${x}/`).concat(['documentation-website','dashboard-app','github-clone'].map(x => `/playground/${x}/`));
+async function openTools(page) {
+ const details = page.locator('.playground-theme-controls');
+ if(await details.count() && !await details.evaluate(e => e.open)) await details.locator('summary').click();
+}
+
 (async () => {
  const browser = await chromium.launch({executablePath:process.env.FLAIR_CHROMIUM_PATH || '/usr/bin/chromium',args:['--no-sandbox']});
  try {
@@ -71,6 +76,7 @@ const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'di
   assert.equal(await tint.inputValue(),'#4493f8');
   assert.equal(await primary.inputValue(),'#3fb950');
   const dark=await bg();
+  await openTools(demo);
   await demo.locator('select[name=scheme]').selectOption('light');
   assert.equal(await demo.locator('html').getAttribute('data-theme'),'light');
   assert.equal(await tint.inputValue(),'#0969da');
@@ -78,24 +84,28 @@ const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'di
   assert.notEqual(await bg(),dark);
   await demo.reload();
   assert.equal(await demo.locator('html').getAttribute('data-theme'),'light');
-  await demo.locator('select[name=theme]').selectOption('paper');
+  await openTools(demo);
+  await demo.locator('select[name=theme]').selectOption('gt');
   assert.equal(await demo.locator('html').getAttribute('data-theme'),'light');
-	  assert.equal(await tint.inputValue(),'#8a4168');
-  assert.equal(await primary.inputValue(),'#315c40');
+	  assert.equal(await tint.inputValue(),'#336699');
+  assert.equal(await primary.inputValue(),'#4f5b93');
+  await openTools(demo);
   await demo.locator('select[name=scheme]').selectOption('system');
   assert.equal(await demo.locator('html').getAttribute('data-theme'),null);
-	  assert.equal(await tint.inputValue(),'#e0a8c5');
-  assert.equal(await primary.inputValue(),'#a2c5a3');
+	  assert.equal(await tint.inputValue(),'#8cc8f5');
+  assert.equal(await primary.inputValue(),'#aeb8ef');
   await demo.reload();
   assert.equal(await demo.locator('html').getAttribute('data-theme'),null);
   const nojs=await browser.newContext({javaScriptEnabled:false,colorScheme:'light'});
   const staticPage=await nojs.newPage();
   await staticPage.goto(`${base}/playground/documentation-website/`);
+  await openTools(staticPage);
   await staticPage.locator('select[name=scheme]').selectOption('dark');
   await Promise.all([staticPage.waitForURL('**/*scheme=dark'),staticPage.getByRole('button',{name:'Apply'}).click()]);
   assert.equal(await staticPage.locator('html').getAttribute('data-theme'),'dark');
   await staticPage.goto(`${base}/playground/dashboard-app/`);
   assert.equal(await staticPage.locator('html').getAttribute('data-theme'),'dark');
+  await openTools(staticPage);
   await staticPage.locator('select[name=scheme]').selectOption('system');
   await Promise.all([staticPage.waitForURL('**/*scheme=system'),staticPage.getByRole('button',{name:'Apply'}).click()]);
   assert.equal(await staticPage.locator('html').getAttribute('data-theme'),null);

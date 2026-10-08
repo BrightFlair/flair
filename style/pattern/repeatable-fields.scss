@@ -1,4 +1,4 @@
-@use "../decoration/empty-message";
+@use "../pattern/empty-message";
 @use "../object/form-field";
 @use "../variable/break";
 
@@ -18,7 +18,7 @@
 // An empty list explains itself from `data-term`. Adding and removing rows,
 // and the order they appear in, belong to the application.
 %p-repeatable-fields {
-	@extend %d-empty-message;
+	@extend %p-empty-message;
 	list-style: none;
 	margin: 0;
 	padding: 0;

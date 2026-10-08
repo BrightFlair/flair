@@ -5,30 +5,23 @@ use Gt\Http\ServerRequest;
 
 class Theme {
 	private const TINTS = [
-		"ink" => ["light" => "#666666", "dark" => "#aaaaaa"],
-		"paper" => ["light" => "#8a4168", "dark" => "#e0a8c5"],
-		"vivid" => ["light" => "#6025d6", "dark" => "#c3a0ff"],
+		"base" => ["light" => "#111111", "dark" => "#f5f5f5"],
+		"bright" => ["light" => "#9e77ed", "dark" => "#9e77ed"],
 		"github" => ["light" => "#0969da", "dark" => "#4493f8"],
-		"material" => ["light" => "#786000", "dark" => "#e8d46e"],
-		"clean-dashboard" => ["light" => "#6854c5", "dark" => "#c4b7ff"],
+		"clean" => ["light" => "#204698", "dark" => "#9cbaff"],
+		"gt" => ["light" => "#336699", "dark" => "#8cc8f5"],
 	];
 	private const PRIMARY_COLOURS = [
-		"ink" => ["light" => "#111111", "dark" => "#ffffff"],
-		"paper" => ["light" => "#315c40", "dark" => "#a2c5a3"],
-		"vivid" => ["light" => "#c7ff54", "dark" => "#c7ff54"],
+		"base" => ["light" => "#111111", "dark" => "#f5f5f5"],
+		"bright" => ["light" => "#c328d1", "dark" => "#c328d1"],
 		"github" => ["light" => "#1f883d", "dark" => "#3fb950"],
-		"material" => ["light" => "#6750a4", "dark" => "#d0bcff"],
-		"clean-dashboard" => ["light" => "#a918b8", "dark" => "#f06bf5"],
+		"clean" => ["light" => "#204698", "dark" => "#9cbaff"],
+		"gt" => ["light" => "#4f5b93", "dark" => "#aeb8ef"],
 	];
 
 	public static function current(ServerRequest $request):string {
-		$theme = $request->getQueryParams()["theme"] ?? $request->getCookieParams()["flair-theme"] ?? "ink";
-		// Base was the original user-facing Monochrome option. Ink is its
-		// stronger replacement; keep old URLs and cookies working as an alias.
-		if($theme === "base") {
-			$theme = "ink";
-		}
-		return in_array($theme, ["ink", "paper", "vivid", "github", "material", "clean-dashboard"], true) ? $theme : "ink";
+		$theme = $request->getQueryParams()["theme"] ?? $request->getCookieParams()["flair-theme"] ?? "base";
+		return is_string($theme) && isset(self::TINTS[$theme]) ? $theme : "base";
 	}
 	public static function scheme(ServerRequest $request):string {
 		$scheme = $request->getQueryParams()["scheme"] ?? $request->getCookieParams()["flair-scheme"] ?? "system";
@@ -53,13 +46,11 @@ class Theme {
 		return $colour;
 	}
 	public static function presetTint(string $theme, string $scheme = "light"):string {
-		$theme = $theme === "base" ? "ink" : $theme;
 		$scheme = $scheme === "dark" ? "dark" : "light";
-		return self::TINTS[$theme][$scheme] ?? self::TINTS["ink"][$scheme];
+		return self::TINTS[$theme][$scheme] ?? self::TINTS["base"][$scheme];
 	}
 	public static function presetPrimary(string $theme, string $scheme = "light"):string {
-		$theme = $theme === "base" ? "ink" : $theme;
 		$scheme = $scheme === "dark" ? "dark" : "light";
-		return self::PRIMARY_COLOURS[$theme][$scheme] ?? self::PRIMARY_COLOURS["ink"][$scheme];
+		return self::PRIMARY_COLOURS[$theme][$scheme] ?? self::PRIMARY_COLOURS["base"][$scheme];
 	}
 }

@@ -1,0 +1,41 @@
+@use "../decoration/focus";
+
+%p-rail-navigation {
+	ul { list-style: none; margin: 0; padding: 0; }
+	li + li { margin-block-start: .25rem; }
+
+	a, button {
+		@extend %d-focus;
+		display: flex;
+		align-items: center;
+		box-sizing: border-box;
+		inline-size: 100%;
+		min-block-size: 2.75rem;
+		padding: .6rem .75rem;
+		gap: .15rem;
+		border: 0;
+		border-radius: var(--theme-radius);
+		background: transparent;
+		box-shadow: none;
+		font: inherit;
+		font-weight: 600;
+		text-align: start;
+		text-decoration: none;
+		color: var(--theme-color-text);
+		transition:
+			background-color var(--theme-motion-duration) var(--theme-motion-easing),
+			color var(--theme-motion-duration) var(--theme-motion-easing),
+			var(--theme-focus-transition);
+
+		&::before { color: var(--theme-color-muted); }
+		&[aria-current]::before { color: inherit; }
+		&:disabled { cursor: default; }
+		&:focus-visible:not(:disabled, [aria-disabled="true"]) {
+			outline: var(--theme-focus-outline);
+		}
+		&[aria-current], &:hover:not(:disabled), &:focus-visible {
+			background-color: var(--theme-nav-current-background);
+			color: var(--theme-color-heading);
+		}
+	}
+}

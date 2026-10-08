@@ -1,13 +1,10 @@
-@use "../pattern/grid";
-@use "../object/card";
+@use "grid";
+
 %l-gallery {
-	@extend %p-grid;
+	@extend %l-grid;
 	> figure {
-		@extend %o-card;
 		margin: 0;
-		> img {
-			aspect-ratio: var(--theme-gallery-ratio, 4 / 3);
-			object-fit: cover;
-		}
+		min-inline-size: 0;
+		> img { inline-size: 100%; aspect-ratio: var(--theme-gallery-ratio, 4 / 3); object-fit: cover; }
 	}
 }

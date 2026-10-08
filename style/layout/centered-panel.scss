@@ -1,0 +1,29 @@
+@use "../variable/break";
+
+%l-centered-panel {
+	box-sizing: border-box;
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto;
+	place-items: start center;
+	min-block-size: 100svh;
+
+	> main {
+		box-sizing: border-box;
+		inline-size: 100%;
+		min-inline-size: 0;
+		min-block-size: 0;
+		align-self: stretch;
+		padding: var(--theme-centered-panel-gutter, var(--theme-space-8)) var(--theme-centered-panel-padding, var(--theme-space-4)) var(--theme-centered-panel-padding, var(--theme-space-4));
+	}
+
+	@media(min-width: break.$compact) {
+		padding: var(--theme-centered-panel-gutter, var(--theme-space-8));
+
+		> main {
+			max-inline-size: var(--theme-centered-panel-width);
+			min-block-size: auto;
+			align-self: start;
+			padding: calc(var(--theme-centered-panel-padding, var(--theme-space-4)) * 2);
+		}
+	}
+}

@@ -1,10 +1,10 @@
-@use "../decoration/control";
+@use "interactive";
 
 %o-control {
-	@extend %d-control;
+	@extend %o-interactive;
 	inline-size: 100%;
 	&:focus:not(:disabled) {
-		background: var(--theme-control-background-focus, var(--theme-control-background, var(--theme-color-surface)));
+		background-color: var(--theme-control-background-focus, var(--theme-control-background, var(--theme-color-surface)));
 	}
 	&:focus-visible {
 		outline-offset: var(--theme-control-focus-offset, var(--theme-focus-offset));

@@ -1,8 +1,8 @@
 @use "../variable/break";
-@use "../decoration/control";
+@use "interactive";
 
 %o-button {
-	@extend %d-control;
+	@extend %o-interactive;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -31,7 +31,7 @@
 	text-align: center;
 	text-decoration: none;
 	overflow-wrap: anywhere;
-	cursor: pointer;
+	cursor: var(--theme-button-cursor, pointer);
 	background: var(--theme-button-background, var(--theme-color-surface));
 	color: var(--theme-button-text, var(--theme-color-text));
 	box-shadow: var(--theme-button-shadow, none);
@@ -43,7 +43,7 @@
 		color: var(--theme-button-text, var(--theme-color-text));
 		text-decoration: var(--theme-button-decoration, none);
 	}
-	&:hover:not(:disabled) {
+	&:hover:not(:disabled, [aria-disabled="true"]) {
 		border-color: var(
 			--theme-button-border-hover,
 			var(--theme-control-border-hover, var(--theme-color-text))
@@ -55,7 +55,7 @@
 			var(--theme-button-decoration, none)
 		);
 	}
-	&:active:not(:disabled) {
+	&:active:not(:disabled, [aria-disabled="true"]) {
 		background: var(
 			--theme-button-background-active,
 			var(--theme-button-background-hover, var(--theme-color-surface-disabled))

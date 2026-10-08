@@ -1,0 +1,15 @@
+// Label wrapping a caption and a control, including an application select wrapper.
+%o-labelled-control {
+	display: block;
+	> span {
+		display: block;
+		font-family: var(--theme-font-body);
+		font-size: var(--theme-label-font-size, 0.8rem);
+		color: var(--theme-color-heading);
+		margin: var(--theme-field-label-margin, var(--theme-space-2)) 0;
+	}
+	> :where(input:not([type="checkbox"], [type="radio"]), select, textarea) {
+		box-sizing: border-box;
+		inline-size: 100%;
+	}
+}

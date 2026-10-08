@@ -1,0 +1,109 @@
+@use "base";
+
+// Authwave's warm surfaces, violet accents and bevelled controls.
+// All structure comes from the monochrome base objects, patterns and layouts.
+@mixin bright {
+	@include base.base;
+
+	--theme-color-primary: #c328d1;
+	--theme-color-secondary: #9e77ed;
+	--theme-code-input-border: var(--theme-color-secondary);
+	--theme-color-success: light-dark(#327700, #8edd56);
+	--theme-indicator-success: #66c61c;
+	--theme-color-danger: light-dark(#b42318, #ffa29c);
+	--theme-indicator-danger: #f04438;
+	--theme-color-warning: light-dark(#936200, #ffbe63);
+	--theme-indicator-warning: #f79009;
+	--theme-focus-color: var(--theme-color-accent);
+
+	--theme-color-page: light-dark(#fafaf9, #453f3a);
+	--theme-color-surface: light-dark(white, #2b2524);
+	--theme-color-border: light-dark(#e8e4e3, #59514a);
+	--theme-control-border: var(--theme-color-border);
+	--theme-control-background: var(--theme-color-surface);
+	--theme-control-border-hover: color-mix(in srgb, var(--theme-control-border) 85%, var(--theme-interaction-shade));
+	--theme-control-background-active: color-mix(in srgb, var(--theme-control-background) 92%, var(--theme-interaction-shade));
+	--theme-control-highlight: rgb(255 255 255 / 40%);
+	--theme-control-shade: rgb(0 0 0 / 15%);
+	--theme-control-highlight-hover: rgb(255 255 255 / 55%);
+	--theme-control-shade-hover: rgb(0 0 0 / 22%);
+	--theme-button-background: var(--theme-control-background);
+	--theme-button-text: light-dark(#453f3a, #e8e4e3);
+	--theme-button-primary-text: #fff;
+	--theme-button-primary-background: var(--theme-color-primary);
+	--theme-button-primary-background-hover: var(--theme-button-primary-background);
+	--theme-button-border: var(--theme-control-border);
+	--theme-button-primary-border: color-mix(in srgb, var(--theme-button-primary-background) 80%, black);
+	--theme-button-border-hover: color-mix(in srgb, var(--theme-button-border) 85%, var(--theme-interaction-shade));
+	--theme-button-background-active: color-mix(in srgb, var(--theme-button-background) 92%, var(--theme-interaction-shade));
+	--theme-button-primary-border-hover: color-mix(in srgb, var(--theme-button-primary-border) 70%, var(--theme-interaction-shade));
+	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-button-primary-background) 92%, var(--theme-interaction-shade));
+
+	--theme-color-text: light-dark(#59514a, #d8d2d0);
+	--theme-color-muted: light-dark(#746b63, #b5aba6);
+	--theme-color-heading: light-dark(#1d1816, #f5f5f4);
+	--theme-link-color: var(--theme-color-text);
+	--theme-link-hover-color: var(--theme-color-heading);
+	--theme-link-active-color: var(--theme-link-hover-color);
+	--theme-link-active-background: color-mix(in srgb, var(--theme-color-secondary) 8%, transparent);
+
+	--theme-shadow-control-inset-top: inset 0 1px 2px 0 var(--theme-control-highlight);
+	--theme-shadow-control-inset-bottom: inset 0 -1px 2px 0 var(--theme-control-shade);
+	--theme-shadow-control-inset-top-hover: inset 0 2px 2px 0 var(--theme-control-highlight-hover);
+	--theme-shadow-control-inset-bottom-hover: inset 0 -1px 4px 0 var(--theme-control-shade-hover);
+	--theme-shadow-control-inset-top-active: inset 0 1px 2px 0 var(--theme-control-shade-hover);
+	--theme-shadow-control-inset-bottom-active: inset 0 -1px 4px 0 var(--theme-control-highlight-hover);
+	--theme-control-shadow: 0 0.1rem 0.1rem 0rem color-mix(in srgb, var(--theme-color-heading), transparent 95%);
+
+	--theme-button-shadow: var(--theme-shadow-control-inset-top), var(--theme-shadow-control-inset-bottom), var(--theme-control-shadow);
+	--theme-button-shadow-hover: var(--theme-shadow-control-inset-top-hover), var(--theme-shadow-control-inset-bottom-hover), var(--theme-control-shadow);
+	--theme-button-shadow-active: var(--theme-shadow-control-inset-top-active), var(--theme-shadow-control-inset-bottom-active), var(--theme-control-shadow);
+
+	--theme-color-tint: var(--theme-color-secondary);
+	--theme-avatar-chroma: 0.07;
+	--theme-brand-filter: none;
+	--theme-font-body: "Inter", system-ui, sans-serif;
+	--theme-font-heading: var(--theme-font-body);
+	--theme-font-mono: "Fira Mono", ui-monospace, monospace;
+	--theme-border-width: 2px;
+	--theme-surface-border-width: 2px;
+	--theme-radius: 0.5rem;
+	--theme-surface-radius: var(--theme-radius);
+	--theme-control-padding-block: 0.75rem;
+	--theme-control-padding-inline: 0.75rem;
+	--theme-control-padding: 0.75rem;
+	--theme-control-font: var(--theme-font-body);
+	--theme-button-weight: 600;
+	--theme-line-height: normal;
+	--theme-button-padding-block: 0.75rem;
+	--theme-button-padding-inline: 0.75rem;
+	--theme-button-background-hover: var(--theme-button-background);
+	--theme-surface-shadow: var(--theme-control-shadow);
+	--theme-focus-width: 4px;
+	--theme-focus-offset: 4px;
+	--theme-focus-active-width: 2px;
+	--theme-motion-duration: 0.1s;
+	--theme-focus-transition: outline-width 0.1s ease;
+	--theme-toggle-badge-padding-block: .4rem;
+	--theme-toggle-badge-padding-inline: .7rem;
+	--theme-toggle-badge-font-size: .75rem;
+	--theme-toggle-badge-border-width: 1px;
+	--theme-toggle-badge-radius: 1rem;
+	--theme-motion-easing: ease;
+	--theme-control-transition: box-shadow 0.1s ease, border-color 0.1s ease, outline-width 0.1s ease;
+	--theme-nav-current-background: color-mix(in srgb, var(--theme-color-surface) 94%, var(--theme-color-secondary));
+	--theme-accent-background: color-mix(in srgb, var(--theme-color-surface) 85%, var(--theme-interaction-shade));
+	--theme-muted-accent-background: color-mix(in srgb, var(--theme-color-surface) 90%, var(--theme-color-primary));
+
+	--theme-code-background: light-dark(#f5f5f4, #211c1b);
+	--theme-syntax-keyword: light-dark(#a51bad, #e8a2f2);
+	--theme-syntax-comment: light-dark(#686159, #b5aba6);
+	--theme-menu-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--theme-color-heading) 12%, transparent);
+
+	--theme-color-on-accent: #fff;
+	--theme-sidebar-contrast-background: var(--theme-color-page);
+	--theme-sidebar-contrast-text: var(--theme-color-text);
+	--theme-sidebar-contrast-hover-background: var(--theme-nav-current-background);
+	--theme-sidebar-contrast-current-background: var(--theme-color-primary);
+	--theme-sidebar-contrast-current-text: var(--theme-color-on-accent);
+}

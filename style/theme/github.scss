@@ -1,7 +1,7 @@
-@use "../mixin/color-scheme";
+@use "base";
 
 @mixin github {
-	@include color-scheme.color-scheme;
+	@include base.base;
 
 	--pal-1: light-dark(#1f2328, #e6edf3);
 	--pal-2: light-dark(#fff, #0d1117);
@@ -57,8 +57,15 @@
 	--theme-button-primary-text: light-dark(#fff, #0d1117);
 	--theme-color-ui-background: var(--theme-color-primary);
 	--theme-color-ui-preferred: #0d1117;
-	--theme-button-primary-background-hover: color-mix(in srgb, var(--theme-color-primary), white 5%);
-	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-color-primary), white 20%);
+	// Keep white captions readable during hover and press in the light scheme.
+	--theme-button-primary-background-hover: light-dark(
+		color-mix(in srgb, var(--theme-color-primary), black 5%),
+		color-mix(in srgb, var(--theme-color-primary), white 5%)
+	);
+	--theme-button-primary-background-active: light-dark(
+		color-mix(in srgb, var(--theme-color-primary), black 10%),
+		color-mix(in srgb, var(--theme-color-primary), white 20%)
+	);
 	--theme-button-primary-border: var(--pal-11);
 	--theme-button-primary-decoration-hover: none;
 	--theme-font-heading: var(--theme-font-body);

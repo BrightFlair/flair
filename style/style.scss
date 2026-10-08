@@ -4,8 +4,9 @@
 );
 
 @use "font/ubuntu";
+@use "font/inter";
+@use "font/fira-mono";
 @use "font/mona-sans";
-@use "font/roboto";
 @use "font/ubuntu-mono";
 @use "font/ubuntu-condensed";
 
@@ -82,3 +83,18 @@
 @use "site/demo-palette";
 @use "site/demo-page-footer-fixed";
 @use "playground";
+@use "site/demo-segments";
+@use "site/demo-toggle";
+@use "site/demo-field-action";
+@use "site/demo-labelled";
+@use "site/demo-settings";
+@use "site/demo-settings-disclosure";
+@use "site/demo-content-panel";
+@use "site/demo-menu";
+@use "site/demo-record-scroll";
+@use "site/demo-record-table";
+@use "site/demo-record-list";
+@use "site/demo-identity";
+@use "site/demo-toolbar";
+@use "site/demo-split";
+@use "site/demo-rail";

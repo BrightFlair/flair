@@ -332,14 +332,14 @@
 	</section>
 	<section class="reference-section" id="icons" aria-labelledby="icons-title">
 		<h2 id="icons-title">Icons</h2>
-		<p>A glyph is asked for in markup, by name: <code>data-icon="trash"</code> names the file, and <code>data-icon-end</code> puts one after the content instead. Flair turns the registered names into URLs at compile time, because CSS cannot build a URL from an attribute value.</p>
+		<p>A glyph is asked for in markup, by name: <code>data-icon="trash"</code> names the file, and <code>data-icon-end</code> puts one after the content instead. Alternatively, keep <code>data-icon</code> and add the boolean <code>data-icon-right</code> attribute. Flair turns the registered names into URLs at compile time, because CSS cannot build a URL from an attribute value.</p>
 		<p>The glyph is a mask filled with <code>currentColor</code>, so it takes the colour of the text beside it and needs no separate rule in a dark scheme. Set the directory and file extension once with <code>$icon-path</code> and <code>$icon-extension</code>.</p>
 		<div class="flair-example">
 			<div class="demo-icons">
 				<button class="demo-button" type="button" data-icon="trash">Delete</button>
 				<button class="demo-button" type="button" data-icon="copy">Copy</button>
 				<button class="demo-primary" type="button" data-icon="plus">New request</button>
-				<a class="demo-link" href="/library/code/" data-icon-end="link-external">Read the code section</a>
+				<a class="demo-link" href="/library/code/" data-icon="link-external" data-icon-right>Read the code section</a>
 				<span data-icon="lock">Secrets are hidden</span>
 			</div>
 		</div>
@@ -349,7 +349,7 @@
 	&lt;button class=&quot;demo-button&quot; type=&quot;button&quot; data-icon=&quot;trash&quot;&gt;Delete&lt;/button&gt;
 	&lt;button class=&quot;demo-button&quot; type=&quot;button&quot; data-icon=&quot;copy&quot;&gt;Copy&lt;/button&gt;
 	&lt;button class=&quot;demo-primary&quot; type=&quot;button&quot; data-icon=&quot;plus&quot;&gt;New request&lt;/button&gt;
-	&lt;a class=&quot;demo-link&quot; href=&quot;/library/code/&quot; data-icon-end=&quot;link-external&quot;&gt;Read the code section&lt;/a&gt;
+	&lt;a class=&quot;demo-link&quot; href=&quot;/library/code/&quot; data-icon=&quot;link-external&quot; data-icon-right&gt;Read the code section&lt;/a&gt;
 	&lt;span data-icon=&quot;lock&quot;&gt;Secrets are hidden&lt;/span&gt;
 &lt;/div&gt;</code></pre>
 			<pre><code>@use &quot;flair&quot; with (

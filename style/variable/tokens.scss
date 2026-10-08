@@ -1,0 +1,84 @@
+@use "palette";
+
+// Complete monochrome foundation. Optional object tokens use local fallbacks.
+// Values only: no selectors, geometry, application names or font downloads.
+@mixin tokens {
+	@include palette.palette;
+	--theme-space-unit: 0.25rem;
+	@for $step from 1 through 12 {
+		--theme-space-#{$step}: calc(var(--theme-space-unit) * #{$step});
+	}
+	--theme-color-text: var(--pal-1);
+	--theme-color-heading: var(--theme-color-text);
+	--theme-color-page: var(--pal-2);
+	--theme-color-surface: var(--pal-2);
+	--theme-color-surface-disabled: var(--pal-3);
+	--theme-color-border: var(--pal-4);
+	--theme-color-muted: var(--pal-5);
+	--theme-color-tint: var(--pal-6);
+	--theme-color-primary: var(--pal-6);
+	--theme-color-secondary: var(--theme-color-tint);
+	--theme-color-accent: var(--theme-color-tint);
+	--theme-color-on-accent: var(--pal-7);
+	--theme-color-ui-background: var(--theme-color-primary);
+	--theme-color-ui-preferred: var(--theme-color-on-accent);
+	--theme-color-ui-contrast: var(--theme-color-ui-preferred);
+	--theme-color-success: var(--pal-8);
+	--theme-color-danger: var(--pal-9);
+	--theme-color-warning: var(--theme-color-text);
+	--theme-font-body: system-ui, sans-serif;
+	--theme-font-heading: var(--theme-font-body);
+	--theme-font-mono: ui-monospace, monospace;
+	--theme-font-size: 1rem;
+	--theme-line-height: 1.5;
+	--theme-font-weight: 400;
+	--theme-label-weight: 500;
+	--theme-heading-weight: 600;
+	--theme-border-width: 1px;
+	--theme-radius: 0;
+	--theme-focus-width: 3px;
+	--theme-focus-offset: 2px;
+	--theme-control-min-height: 2.75rem;
+	--theme-choice-size: 1.25rem;
+	--theme-textarea-min-height: 8rem;
+	--theme-field-min-width: 14rem;
+	--theme-control-shadow: none;
+	--theme-control-transition: none;
+	--theme-button-shadow: var(--theme-control-shadow);
+	--theme-button-shadow-hover: var(--theme-button-shadow);
+	--theme-button-shadow-active: var(--theme-button-shadow);
+	--theme-surface-shadow: none;
+	--theme-sidebar-contrast-background: var(--pal-3);
+	--theme-sidebar-contrast-text: var(--pal-1);
+	--theme-sidebar-contrast-hover-background: color-mix(in srgb, var(--pal-3), var(--pal-1) 10%);
+	--theme-sidebar-contrast-current-background: var(--pal-1);
+	--theme-sidebar-contrast-current-text: var(--pal-2);
+
+	--theme-control-padding: var(--theme-space-3);
+	--theme-control-border-rule: var(--theme-border-width) solid var(--theme-control-border, var(--theme-color-border));
+	--theme-button-border-rule: var(--theme-border-width) solid var(--theme-button-border, var(--theme-color-border));
+	--theme-surface-border: var(--theme-surface-border-width, var(--theme-border-width)) solid var(--theme-color-border);
+	--theme-focus-outline: var(--theme-focus-width) solid var(--theme-focus-color, var(--theme-color-accent));
+	--theme-focus-active-width: 2px;
+	--theme-focus-transition: none;
+	--theme-icon-button-size: 2.75rem;
+	--theme-menu-width: 20rem;
+	--theme-metrics-max: 64rem;
+	--theme-metric-max: 18rem;
+	--theme-centered-panel-width: 32rem;
+	--theme-nav-current-background: var(--theme-color-surface-disabled);
+	--theme-accent-background: var(--theme-color-surface-disabled);
+	--theme-muted-accent-background: var(--theme-color-surface-disabled);
+
+	--theme-control-background: var(--theme-color-surface);
+	--theme-control-border: var(--theme-color-border);
+	--theme-control-border-hover: var(--theme-color-text);
+	--theme-control-background-active: var(--theme-color-surface-disabled);
+	--theme-button-background: var(--theme-color-surface);
+	--theme-button-background-active: var(--theme-color-surface-disabled);
+	--theme-button-border: var(--theme-color-border);
+	--theme-button-border-hover: var(--theme-color-text);
+	--theme-button-text: var(--theme-color-text);
+	--theme-code-input-border: var(--theme-color-secondary);
+	--theme-interaction-shade: var(--theme-color-secondary);
+}

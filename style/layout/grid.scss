@@ -1,5 +1,5 @@
 // Container-driven columns; no viewport breakpoint or width cap on the grid itself.
-%p-grid {
+%l-grid {
 	display: grid;
 	gap: var(--theme-grid-gap, var(--theme-space-6));
 	grid-template-columns: repeat(

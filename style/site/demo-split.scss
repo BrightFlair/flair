@@ -1,0 +1,3 @@
+@use "../flair";
+
+.demo-split { @extend %l-split; --theme-split-main: 24rem; }

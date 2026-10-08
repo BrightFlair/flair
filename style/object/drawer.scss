@@ -14,6 +14,9 @@
 // edge, for a navigation rail rather than a tool panel.
 %o-drawer {
 	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-surface-padding, var(--theme-space-6));
 	inline-size: 100%;
 	max-inline-size: none;
 	margin: 0;

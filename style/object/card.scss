@@ -1,11 +1,14 @@
 @use "../decoration/surface";
 @use "../decoration/typography";
-@use "../decoration/stack";
+@use "../pattern/stack";
 
 %o-card {
 	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-surface-padding, var(--theme-space-6));
 	@extend %d-typography;
-	@extend %d-stack;
+	@extend %p-stack;
 	> :where(h2, h3, h4) {
 		@extend %d-typography-heading;
 		font-size: var(--theme-card-title-size, 1.25rem);

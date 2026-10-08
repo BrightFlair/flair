@@ -23,7 +23,7 @@ example shows its own HTML and Sass under **HTML and Sass**.
 }
 
 .project-list {
-	@extend %p-grid;
+	@extend %l-grid;
 }
 
 .project-summary {
@@ -33,9 +33,9 @@ example shows its own HTML and Sass under **HTML and Sass**.
 
 Add Flair's `style` directory to the Sass load path. Fonts are loaded by the
 application. Themes live in their own namespace: `@use "theme";` gives
-`theme.base`, `theme.ink`, `theme.paper`, `theme.vivid`, `theme.github`,
-`theme.material` and `theme.clean-dashboard`. Include `theme.base` at the document root, then at most one
-preset. Sass has a single module namespace, so the API is `theme.github`, not
+`theme.base`, `theme.bright`, `theme.github`, `theme.clean` and `theme.gt`.
+Every preset includes the complete monochrome base before overriding values.
+Choose one at the document root; base alone is the usable default. Sass has a single module namespace, so the API is `theme.github`, not
 `flair.theme.github`; `@use "theme/github" as theme;` imports one preset alone.
 
 `@extend` emits the dependencies of the definition being extended, and Sass
@@ -127,8 +127,7 @@ needing more than nine adds further slots of its own and maps them the same way.
 named tint. Override the tint on a theme container to recolour links, focus
 rings, current states and components which use the theme accent.
 `--theme-color-primary` independently controls primary button backgrounds. It
-also reads slot six by default, while themes such as GitHub and Vivid map it to
-their green and lime palette slots.
+also reads slot six by default, while GitHub maps it to its green palette slot and Bright supplies its purple directly.
 
 Every slot is a `light-dark()` pair, so one palette serves both schemes without
 a second block of colours and without JavaScript.
@@ -181,7 +180,7 @@ the browser's initial font size, not a theme's root override.
 
 Prefer intrinsic sizing to a width query where a definition can manage without
 one: available container space is more useful than screen size when the same
-component appears in a sidebar, a panel or a nested layout. `%p-grid`, wrapping
+component appears in a sidebar, a panel or a nested layout. `%l-grid`, wrapping
 rows and locally scrolling tables all adapt without a breakpoint. Queries for
 accessibility preferences, such as reduced motion or forced colours, are
 independent of this convention.
@@ -212,6 +211,9 @@ A glyph is asked for in markup, by name:
 
 .toolbar { @include flair.icon; }
 ```
+
+`data-icon="chevron-right" data-icon-right` places a single icon after its text.
+The existing `data-icon-end="chevron-right"` form remains supported.
 
 `flair.icon` binds `data-icon` and `data-icon-end` to `%p-icon` and turns each
 registered name into a URL under `$icon-path`. Included without a selector the
@@ -257,7 +259,7 @@ that owns them, so a message has no separate element to keep in step.
 | --- | --- |
 | `%p-prose` | A text container with semantic headings, paragraphs, lists, quotations and links. Heading order belongs to the document. |
 | `%o-card` | Any suitable container; direct headings, optional image and footer. Card width belongs to its parent. |
-| `%p-panel` | A titled working surface. Each direct heading is separated from the content above it by a rule. A direct `article` takes the same rhythm without needing a heading. |
+| `%o-panel` | A titled working surface. Each direct heading is separated from the content above it by a rule. A direct `article` takes the same rhythm without needing a heading. |
 | `%o-avatar` | Image or initials. Give images appropriate alt text; hide initials where a visible name already conveys identity. |
 | `%p-data-list` | `dl > div > dt + dd`; groups wrap into available columns. `--theme-data-min` (14rem) can be set to 100% for a single column. |
 | `%p-list` | A `ul` or `ol` with direct `li` children; separators only between items. |
@@ -276,7 +278,7 @@ that owns them, so a message has no separate element to keep in step.
 | `%o-code-block`, `%d-syntax` | `pre > code` or `samp`. Tokens carry `syntax-*` or the documented `hljs-*` classes. No parser is bundled. |
 | `%p-syntax-tree` | Nested `details` elements, each holding a `summary` and a `.syntax-branch`. Closed nodes draw inline, open nodes indent. `data-language` names the format; `.syntax-index` carries `data-index`. Parsing and choosing which nodes start open are the application's work. |
 | `%p-labelled-region` | A block of output with its caption in `data-label`. The element holds only the output, and can be replaced wholesale. |
-| `%d-empty-message` | A container whose `:empty` state generates its own message, from `data-term` where present. |
+| `%p-empty-message` | A container whose `:empty` state generates its own message, from `data-term` where present. |
 | `%l-gallery` | Direct `figure` children containing images and captions. Intrinsic image dimensions avoid layout shift. |
 | `%l-dashboard` | Optional header, `.metrics > article`, then other content. Data is supplied by the application. |
 | `%l-workspace` | A direct `aside` rail followed by a `section` holding any number of panels. The rail comes first in source order. |
@@ -287,7 +289,7 @@ that owns them, so a message has no separate element to keep in step.
 | `%p-search-results` | Ordinary `ul > li > a` links, with an optional `.result-detail`. Filtering, announcements and requests are application behaviour. |
 | `%p-page-intro`, `%d-typography-lead`, `%d-typography-eyebrow` | A direct `h1`/`h2` or `.intro-title`, followed by a lead paragraph. Heading levels remain the document's responsibility. |
 | `%o-skip-link`, `%d-visually-hidden` | A skip link needs a real destination and is visible on focus. Hidden text must not contain invisible focusable controls. |
-| `%p-empty-state` | A whole region with a heading and an action, for when there is nothing to show. `%d-empty-message` is the one-line form for a collection. |
+| `%p-empty-state` | A whole region with a heading and an action, for when there is nothing to show. `%p-empty-message` is the one-line form for a collection. |
 | `%p-icon`, `%o-icon-button` | `data-icon` and `data-icon-end` name the glyph file. An icon button keeps its label in the document, revealed on hover and focus. |
 | `%d-state-busy`, `%d-state-dragging`, `%d-state-reveal` | Applied only to the state being described. Reduced motion and print show revealed content immediately. |
 | `%p-checklist` | A list whose items hold a `.checklist-marker` and text. Markers carry an explicit accessible label; `data-available="false"` on an item gives the secondary treatment. These are informational markers, not checkbox controls. |
@@ -437,20 +439,20 @@ Every file can be imported on its own, or reached through `flair.scss`.
 Dependencies are explicit `@use` statements in the file that needs them.
 
 Each file owns exactly one root name, matching its filename without the layer
-prefix: `%d-stack` is in `decoration/stack.scss`. Nested variants stay with
+prefix: `%p-stack` is in `pattern/stack.scss`. Nested variants stay with
 their owner and are extended with the composed name, so `&-fixed` inside
 `%p-page-footer` is extended as `%p-page-footer-fixed`. Unrelated definitions get
 their own file. General mixins live in `mixin/<name>.scss`, theme mixins in
 `theme/<name>.scss`, and each font file owns one family. Composition files
 contain only imports and forwards.
 
-| [`style/decoration/cluster.scss`](../style/decoration/cluster.scss) | `%d-cluster` |
+| [`style/pattern/cluster.scss`](../style/pattern/cluster.scss) | `%p-cluster` |
 | [`style/decoration/control.scss`](../style/decoration/control.scss) | `%d-control` |
-| [`style/decoration/empty-message.scss`](../style/decoration/empty-message.scss) | `%d-empty-message` |
+| [`style/pattern/empty-message.scss`](../style/pattern/empty-message.scss) | `%p-empty-message` |
 | [`style/decoration/focus-ring.scss`](../style/decoration/focus-ring.scss) | `%d-focus-ring` |
 | [`style/decoration/highlight.scss`](../style/decoration/highlight.scss) | `%d-highlight` |
 | [`style/decoration/sidebar-contrast.scss`](../style/decoration/sidebar-contrast.scss) | `%d-sidebar-contrast` |
-| [`style/decoration/stack.scss`](../style/decoration/stack.scss) | `%d-stack` |
+| [`style/pattern/stack.scss`](../style/pattern/stack.scss) | `%p-stack` |
 | [`style/decoration/state.scss`](../style/decoration/state.scss) | `%d-state` (`&-busy`, `&-dragging`, `&-reveal`) |
 | [`style/decoration/surface.scss`](../style/decoration/surface.scss) | `%d-surface` |
 | [`style/decoration/syntax.scss`](../style/decoration/syntax.scss) | `%d-syntax` |
@@ -499,7 +501,7 @@ contain only imports and forwards.
 | [`style/pattern/field-row.scss`](../style/pattern/field-row.scss) | `%p-field-row` |
 | [`style/pattern/form-actions.scss`](../style/pattern/form-actions.scss) | `%p-form-actions` |
 | [`style/pattern/form-fields.scss`](../style/pattern/form-fields.scss) | `%p-form-fields` |
-| [`style/pattern/grid.scss`](../style/pattern/grid.scss) | `%p-grid` |
+| [`style/layout/grid.scss`](../style/layout/grid.scss) | `%l-grid` |
 | [`style/pattern/icon.scss`](../style/pattern/icon.scss) | `%p-icon` (`&-end`) |
 | [`style/pattern/key-value-list.scss`](../style/pattern/key-value-list.scss) | `%p-key-value-list` |
 | [`style/pattern/labelled-region.scss`](../style/pattern/labelled-region.scss) | `%p-labelled-region` |
@@ -512,7 +514,7 @@ contain only imports and forwards.
 | [`style/pattern/page-intro.scss`](../style/pattern/page-intro.scss) | `%p-page-intro` |
 | [`style/pattern/page-tabs.scss`](../style/pattern/page-tabs.scss) | `%p-page-tabs` |
 | [`style/pattern/pagination.scss`](../style/pattern/pagination.scss) | `%p-pagination` |
-| [`style/pattern/panel.scss`](../style/pattern/panel.scss) | `%p-panel` |
+| [`style/object/panel.scss`](../style/object/panel.scss) | `%o-panel` |
 | [`style/pattern/prose.scss`](../style/pattern/prose.scss) | `%p-prose` |
 | [`style/pattern/repeatable-fields.scss`](../style/pattern/repeatable-fields.scss) | `%p-repeatable-fields` |
 | [`style/pattern/row-actions.scss`](../style/pattern/row-actions.scss) | `%p-row-actions` |
@@ -539,12 +541,7 @@ contain only imports and forwards.
 | [`style/mixin/sticky-sidebar.scss`](../style/mixin/sticky-sidebar.scss) | `@mixin sticky-sidebar` |
 | [`style/mixin/typography.scss`](../style/mixin/typography.scss) | `@mixin typography` |
 | [`style/theme/base.scss`](../style/theme/base.scss) | `@mixin base` |
-| [`style/theme/clean-dashboard.scss`](../style/theme/clean-dashboard.scss) | `@mixin clean-dashboard` |
 | [`style/theme/github.scss`](../style/theme/github.scss) | `@mixin github` |
-| [`style/theme/ink.scss`](../style/theme/ink.scss) | `@mixin ink` |
-| [`style/theme/material.scss`](../style/theme/material.scss) | `@mixin material` |
-| [`style/theme/paper.scss`](../style/theme/paper.scss) | `@mixin paper` |
-| [`style/theme/vivid.scss`](../style/theme/vivid.scss) | `@mixin vivid` |
 | [`style/variable/break.scss`](../style/variable/break.scss) | `$compact`, `$nav`, `$shell`, `$wide` |
 | [`style/variable/icon.scss`](../style/variable/icon.scss) | `$path`, `$extension`, `$names` |
 
@@ -893,7 +890,7 @@ npm install --prefix /tmp/flair-review playwright @axe-core/playwright
 NODE_PATH=/tmp/flair-review/node_modules node test/browser-check.cjs
 ```
 
-Start the website on port 8084 first with `gt run -p 8084`. `FLAIR_TEST_URL`
+Start the website on port 8084 first with `php -S 127.0.0.1:8084 -t www vendor/phpgt/webengine/go.php`. `FLAIR_TEST_URL`
 selects another address and `FLAIR_CHROMIUM_PATH` another Chromium executable;
 the default is `/usr/bin/chromium`. The script checks every page, theme and
 width combination, runs axe on each page and theme at desktop width, and
@@ -951,8 +948,7 @@ radios above a large primary colour circle and a smaller tint circle. Selecting
 the active scheme again returns to the system default; pressing Space on the
 selected radio does the same. Neither radio is checked in system mode.
 
-Library content is capped at 80rem with gutters outside that measure. At the
-GitHub theme's 14px root that is 1120px, and at a 16px root, 1280px. Demo narrow
+Library content is capped at 80rem with gutters outside that measure. At a 16px root, that is 1280px. Applications own their root font size; API Horse uses 14px. Demo narrow
 containers and compact variants are local examples, not library defaults.
 
 The documentation switcher stays in normal flow on mobile so it cannot obscure
@@ -960,3 +956,7 @@ focused content, and is fixed from 60rem. The dialog and drawer examples reveal
 their actions after enhancement, reset `returnValue` before reopening, and
 report each choice in a status region outside the dialog, returning focus to the
 opener. Those behaviours belong to `script/component/library-example.es6`.
+
+`test/control-states-browser-check.cjs` checks pointer and keyboard outlines,
+first-frame focus colours, segment shadows, compact Bright badges and trailing
+icon placement in both monochrome and Bright, in both colour schemes.

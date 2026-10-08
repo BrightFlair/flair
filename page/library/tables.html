@@ -528,4 +528,13 @@
 }</code></pre>
 		</details>
 	</section>
+
+<section class="reference-section" id="record-tables" aria-labelledby="record-tables-title">
+	<h2 id="record-tables-title">Responsive record tables</h2>
+	<p>Every cell has a data-label for the compact presentation. Container queries opt into columns where the enclosing surface has room; no data is hidden.</p>
+	<div class="flair-example"><div class="demo-record-scroll"><table class="demo-record-table"><thead><tr><th>Name</th><th>Status</th></tr></thead><tbody><tr><td data-label="Name">Example application</td><td data-label="Status">Active</td></tr><tr><td data-label="Name">Another application</td><td data-label="Status">Pending</td></tr></tbody></table></div></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;div class=&quot;demo-record-scroll&quot;&gt;&lt;table class=&quot;demo-record-table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td data-label=&quot;Name&quot;&gt;Example application&lt;/td&gt;&lt;td data-label=&quot;Status&quot;&gt;Active&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-label=&quot;Name&quot;&gt;Another application&lt;/td&gt;&lt;td data-label=&quot;Status&quot;&gt;Pending&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</code></pre><pre><code>@use "flair";
+.demo-record-scroll { container-type: inline-size; }
+.demo-record-table { @extend %o-record-data-table; @extend %p-record-table; @include flair.record-table-columns; }</code></pre></details>
+</section>
 </main>

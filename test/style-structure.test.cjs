@@ -72,7 +72,7 @@ test('every stylesheet defines one owner whose name matches its filename', () =>
 		const nodes = statements(fs.readFileSync(file, 'utf8'));
 		const owners = definitions(nodes);
 		// The variable layer holds overridable Sass configuration, never rules.
-		if (path.dirname(relative) === 'variable') {
+		if (path.dirname(relative) === 'variable' && !['palette', 'tokens'].includes(name)) {
 			assert.equal(owners.length, 0, relative);
 			assert.ok(nodes.every(node => /^(@(use|forward)\b|\$[\w-]+\s*:)/.test(node.header)), relative);
 			assert.ok(nodes.some(node => node.header.startsWith('$')), `${relative}: expected at least one variable`);
@@ -87,6 +87,10 @@ test('every stylesheet defines one owner whose name matches its filename', () =>
 				|| (relative === 'site/base.scss' && /^@include flair\.[\w-]+(\(.*\))?;$/s.test(node.header))), relative);
 			continue;
 		}
+		if (owners.length && owners.every(owner => owner.header === '@font-face')) {
+			for (const owner of owners) assert.equal(owner.body.match(/font-family:\s*"([^"]+)"/)[1].toLowerCase().replaceAll(' ', '-'), name, relative);
+			continue;
+		}
 		assert.equal(owners.length, 1, `${relative}: expected exactly one selector, mixin, placeholder or font family`);
 		const owner = owners[0];
 		if (owner.header === '@font-face') {
@@ -94,7 +98,7 @@ test('every stylesheet defines one owner whose name matches its filename', () =>
 			assert.equal(family.toLowerCase().replaceAll(' ', '-'), name, relative);
 		} else if (owner.header.startsWith('@mixin ')) {
 			assert.equal(owner.header.match(/^@mixin ([\w-]+)/)[1], name, relative);
-			assert.ok(['mixin', 'theme'].includes(path.dirname(relative)), relative);
+			assert.ok(['mixin', 'theme', 'variable', 'element'].includes(path.dirname(relative)), relative);
 		} else if (owner.header.startsWith('%')) {
 			const prefixes = { decoration: 'd', object: 'o', pattern: 'p', layout: 'l' };
 			assert.equal(owner.header, `%${prefixes[path.dirname(relative)]}-${name}`, relative);

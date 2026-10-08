@@ -1,10 +1,8 @@
 @use "../mixin/defaults";
 @use "../mixin/color-scheme";
 
+// Every theme starts here; base is also the complete default theme.
 @mixin base {
 	@include color-scheme.color-scheme;
 	@include defaults.defaults;
-	--theme-font-heading: "Ubuntu Condensed", sans-serif;
-	--theme-font-mono: "Ubuntu Mono", monospace;
-	--theme-heading-weight: 400;
 }

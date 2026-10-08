@@ -1,0 +1,3 @@
+@use "../flair";
+
+.demo-identity { @extend %p-identity; }

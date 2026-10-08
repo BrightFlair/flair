@@ -3,6 +3,9 @@
 @use "../decoration/focus-ring";
 %o-disclosure {
 	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-surface-padding, var(--theme-space-6));
 	padding: 0;
 	// Summary hover and focus backgrounds inherit the outer radius. Clip them
 	// to the disclosure so their square paint area cannot escape its corners.

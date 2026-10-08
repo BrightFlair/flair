@@ -2,6 +2,9 @@
 @use "../decoration/surface";
 %o-dialog {
 	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-surface-padding, var(--theme-space-6));
 	inline-size: min(
 		var(--theme-dialog-width, 32rem),
 		calc(100% - 2 * var(--theme-space-4))

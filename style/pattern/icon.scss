@@ -21,6 +21,7 @@
 // `line-height: normal` with, leaving a glyph-only control several pixels
 // short of its neighbours.
 %p-icon {
+	&[data-icon-right]::before { display: none; }
 	&::before {
 		content: var(--theme-icon-strut, "");
 		display: inline-block;

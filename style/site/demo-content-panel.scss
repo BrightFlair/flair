@@ -1,0 +1,3 @@
+@use "../flair";
+
+.demo-content-panel { @extend %o-content-panel; padding: var(--theme-space-4); }

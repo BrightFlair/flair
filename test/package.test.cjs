@@ -42,7 +42,7 @@ body { @include flair.typography; @include flair.controls; @include flair.icon; 
 }
 .reading { @include flair.sticky-sidebar; }
 .menu { @include flair.collapsible-navigation; }
-.panel { @extend %p-panel; }
+.panel { @extend %o-panel; }
 .fields { @extend %p-form-fields; }
 .pairs { @extend %p-key-value-list; }
 .repeat { @extend %p-repeatable-fields; }
@@ -50,7 +50,7 @@ body { @include flair.typography; @include flair.controls; @include flair.icon; 
 .region { @extend %p-labelled-region; }
 .tree { @extend %p-syntax-tree; }
 .row { @extend %p-row-actions; }
-.empty { @extend %d-empty-message; }
+.empty { @extend %p-empty-message; }
 .drawer { @extend %o-drawer; }
 .glyph-button { @extend %o-icon-button; }
 .frame { @extend %l-page-frame; }

@@ -1,0 +1,9 @@
+@use "../decoration/surface";
+
+// A content surface with separated form and footer regions.
+%o-content-panel {
+	@extend %d-surface;
+	min-inline-size: 0;
+	form { margin-block-start: var(--theme-content-panel-section-gap, var(--theme-space-8)); }
+	> footer { margin-block-start: var(--theme-content-panel-section-gap, var(--theme-space-8)); }
+}

@@ -1,0 +1,3 @@
+@use "../flair";
+
+.demo-toolbar { @extend %p-toolbar; }

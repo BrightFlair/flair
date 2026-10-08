@@ -1,0 +1,10 @@
+@use "../variable/break";
+
+// Explicit opt-in: Sass emits empty @container rules for unextended placeholders.
+@mixin record-table-columns {
+	@container(min-width: #{break.$compact}) {
+		thead { display: table-header-group; }
+		tr { display: table-row; padding: 0; }
+		td { display: table-cell; padding: .75rem; border-block-end: 1px solid var(--theme-color-border); &::before { display: none; } }
+	}
+}

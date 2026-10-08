@@ -37,7 +37,6 @@ Individual modules can be loaded instead of the aggregate entry point:
 Optional element defaults:
 
 ```scss
-@use "path/to/flair/style/flair";
 @include flair.controls; // Global native-tag rules.
 
 // Alternatively, scope the same rules to a particular region:
@@ -54,12 +53,12 @@ Optional element defaults:
 | --- | --- | --- |
 | `style/mixin/defaults.scss` | `defaults()` | Monochrome values and shared scales; explicitly emitted by the consumer. |
 | `style/decoration/focus-ring.scss` | `%d-focus-ring` | Outline width, colour and offset. |
-| `style/decoration/control.scss` | `%d-control` | Shared font, padding, border, background, hover, disabled and explicit invalid presentation. Its `:focus-visible` rule extends `%d-focus-ring`. |
-| `style/object/control.scss` | `%o-control` | Extends `%d-control`; full-width text-like controls, placeholder colour, read-only border and resizable textarea. |
+| `style/decoration/control.scss` | `%d-control` | Shared font, border, background, hover, disabled and explicit invalid appearance. Its `:focus-visible` rule extends `%d-focus-ring`. |
+| `style/object/control.scss` | `%o-control` | Extends `%o-interactive`; full-width text-like controls, placeholder colour, read-only border and resizable textarea. |
 | `style/object/choice.scss` | `%o-choice` | Native checkbox/radio size and accent; extends focus ring on keyboard focus. |
 | `style/object/range.scss` | `%o-range` | Native full-width range input; extends focus ring on keyboard focus. |
 | `style/object/color.scss` | `%o-color` | Extends `%d-control`; smaller colour picker. |
-| `style/object/button.scss` | `%o-button` | Extends `%d-control`; inline button or link presentation, alignment and colours. |
+| `style/object/button.scss` | `%o-button` | Extends `%o-interactive`; inline button or link presentation, alignment and colours. |
 | `style/object/button-primary.scss` | `%o-button-primary` | Extends `%o-button`; accent background with contrasting text. |
 | `style/mixin/controls.scss` | `controls()` | Optional native-tag mappings to the objects above. |
 | `style/object/form-field.scss` | `%o-form-field` | Label/control/message stack; includes direct-child element mappings. |
@@ -149,133 +148,6 @@ Objects read public variables; they do not redefine them on every control. Chang
 
 Call `defaults()` once for each independent root. Calling it on a nested component intentionally resets the public values in that scope. The website includes defaults once on `:root`. Example containers inherit the global theme and only override properties needed for local spacing demonstrations.
 
-Theme authors should set the native `color-scheme` alongside their colours. Check foreground/background contrast, focus contrast and disabled readability for each theme. The font and colour defaults are monochrome; the example Paper theme is only a demonstration.
+Themes include the base colour-scheme support before overriding values. Check foreground/background contrast, focus contrast and disabled readability in both schemes. The website offers the five current themes; applications own any font downloads. See [architecture.md](architecture.md) for the ownership rules and [migration.md](migration.md) for reference project setup.
 
-The Vivid theme demonstrates a yellow surface, purple text and borders, mint secondary buttons and lime primary buttons. It also changes control padding, field and action spacing, border width, corner radii and label weight. All changes use CSS properties in `style/site/root.scss`; the markup and library selectors are shared with the other themes. The local Compact option still overrides density settings when selected.
-
-GitHub uses api.horse's light palette, Mona Sans font, 14px root size, grey control backgrounds, quarter-rem corners, blue focus rings and green primary buttons. Its button hover and pressed colours use the same colour mixing as api.horse. The references are api.horse's `style/variable/palette.scss`, `style/decoration/user-interface.scss`, `style/element/html.scss` and `style/element/button.scss`. Application-specific panel layouts and monospace field overrides are not part of this theme.
-
-Material uses a Material 3 light palette, Roboto, 56px outlined controls, 40px rounded buttons, smaller labels and supporting text, and increased form spacing. Its values follow the [Material Web outlined field tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-outlined-text-field.scss) and [filled button tokens](https://github.com/material-components/material-web/blob/main/tokens/versions/v0_192/_md-comp-filled-button.scss). This is a styling theme for Flair's existing objects: labels remain above controls, and checkboxes, radios, selects and sliders retain native browser behaviour and appearance. Floating labels, ripples and custom Material widgets are not implemented.
-
-Both themes apply through the global selector, including without JavaScript. Their self-hosted fonts and SIL Open Font Licences live in `asset/font/mona-sans/` and `asset/font/roboto/`; only the website imports their font definitions. Website heading fonts and selector borders, corners and shadows use separate `--site-*` properties. No website rules are included by the library entry point.
-
-### Default properties
-
-| Property | Default |
-| --- | --- |
-| `--theme-space-1` | `.25rem` |
-| `--theme-space-2` | `.5rem` |
-| `--theme-space-3` | `.75rem` |
-| `--theme-space-4` | `1rem` |
-| `--theme-space-6` | `1.5rem` |
-| `--theme-space-8` | `2rem` |
-| `--theme-color-text` | `#111` |
-| `--theme-color-muted` | `#525252` |
-| `--theme-color-surface` | `#fff` |
-| `--theme-color-surface-disabled` | `#eee` |
-| `--theme-color-border` | `#767676` |
-| `--theme-color-tint` | `var(--pal-6)` |
-| `--theme-color-accent` | `#111` |
-| `--theme-color-on-accent` | `#fff` |
-| `--theme-color-primary` | `var(--pal-6)` |
-| `--theme-color-ui-background` | `var(--theme-color-primary)` |
-| `--theme-color-ui-preferred` | `var(--theme-color-on-accent)` |
-| `--theme-color-ui-contrast` | `var(--theme-color-ui-preferred)`, or an 80% contrasting colour mixed with the preferred colour when supported |
-| `--theme-color-danger` | `#111` |
-| `--theme-font-body` | `"Ubuntu", sans-serif` |
-| `--theme-font-size` | `1rem` |
-| `--theme-line-height` | `1.5` |
-| `--theme-font-weight` | `400` |
-| `--theme-label-weight` | `500` |
-| `--theme-border-width` | `1px` |
-| `--theme-radius` | `0` |
-| `--theme-focus-width` | `3px` |
-| `--theme-focus-offset` | `2px` |
-| `--theme-control-min-height` | `2.75rem` |
-| `--theme-choice-size` | `1.25rem` |
-| `--theme-textarea-min-height` | `8rem` |
-| `--theme-field-min-width` | `14rem` |
-
-### Optional overrides
-
-These are consumed with fallbacks; they are not assigned by `defaults()`.
-
-| Property | Fallback |
-| --- | --- |
-| `--theme-focus-color` | `var(--theme-color-accent)` |
-| `--theme-control-padding-block` | `var(--theme-space-2)` |
-| `--theme-control-padding-inline` | `var(--theme-space-3)` |
-| `--theme-control-border` | `var(--theme-color-border)` |
-| `--theme-control-radius` | `var(--theme-radius)` |
-| `--theme-control-background` | `var(--theme-color-surface)` |
-| `--theme-control-text` | `var(--theme-color-text)` |
-| `--theme-control-border-hover` | `var(--theme-color-text)` |
-| `--theme-control-background-disabled` | `var(--theme-color-surface-disabled)` |
-| `--theme-control-text-disabled` | `var(--theme-color-muted)` |
-| `--theme-disabled-opacity` | `1` |
-| `--theme-color-control-width` | `4rem` |
-| `--theme-button-background` | `var(--theme-color-surface)` |
-| `--theme-button-text` | `var(--theme-color-text)` |
-| `--theme-button-weight` | `var(--theme-label-weight)` |
-| `--theme-button-background-hover` | `var(--theme-color-surface-disabled)` |
-| `--theme-button-primary-background` | `var(--theme-color-primary)` |
-| `--theme-button-primary-text` | `var(--theme-color-ui-contrast)` |
-| `--theme-button-primary-background-hover` | Primary mixed 15% toward its contrast colour |
-| `--theme-field-gap` | `var(--theme-space-2)` |
-| `--theme-form-gap` | `var(--theme-space-4)` |
-| `--theme-fieldset-padding` | `var(--theme-space-4)` |
-| `--theme-actions-align` | `flex-end` |
-| `--theme-actions-gap` | `var(--theme-space-3)` |
-| `--theme-actions-margin` | `var(--theme-space-2)` |
-
-### Additional theme properties
-
-| Property | Fallback |
-| --- | --- |
-| `--theme-control-background-focus` | Control background, then surface |
-| `--theme-control-focus-offset` | `var(--theme-focus-offset)` |
-| `--theme-control-invalid-border-style` | `dashed` |
-| `--theme-label-font-size` | `var(--theme-font-size)` |
-| `--theme-message-font-size` | `var(--theme-font-size)` |
-| `--theme-button-min-height` | Control minimum height |
-| `--theme-button-padding-block` | Control block padding, then space 2 |
-| `--theme-button-padding-inline` | Control inline padding, then space 3 |
-| `--theme-button-radius` | Control radius, then general radius |
-| `--theme-button-font-size` | `var(--theme-font-size)` |
-| `--theme-button-border` | Control border, then general border |
-| `--theme-button-border-hover` | Control hover border, then text colour |
-| `--theme-button-primary-border` | Primary background, then primary colour |
-| `--theme-button-primary-decoration-hover` | `underline` |
-| `--theme-button-background-active` | Button hover background, then disabled surface |
-| `--theme-button-primary-background-active` | Primary hover background, or primary mixed 25% toward its contrast colour |
-| `--theme-button-shadow-hover` | `none` |
-
-## Available width
-
-Forms and fields use the width supplied by their containing layout. The form pattern does not impose a maximum width. Field rows can wrap as that available width decreases.
-
-The documentation website centres library page content and limits it to `--site-library-max-width` (80rem), with page gutters outside that measure. This is a website layout decision, shared by headings, examples and source listings. Implementing applications should choose their own container widths; individual controls can have narrower widths when their expected input warrants it.
-
-## Sass output and override behaviour
-
-`@use "flair"` alone produces no CSS. Extending one button includes its decoration and focus rules, but no form pattern. Extending the form pattern includes its complete dependency graph, even if one particular form does not contain every supported child. Sass does not inspect HTML to prune unused branches.
-
-Extensions add selectors at the definition site. An `@extend` does not copy declarations into the location where it is written. Keep dependencies explicit with `@use`/`@forward`, extend simple placeholders, and use ordinary property overrides for application adjustments. Do not extend an outside placeholder from a media query; place responsive CSS property changes there instead.
-
-Flair introduces no cascade layers, because a consuming application controls its own import order and adopting layers is its decision to make. The library uses no `!important`, no absolute positioning, no fixed width for a whole form, and no breakpoint-dependent field ordering.
-
-## Composing with an application's own controls
-
-- A shared control decoration in an application corresponds to `%d-control`, with `%o-control` and `%o-button` supplying the role-specific behaviour on top of it.
-- Font and palette choices stay with the application, as overrides of the inherited properties, rather than being absorbed into the definition.
-- A field decorator that arranges a label, a control and a message corresponds to `%o-form-field`, and the container that stacks several of them to `%p-form-fields`. Field rules living inside a larger panel decoration can be extracted to those two.
-- A specialised input, such as a search field with its own icon and behaviour, can consume the control object while keeping its own layout.
-
-Dimensions and palette mappings are worth comparing against the application they
-come from before its own rules are removed.
-
-## Verification
-
-Run `npm test` for Sass API/output checks and `gt build` for the website build. In the browser, check `/library/controls/` and `/library/forms/` at narrow and wide widths, keyboard focus and choice navigation, disabled fieldsets, native required/email validation, global theme persistence, density inheritance and form submission without JavaScript.
-
-Sources: [Sass extensions](https://sass-lang.com/documentation/at-rules/extend/), [WAI labels](https://www.w3.org/WAI/tutorials/forms/labels/), [WAI grouping](https://www.w3.org/WAI/tutorials/forms/grouping/), [WAI notifications](https://www.w3.org/WAI/tutorials/forms/notifications/).
+The old presets are retired. Base is monochrome; Bright supplies Authwave's warm surfaces and bevels, GitHub supplies API Horse's existing treatment, Clean supplies DHP Logging's blue interface, and GT supplies the PHP.GT website palette. All use the same native controls and form relationships.

@@ -7,6 +7,7 @@
 	overflow-wrap: anywhere;
 
 	&-heading {
+		color: var(--theme-color-heading);
 		font-family: var(--theme-font-heading, var(--theme-font-body));
 		font-weight: var(--theme-heading-weight, 500);
 		line-height: var(--theme-heading-leading, 1.15);
@@ -16,7 +17,6 @@
 
 	&-lead {
 		font-size: var(--theme-lead-size, 1.25rem);
-		max-inline-size: var(--theme-lead-measure, 55ch);
 	}
 
 	&-eyebrow {

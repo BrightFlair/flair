@@ -2,6 +2,9 @@
 
 %o-inset {
 	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-surface-padding, var(--theme-space-6));
 	background: var(--theme-inset-background, var(--theme-color-surface-disabled));
 	box-shadow: none;
 }

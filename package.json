@@ -1,6 +1,6 @@
 {
 	"name": "flair",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"sass": "style/flair.scss",
 	"files": [
 		"style/flair.scss",
@@ -10,7 +10,8 @@
 		"style/decoration/",
 		"style/object/",
 		"style/pattern/",
-		"style/layout/"
+		"style/layout/",
+		"style/element/"
 	],
 	"devDependencies": {
 		"esbuild": "^0.28.2",

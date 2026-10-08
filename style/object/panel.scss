@@ -11,8 +11,11 @@
 //     <h2>Query parameters</h2>
 //     …
 //   </request-editor>
-%p-panel {
+%o-panel {
 	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-surface-padding, var(--theme-space-6));
 	position: relative;
 	display: block;
 	min-inline-size: 0;

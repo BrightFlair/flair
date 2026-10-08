@@ -453,4 +453,12 @@
 }</code></pre>
 		</details>
 	</section>
+
+<section class="reference-section" id="disclosure-menus" aria-labelledby="disclosure-menus-title">
+	<h2 id="disclosure-menus-title">Disclosure menus</h2>
+	<p>Native details provides open state and keyboard behavior. The object places a small action surface beside its trigger.</p>
+	<div class="flair-example"><details class="demo-menu"><summary>Record actions</summary><div class="disclosure-content"><button class="demo-button" type="button">Copy record</button></div></details></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;details class=&quot;demo-menu&quot;&gt;&lt;summary&gt;Record actions&lt;/summary&gt;&lt;div class=&quot;disclosure-content&quot;&gt;&lt;button class=&quot;demo-button&quot; type=&quot;button&quot;&gt;Copy record&lt;/button&gt;&lt;/div&gt;&lt;/details&gt;</code></pre><pre><code>@use "flair";
+.demo-menu { @extend %o-disclosure-menu; }</code></pre></details>
+</section>
 </main>

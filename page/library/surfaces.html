@@ -84,7 +84,7 @@
 }
 
 .demo-grid {
-	@extend %p-grid;
+	@extend %l-grid;
 }
 
 .demo-data-list {
@@ -393,11 +393,11 @@
 			<pre><code>@use &quot;flair&quot;;
 
 .demo-panel {
-	@extend %p-panel;
+	@extend %o-panel;
 }
 
 .demo-grid {
-	@extend %p-grid;
+	@extend %l-grid;
 }</code></pre>
 		</details>
 	</section>
@@ -468,4 +468,31 @@
 }</code></pre>
 		</details>
 	</section>
+
+<section class="reference-section" id="settings-surfaces" aria-labelledby="settings-surfaces-title">
+	<h2 id="settings-surfaces-title">Settings surfaces</h2>
+	<p>A single settings surface or disclosure owns its heading and content. Page layout decides how many are shown.</p>
+	<div class="flair-example"><section class="demo-settings"><h3>Account settings</h3><p>One independently readable unit.</p></section><details class="demo-settings-disclosure"><summary>Advanced settings</summary><div class="settings-content"><p>Native disclosure content.</p></div></details></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;section class=&quot;demo-settings&quot;&gt;&lt;h3&gt;Account settings&lt;/h3&gt;&lt;p&gt;One independently readable unit.&lt;/p&gt;&lt;/section&gt;&lt;details class=&quot;demo-settings-disclosure&quot;&gt;&lt;summary&gt;Advanced settings&lt;/summary&gt;&lt;div class=&quot;settings-content&quot;&gt;&lt;p&gt;Native disclosure content.&lt;/p&gt;&lt;/div&gt;&lt;/details&gt;</code></pre><pre><code>@use "flair";
+.demo-settings { @extend %o-settings-panel; }
+.demo-settings-disclosure { @extend %o-settings-disclosure; }</code></pre></details>
+</section>
+
+<section class="reference-section" id="content-panels" aria-labelledby="content-panels-title">
+	<h2 id="content-panels-title">Content panels</h2>
+	<p>A content panel separates its form and footer regions without deciding its page position.</p>
+	<div class="flair-example"><section class="demo-content-panel"><h3>Contact preferences</h3><form class="demo-form"><label><span>Email address</span><input type="email"></label></form><footer>Changes apply to your account.</footer></section></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;section class=&quot;demo-content-panel&quot;&gt;&lt;h3&gt;Contact preferences&lt;/h3&gt;&lt;form class=&quot;demo-form&quot;&gt;&lt;label&gt;&lt;span&gt;Email address&lt;/span&gt;&lt;input type=&quot;email&quot;&gt;&lt;/label&gt;&lt;/form&gt;&lt;footer&gt;Changes apply to your account.&lt;/footer&gt;&lt;/section&gt;</code></pre><pre><code>@use "flair";
+.demo-content-panel { @extend %o-content-panel; padding: var(--theme-space-4); }</code></pre></details>
+</section>
+
+<section class="reference-section" id="record-relationships" aria-labelledby="record-relationships-title">
+	<h2 id="record-relationships-title">Record relationships</h2>
+	<p>A toolbar groups actions; identity pairs an avatar with text; record lists arrange repeated identities and their actions.</p>
+	<div class="flair-example"><ul class="demo-record-list"><li><div class="demo-identity"><span class="demo-avatar" aria-hidden="true">AB</span><div><strong>Example user</strong><small>Administrator</small></div></div><div class="demo-toolbar"><button class="demo-button" type="button">View</button><button class="demo-button" type="button">Edit</button></div></li></ul></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;ul class=&quot;demo-record-list&quot;&gt;&lt;li&gt;&lt;div class=&quot;demo-identity&quot;&gt;&lt;span class=&quot;demo-avatar&quot; aria-hidden=&quot;true&quot;&gt;AB&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Example user&lt;/strong&gt;&lt;small&gt;Administrator&lt;/small&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;demo-toolbar&quot;&gt;&lt;button class=&quot;demo-button&quot; type=&quot;button&quot;&gt;View&lt;/button&gt;&lt;button class=&quot;demo-button&quot; type=&quot;button&quot;&gt;Edit&lt;/button&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;</code></pre><pre><code>@use "flair";
+.demo-record-list { @extend %p-record-list; }
+.demo-identity { @extend %p-identity; }
+.demo-toolbar { @extend %p-toolbar; }</code></pre></details>
+</section>
 </main>

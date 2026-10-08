@@ -1,0 +1,55 @@
+@use "base";
+
+// DHP Logging's restrained blue interface, layered on the neutral values.
+@mixin clean {
+	@include base.base;
+	--pal-1: light-dark(#3c3b37, #eee);
+	--pal-2: light-dark(#fff, #171b22);
+	--pal-3: light-dark(#f1f5f9, #242c38);
+	--pal-4: light-dark(#64748b, #8294af);
+	--pal-5: light-dark(#444, #bac5d5);
+	--pal-6: light-dark(#204698, #9cbaff);
+	--pal-7: light-dark(#fff, #171b22);
+	--pal-8: light-dark(#087b56, #70ddb0);
+	--pal-9: light-dark(#dc2626, #ffa29c);
+	--theme-color-primary: var(--pal-6);
+	--theme-sidebar-contrast-background: light-dark(#3c3b37, #202731);
+	--theme-sidebar-contrast-text: light-dark(#fff, #dce3ed);
+	--theme-sidebar-contrast-hover-background: color-mix(in srgb, var(--theme-sidebar-contrast-background), var(--theme-sidebar-contrast-text) 8%);
+	--theme-sidebar-contrast-current-background: var(--theme-color-primary);
+	--theme-sidebar-contrast-current-text: var(--theme-color-on-accent);
+	--theme-color-secondary: var(--pal-4);
+	--theme-color-warning: light-dark(#fd7347, #ffab91);
+	--theme-color-warning-soft: light-dark(#ffab91, #8f3420);
+	--theme-font-body: "Ubuntu", system-ui, sans-serif;
+	--theme-font-heading: "Ubuntu Condensed", system-ui, sans-serif;
+	--theme-font-mono: "Ubuntu Mono", ui-monospace, monospace;
+	--theme-font-weight: 300;
+	--theme-heading-weight: 400;
+	--theme-radius: 0.25rem;
+	--theme-surface-radius: 0.5rem;
+	--theme-control-padding-block: 0.5rem;
+	--theme-control-padding-inline: 0.5rem;
+	--theme-control-border: var(--theme-color-primary);
+	--theme-control-border-hover: var(--theme-color-primary);
+	--theme-control-background: var(--theme-color-surface);
+	--theme-button-background: color-mix(in srgb, var(--theme-color-primary), var(--theme-color-surface) 90%);
+	--theme-button-background-hover: color-mix(in srgb, var(--theme-button-background), var(--theme-color-surface) 80%);
+	--theme-button-background-active: color-mix(in srgb, var(--theme-button-background), var(--theme-color-surface) 50%);
+	--theme-button-primary-background: color-mix(in srgb, var(--theme-color-success), var(--theme-color-surface) 60%);
+	--theme-button-primary-text: var(--theme-color-text);
+	--theme-button-primary-background-hover: color-mix(in srgb, var(--theme-button-primary-background), var(--theme-color-surface) 80%);
+	--theme-button-primary-background-active: color-mix(in srgb, var(--theme-button-primary-background), var(--theme-color-surface) 50%);
+	--theme-button-weight: 300;
+	--theme-focus-color: color-mix(in srgb, var(--theme-color-primary), transparent 50%);
+	--theme-focus-width: 0.1rem;
+	--theme-focus-offset: 0.1rem;
+
+	--theme-brand-surface: light-dark(#f8f8f8, #242c38);
+	--theme-logo-end: #00adef;
+	--theme-header-border: light-dark(#aaa, #8294af);
+	--theme-warning-text: light-dark(#9a5200, #ffba7a);
+	--theme-critical-background: #c01818;
+	--theme-critical-text: #fff;
+	--theme-alert-background: #d32f2f;
+}

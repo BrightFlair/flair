@@ -41,7 +41,7 @@
 	}
 
 	& .demo-grid {
-		@extend %p-grid;
+		@extend %l-grid;
 	}
 
 	& .demo-data-list {
@@ -143,14 +143,17 @@
 
 	& .demo-gallery {
 		@extend %l-gallery;
+		> figure { @extend %o-card; }
 	}
 
 	& .demo-dashboard {
 		@extend %l-dashboard;
+		> .metrics > article { @extend %o-card; }
 	}
 
 	& .demo-article {
 		@extend %l-article;
+		@extend %p-prose;
 	}
 
 	& .demo-danger-button {

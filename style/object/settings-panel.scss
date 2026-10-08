@@ -1,0 +1,8 @@
+%o-settings-panel {
+	min-inline-size: 0;
+	padding: var(--theme-space-4);
+	border: var(--theme-surface-border);
+	border-radius: var(--theme-surface-radius);
+	background: var(--theme-color-surface);
+	> h2, > h3 { margin: 0; }
+}

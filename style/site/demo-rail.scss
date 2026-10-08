@@ -1,0 +1,3 @@
+@use "../flair";
+
+.demo-rail { @extend %p-rail-navigation; }

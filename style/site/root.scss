@@ -26,56 +26,11 @@
 
 	@include theme.base;
 
-	&[data-flair-theme="ink"] {
-		@include theme.ink;
-	}
+	&[data-flair-theme="bright"] { @include theme.bright; }
 
-	&[data-flair-theme="paper"] {
-		@include theme.paper;
-	}
+	&[data-flair-theme="github"] { @include theme.github; }
 
-	&[data-flair-theme="vivid"] {
-		@include theme.vivid;
-	}
+	&[data-flair-theme="clean"] { @include theme.clean; }
 
-	&[data-flair-theme="github"] {
-		@include theme.github;
-	}
-
-	&[data-flair-theme="material"] {
-		@include theme.material;
-	}
-
-	&[data-flair-theme="clean-dashboard"] {
-		@include theme.clean-dashboard;
-		--site-font-body: var(--theme-font-body);
-		--site-font-heading: var(--theme-font-heading);
-		--site-switcher-border-width: 1px;
-		--site-switcher-border: var(--theme-color-border);
-		--site-switcher-radius: var(--theme-radius);
-		--site-switcher-shadow: none;
-	}
-
-	&[data-flair-theme="github"] {
-		--site-font-body: var(--theme-font-body);
-		--site-font-heading: var(--theme-font-body);
-		--site-font-size: 14px;
-		--site-hero-width-factor: 2.7;
-		--site-hero-offset: -0.037em;
-		--site-switcher-border-width: 1px;
-		--site-switcher-border: var(--theme-color-border);
-		--site-switcher-radius: var(--theme-radius);
-		--site-switcher-shadow: 0 1px 0 rgb(31 35 40 / 4%);
-	}
-
-	&[data-flair-theme="material"] {
-		--site-font-body: var(--theme-font-body);
-		--site-font-heading: var(--theme-font-body);
-		--site-switcher-border-width: 1px;
-		--site-switcher-border: var(--theme-color-border);
-		--site-hero-width-factor: 2.5;
-		--site-hero-offset: -0.058em;
-		--site-switcher-radius: var(--theme-radius);
-		--site-switcher-shadow: 0 2px 6px rgb(0 0 0 / 16%);
-	}
+	&[data-flair-theme="gt"] { @include theme.gt; }
 }
