@@ -6,7 +6,7 @@ black and white, and given a visual design afterwards, because no definition
 names a colour, a font or a corner radius directly — only the role that a value
 plays.
 
-Importing `style/flair.scss` emits no CSS, no fonts and no JavaScript. An
+Importing `style/lib/flair.scss` emits no CSS, no fonts and no JavaScript. An
 application gets exactly the definitions it extends, and nothing else. The
 example website alongside the library demonstrates every definition; each live
 example shows its own HTML and Sass under **HTML and Sass**.
@@ -31,12 +31,13 @@ example shows its own HTML and Sass under **HTML and Sass**.
 }
 ```
 
-Add Flair's `style` directory to the Sass load path. Fonts are loaded by the
-application. Themes live in their own namespace: `@use "theme";` gives
-`theme.base`, `theme.bright`, `theme.github`, `theme.clean` and `theme.gt`.
-Every preset includes the complete monochrome base before overriding values.
-Choose one at the document root; base alone is the usable default. Sass has a single module namespace, so the API is `theme.github`, not
-`flair.theme.github`; `@use "theme/github" as theme;` imports one preset alone.
+Add Flair's `style/lib` directory to the Sass load path. Fonts are loaded by the
+application. Import the preset you need, for example `@use "theme/github" as theme;`,
+then include `theme.github` at the document root. Available presets are `base`,
+`bright`, `github`, `clean` and `gt`. Every preset includes the complete monochrome
+base before overriding values, so a separate base include is unnecessary.
+Use `@use "theme/base" as theme;` and `theme.base` for the monochrome default.
+The showcase website imports each preset explicitly for its theme switcher.
 
 `@extend` emits the dependencies of the definition being extended, and Sass
 cannot read HTML to prune descendant rules it does not find a use for. Keep
@@ -50,7 +51,7 @@ root or scoped inside an application selector.
 Almost everything in Flair is adjusted through inherited CSS custom properties.
 A media query cannot read a custom property, and a URL cannot be assembled from
 an attribute value, so the few values that must exist at compile time are Sass
-variables. They all live in `style/variable/`, and are the only things a
+variables. They all live in `style/lib/variable/`, and are the only things a
 consumer is expected to configure in Sass:
 
 ```scss
@@ -269,6 +270,7 @@ that owns them, so a message has no separate element to keep in step.
 | `%p-pagination` | Navigation structure; unavailable destinations are `span` elements, not actionable links. Give the nav an accessible label. |
 | `%p-row-actions` | A row containing a `.row-actions` element. The actions fade in on hover and on focus within the row, and are never removed from the accessibility tree. |
 | `%o-disclosure`, `%p-accordion` | `details > summary + .disclosure-content`; the accordion container has direct `details` children. Native markers and keyboard behaviour are retained. A shared `name` gives an exclusive group in supporting browsers. |
+| `%o-popover` | An element with `id` and `popover="auto"`, opened by a native `button type="button"` with matching `popovertarget`. The browser provides toggling, top-layer placement, Escape and outside-click dismissal without JavaScript. A centred, scrollable surface leaves the rest of the page interactive. Use `popovertargetaction="hide"` on an explicit close button. Visibility is never overridden; unsupported browsers show the content inline. |
 | `%o-dialog` | Native `dialog` with an accessible heading. Styling never forces a closed dialog to display. Inline content appears in normal flow before enhancement; `showModal()` supplies top-layer placement and focus containment. |
 | `%o-drawer` | Native `dialog` pinned to an edge. `data-drawer-side="start"` moves it to the other one. Otherwise identical in responsibility to `%o-dialog`. |
 | `%o-table`, `%p-table-scroll` | A semantic table inside a named, focusable scroll region. Use a caption and scoped headers. `.numeric` aligns numeric cells without changing their semantics. |
@@ -421,6 +423,12 @@ stay visible. `--theme-highlight-marker-size` defaults to `0.375rem`;
 `--theme-highlight-border-width` and `-color` fall back to the standard border
 properties. Markers use `currentColor` and intercept no pointer events.
 
+`%d-highlight-centered` includes the same border and markers, with each square
+centred on its outer border-box corner instead of sitting entirely outside it.
+Its squares are 150% of `--theme-highlight-marker-size`, so it needs 75% of that
+property's size of unclipped space outside the box. It uses the same theme properties.
+Extend this variant instead of `%d-highlight`.
+
 ### Interaction states
 
 `%d-state-busy`, `%d-state-dragging` and `%d-state-reveal` are applied only to
@@ -446,104 +454,105 @@ their own file. General mixins live in `mixin/<name>.scss`, theme mixins in
 `theme/<name>.scss`, and each font file owns one family. Composition files
 contain only imports and forwards.
 
-| [`style/pattern/cluster.scss`](../style/pattern/cluster.scss) | `%p-cluster` |
-| [`style/decoration/control.scss`](../style/decoration/control.scss) | `%d-control` |
-| [`style/pattern/empty-message.scss`](../style/pattern/empty-message.scss) | `%p-empty-message` |
-| [`style/decoration/focus-ring.scss`](../style/decoration/focus-ring.scss) | `%d-focus-ring` |
-| [`style/decoration/highlight.scss`](../style/decoration/highlight.scss) | `%d-highlight` |
-| [`style/decoration/sidebar-contrast.scss`](../style/decoration/sidebar-contrast.scss) | `%d-sidebar-contrast` |
-| [`style/pattern/stack.scss`](../style/pattern/stack.scss) | `%p-stack` |
-| [`style/decoration/state.scss`](../style/decoration/state.scss) | `%d-state` (`&-busy`, `&-dragging`, `&-reveal`) |
-| [`style/decoration/surface.scss`](../style/decoration/surface.scss) | `%d-surface` |
-| [`style/decoration/syntax.scss`](../style/decoration/syntax.scss) | `%d-syntax` |
-| [`style/decoration/typography.scss`](../style/decoration/typography.scss) | `%d-typography` (`&-heading`, `&-lead`, `&-eyebrow`) |
-| [`style/decoration/visually-hidden.scss`](../style/decoration/visually-hidden.scss) | `%d-visually-hidden` |
-| [`style/object/avatar.scss`](../style/object/avatar.scss) | `%o-avatar` |
-| [`style/object/badge.scss`](../style/object/badge.scss) | `%o-badge` |
-| [`style/object/button-danger.scss`](../style/object/button-danger.scss) | `%o-button-danger` |
-| [`style/object/button-primary.scss`](../style/object/button-primary.scss) | `%o-button-primary` |
-| [`style/object/button.scss`](../style/object/button.scss) | `%o-button` |
-| [`style/object/card.scss`](../style/object/card.scss) | `%o-card` |
-| [`style/object/choice-field.scss`](../style/object/choice-field.scss) | `%o-choice-field` |
-| [`style/object/choice.scss`](../style/object/choice.scss) | `%o-choice` |
-| [`style/object/code-block.scss`](../style/object/code-block.scss) | `%o-code-block` |
-| [`style/object/code.scss`](../style/object/code.scss) | `%o-code` |
-| [`style/object/color.scss`](../style/object/color.scss) | `%o-color` |
-| [`style/object/control.scss`](../style/object/control.scss) | `%o-control` |
-| [`style/object/dialog.scss`](../style/object/dialog.scss) | `%o-dialog` |
-| [`style/object/disclosure.scss`](../style/object/disclosure.scss) | `%o-disclosure` |
-| [`style/object/drawer.scss`](../style/object/drawer.scss) | `%o-drawer` |
-| [`style/object/fieldset.scss`](../style/object/fieldset.scss) | `%o-fieldset` |
-| [`style/object/form-field.scss`](../style/object/form-field.scss) | `%o-form-field` |
-| [`style/object/icon-button.scss`](../style/object/icon-button.scss) | `%o-icon-button` |
-| [`style/object/inset.scss`](../style/object/inset.scss) | `%o-inset` |
-| [`style/object/key.scss`](../style/object/key.scss) | `%o-key` |
-| [`style/object/link.scss`](../style/object/link.scss) | `%o-link` |
-| [`style/object/nav-link.scss`](../style/object/nav-link.scss) | `%o-nav-link` |
-| [`style/object/notice-danger.scss`](../style/object/notice-danger.scss) | `%o-notice-danger` |
-| [`style/object/notice-success.scss`](../style/object/notice-success.scss) | `%o-notice-success` |
-| [`style/object/notice-warning.scss`](../style/object/notice-warning.scss) | `%o-notice-warning` |
-| [`style/object/notice.scss`](../style/object/notice.scss) | `%o-notice` |
-| [`style/object/progress.scss`](../style/object/progress.scss) | `%o-progress` |
-| [`style/object/range.scss`](../style/object/range.scss) | `%o-range` |
-| [`style/object/skip-link.scss`](../style/object/skip-link.scss) | `%o-skip-link` |
-| [`style/object/table.scss`](../style/object/table.scss) | `%o-table` |
-| [`style/object/value.scss`](../style/object/value.scss) | `%o-value` |
-| [`style/pattern/accordion.scss`](../style/pattern/accordion.scss) | `%p-accordion` |
-| [`style/pattern/action-list.scss`](../style/pattern/action-list.scss) | `%p-action-list` |
-| [`style/pattern/action-row.scss`](../style/pattern/action-row.scss) | `%p-action-row` |
-| [`style/pattern/breadcrumbs.scss`](../style/pattern/breadcrumbs.scss) | `%p-breadcrumbs` |
-| [`style/pattern/checklist.scss`](../style/pattern/checklist.scss) | `%p-checklist` |
-| [`style/pattern/cluster.scss`](../style/pattern/cluster.scss) | `%p-cluster` |
-| [`style/pattern/compound-field.scss`](../style/pattern/compound-field.scss) | `%p-compound-field` |
-| [`style/pattern/data-list.scss`](../style/pattern/data-list.scss) | `%p-data-list` |
-| [`style/pattern/empty-state.scss`](../style/pattern/empty-state.scss) | `%p-empty-state` |
-| [`style/pattern/field-row.scss`](../style/pattern/field-row.scss) | `%p-field-row` |
-| [`style/pattern/form-actions.scss`](../style/pattern/form-actions.scss) | `%p-form-actions` |
-| [`style/pattern/form-fields.scss`](../style/pattern/form-fields.scss) | `%p-form-fields` |
-| [`style/layout/grid.scss`](../style/layout/grid.scss) | `%l-grid` |
-| [`style/pattern/icon.scss`](../style/pattern/icon.scss) | `%p-icon` (`&-end`) |
-| [`style/pattern/key-value-list.scss`](../style/pattern/key-value-list.scss) | `%p-key-value-list` |
-| [`style/pattern/labelled-region.scss`](../style/pattern/labelled-region.scss) | `%p-labelled-region` |
-| [`style/pattern/list.scss`](../style/pattern/list.scss) | `%p-list` |
-| [`style/pattern/metric.scss`](../style/pattern/metric.scss) | `%p-metric` |
-| [`style/pattern/navigation.scss`](../style/pattern/navigation.scss) | `%p-navigation` |
-| [`style/pattern/output-row.scss`](../style/pattern/output-row.scss) | `%p-output-row` |
-| [`style/pattern/page-footer.scss`](../style/pattern/page-footer.scss) | `%p-page-footer` (`&-fixed`) |
-| [`style/pattern/page-header.scss`](../style/pattern/page-header.scss) | `%p-page-header` |
-| [`style/pattern/page-intro.scss`](../style/pattern/page-intro.scss) | `%p-page-intro` |
-| [`style/pattern/page-tabs.scss`](../style/pattern/page-tabs.scss) | `%p-page-tabs` |
-| [`style/pattern/pagination.scss`](../style/pattern/pagination.scss) | `%p-pagination` |
-| [`style/object/panel.scss`](../style/object/panel.scss) | `%o-panel` |
-| [`style/pattern/prose.scss`](../style/pattern/prose.scss) | `%p-prose` |
-| [`style/pattern/repeatable-fields.scss`](../style/pattern/repeatable-fields.scss) | `%p-repeatable-fields` |
-| [`style/pattern/row-actions.scss`](../style/pattern/row-actions.scss) | `%p-row-actions` |
-| [`style/pattern/search-results.scss`](../style/pattern/search-results.scss) | `%p-search-results` |
-| [`style/pattern/side-navigation.scss`](../style/pattern/side-navigation.scss) | `%p-side-navigation` (`&-icons`) |
-| [`style/pattern/stack.scss`](../style/pattern/stack.scss) | `%p-stack` |
-| [`style/pattern/syntax-tree.scss`](../style/pattern/syntax-tree.scss) | `%p-syntax-tree` |
-| [`style/pattern/table-scroll.scss`](../style/pattern/table-scroll.scss) | `%p-table-scroll` |
-| [`style/layout/article.scss`](../style/layout/article.scss) | `%l-article` |
-| [`style/layout/dashboard.scss`](../style/layout/dashboard.scss) | `%l-dashboard` |
-| [`style/layout/gallery.scss`](../style/layout/gallery.scss) | `%l-gallery` |
-| [`style/layout/page-frame.scss`](../style/layout/page-frame.scss) | `%l-page-frame` |
-| [`style/layout/sidebar.scss`](../style/layout/sidebar.scss) | `%l-sidebar` |
-| [`style/layout/workspace.scss`](../style/layout/workspace.scss) | `%l-workspace` |
-| [`style/mixin/application-shell.scss`](../style/mixin/application-shell.scss) | `@mixin application-shell` |
-| [`style/mixin/base.scss`](../style/mixin/base.scss) | `@mixin base` |
-| [`style/mixin/collapsible-navigation.scss`](../style/mixin/collapsible-navigation.scss) | `@mixin collapsible-navigation` |
-| [`style/mixin/color-scheme.scss`](../style/mixin/color-scheme.scss) | `@mixin color-scheme` |
-| [`style/mixin/controls.scss`](../style/mixin/controls.scss) | `@mixin controls` |
-| [`style/mixin/defaults.scss`](../style/mixin/defaults.scss) | `@mixin defaults` |
-| [`style/mixin/icon.scss`](../style/mixin/icon.scss) | `@mixin icon` |
-| [`style/mixin/palette.scss`](../style/mixin/palette.scss) | `@mixin palette` |
-| [`style/mixin/sidebar-bleed.scss`](../style/mixin/sidebar-bleed.scss) | `@mixin sidebar-bleed` |
-| [`style/mixin/sticky-sidebar.scss`](../style/mixin/sticky-sidebar.scss) | `@mixin sticky-sidebar` |
-| [`style/mixin/typography.scss`](../style/mixin/typography.scss) | `@mixin typography` |
-| [`style/theme/base.scss`](../style/theme/base.scss) | `@mixin base` |
-| [`style/theme/github.scss`](../style/theme/github.scss) | `@mixin github` |
-| [`style/variable/break.scss`](../style/variable/break.scss) | `$compact`, `$nav`, `$shell`, `$wide` |
-| [`style/variable/icon.scss`](../style/variable/icon.scss) | `$path`, `$extension`, `$names` |
+| [`style/lib/pattern/cluster.scss`](../style/lib/pattern/cluster.scss) | `%p-cluster` |
+| [`style/lib/decoration/control.scss`](../style/lib/decoration/control.scss) | `%d-control` |
+| [`style/lib/pattern/empty-message.scss`](../style/lib/pattern/empty-message.scss) | `%p-empty-message` |
+| [`style/lib/decoration/focus-ring.scss`](../style/lib/decoration/focus-ring.scss) | `%d-focus-ring` |
+| [`style/lib/decoration/highlight.scss`](../style/lib/decoration/highlight.scss) | `%d-highlight` |
+| [`style/lib/decoration/sidebar-contrast.scss`](../style/lib/decoration/sidebar-contrast.scss) | `%d-sidebar-contrast` |
+| [`style/lib/pattern/stack.scss`](../style/lib/pattern/stack.scss) | `%p-stack` |
+| [`style/lib/decoration/state.scss`](../style/lib/decoration/state.scss) | `%d-state` (`&-busy`, `&-dragging`, `&-reveal`) |
+| [`style/lib/decoration/surface.scss`](../style/lib/decoration/surface.scss) | `%d-surface` |
+| [`style/lib/decoration/syntax.scss`](../style/lib/decoration/syntax.scss) | `%d-syntax` |
+| [`style/lib/decoration/typography.scss`](../style/lib/decoration/typography.scss) | `%d-typography` (`&-heading`, `&-lead`, `&-eyebrow`) |
+| [`style/lib/decoration/visually-hidden.scss`](../style/lib/decoration/visually-hidden.scss) | `%d-visually-hidden` |
+| [`style/lib/object/avatar.scss`](../style/lib/object/avatar.scss) | `%o-avatar` |
+| [`style/lib/object/badge.scss`](../style/lib/object/badge.scss) | `%o-badge` |
+| [`style/lib/object/button-danger.scss`](../style/lib/object/button-danger.scss) | `%o-button-danger` |
+| [`style/lib/object/button-primary.scss`](../style/lib/object/button-primary.scss) | `%o-button-primary` |
+| [`style/lib/object/button.scss`](../style/lib/object/button.scss) | `%o-button` |
+| [`style/lib/object/card.scss`](../style/lib/object/card.scss) | `%o-card` |
+| [`style/lib/object/choice-field.scss`](../style/lib/object/choice-field.scss) | `%o-choice-field` |
+| [`style/lib/object/choice.scss`](../style/lib/object/choice.scss) | `%o-choice` |
+| [`style/lib/object/code-block.scss`](../style/lib/object/code-block.scss) | `%o-code-block` |
+| [`style/lib/object/code.scss`](../style/lib/object/code.scss) | `%o-code` |
+| [`style/lib/object/color.scss`](../style/lib/object/color.scss) | `%o-color` |
+| [`style/lib/object/control.scss`](../style/lib/object/control.scss) | `%o-control` |
+| [`style/lib/object/dialog.scss`](../style/lib/object/dialog.scss) | `%o-dialog` |
+| [`style/lib/object/disclosure.scss`](../style/lib/object/disclosure.scss) | `%o-disclosure` |
+| [`style/lib/object/popover.scss`](../style/lib/object/popover.scss) | `%o-popover` |
+| [`style/lib/object/drawer.scss`](../style/lib/object/drawer.scss) | `%o-drawer` |
+| [`style/lib/object/fieldset.scss`](../style/lib/object/fieldset.scss) | `%o-fieldset` |
+| [`style/lib/object/form-field.scss`](../style/lib/object/form-field.scss) | `%o-form-field` |
+| [`style/lib/object/icon-button.scss`](../style/lib/object/icon-button.scss) | `%o-icon-button` |
+| [`style/lib/object/inset.scss`](../style/lib/object/inset.scss) | `%o-inset` |
+| [`style/lib/object/key.scss`](../style/lib/object/key.scss) | `%o-key` |
+| [`style/lib/object/link.scss`](../style/lib/object/link.scss) | `%o-link` |
+| [`style/lib/object/nav-link.scss`](../style/lib/object/nav-link.scss) | `%o-nav-link` |
+| [`style/lib/object/notice-danger.scss`](../style/lib/object/notice-danger.scss) | `%o-notice-danger` |
+| [`style/lib/object/notice-success.scss`](../style/lib/object/notice-success.scss) | `%o-notice-success` |
+| [`style/lib/object/notice-warning.scss`](../style/lib/object/notice-warning.scss) | `%o-notice-warning` |
+| [`style/lib/object/notice.scss`](../style/lib/object/notice.scss) | `%o-notice` |
+| [`style/lib/object/progress.scss`](../style/lib/object/progress.scss) | `%o-progress` |
+| [`style/lib/object/range.scss`](../style/lib/object/range.scss) | `%o-range` |
+| [`style/lib/object/skip-link.scss`](../style/lib/object/skip-link.scss) | `%o-skip-link` |
+| [`style/lib/object/table.scss`](../style/lib/object/table.scss) | `%o-table` |
+| [`style/lib/object/value.scss`](../style/lib/object/value.scss) | `%o-value` |
+| [`style/lib/pattern/accordion.scss`](../style/lib/pattern/accordion.scss) | `%p-accordion` |
+| [`style/lib/pattern/action-list.scss`](../style/lib/pattern/action-list.scss) | `%p-action-list` |
+| [`style/lib/pattern/action-row.scss`](../style/lib/pattern/action-row.scss) | `%p-action-row` |
+| [`style/lib/pattern/breadcrumbs.scss`](../style/lib/pattern/breadcrumbs.scss) | `%p-breadcrumbs` |
+| [`style/lib/pattern/checklist.scss`](../style/lib/pattern/checklist.scss) | `%p-checklist` |
+| [`style/lib/pattern/cluster.scss`](../style/lib/pattern/cluster.scss) | `%p-cluster` |
+| [`style/lib/pattern/compound-field.scss`](../style/lib/pattern/compound-field.scss) | `%p-compound-field` |
+| [`style/lib/pattern/data-list.scss`](../style/lib/pattern/data-list.scss) | `%p-data-list` |
+| [`style/lib/pattern/empty-state.scss`](../style/lib/pattern/empty-state.scss) | `%p-empty-state` |
+| [`style/lib/pattern/field-row.scss`](../style/lib/pattern/field-row.scss) | `%p-field-row` |
+| [`style/lib/pattern/form-actions.scss`](../style/lib/pattern/form-actions.scss) | `%p-form-actions` |
+| [`style/lib/pattern/form-fields.scss`](../style/lib/pattern/form-fields.scss) | `%p-form-fields` |
+| [`style/lib/layout/grid.scss`](../style/lib/layout/grid.scss) | `%l-grid` |
+| [`style/lib/pattern/icon.scss`](../style/lib/pattern/icon.scss) | `%p-icon` (`&-end`) |
+| [`style/lib/pattern/key-value-list.scss`](../style/lib/pattern/key-value-list.scss) | `%p-key-value-list` |
+| [`style/lib/pattern/labelled-region.scss`](../style/lib/pattern/labelled-region.scss) | `%p-labelled-region` |
+| [`style/lib/pattern/list.scss`](../style/lib/pattern/list.scss) | `%p-list` |
+| [`style/lib/pattern/metric.scss`](../style/lib/pattern/metric.scss) | `%p-metric` |
+| [`style/lib/pattern/navigation.scss`](../style/lib/pattern/navigation.scss) | `%p-navigation` |
+| [`style/lib/pattern/output-row.scss`](../style/lib/pattern/output-row.scss) | `%p-output-row` |
+| [`style/lib/pattern/page-footer.scss`](../style/lib/pattern/page-footer.scss) | `%p-page-footer` (`&-fixed`) |
+| [`style/lib/pattern/page-header.scss`](../style/lib/pattern/page-header.scss) | `%p-page-header` |
+| [`style/lib/pattern/page-intro.scss`](../style/lib/pattern/page-intro.scss) | `%p-page-intro` |
+| [`style/lib/pattern/page-tabs.scss`](../style/lib/pattern/page-tabs.scss) | `%p-page-tabs` |
+| [`style/lib/pattern/pagination.scss`](../style/lib/pattern/pagination.scss) | `%p-pagination` |
+| [`style/lib/object/panel.scss`](../style/lib/object/panel.scss) | `%o-panel` |
+| [`style/lib/pattern/prose.scss`](../style/lib/pattern/prose.scss) | `%p-prose` |
+| [`style/lib/pattern/repeatable-fields.scss`](../style/lib/pattern/repeatable-fields.scss) | `%p-repeatable-fields` |
+| [`style/lib/pattern/row-actions.scss`](../style/lib/pattern/row-actions.scss) | `%p-row-actions` |
+| [`style/lib/pattern/search-results.scss`](../style/lib/pattern/search-results.scss) | `%p-search-results` |
+| [`style/lib/pattern/side-navigation.scss`](../style/lib/pattern/side-navigation.scss) | `%p-side-navigation` (`&-icons`) |
+| [`style/lib/pattern/stack.scss`](../style/lib/pattern/stack.scss) | `%p-stack` |
+| [`style/lib/pattern/syntax-tree.scss`](../style/lib/pattern/syntax-tree.scss) | `%p-syntax-tree` |
+| [`style/lib/pattern/table-scroll.scss`](../style/lib/pattern/table-scroll.scss) | `%p-table-scroll` |
+| [`style/lib/layout/article.scss`](../style/lib/layout/article.scss) | `%l-article` |
+| [`style/lib/layout/dashboard.scss`](../style/lib/layout/dashboard.scss) | `%l-dashboard` |
+| [`style/lib/layout/gallery.scss`](../style/lib/layout/gallery.scss) | `%l-gallery` |
+| [`style/lib/layout/page-frame.scss`](../style/lib/layout/page-frame.scss) | `%l-page-frame` |
+| [`style/lib/layout/sidebar.scss`](../style/lib/layout/sidebar.scss) | `%l-sidebar` |
+| [`style/lib/layout/workspace.scss`](../style/lib/layout/workspace.scss) | `%l-workspace` |
+| [`style/lib/mixin/application-shell.scss`](../style/lib/mixin/application-shell.scss) | `@mixin application-shell` |
+| [`style/lib/mixin/init.scss`](../style/lib/mixin/init.scss) | `@mixin init` |
+| [`style/lib/mixin/collapsible-navigation.scss`](../style/lib/mixin/collapsible-navigation.scss) | `@mixin collapsible-navigation` |
+| [`style/lib/mixin/color-scheme.scss`](../style/lib/mixin/color-scheme.scss) | `@mixin color-scheme` |
+| [`style/lib/mixin/controls.scss`](../style/lib/mixin/controls.scss) | `@mixin controls` |
+| [`style/lib/mixin/defaults.scss`](../style/lib/mixin/defaults.scss) | `@mixin defaults` |
+| [`style/lib/mixin/icon.scss`](../style/lib/mixin/icon.scss) | `@mixin icon` |
+| [`style/lib/mixin/palette.scss`](../style/lib/mixin/palette.scss) | `@mixin palette` |
+| [`style/lib/mixin/sidebar-bleed.scss`](../style/lib/mixin/sidebar-bleed.scss) | `@mixin sidebar-bleed` |
+| [`style/lib/mixin/sticky-sidebar.scss`](../style/lib/mixin/sticky-sidebar.scss) | `@mixin sticky-sidebar` |
+| [`style/lib/mixin/typography.scss`](../style/lib/mixin/typography.scss) | `@mixin typography` |
+| [`style/lib/theme/base.scss`](../style/lib/theme/base.scss) | `@mixin base` |
+| [`style/lib/theme/github.scss`](../style/lib/theme/github.scss) | `@mixin github` |
+| [`style/lib/variable/break.scss`](../style/lib/variable/break.scss) | `$compact`, `$nav`, `$shell`, `$wide` |
+| [`style/lib/variable/icon.scss`](../style/lib/variable/icon.scss) | `$path`, `$extension`, `$names` |
 
 ## Property reference
 
@@ -734,6 +743,8 @@ foundational value or a literal.
 | `--theme-panel-section-space` | `var(--theme-space-8)` |
 | `--theme-panel-subheading-size` | `1.25rem` |
 | `--theme-progress-height` | `0.75rem` |
+| `--theme-popover-padding` | `var(--theme-space-4)` |
+| `--theme-popover-width` | `24rem` |
 | `--theme-prose-measure` | `65ch` |
 | `--theme-quote-border-width` | `4px` |
 | `--theme-region-background` | `var(--theme-color-surface-disabled)` |
@@ -838,7 +849,7 @@ foundational value or a literal.
 
 ## Consuming Flair from an application
 
-Add Flair as a dependency and put its `style` directory on the Sass load path:
+Add Flair as a dependency and put its `style/lib` directory on the Sass load path:
 
 ```json
 { "dependencies": { "flair": "github:BrightFlair/flair" } }
@@ -850,7 +861,7 @@ adjusting the relative path. WebEngine projects override the Sass command in
 
 ```ini
 [style/**/*.scss]
-execute=./node_modules/.bin/sass --load-path=node_modules/flair/style ./style/style.scss www/style.css --source-map --embed-sources --embed-source-map
+execute=./node_modules/.bin/sass --load-path=node_modules/flair/style/lib ./style/style.scss www/style.css --source-map --embed-sources --embed-source-map
 ```
 
 The package contains the public Sass entry and the library directories:
@@ -902,6 +913,11 @@ system preferences, explicit overrides, live switching and unchanged geometry.
 `test/mobile-browser-check.cjs` covers touch navigation, keyboard dismissal,
 breakpoint transitions, full-screen modal forms, every theme and scheme
 combination, and the no-JavaScript fallback.
+
+`test/popover-browser-check.cjs` needs no website server. It checks the live
+popover example without JavaScript across all themes at three viewport widths,
+including keyboard opening, tab order, focus restoration, toggling, explicit
+closing, outside-click dismissal and scrolling long content.
 
 `test/engine-parity-check.cjs` measures control geometry in Chromium and
 Firefox across every theme, asserting relationships between elements rather

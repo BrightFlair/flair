@@ -10,7 +10,7 @@
 		<h2 id="control-dependencies">Definitions and dependencies</h2>
 		<p>
 			The entry point
-			<code>style/flair.scss</code>
+			<code>style/lib/flair.scss</code>
 			loads definitions without emitting any CSS. Include the default variables once, then
 			extend the objects you need. Fonts are supplied by the application; these examples
 			use the Ubuntu files installed on this website.
@@ -57,7 +57,7 @@
 				extends the control decoration with a smaller swatch size.
 			</li>
 		</ol>
-		<pre><code>@use "path/to/flair/style/flair";
+		<pre><code>@use "path/to/flair/style/lib/flair";
 
 :root {
 	@include flair.defaults;

@@ -1,0 +1,13 @@
+@use "../decoration/surface";
+@use "stack";
+
+%p-empty-state {
+	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-surface-padding, var(--theme-space-6));
+	@extend %p-stack;
+	align-items: center;
+	text-align: center;
+	padding: var(--theme-empty-padding, var(--theme-space-8));
+}

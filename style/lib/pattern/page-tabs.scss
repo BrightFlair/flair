@@ -1,0 +1,53 @@
+@use "../variable/break";
+@use "navigation";
+
+%p-page-tabs {
+	@extend %p-navigation;
+	border-block-end: var(--theme-tab-border-width, var(--theme-border-width)) solid var(--theme-color-border);
+	padding-block-end: var(--theme-tab-border-gap, var(--theme-space-2));
+
+	> :where(ul, menu) {
+		flex-direction: row;
+		flex-wrap: var(--theme-tab-wrap, wrap);
+		overflow-x: var(--theme-tab-overflow, visible);
+		scrollbar-width: var(--theme-tab-scrollbar, auto);
+		gap: var(--theme-tab-gap, var(--theme-nav-gap, var(--theme-space-2)));
+	}
+
+	> :where(ul, menu) > li {
+		// Tab labels stay intact when a themed tab bar scrolls horizontally.
+		// A wrapping bar still wraps whole tabs at available breakpoints.
+		flex: 0 0 auto;
+		border-block-end: var(--theme-tab-indicator-width, 0px) solid transparent;
+
+		> a {
+			margin: var(--theme-tab-link-margin, 0);
+			font-weight: var(--theme-tab-link-weight, inherit);
+			opacity: var(--theme-tab-link-opacity, 1);
+			transition: var(--theme-tab-link-transition, none);
+			padding-inline: var(--theme-tab-link-padding-inline,
+			var(--theme-nav-padding-inline, var(--theme-space-4)));
+			border-radius: var(--theme-tab-link-radius,
+			var(--theme-nav-radius, var(--theme-radius)));
+
+			&[aria-current]:not([aria-current="false"]):not([aria-current=""]) {
+				font-weight: var(--theme-tab-current-weight, var(--theme-nav-current-weight, 700));
+				opacity: var(--theme-tab-current-opacity, 1);
+
+				&:not(:hover):not(:focus-visible) {
+					background: var(--theme-tab-current-background, var(--theme-nav-current-background, var(--theme-selected-background, var(--theme-color-surface-disabled))));
+				}
+			}
+		}
+
+		&:has(> a[aria-current]:not([aria-current="false"]):not([aria-current=""])) {
+			border-block-end-color: var(--theme-tab-indicator-color, var(--theme-color-accent));
+		}
+	}
+
+	@media (min-width: break.$nav) {
+		> :where(ul, menu) {
+			flex-direction: row;
+		}
+	}
+}

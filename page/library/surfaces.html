@@ -147,6 +147,9 @@
 				<div class="demo-highlight">
 					<p>The same decoration can frame a container at its available width.</p>
 				</div>
+				<div class="demo-highlight-centered">
+					<p>This variant centres its square markers on the container's corners.</p>
+				</div>
 			</div>
 		</div>
 		<p>
@@ -157,6 +160,12 @@
 			The decoration uses <code>::before</code> and needs space outside its border
 			without clipping by an ancestor.
 		</p>
+		<p>
+			Extend <code>%d-highlight-centered</code> instead to centre each square on
+			the outer border-box corner. Its squares are 150% of
+			<code>--theme-highlight-marker-size</code>, and it needs 75% of that
+			property's size of space outside the box.
+		</p>
 		<details class="reference-source">
 			<summary>HTML and Sass</summary>
 			<pre><code>&lt;p&gt;&lt;span class="demo-highlight"&gt;Highlighted text&lt;/span&gt;&lt;/p&gt;
@@ -165,6 +174,9 @@
 &lt;/div&gt;
 &lt;div class="demo-highlight"&gt;
 	&lt;p&gt;The same decoration can frame a container at its available width.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="demo-highlight-centered"&gt;
+	&lt;p&gt;This variant centres its square markers on the container's corners.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
 			<pre><code>@use "flair";
 
@@ -177,6 +189,11 @@
 
 .demo-highlight-wrap {
 	max-inline-size: 20ch;
+}
+
+.demo-highlight-centered {
+	@extend %d-highlight-centered;
+	padding: var(--theme-space-2);
 }</code></pre>
 		</details>
 	</section>

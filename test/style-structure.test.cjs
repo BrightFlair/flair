@@ -65,14 +65,14 @@ function definitions(nodes) {
 }
 
 test('every stylesheet defines one owner whose name matches its filename', () => {
-	const composition = new Set(['flair.scss', 'style.scss', 'playground/index.scss', 'site/base.scss', 'theme/index.scss']);
+	const composition = new Set(['lib/flair.scss', 'style.scss', 'playground/index.scss', 'site/base.scss']);
 	for (const file of styles()) {
 		const relative = path.relative(root, file);
 		const name = path.basename(file, '.scss');
 		const nodes = statements(fs.readFileSync(file, 'utf8'));
 		const owners = definitions(nodes);
 		// The variable layer holds overridable Sass configuration, never rules.
-		if (path.dirname(relative) === 'variable' && !['palette', 'tokens'].includes(name)) {
+		if (path.dirname(relative) === 'lib/variable' && !['palette', 'tokens'].includes(name)) {
 			assert.equal(owners.length, 0, relative);
 			assert.ok(nodes.every(node => /^(@(use|forward)\b|\$[\w-]+\s*:)/.test(node.header)), relative);
 			assert.ok(nodes.some(node => node.header.startsWith('$')), `${relative}: expected at least one variable`);
@@ -98,10 +98,10 @@ test('every stylesheet defines one owner whose name matches its filename', () =>
 			assert.equal(family.toLowerCase().replaceAll(' ', '-'), name, relative);
 		} else if (owner.header.startsWith('@mixin ')) {
 			assert.equal(owner.header.match(/^@mixin ([\w-]+)/)[1], name, relative);
-			assert.ok(['mixin', 'theme', 'variable', 'element'].includes(path.dirname(relative)), relative);
+			assert.ok(['mixin', 'theme', 'variable'].includes(path.basename(path.dirname(relative))), relative);
 		} else if (owner.header.startsWith('%')) {
 			const prefixes = { decoration: 'd', object: 'o', pattern: 'p', layout: 'l' };
-			assert.equal(owner.header, `%${prefixes[path.dirname(relative)]}-${name}`, relative);
+			assert.equal(owner.header, `%${prefixes[path.basename(path.dirname(relative))]}-${name}`, relative);
 		} else {
 			assert.match(owner.header, /^(?:\.|:{1,2})?[\w-]+$/, relative);
 			assert.equal(owner.header.replace(/^[.:]+/, ''), name, relative);
@@ -110,10 +110,10 @@ test('every stylesheet defines one owner whose name matches its filename', () =>
 });
 
 test('each mixin can be imported directly and through the public entry point', () => {
-	for (const file of fs.readdirSync(path.join(root, 'mixin'))) {
+	for (const file of fs.readdirSync(path.join(root, 'lib/mixin'))) {
 		const name = path.basename(file, '.scss');
-		const direct = sass.compileString(`@use "mixin/${name}"; .consumer { @include ${name}.${name}; }`, { loadPaths: [root] }).css;
-		const publicCss = sass.compileString(`@use "flair"; .consumer { @include flair.${name}; }`, { loadPaths: [root] }).css;
+		const direct = sass.compileString(`@use "mixin/${name}"; .consumer { @include ${name}.${name}; }`, { loadPaths: [path.join(root, 'lib')] }).css;
+		const publicCss = sass.compileString(`@use "flair"; .consumer { @include flair.${name}; }`, { loadPaths: [path.join(root, 'lib')] }).css;
 		assert.ok(direct.includes('.consumer'), name);
 		assert.ok(publicCss.includes('.consumer'), name);
 		assert.doesNotMatch(direct + publicCss, /@font-face|--site-/);

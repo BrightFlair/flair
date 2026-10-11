@@ -1,0 +1,87 @@
+@use "../object/button";
+
+%p-segmented-control {
+	position: relative;
+	display: inline-flex;
+	block-size: var(--theme-segment-height, auto);
+	max-inline-size: 100%;
+	gap: 0;
+	border-radius: var(--theme-radius);
+	background: var(--theme-control-background);
+	box-shadow: var(--theme-control-shadow);
+
+	> form {
+		display: flex;
+		min-inline-size: 0;
+	}
+
+	> .segment-menu {
+		display: contents;
+	}
+
+	.disclosure-menu {
+		position: static;
+	}
+
+	&:has(.segment-menu) {
+		--theme-segment-padding-inline: clamp(.35rem, 1.5vw, .8rem);
+	}
+
+	.disclosure-menu > summary {
+		block-size: 100%;
+		margin-inline-start: calc(-1 * var(--theme-border-width));
+		--theme-control-border-hover: var(--theme-button-border-hover);
+		color: var(--theme-button-text);
+	}
+
+	> button, > form > button, .disclosure-menu > summary {
+		@extend %o-button;
+		--theme-button-shadow: none;
+		--theme-button-shadow-hover: none;
+		--theme-button-shadow-active: none;
+		position: relative;
+		min-inline-size: 0;
+		padding: .65rem var(--theme-segment-padding-inline, .8rem);
+		border: var(--theme-button-border-rule);
+		border-radius: 0;
+		font-size: .8rem;
+		white-space: nowrap;
+
+		&, &:hover, &:active {
+			box-shadow: none;
+		}
+
+		& + button {
+			margin-inline-start: calc(-1 * var(--theme-border-width));
+		}
+
+		&[aria-pressed="true"], &[aria-current="true"] {
+			--theme-button-background: var(--theme-nav-current-background);
+			color: var(--theme-color-heading);
+		}
+
+		&:hover:not(:disabled, [aria-disabled="true"]) {
+			background: var(--theme-button-background-hover, var(--theme-color-surface-disabled));
+			border-color: var(--theme-button-border-hover, var(--theme-control-border-hover));
+			z-index: 1;
+		}
+
+		&:active:not(:disabled, [aria-disabled="true"]) {
+			background: var(--theme-button-background-active, var(--theme-color-surface-disabled));
+		}
+
+		&:is(:focus, :active) {
+			z-index: 2;
+		}
+	}
+
+	> button:first-of-type, > form:first-child > button:first-of-type {
+		border-start-start-radius: var(--theme-radius);
+		border-end-start-radius: var(--theme-radius);
+	}
+
+	> button:last-of-type, > form:last-child > button:last-of-type, > .segment-menu:last-child summary {
+		border-start-end-radius: var(--theme-radius);
+		border-end-end-radius: var(--theme-radius);
+	}
+}

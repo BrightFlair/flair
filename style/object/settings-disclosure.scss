@@ -1,8 +1,0 @@
-%o-settings-disclosure {
-	min-inline-size: 0;
-	border: var(--theme-surface-border);
-	border-radius: var(--theme-surface-radius);
-	background: var(--theme-color-surface);
-	> summary { cursor: pointer; padding: var(--theme-space-4); overflow-wrap: anywhere; }
-	> .settings-content { padding: 0 var(--theme-space-4) var(--theme-space-4); min-inline-size: 0; }
-}

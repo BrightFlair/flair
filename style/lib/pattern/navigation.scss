@@ -1,0 +1,29 @@
+@use "../variable/break";
+@use "../object/nav-link";
+
+%p-navigation {
+	> :where(ul, menu) {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		gap: var(--theme-nav-gap, var(--theme-space-2));
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		> li {
+			min-inline-size: 0;
+			margin: 0;
+		}
+
+		> li > a {
+			@extend %o-nav-link;
+		}
+	}
+
+	@media (min-width: break.$nav) {
+		> :where(ul, menu) {
+			flex-direction: row;
+		}
+	}
+}

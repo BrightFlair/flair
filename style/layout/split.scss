@@ -1,9 +1,0 @@
-%l-split {
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--theme-split-gap, var(--theme-space-4));
-	align-items: var(--theme-split-align, start);
-
-	> :first-child { flex: 999 1 var(--theme-split-main, 32rem); min-inline-size: 0; max-inline-size: var(--theme-split-main-max, none); }
-	> :last-child { flex: 1 1 var(--theme-split-side, 12rem); min-inline-size: 0; }
-}

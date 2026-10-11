@@ -1,5 +1,9 @@
-@use "../flair";
-@use "../theme";
+@use "../lib/flair";
+@use "../lib/theme/base";
+@use "../lib/theme/bright";
+@use "../lib/theme/github";
+@use "../lib/theme/clean";
+@use "../lib/theme/gt";
 
 :root {
 	@include flair.defaults;
@@ -24,13 +28,13 @@
 	color: var(--site-ink);
 	background: var(--site-paper);
 
-	@include theme.base;
+	@include base.base;
 
-	&[data-flair-theme="bright"] { @include theme.bright; }
+	&[data-flair-theme="bright"] { @include bright.bright; }
 
-	&[data-flair-theme="github"] { @include theme.github; }
+	&[data-flair-theme="github"] { @include github.github; }
 
-	&[data-flair-theme="clean"] { @include theme.clean; }
+	&[data-flair-theme="clean"] { @include clean.clean; }
 
-	&[data-flair-theme="gt"] { @include theme.gt; }
+	&[data-flair-theme="gt"] { @include gt.gt; }
 }

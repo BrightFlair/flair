@@ -1,0 +1,15 @@
+@use "../mixin/typography";
+@use "../decoration/typography" as decoration;
+
+%p-prose {
+	@extend %d-typography;
+	@include typography.typography;
+
+	> :first-child {
+		margin-block-start: 0;
+	}
+
+	> :last-child {
+		margin-block-end: 0;
+	}
+}

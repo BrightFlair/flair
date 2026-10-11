@@ -722,7 +722,7 @@
 			</dl>
 		</div>
 		<p>Configure them on the first <code>@use</code> of the library, before another module loads it. Mixins that take a <code>$from</code> argument default to the matching variable, so a single composition can still choose its own threshold without changing the library: <code>flair.application-shell($from: 80rem)</code>.</p>
-		<p>All four are overridable Sass variables in <code>style/variable/</code>, alongside <code>$icon-path</code>, <code>$icon-extension</code> and <code>$icon-names</code>. That directory is the only place the library keeps a value a consumer is expected to change in Sass; everything else is a CSS custom property, and inherited.</p>
+		<p>All four are overridable Sass variables in <code>style/lib/variable/</code>, alongside <code>$icon-path</code>, <code>$icon-extension</code> and <code>$icon-names</code>. That directory is the only place the library keeps a value a consumer is expected to change in Sass; everything else is a CSS custom property, and inherited.</p>
 		<details class="reference-source"><summary>HTML and Sass</summary>
 			<pre><code>&lt;dl class=&quot;token-list&quot;&gt;
 	&lt;dt&gt;&lt;code&gt;$break-compact&lt;/code&gt;&lt;/dt&gt;

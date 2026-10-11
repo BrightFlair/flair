@@ -1,0 +1,35 @@
+// A border with four external corner markers. Inline consumers need an unfragmented box.
+%d-highlight {
+	position: relative;
+	border: var(--theme-highlight-border-width, var(--theme-border-width, 1px)) solid var(--theme-highlight-border-color, var(--theme-color-border));
+
+	&::before {
+		content: "";
+		position: absolute;
+		// Keep the squares above border overlays and continuous gutter guides.
+		z-index: 2;
+		inset: calc(-1 * (var(--theme-highlight-marker-size, 0.375rem) + var(--theme-highlight-border-width, var(--theme-border-width, 1px))));
+		pointer-events: none;
+		background-image: linear-gradient(currentColor, currentColor),
+		linear-gradient(currentColor, currentColor),
+		linear-gradient(currentColor, currentColor),
+		linear-gradient(currentColor, currentColor);
+		background-size: var(--theme-highlight-marker-size, 0.375rem) var(--theme-highlight-marker-size, 0.375rem);
+		background-position: left top,
+			right top,
+			left bottom,
+			right bottom;
+		background-repeat: no-repeat;
+	}
+
+	// Scale markers to 150% and centre them on the outer border-box corner. The absolute
+	// containing block starts inside the border, so include its width too.
+	&-centered {
+		@extend %d-highlight;
+
+		&::before {
+			inset: calc(-1 * (0.75 * var(--theme-highlight-marker-size, 0.375rem) + var(--theme-highlight-border-width, var(--theme-border-width, 1px))));
+			background-size: calc(1.5 * var(--theme-highlight-marker-size, 0.375rem)) calc(1.5 * var(--theme-highlight-marker-size, 0.375rem));
+		}
+	}
+}

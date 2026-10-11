@@ -3,7 +3,7 @@
 		<p class="eyebrow">Flair library / 06</p>
 		<h1>Disclosures</h1>
 		<p class="library-description">
-			Native expandable content and an optional modal presentation.
+			Native expandable content, popovers and an optional modal presentation.
 		</p>
 	</header>
 	<section class="reference-section" id="single" aria-labelledby="single-title">
@@ -144,6 +144,46 @@
 
 .demo-accordion {
 	@extend %p-accordion;
+}</code></pre>
+		</details>
+	</section>
+	<section class="reference-section" id="popovers" aria-labelledby="popovers-title">
+		<h2 id="popovers-title">Popover disclosures</h2>
+		<p>
+			A button with <code>popovertarget</code> toggles content in the browser's
+			top layer without JavaScript. With <code>popover="auto"</code>, clicking
+			outside or pressing Escape dismisses it. The page remains interactive.
+		</p>
+		<div class="flair-example">
+			<button class="demo-button" type="button" popovertarget="connection-popover">Connection information</button>
+			<div class="demo-popover" id="connection-popover" popover="auto" aria-labelledby="connection-popover-title">
+				<h3 id="connection-popover-title">Connection information</h3>
+				<p>Additional information appears on demand, above the page content.</p>
+				<button class="demo-button" type="button" popovertarget="connection-popover" popovertargetaction="hide">Close information</button>
+			</div>
+		</div>
+		<p>
+			<code>%o-popover</code> provides a centred, scrollable surface with themed
+			width and padding. The browser supplies visibility and dismissal;
+			no <code>aria-expanded</code> state needs to be synchronised in script.
+			Browsers without popover support show the content inline.
+		</p>
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;button class="demo-button" type="button" popovertarget="connection-popover"&gt;Connection information&lt;/button&gt;
+&lt;div class="demo-popover" id="connection-popover" popover="auto" aria-labelledby="connection-popover-title"&gt;
+	&lt;h3 id="connection-popover-title"&gt;Connection information&lt;/h3&gt;
+	&lt;p&gt;Additional information appears on demand, above the page content.&lt;/p&gt;
+	&lt;button class="demo-button" type="button" popovertarget="connection-popover" popovertargetaction="hide"&gt;Close information&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-button {
+	@extend %o-button;
+}
+
+.demo-popover {
+	@extend %o-popover;
 }</code></pre>
 		</details>
 	</section>

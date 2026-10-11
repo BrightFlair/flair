@@ -1,0 +1,28 @@
+@use "../variable/break";
+
+// Every field remains readable on small containers without horizontal scrolling.
+%p-record-table {
+	thead {
+		display: none;
+	}
+
+	tr {
+		display: block;
+		padding-block: .5rem;
+		border-block-end: 1px solid var(--theme-color-border);
+	}
+
+	td {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: .75rem;
+		padding: .5rem;
+		border: 0;
+		overflow-wrap: anywhere;
+
+		&::before {
+			content: attr(data-label);
+			font-weight: 600;
+		}
+	}
+}

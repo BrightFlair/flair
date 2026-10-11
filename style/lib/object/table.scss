@@ -1,0 +1,42 @@
+%o-table {
+	inline-size: 100%;
+	border-collapse: collapse;
+	color: var(--theme-color-text);
+	font-family: var(--theme-font-body);
+	font-size: var(--theme-font-size);
+	line-height: var(--theme-text-leading, 1.6);
+
+	caption {
+		text-align: start;
+		padding-block-end: var(--theme-space-4);
+		font-weight: var(--theme-heading-weight, 500);
+	}
+
+	:where(th, td) {
+		padding: var(--theme-table-padding-block, var(--theme-space-3)) var(--theme-table-padding-inline, var(--theme-space-4));
+		text-align: start;
+		vertical-align: top;
+		border-block-end: var(--theme-border-width) solid var(--theme-color-border);
+	}
+
+	thead {
+		background: var(--theme-table-header-background, var(--theme-color-surface-disabled));
+	}
+
+	tbody > tr:nth-child(even) {
+		background: var(--theme-table-stripe-background, transparent);
+	}
+
+	tbody > tr:hover {
+		background: var(--theme-table-hover-background, var(--theme-color-surface-disabled));
+	}
+
+	.numeric {
+		text-align: end;
+		font-variant-numeric: tabular-nums;
+	}
+
+	tfoot {
+		font-weight: var(--theme-heading-weight, 500);
+	}
+}

@@ -1,5 +1,5 @@
 // Configure the library once, before any module loads it.
-@use "flair" with (
+@use "lib/flair" with (
 	$icon-names: (trash, share, copy, lock, key, plus, grip, sun, moon, device-desktop, link-external)
 );
 
@@ -91,6 +91,7 @@
 @use "site/demo-settings-disclosure";
 @use "site/demo-content-panel";
 @use "site/demo-menu";
+@use "site/demo-popover";
 @use "site/demo-record-scroll";
 @use "site/demo-record-table";
 @use "site/demo-record-list";

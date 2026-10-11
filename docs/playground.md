@@ -5,12 +5,12 @@ Open `/playground/` from the global section selector. The index retains that sel
 To add an experiment:
 
 1. Copy `page/playground/blank.html` to `page/playground/my-layout.html` and give its main element a unique class. Keep `id="main-content"` for the skip link.
-2. Create `style/playground/my-layout.scss`, import `../flair`, and extend placeholders onto selectors scoped to that experiment.
+2. Create `style/playground/my-layout.scss`, import `../lib/flair`, and extend placeholders onto selectors scoped to that experiment.
 3. Add `@use "my-layout";` near the top of `style/playground/index.scss`.
 4. Run `gt build` and visit `/playground/my-layout/`. Add a link on the playground index if you want it listed there.
 
 ```scss
-@use "../flair";
+@use "../lib/flair";
 
 .my-layout {
 	@extend %l-grid;

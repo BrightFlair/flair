@@ -27,13 +27,12 @@ const consumer = `@use "flair" with (
 	$icon-path: "/asset/glyph/",
 	$icon-names: (trash, share)
 );
-@use "theme";
+@use "theme/github" as theme;
 
 html {
-	@include theme.base;
 	@include theme.github;
 }
-:root { @include flair.base; }
+:root { @include flair.init; }
 body { @include flair.typography; @include flair.controls; @include flair.icon; }
 .workspace {
 	@include flair.application-shell;
@@ -61,7 +60,7 @@ test('the published package alone compiles a complete application stylesheet', (
 	const directory = published();
 	try {
 		const result = sass.compileString(consumer, {
-			loadPaths: [path.join(directory, 'style')], style: 'expanded',
+			loadPaths: [path.join(directory, 'style/lib')], style: 'expanded',
 		});
 		// Nothing outside the published file list may be reached.
 		for (const url of result.loadedUrls.filter(url => url.protocol === 'file:')) {
@@ -76,8 +75,9 @@ test('the published package alone compiles a complete application stylesheet', (
 });
 
 test('the published file list covers every directory the entry point loads', () => {
-	const result = sass.compileString('@use "flair";\n@use "theme";', {
-		loadPaths: [path.resolve(root, 'style')],
+	const imports = ['@use "flair";', ...['base', 'bright', 'github', 'clean', 'gt'].map(name => `@use "theme/${name}";`)];
+	const result = sass.compileString(imports.join('\n'), {
+		loadPaths: [path.resolve(root, 'style/lib')],
 	});
 	const allowed = manifest.files.map(entry => path.resolve(root, entry));
 	for (const url of result.loadedUrls.filter(url => url.protocol === 'file:')) {

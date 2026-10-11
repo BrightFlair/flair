@@ -1,0 +1,32 @@
+@use "../decoration/focus";
+
+%o-disclosure-menu {
+	position: relative;
+	min-inline-size: 0;
+
+	> summary {
+		@extend %d-focus;
+		list-style: none;
+		cursor: pointer;
+
+		&::-webkit-details-marker {
+			display: none;
+		}
+	}
+
+	> .disclosure-content {
+		position: absolute;
+		inset-block-start: calc(100% + .5rem);
+		inset-inline-end: 0;
+		z-index: 10;
+		box-sizing: border-box;
+		inline-size: min(var(--theme-menu-width), calc(100vw - 2 * var(--theme-workspace-padding)));
+		padding: var(--theme-space-4);
+		border: var(--theme-surface-border);
+		border-radius: var(--theme-surface-radius);
+		background: var(--theme-color-surface);
+		color: var(--theme-color-text);
+		box-shadow: var(--theme-menu-shadow, none);
+		overflow-wrap: anywhere;
+	}
+}

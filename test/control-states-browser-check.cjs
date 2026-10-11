@@ -5,10 +5,11 @@ const assert = require('node:assert/strict');
 const path = require('node:path');
 const css = sass.compileString(`
 @use "flair" with ($icon-names: (chevron-right));
-@use "theme";
-:root { @include theme.base; }
-:root[data-flair-theme=bright] { @include theme.bright; }
-@include flair.base;
+@use "theme/base";
+@use "theme/bright";
+:root { @include base.base; }
+:root[data-flair-theme=bright] { @include bright.bright; }
+@include flair.init;
 @include flair.controls;
 @include flair.icon;
 body { padding: 2rem; background: var(--theme-color-page); color: var(--theme-color-text); }
@@ -16,7 +17,7 @@ body { padding: 2rem; background: var(--theme-color-page); color: var(--theme-co
 .segments { @extend %p-segmented-control; }
 .menu { @extend %o-disclosure-menu; }
 .toggle { @extend %o-toggle-badge; }
-`, {loadPaths: [path.resolve(__dirname, '../style')]}).css;
+`, {loadPaths: [path.resolve(__dirname, '../style/lib')]}).css;
 const markup = `<button id="button">Button</button><select id="select"><option>Select</option></select>
 <div class="segments"><button>30 days</button><button>7 days</button><button>Today</button>
 <div class="segment-menu"><details class="menu disclosure-menu"><summary class="control">Custom</summary></details></div></div>
@@ -71,6 +72,7 @@ const markup = `<button id="button">Button</button><select id="select"><option>S
    const next = page.locator('[data-icon-right]');
    assert.equal(await next.evaluate(e => getComputedStyle(e, '::before').content), 'none');
    assert.ok(await next.evaluate(e => getComputedStyle(e, '::after').maskImage.includes('chevron-right.svg')), 'Right icon renders after the words');
+   assert.equal(await next.evaluate(e => getComputedStyle(e, '::after').marginInlineStart), '0px', 'Trailing icon spacing is owned by the button gap');
    console.log(`Passed control focus, press, segmented shadows, badges and trailing icons: ${theme}/${scheme}`);
   }
  } finally { await browser.close(); }

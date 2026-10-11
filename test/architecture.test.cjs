@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const sass = require('sass');
-const root = path.resolve(__dirname, '../style');
+const root = path.resolve(__dirname, '../style/lib');
 const compile = source => sass.compileString(source, {loadPaths: [root]}).css;
 
 test('base colours are monochrome and fonts need no downloads', () => {
@@ -18,8 +18,9 @@ test('base colours are monochrome and fonts need no downloads', () => {
 });
 
 test('each theme starts from base and importing themes has no side effects', () => {
- assert.equal(compile('@use "theme";'), '');
+ assert.equal(compile('@use "theme/base";'), '');
  for(const name of ['bright', 'github', 'clean', 'gt']) {
+  assert.equal(compile(`@use "theme/${name}";`), '');
   const source = fs.readFileSync(path.join(root, `theme/${name}.scss`), 'utf8');
   assert.match(source, /@use "base"/);
   assert.match(source, /@include base\.base/);
@@ -44,4 +45,21 @@ test('layouts cannot choose the appearance or contents of their regions', () => 
   assert.doesNotMatch(source, /@use "\.\.\/(decoration|object|pattern|element)\//, name);
   assert.doesNotMatch(source, /(?:^|\n)\s*(?:color|background[\w-]*|border[\w-]*|box-shadow|font[\w-]*):/, name);
  }
+});
+
+// Presets must not export another preset's optional role values.
+test('Bright interface values are scoped and leave other themes unchanged', () => {
+ const roles = ['caption-size', 'font-size-compact', 'workspace-padding-wide',
+  'badge-indicator-size', 'code-input-border-width', 'content-panel-section-gap'];
+ const bright = compile('@use "theme/bright" as theme; .bright { @include theme.bright; }');
+ for(const role of roles) assert.ok(bright.includes(`--theme-${role}:`), role);
+ assert.match(bright, /--theme-badge-radius:\s*0?\.35rem/);
+ for(const name of ['base', 'github', 'clean', 'gt']) {
+  const css = compile(`@use "theme/${name}" as theme; .other { @include theme.${name}; }`);
+  for(const role of roles) assert.ok(!css.includes(`--theme-${role}:`), `${name}: Bright ${role} leaked`);
+  assert.doesNotMatch(css, /--theme-badge-radius:\s*0?\.35rem/);
+ }
+ const combined = compile('@use "theme/base"; @use "theme/bright"; .base { @include base.base; } .bright { @include bright.bright; }');
+ const baseBlock = combined.match(/\.base \{([^}]+)\}/)[1];
+ for(const role of roles) assert.ok(!baseBlock.includes(`--theme-${role}:`), `Combined stylesheet: ${role} escaped Bright`);
 });

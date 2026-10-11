@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const sass = require('sass');
 const path = require('node:path');
 const compile = source => sass.compileString(source, {
-	loadPaths: [path.resolve(__dirname, '../style')], style: 'expanded',
+	loadPaths: [path.resolve(__dirname, '../style/lib')], style: 'expanded',
 }).css;
 
 test('importing public definitions has no CSS or font side effects', () => {
@@ -76,7 +76,7 @@ test('primary buttons use an independent colour with tint-aware contrast', () =>
 	assert.match(defaults, /var\(--theme-color-ui-preferred\)/);
 	assert.match(button, /var\(--theme-button-primary-text, var\(--theme-color-ui-contrast\)\)/);
 	assert.match(button, /var\(--theme-button-primary-background, var\(--theme-color-primary\)\)/);
-	const github = compile('@use "theme"; .theme { @include theme.github; }');
+	const github = compile('@use "theme/github" as theme; .theme { @include theme.github; }');
 	assert.match(github, /--theme-color-tint:\s*var\(--pal-6\)/);
 	assert.match(github, /--theme-color-primary:\s*var\(--pal-8\)/);
 	assert.match(github, /--theme-color-ui-background:\s*var\(--theme-color-primary\)/);
@@ -105,7 +105,7 @@ test('disclosure extension preserves native visibility and marker behaviour', ()
 
 test('every public placeholder can be consumed in isolation', () => {
 	const fs = require('node:fs');
-	const root = path.resolve(__dirname, '../style');
+	const root = path.resolve(__dirname, '../style/lib');
 	const placeholders = new Set();
 	for (const folder of ['decoration', 'object', 'pattern', 'layout']) {
 		for (const file of fs.readdirSync(path.join(root, folder))) {
@@ -132,7 +132,7 @@ test('every public placeholder can be consumed in isolation', () => {
 
 test('library placeholders have one matching file and explicit dependencies', () => {
 	const fs = require('node:fs');
-	const root = path.resolve(__dirname, '../style');
+	const root = path.resolve(__dirname, '../style/lib');
 	for (const [folder, prefix] of Object.entries({ decoration: 'd', object: 'o', pattern: 'p', layout: 'l' })) {
 		for (const file of fs.readdirSync(path.join(root, folder)).filter(file => file.endsWith('.scss'))) {
 			const source = fs.readFileSync(path.join(root, folder, file), 'utf8');
@@ -173,10 +173,9 @@ test('checklists remain independent of pricing, card surfaces and application fo
 });
 
 test('theme mixins are opt-in and export no website selectors or font downloads', () => {
-	assert.equal(compile('@use "theme";'), '');
 	for (const name of ['base', 'bright', 'github', 'clean', 'gt']) {
-		const css = compile(`@use "theme"; .theme { @include theme.${name}; }`);
-		assert.equal(compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`), css);
+		assert.equal(compile(`@use "theme/${name}";`), '');
+		const css = compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`);
 		assert.match(css, /--theme-color-text/);
 		assert.match(css, /--theme-color-tint/);
 		assert.match(css, /--theme-color-primary/);
@@ -211,7 +210,7 @@ test('all new patterns have live examples and source in the appropriate document
 		code: ['document-baseline', 'syntax-trees', 'http-metadata', 'labelled-regions'],
 		controls: ['icons', 'icon-buttons'],
 		forms: ['compound-fields', 'repeatable-fields'],
-		disclosures: ['drawers'],
+		disclosures: ['drawers', 'popovers'],
 		tables: ['key-value-lists'],
 	};
 	for (const [page, ids] of Object.entries(pages)) {

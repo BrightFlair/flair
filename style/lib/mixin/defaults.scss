@@ -1,0 +1,6 @@
+@use "../variable/tokens";
+
+// Explicit opt-in values; importing Flair emits nothing.
+@mixin defaults {
+	@include tokens.tokens;
+}

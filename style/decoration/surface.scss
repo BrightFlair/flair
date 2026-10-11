@@ -1,8 +1,0 @@
-%d-surface {
-	border: var(--theme-surface-border-width, var(--theme-border-width)) solid
-		var(--theme-color-border);
-	border-radius: var(--theme-surface-radius, var(--theme-radius));
-	background: var(--theme-surface-background, var(--theme-color-surface));
-	color: var(--theme-color-text);
-	box-shadow: var(--theme-surface-shadow, none);
-}

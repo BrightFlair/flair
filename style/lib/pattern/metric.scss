@@ -1,0 +1,26 @@
+@use "../object/value";
+@use "form-actions";
+
+%p-metric {
+	display: grid;
+	gap: var(--theme-metric-gap, var(--theme-space-4));
+	min-inline-size: 0;
+	text-align: var(--theme-metric-align, center);
+
+	> :where(h2, h3, h4, p, output) {
+		margin-block: 0;
+	}
+
+	> :where(output, .metric-value) {
+		@extend %o-value;
+	}
+
+	> .metric-detail {
+		color: var(--theme-color-muted);
+	}
+
+	> .actions {
+		@extend %p-form-actions;
+		justify-content: var(--theme-metric-align, center);
+	}
+}

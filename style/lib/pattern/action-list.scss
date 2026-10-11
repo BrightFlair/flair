@@ -1,0 +1,10 @@
+@use "list";
+@use "action-row";
+
+%p-action-list {
+	@extend %p-list;
+
+	> li {
+		@extend %p-action-row;
+	}
+}

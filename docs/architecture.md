@@ -3,13 +3,20 @@
 Flair's public entry point is definitions only. Importing it emits no CSS,
 fonts, network requests or application selectors. Every placeholder has one
 file, explicit dependencies, and a reason independent of an application.
-Native defaults are separate opt-in mixins.
+Native defaults are separate opt-in mixins in `style/lib/mixin/`.
+The Element layer is reserved for individual native HTML selector rules;
+collections of rules emitted by a mixin belong in Mixin.
+
+`style/lib/` is the reusable library root, including its `flair.scss` entry
+point, hierarchy layers, mixins and themes. `style/style.scss` composes this
+website's styles; `style/site/`, `style/playground/` and `style/font/` belong to
+the website. Consumers add `style/lib/` to their Sass load path.
 
 | Layer | Owns | Does not own |
 | --- | --- | --- |
 | Variable | Configurable Sass values and CSS value mixins: palette, scale, roles | Rules for controls or page structure |
 | Decoration | Appearance: colour, typography, border, shadow, focus and visual state | Padding, child arrangement or dimensions of a UI unit |
-| Element | Opt-in native defaults and normalisation | Application classes or route composition |
+| Element | Individual native HTML selector rules | Mixin definitions, application classes or route composition |
 | Object | One UI role, including its dimensions, internal content and interaction states | Page placement or application data |
 | Pattern | Relationships between units and their shared state | Whole-page regions or route exceptions |
 | Layout | Arrangement of major regions and collections | Surface colours, fonts, borders or tile contents |
@@ -32,7 +39,7 @@ values without document selectors. `theme.base` adds native colour-scheme
 selection. All presets include `theme.base`, then override values only. Fonts
 are downloaded by applications, never by the library.
 
-Themes contain no component selectors, layout rules or application properties.
+Themes contain no component selectors, layout rules or application properties. Bright also owns optional typography, badge, panel, footer and responsive spacing values. Consumers use neutral scale/role fallbacks when another theme leaves those tokens unset; Bright values must never be copied into the base defaults or emitted outside its mixin. Applications retain route composition, breakpoints and structural measurements.
 A project must stay usable when its preset is replaced with base. Colour is
 supplemented by labels, borders, native checked state, aria-current or
 aria-pressed. There is no styling-only promise that aria-disabled prevents an
@@ -59,6 +66,7 @@ use the corrected names.
 | --- | --- |
 | `%o-interactive` | Shared dimensions of text controls and button roles |
 | `%o-labelled-control` | A caption and a native control or application select wrapper; does not assume the full `.field` structure |
+| `%o-icon-button-plain` | A glyph action without border, surface or shadow; preserves the icon button target and focus ring |
 | `%o-toggle-badge` | A native checkbox with a badge caption and visible checked/focus states |
 | `%o-content-panel`, `%o-content-panel-borderless` | A surface with form/footer section rhythm, with an optional borderless variant |
 | `%o-settings-panel`, `%o-settings-disclosure` | One settings surface, either always visible or natively disclosed |

@@ -1,0 +1,12 @@
+// Explicit document baseline; importing Flair never applies a reset automatically.
+@mixin init {
+	*, *::before, *::after {
+		box-sizing: border-box;
+	}
+	body {
+		margin: 0;
+	}
+	[hidden] {
+		display: none !important;
+	}
+}

@@ -9,7 +9,7 @@ interface, include `theme.base` in place of the preset.
 @use "flair";
 @use "theme/bright";
 :root { @include bright.bright; }
-@include flair.base;
+@include flair.init;
 @include flair.controls;
 ```
 

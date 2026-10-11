@@ -1,4 +1,4 @@
-@use "../flair";
+@use "../lib/flair";
 
 .flair-example {
 	padding: var(--site-space-medium);
@@ -207,5 +207,10 @@
 
 	& .demo-highlight-wrap {
 		max-inline-size: 20ch;
+	}
+
+	& .demo-highlight-centered {
+		@extend %d-highlight-centered;
+		padding: var(--theme-space-2);
 	}
 }

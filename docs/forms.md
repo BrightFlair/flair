@@ -7,7 +7,7 @@ Review the live examples at `/library/controls/` and `/library/forms/`. The glob
 ## Entry points
 
 ```scss
-@use "path/to/flair/style/flair";
+@use "path/to/flair/style/lib/flair";
 
 :root {
 	@include flair.defaults;
@@ -18,13 +18,13 @@ contact-form form {
 }
 ```
 
-`style/flair.scss` emits no CSS by itself and imports no fonts. `defaults()` emits properties in the selector where it is included. Include it on the application root, or on the root of an independent theme preview. Load the fonts in your application, or override `--theme-font-body`.
+`style/lib/flair.scss` emits no CSS by itself and imports no fonts. `defaults()` emits properties in the selector where it is included. Include it on the application root, or on the root of an independent theme preview. Load the fonts in your application, or override `--theme-font-body`.
 
 Individual modules can be loaded instead of the aggregate entry point:
 
 ```scss
-@use "path/to/flair/style/mixin/defaults";
-@use "path/to/flair/style/object/button";
+@use "path/to/flair/style/lib/mixin/defaults";
+@use "path/to/flair/style/lib/object/button";
 
 :root {
 	@include defaults.defaults;
@@ -51,22 +51,22 @@ Optional element defaults:
 
 | Layer and source | Public definition | Responsibility and dependency |
 | --- | --- | --- |
-| `style/mixin/defaults.scss` | `defaults()` | Monochrome values and shared scales; explicitly emitted by the consumer. |
-| `style/decoration/focus-ring.scss` | `%d-focus-ring` | Outline width, colour and offset. |
-| `style/decoration/control.scss` | `%d-control` | Shared font, border, background, hover, disabled and explicit invalid appearance. Its `:focus-visible` rule extends `%d-focus-ring`. |
-| `style/object/control.scss` | `%o-control` | Extends `%o-interactive`; full-width text-like controls, placeholder colour, read-only border and resizable textarea. |
-| `style/object/choice.scss` | `%o-choice` | Native checkbox/radio size and accent; extends focus ring on keyboard focus. |
-| `style/object/range.scss` | `%o-range` | Native full-width range input; extends focus ring on keyboard focus. |
-| `style/object/color.scss` | `%o-color` | Extends `%d-control`; smaller colour picker. |
-| `style/object/button.scss` | `%o-button` | Extends `%o-interactive`; inline button or link presentation, alignment and colours. |
-| `style/object/button-primary.scss` | `%o-button-primary` | Extends `%o-button`; accent background with contrasting text. |
-| `style/mixin/controls.scss` | `controls()` | Optional native-tag mappings to the objects above. |
-| `style/object/form-field.scss` | `%o-form-field` | Label/control/message stack; includes direct-child element mappings. |
-| `style/object/choice-field.scss` | `%o-choice-field` | Checkbox/radio with wrapping text; extends `%o-choice` on the input. |
-| `style/object/fieldset.scss` | `%o-fieldset` | Native legend and bordered group; extends field and choice objects on its children. |
-| `style/pattern/field-row.scss` | `%p-field-row` | Wrapping flex row; extends field objects on direct `.field` or `label` children. |
-| `style/pattern/form-actions.scss` | `%p-form-actions` | Wrapping actions; extends button objects and primary variant. Preserves DOM order. |
-| `style/pattern/form-fields.scss` | `%p-form-fields` | Field stack that composes field, choice, fieldset, row and action definitions. |
+| `style/lib/mixin/defaults.scss` | `defaults()` | Monochrome values and shared scales; explicitly emitted by the consumer. |
+| `style/lib/decoration/focus-ring.scss` | `%d-focus-ring` | Outline width, colour and offset. |
+| `style/lib/decoration/control.scss` | `%d-control` | Shared font, border, background, hover, disabled and explicit invalid appearance. Its `:focus-visible` rule extends `%d-focus-ring`. |
+| `style/lib/object/control.scss` | `%o-control` | Extends `%o-interactive`; full-width text-like controls, placeholder colour, read-only border and resizable textarea. |
+| `style/lib/object/choice.scss` | `%o-choice` | Native checkbox/radio size and accent; extends focus ring on keyboard focus. |
+| `style/lib/object/range.scss` | `%o-range` | Native full-width range input; extends focus ring on keyboard focus. |
+| `style/lib/object/color.scss` | `%o-color` | Extends `%d-control`; smaller colour picker. |
+| `style/lib/object/button.scss` | `%o-button` | Extends `%o-interactive`; inline button or link presentation, alignment and colours. |
+| `style/lib/object/button-primary.scss` | `%o-button-primary` | Extends `%o-button`; accent background with contrasting text. |
+| `style/lib/mixin/controls.scss` | `controls()` | Optional native-tag mappings to the objects above. |
+| `style/lib/object/form-field.scss` | `%o-form-field` | Label/control/message stack; includes direct-child element mappings. |
+| `style/lib/object/choice-field.scss` | `%o-choice-field` | Checkbox/radio with wrapping text; extends `%o-choice` on the input. |
+| `style/lib/object/fieldset.scss` | `%o-fieldset` | Native legend and bordered group; extends field and choice objects on its children. |
+| `style/lib/pattern/field-row.scss` | `%p-field-row` | Wrapping flex row; extends field objects on direct `.field` or `label` children. |
+| `style/lib/pattern/form-actions.scss` | `%p-form-actions` | Wrapping actions; extends button objects and primary variant. Preserves DOM order. |
+| `style/lib/pattern/form-fields.scss` | `%p-form-fields` | Field stack that composes field, choice, fieldset, row and action definitions. |
 
 Element mapping mixins may depend on objects, and the form-field object may use the controls mixin. This graph is acyclic: the controls mixin imports control and button objects, not the form-field object. Directory order is not dependency order.
 

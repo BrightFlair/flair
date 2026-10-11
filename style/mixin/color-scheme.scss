@@ -1,6 +1,0 @@
-// Include at html/:root. The browser chooses a scheme unless explicitly overridden.
-@mixin color-scheme {
-	color-scheme: light dark;
-	&:is([data-theme="light"], [data-color-scheme="light"]) { color-scheme: light; }
-	&:is([data-theme="dark"], [data-color-scheme="dark"]) { color-scheme: dark; }
-}

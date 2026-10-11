@@ -20,7 +20,7 @@ async function openTools(page) {
   const context = await browser.newContext({javaScriptEnabled:false, colorScheme:'light'});
   const page = await context.newPage();
   for(const theme of standaloneThemes) {
-   const css = sass.compileString(`@use "flair"; @use "theme"; html { @include theme.base; ${theme==='base'?'':`@include theme.${theme};`} background:var(--theme-color-surface); color:var(--theme-color-text); } button { @extend %o-button; }`, {loadPaths:[path.resolve('style')]}).css;
+   const css = sass.compileString(`@use "flair"; @use "theme/${theme}" as preset; html { @include preset.${theme}; background:var(--theme-color-surface); color:var(--theme-color-text); } button { @extend %o-button; }`, {loadPaths:[path.resolve('style/lib')]}).css;
    await page.setContent(`<html lang="en"><title>Scheme test</title><style>${css}</style><body><button>Example</button></body></html>`);
    const background = () => page.locator('html').evaluate(e=>getComputedStyle(e).backgroundColor);
    const dimensions = () => page.locator('button').boundingBox();

@@ -1,4 +1,4 @@
-@use "../flair";
+@use "../lib/flair";
 
-@include flair.base;
+@include flair.init;
 @include flair.icon;
