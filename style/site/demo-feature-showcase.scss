@@ -1,0 +1,21 @@
+@use "../lib/flair";
+
+.demo-feature-showcase {
+	@extend %p-feature-showcase;
+
+	.showcase-copy,
+	.showcase-media {
+		padding: var(--theme-space-4);
+		border: var(--theme-border-width) solid var(--theme-color-border);
+	}
+
+	.showcase-media {
+		place-items: center;
+		min-block-size: 12rem;
+		background: var(--theme-color-surface-disabled);
+	}
+
+	input {
+		@extend %d-visually-hidden;
+	}
+}

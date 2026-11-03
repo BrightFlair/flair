@@ -9,7 +9,11 @@
 	align-items: var(--theme-actions-align-items, stretch);
 	justify-content: var(--theme-actions-align, flex-end);
 	gap: var(--theme-actions-gap, var(--theme-space-3));
-	margin-block-start: var(--theme-actions-margin, var(--theme-space-2));
+	margin-block-start: var(--theme-actions-margin, 0);
+	font-size: var(--theme-label-font-size, .8rem);
+	line-height: var(--theme-line-height);
+	padding-block-start: var(--theme-actions-padding-block-start,
+		calc(1lh + var(--theme-field-gap, var(--theme-space-2))));
 
 	> :where(button, input[type="submit"], input[type="reset"]) {
 		@extend %o-button;

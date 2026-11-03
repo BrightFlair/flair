@@ -639,6 +639,8 @@ foundational value or a literal.
 | `--theme-data-min` | `14rem` |
 | `--theme-dialog-backdrop` | `rgb(0 0 0 / 55%)` |
 | `--theme-dialog-width` | `32rem` |
+| `--theme-control-placeholder-opacity` | `1` |
+| `--theme-control-placeholder-font-style` | `normal` |
 | `--theme-disabled-opacity` | `1` |
 | `--theme-disclosure-background` | `transparent` |
 | `--theme-disclosure-hover-background` | `var(--theme-nav-hover-background, var(--theme-color-surface-disabled))` |
@@ -976,3 +978,33 @@ opener. Those behaviours belong to `script/component/library-example.es6`.
 `test/control-states-browser-check.cjs` checks pointer and keyboard outlines,
 first-frame focus colours, segment shadows, compact Bright badges and trailing
 icon placement in both monochrome and Bright, in both colour schemes.
+
+
+### Editorial columns and feature showcase
+
+`%l-editorial` places a heading or short introduction beside a content column.
+Its grid enhancement starts at `$break-wide`; extend it alongside the mobile layout.
+`--theme-editorial-leading`, `--theme-editorial-content` (both `1fr`) and
+`--theme-editorial-gap` (`--theme-space-12`) control its proportions and spacing.
+
+`%p-feature-showcase` starts at `$break-wide` and enhances four `.showcase-item` children into two choices
+on either side of a shared media column. Each item contains a labelled native
+radio input, `.showcase-copy` and `.showcase-media`. Give the radios a common
+name and check the first radio. A label inside each copy region selects its
+radio; keyboard arrow keys use the native radio interaction. The selected
+item's media appears centrally, and its copy has full opacity. All content
+remains in one HTML structure, ready for a stacked or carousel mobile layout.
+The consumer owns radio visibility, typography and media decoration.
+
+`--theme-showcase-media-share` defaults to `1.4fr`, `--theme-showcase-gap` to
+`--theme-space-8`, and `--theme-showcase-inactive-opacity` to `0.6`.
+
+| Source | Public placeholder |
+| --- | --- |
+| `style/lib/layout/editorial.scss` | `%l-editorial` |
+| `style/lib/pattern/feature-showcase.scss` | `%p-feature-showcase` |
+
+Form action containers (`%p-form-actions`, or `.actions` within `%p-form-fields`)
+reserve a label line and field gap above their buttons. This uses the shared label
+font-size, line-height and field-gap tokens, including in stacked forms. Override
+`--theme-actions-padding-block-start` when a layout needs different spacing.

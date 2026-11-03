@@ -1,0 +1,32 @@
+@use "../variable/break";
+
+// The contents navigation comes first in reading order. Enhance the same DOM
+// into a prose column and right sidebar only when both have enough space.
+%l-reading {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	align-items: start;
+
+	> * { min-inline-size: 0; }
+
+	> aside {
+		position: sticky;
+		inset-block-start: 0;
+		z-index: 3;
+	}
+
+	@media (min-width: break.$wide) {
+		grid-template-columns: minmax(0, var(--theme-reading-main, 2.25fr)) minmax(14rem, var(--theme-reading-aside, 1fr));
+
+		> aside {
+			grid-column: 2;
+			grid-row: 1;
+			inset-block-start: var(--theme-sticky-offset, var(--theme-space-6));
+		}
+
+		> .reading-content {
+			grid-column: 1;
+			grid-row: 1;
+		}
+	}
+}
