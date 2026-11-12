@@ -2,7 +2,7 @@
 
 Controls, field objects and the patterns that arrange them. Validation, submission and data binding belong to the application; Flair supplies only the presentation and the native behaviour that comes with it.
 
-Review the live examples at `/library/controls/` and `/library/forms/`. The global theme selector and local spacing selectors belong to the website, not the library runtime. The theme selection applies to every page and is stored in a cookie. The server renders the selected theme before styles load; JavaScript applies changes immediately. Without JavaScript, the Apply button submits the theme form.
+Review the live examples at `/library/controls/` and `/library/forms/`. The Forms page includes checkbox states, wrapping labels and enlarged text at `/library/forms/#checkboxes`. The global theme selector and local spacing selectors belong to the website, not the library runtime. The theme selection applies to every page and is stored in a cookie. The server renders the selected theme before styles load; JavaScript applies changes immediately. Without JavaScript, the Apply button submits the theme form.
 
 ## Entry points
 
@@ -113,7 +113,7 @@ Only placeholders are extended. Pattern classes such as `.field` are structural 
 
 - Use direct wrapping `label` children for fields: caption in the first `span`, followed by the control and optional `.field-help`/`.field-error` spans. The control needs no ID unless something else references it. Help/error spans retain IDs for `aria-describedby`. A `.field` container with a separate associated label is supported when grouping requires it.
 - Direct `.field-row` children contain `.field` or wrapping `label` children. They wrap based on container width, not viewport width.
-- Direct `.choice` children are wrapping labels with a checkbox/radio and text in a span.
+- Direct `.choice` children are wrapping labels with a checkbox/radio and text in a span. The control aligns with the first line of text using the label's font and line height; wrapped lines remain in the text column.
 - Direct `fieldset` children contain a native `legend` and direct wrapping labels, `.field` containers or `.choice` labels. Deeper nested fieldsets/rows are not automatically styled.
 - Direct `.actions` children contain buttons. `.primary` extends the primary button object. `.action-start` uses a logical auto margin, without reordering keyboard navigation. Give links their own `%o-button` extension if button presentation is appropriate.
 - Keep these hooks out of unrelated nested components. Match existing application selectors to the smaller objects/patterns when adding the default hooks would be inappropriate. Do not deepen global descendant selectors to accommodate one application's markup.

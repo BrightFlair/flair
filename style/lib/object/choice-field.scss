@@ -15,7 +15,8 @@
 
 	> :where(input[type="checkbox"], input[type="radio"]) {
 		@extend %o-choice;
-		margin-block-start: var(--theme-space-1);
+		font: inherit;
+		margin-block-start: max(0px, calc((1lh - var(--theme-choice-size)) / 2));
 	}
 
 	@media (min-width: break.$compact) {

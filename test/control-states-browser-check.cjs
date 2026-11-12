@@ -31,6 +31,10 @@ const markup = `<button id="button">Button</button><select id="select"><option>S
   for(const theme of ['base', 'bright']) for(const scheme of ['light', 'dark']) {
    await page.emulateMedia({colorScheme: scheme});
    await page.setContent(`<html data-flair-theme="${theme}"><style>${css}</style><body>${markup}</body></html>`);
+   const heights = await page.locator('#button, #select, .segments > button').evaluateAll(elements =>
+    elements.map(element => element.getBoundingClientRect().height));
+   assert.ok(Math.max(...heights) - Math.min(...heights) < 1,
+    `${theme}/${scheme}: selects, buttons and segmented controls share one height (${heights.join(', ')})`);
    const expected = await page.evaluate(() => {
     const sample = document.createElement('span');
     sample.style.color = 'var(--theme-focus-color, var(--theme-color-accent))';

@@ -131,6 +131,71 @@
 			</p>
 		</div>
 	</section>
+	<section class="reference-section" id="checkboxes" aria-labelledby="checkbox-form-title">
+		<h2 id="checkbox-form-title">Checkboxes in a form</h2>
+		<p>Click either the checkbox or its label to toggle it. Tab moves between controls; Space changes the focused checkbox.</p>
+		<div class="reference-grid">
+			<div class="flair-example">
+				<form class="demo-form">
+					<label class="choice">
+						<input type="checkbox" name="setPassword" />
+						<span>Set password</span>
+					</label>
+					<label class="choice">
+						<input type="checkbox" name="emailInstructions" checked />
+						<span>Email user instructions for logging in</span>
+					</label>
+					<label class="choice">
+						<input type="checkbox" name="unavailable" disabled />
+						<span>Unavailable option</span>
+					</label>
+					<label class="choice">
+						<input type="checkbox" name="enabledElsewhere" checked disabled />
+						<span>Enabled option that cannot be changed</span>
+					</label>
+				</form>
+			</div>
+			<pre><code>&lt;form class="account-form"&gt;
+	&lt;label class="choice"&gt;
+		&lt;input type="checkbox" name="setPassword" /&gt;
+		&lt;span&gt;Set password&lt;/span&gt;
+	&lt;/label&gt;
+	&lt;label class="choice"&gt;
+		&lt;input type="checkbox" name="emailInstructions" checked /&gt;
+		&lt;span&gt;Email user instructions for logging in&lt;/span&gt;
+	&lt;/label&gt;
+&lt;/form&gt;
+
+.account-form {
+	@extend %p-form-fields;
+}</code></pre>
+		</div>
+	</section>
+	<section class="reference-section" aria-labelledby="wrapping-checkbox-title">
+		<h2 id="wrapping-checkbox-title">Wrapping labels</h2>
+		<p>The checkbox stays alongside the first line. Subsequent lines start beneath the label text.</p>
+		<div class="flair-example">
+			<label class="demo-choice" style="max-inline-size: 20rem">
+				<input type="checkbox" name="updates" />
+				<span>Receive release notes, documentation updates and invitations to try new features before they are released.</span>
+			</label>
+		</div>
+	</section>
+	<section class="reference-section" aria-labelledby="large-checkbox-title">
+		<h2 id="large-checkbox-title">Larger text and line spacing</h2>
+		<p>Alignment follows the label's line height, including when a theme changes its font. Use the theme selector to compare appearances.</p>
+		<div class="flair-example" style="--theme-font-size: 1.5rem; --theme-line-height: 1.8">
+			<label class="demo-choice" style="max-inline-size: 28rem">
+				<input type="checkbox" name="largeLabel" />
+				<span>Keep me informed about important changes to my account.</span>
+			</label>
+		</div>
+		<pre><code>.notification-choice {
+	@extend %o-choice-field;
+	--theme-font-size: 1.5rem;
+	--theme-line-height: 1.8;
+}</code></pre>
+	</section>
 	<section class="reference-section" aria-labelledby="additional-states">
 		<h2 id="additional-states">Errors and disabled groups</h2>
 		<p>
