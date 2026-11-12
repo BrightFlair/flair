@@ -439,20 +439,7 @@
 }</code></pre>
 		</details>
 	</section>
-	<section class="reference-section" aria-labelledby="usage-title">
-		<h2 id="usage-title">Using these styles</h2>
-		<p>
-			Import <code>flair</code>, include <code>flair.defaults</code> on your application
-			root, then extend the placeholders shown in each example onto your own selectors.
-			The <code>demo-</code> names belong to this website. The containing layout
-			determines available width; theme properties are inherited.
-		</p>
-		<p>
-			Change the global theme to compare the same markup. Source files, dependencies,
-			property fallbacks and behavioural requirements are documented in
-			<code>docs/library.md</code>.
-		</p>
-	</section>
+
 	<section class="reference-section" id="key-value-lists" aria-labelledby="key-value-lists-title">
 		<h2 id="key-value-lists-title">Key and value lists</h2>
 		<p>A bordered list of name and value pairs, one row each, with room for a trailing action. Rows alternate shading so a long list stays trackable. This is the editable form: each row owns the control that removes it.</p>
@@ -474,9 +461,9 @@
 					<form><button class="demo-icon-button" type="button" data-icon="trash"><span>Delete</span></button></form>
 				</li>
 			</ul>
-			
+
 			<p>The same pattern, set to read machine output instead. Only theme properties differ; the layout is unchanged.</p>
-			
+
 			<ul class="demo-header-list" data-term="response headers">
 				<li><span>content-type</span><span>application/json; charset=utf-8</span></li>
 				<li><span>cache-control</span><span>no-store, max-age=0</span></li>
@@ -537,4 +524,19 @@
 .demo-record-scroll { container-type: inline-size; }
 .demo-record-table { @extend %o-record-data-table; @extend %p-record-table; @include flair.record-table-columns; }</code></pre></details>
 </section>
+	<hr class="reference-divider" />
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
+	</section>
 </main>

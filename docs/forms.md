@@ -66,6 +66,7 @@ Optional element defaults:
 | `style/lib/object/fieldset.scss` | `%o-fieldset` | Native legend and bordered group; extends field and choice objects on its children. |
 | `style/lib/pattern/field-row.scss` | `%p-field-row` | Wrapping flex row; extends field objects on direct `.field` or `label` children. |
 | `style/lib/pattern/form-actions.scss` | `%p-form-actions` | Wrapping actions; extends button objects and primary variant. Preserves DOM order. |
+| `style/lib/pattern/input-group.scss` | `%p-input-group` | Joins direct native controls with shared borders, outer rounding and independent disabled/focus states. |
 | `style/lib/pattern/form-fields.scss` | `%p-form-fields` | Field stack that composes field, choice, fieldset, row and action definitions. |
 
 Element mapping mixins may depend on objects, and the form-field object may use the controls mixin. This graph is acyclic: the controls mixin imports control and button objects, not the form-field object. Directory order is not dependency order.
@@ -151,3 +152,47 @@ Call `defaults()` once for each independent root. Calling it on a nested compone
 Themes include the base colour-scheme support before overriding values. Check foreground/background contrast, focus contrast and disabled readability in both schemes. The website offers the five current themes; applications own any font downloads. See [architecture.md](architecture.md) for the ownership rules and [migration.md](migration.md) for reference project setup.
 
 The old presets are retired. Base is monochrome; Bright supplies Authwave's warm surfaces and bevels, GitHub supplies API Horse's existing treatment, Clean supplies DHP Logging's blue interface, and GT supplies the PHP.GT website palette. All use the same native controls and form relationships.
+
+## Input groups
+
+Extend `%p-input-group` on an application selector to join text-like inputs,
+selects or textareas. Importing the pattern emits no global selectors. Use a
+separate `.field` wrapper for the visible group label/help, and give each
+editable control its own accessible name. Do not wrap multiple editable
+controls in a single label.
+
+```html
+<div class="field">
+  <span id="sender-label">Sender address</span>
+  <div class="sender-address" role="group" aria-labelledby="sender-label">
+    <input name="prefix" value="security" aria-label="Email prefix" />
+    <input name="domain" value="@login.example.com" size="18"
+      data-span="narrow" aria-label="Fixed email domain" disabled />
+  </div>
+</div>
+```
+
+```scss
+.sender-address { @extend %p-input-group; }
+```
+
+Controls share the available field width and overlap one border at each seam;
+only the group's outside corners are rounded. Focus is raised above adjoining
+controls without clipping the native themed outline. Logical margins and corner
+properties support right-to-left layouts.
+
+`data-span="narrow"` opts a control into content sizing, useful for fixed
+prefixes/suffixes and selects. An input's HTML `size` is the fallback in browsers
+without `field-sizing: content`. Override `--theme-input-group-flex` or
+`--theme-input-group-narrow-flex` when a consumer needs different shares. Put
+hidden inputs, labels and help text outside the group so its first and last
+children remain the visible controls.
+
+Use native `disabled` for fixed context: the field cannot be edited, is skipped
+by Tab and is omitted from form submission. The server must enforce the fixed
+portion; CSS and disabled attributes are not validation. Use `readonly` for
+text-like values that should remain focusable and submitted. Keep fixed text in
+the help content too when it may be clipped at narrow widths or enlarged text.
+
+See `/library/forms/#input-groups` for a fixed suffix, fixed prefix, two editable
+fields, a disabled middle separator, and a select beside a number input.

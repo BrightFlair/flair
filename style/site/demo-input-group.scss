@@ -1,0 +1,5 @@
+@use "../lib/flair";
+
+.demo-input-group {
+	@extend %p-input-group;
+}

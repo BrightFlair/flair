@@ -46,6 +46,7 @@ body { @include flair.typography; @include flair.controls; @include flair.icon; 
 .pairs { @extend %p-key-value-list; }
 .repeat { @extend %p-repeatable-fields; }
 .combo { @extend %p-compound-field; }
+.joined { @extend %p-input-group; }
 .region { @extend %p-labelled-region; }
 .tree { @extend %p-syntax-tree; }
 .row { @extend %p-row-actions; }
