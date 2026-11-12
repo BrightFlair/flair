@@ -241,189 +241,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="reference-section" id="implementation-notes" aria-labelledby="form-dependencies">
-		<h2 id="form-dependencies">How the pattern is composed</h2>
-		<ol>
-			<li>
-				<code>%o-form-field</code>
-				provides label, control and message layout.
-			</li>
-			<li>
-				<code>%o-choice-field</code>
-				puts a native checkbox or radio beside wrapping label text.
-			</li>
-			<li>
-				<code>%o-fieldset</code>
-				provides a bordered group with a legend, fields and choices.
-			</li>
-			<li>
-				<code>%p-field-row</code>
-				extends field objects inside a wrapping flex row. Fields wrap when their combined
-				minimum widths and gap no longer fit the container.
-			</li>
-			<li>
-				<code>%p-form-actions</code>
-				arranges buttons without changing their DOM order. A direct
-				<code>.primary</code>
-				child extends
-				<code>%o-button-primary</code>
-				;
-				<code>.action-start</code>
-				pushes subsequent actions towards the inline end.
-			</li>
-			<li>
-				<code>%p-form-fields</code>
-				combines these definitions into one form structure.
-			</li>
-		</ol>
-		<pre><code>@use "path/to/flair/style/lib/flair";
 
-:root {
-	@include flair.defaults;
-}
-
-contact-form form {
-	@extend %p-form-fields;
-}
-
-contact-form {
-	--theme-form-gap: var(--theme-space-6);
-	--theme-control-radius: .25rem;
-}</code></pre>
-		<h3>Direct children of the pattern</h3>
-		<dl class="token-list">
-			<dt>
-				<code>.field</code>
-				or
-				<code>label</code>
-			</dt>
-			<dd>
-				A wrapping label with its caption span, control and optional messages. A .field
-				container is also supported when needed.
-			</dd>
-			<dt><code>.field-row</code></dt>
-			<dd>
-				A wrapping row containing direct
-				<code>.field</code>
-				or
-				<code>label</code>
-				children.
-			</dd>
-			<dt><code>.choice</code></dt>
-			<dd>
-				A wrapping label containing a checkbox or radio followed by its text in a span.
-			</dd>
-			<dt><code>fieldset</code></dt>
-			<dd>
-				A legend and direct labels,
-				<code>.field</code>
-				containers or
-				<code>.choice</code>
-				labels.
-			</dd>
-			<dt><code>.actions</code></dt>
-			<dd>
-				Buttons and optional application-styled links. Apply
-				<code>%o-button</code>
-				to a link selector if it should look like a button.
-			</dd>
-		</dl>
-		<p>
-			These hooks describe structural roles. They are not a list of visual utility
-			classes. Existing applications can extend the smaller objects and patterns on their
-			own selectors when their markup differs. Arbitrary wrapper depths and nested
-			components are intentionally not traversed.
-		</p>
-		<h3>Form properties</h3>
-		<dl class="token-list">
-			<dt><code>--theme-form-gap</code></dt>
-			<dd>
-				Space between fields and within rows and groups. Falls back to
-				<code>--theme-space-4</code>
-				(1rem).
-			</dd>
-			<dt><code>--theme-field-gap</code></dt>
-			<dd>
-				Space between a label, control and message. Falls back to
-				<code>--theme-space-2</code>
-				(0.5rem).
-			</dd>
-			<dt><code>--theme-field-min-width</code></dt>
-			<dd>
-				Preferred field width before a row wraps. Default: 14rem. Fields can shrink below
-				this to fit narrow containers.
-			</dd>
-			<dt><code>--theme-label-weight</code></dt>
-			<dd>Label, legend and error-text weight. Default: 500.</dd>
-			<dt><code>--theme-fieldset-padding</code></dt>
-			<dd>
-				Falls back to
-				<code>--theme-space-4</code>
-				.
-			</dd>
-			<dt>
-				<code>--theme-actions-align</code>
-				,
-				<code>--theme-actions-gap</code>
-				,
-				<code>--theme-actions-margin</code>
-			</dt>
-			<dd>
-				Action justification, gap and block-start margin. Defaults: flex-end, spacing step
-				3, spacing step 2.
-			</dd>
-			<dt>
-				<code>--theme-actions-direction</code>
-				,
-				<code>--theme-actions-wrap</code>
-				and
-				<code>--theme-action-white-space</code>
-			</dt>
-			<dd>
-				The narrow-layout direction, wrapping and button text wrapping. Set these when a
-				compact toolbar must remain one horizontal row. The compact breakpoint can be
-				configured separately with <code>--theme-actions-compact-direction</code> and
-				<code>--theme-actions-compact-align-items</code>.
-			</dd>
-		</dl>
-		<h3>Output and responsibility</h3>
-		<p>
-			Only extended placeholders produce rules. Including
-			<code>defaults()</code>
-			explicitly emits variables; including
-			<code>controls()</code>
-			explicitly emits native element selectors. Extending a form also includes the
-			objects it depends on. Sass does not inspect the HTML to remove unused parts of that
-			pattern.
-		</p>
-		<p>
-			Extensions add selectors where the original placeholder is defined, not where the
-			extension is written. Use CSS properties for theme changes and local declarations
-			for application-specific adjustments. Extending a placeholder from inside an
-			unrelated media query is not supported; apply responsive property overrides instead.
-		</p>
-		<p>
-			The library adds no JavaScript, validation logic, network requests or submission
-			handlers. The global theme selector, example spacing controls and submission
-			acknowledgement belong to this website. Themes change CSS properties; native browser
-			controls may still render differently between browsers.
-		</p>
-		<p>
-			References:
-			<a href="https://sass-lang.com/documentation/at-rules/extend/">
-				Sass extension behaviour
-			</a>
-			,
-			<a href="https://www.w3.org/WAI/tutorials/forms/labels/">form labels</a>
-			,
-			<a href="https://www.w3.org/WAI/tutorials/forms/grouping/"> grouping controls </a>
-			and
-			<a href="https://www.w3.org/WAI/tutorials/forms/notifications/">
-				validation messages
-			</a>
-			.
-		</p>
-	</section>
 	<section class="reference-section" id="contained-form" aria-labelledby="contained-form-title">
 		<h2 id="contained-form-title">Form in a narrow layout</h2>
 		<p>
@@ -641,4 +459,312 @@ contact-form {
 .demo-field-action { @extend %p-field-action; }
 .demo-labelled { @extend %o-labelled-control; @include flair.controls; }</code></pre></details>
 </section>
+	<section class="reference-section" id="input-groups" aria-labelledby="input-groups-title">
+		<h2 id="input-groups-title">Input groups</h2>
+		<p>Join several native controls into the space of one field. Touching controls have square inner corners and one shared border; only the outside corners retain the theme's rounding. Every editable control keeps its own label, focus and keyboard behaviour.</p>
+		<div class="reference-grid">
+			<div class="flair-example">
+				<div class="demo-field">
+					<span id="group-email-label">Email sender</span>
+					<div class="demo-input-group" role="group" aria-labelledby="group-email-label" aria-describedby="group-email-help">
+						<input name="senderPrefix" value="security" aria-label="Email prefix" autocomplete="off" spellcheck="false" />
+						<input name="senderDomain" value="@login.example.com" size="18" data-span="narrow" aria-label="Fixed email domain" disabled />
+					</div>
+					<span id="group-email-help" class="field-help">Edit the prefix; @login.example.com is fixed and disabled.</span>
+				</div>
+			</div>
+			<div class="flair-example">
+				<div class="demo-field">
+					<span id="group-url-label">Website address</span>
+					<div class="demo-input-group" role="group" aria-labelledby="group-url-label" aria-describedby="group-url-help">
+						<input name="scheme" value="https://" size="8" data-span="narrow" aria-label="Fixed URL scheme" disabled />
+						<input name="hostname" value="example.com" aria-label="Website hostname" autocomplete="off" spellcheck="false" />
+					</div>
+					<span id="group-url-help" class="field-help">A disabled prefix makes the required scheme visible.</span>
+				</div>
+			</div>
+			<div class="flair-example">
+				<div class="demo-field">
+					<span id="group-name-label">Full name</span>
+					<div class="demo-input-group" role="group" aria-labelledby="group-name-label" aria-describedby="group-name-help">
+						<input name="givenName" placeholder="First name" aria-label="First name" autocomplete="given-name" />
+						<input name="familyName" placeholder="Last name" aria-label="Last name" autocomplete="family-name" />
+					</div>
+					<span id="group-name-help" class="field-help">Both fields are editable and keep their own accessible names.</span>
+				</div>
+			</div>
+			<div class="flair-example">
+				<div class="demo-field">
+					<span id="group-repository-label">Repository path</span>
+					<div class="demo-input-group" role="group" aria-labelledby="group-repository-label" aria-describedby="group-repository-help">
+						<input name="owner" value="authwave" aria-label="Repository owner" autocomplete="off" spellcheck="false" />
+						<input name="separator" value="/" size="1" data-span="narrow" aria-label="Fixed path separator" disabled />
+						<input name="repository" value="provider" aria-label="Repository name" autocomplete="off" spellcheck="false" />
+					</div>
+					<span id="group-repository-help" class="field-help">A disabled field can sit between two editable fields.</span>
+				</div>
+			</div>
+			<div class="flair-example">
+				<div class="demo-field">
+					<span id="group-amount-label">Amount and currency</span>
+					<div class="demo-input-group" role="group" aria-labelledby="group-amount-label" aria-describedby="group-amount-help">
+						<select name="currency" data-span="narrow" aria-label="Currency">
+							<option value="GBP">GBP</option>
+							<option value="EUR">EUR</option>
+							<option value="USD">USD</option>
+						</select>
+						<input type="number" name="amount" min="0" step="0.01" value="12.50" aria-label="Amount" />
+					</div>
+					<span id="group-amount-help" class="field-help">A native select and number field share the same frame.</span>
+				</div>
+			</div>
+		</div>
+		<p>Use <code>data-span="narrow"</code> for a content-sized prefix, suffix or select. Other fields share the remaining width. The HTML <code>size</code> attribute supplies a fallback measure for fixed text where content sizing is unavailable.</p>
+		<p>Disabled controls are visible context, not submitted values, and are skipped by Tab. The application must supply and enforce fixed portions when saving. Use <code>readonly</code> instead when a text value should stay focusable and be submitted.</p>
+		<details class="reference-source">
+			<summary>HTML and Sass</summary>
+			<pre><code>&lt;div class=&quot;demo-field&quot;&gt;
+	&lt;span id=&quot;group-email-label&quot;&gt;Email sender&lt;/span&gt;
+	&lt;div class=&quot;demo-input-group&quot; role=&quot;group&quot; aria-labelledby=&quot;group-email-label&quot; aria-describedby=&quot;group-email-help&quot;&gt;
+		&lt;input name=&quot;senderPrefix&quot; value=&quot;security&quot; aria-label=&quot;Email prefix&quot; autocomplete=&quot;off&quot; spellcheck=&quot;false&quot; /&gt;
+		&lt;input name=&quot;senderDomain&quot; value=&quot;@login.example.com&quot; size=&quot;18&quot; data-span=&quot;narrow&quot; aria-label=&quot;Fixed email domain&quot; disabled /&gt;
+	&lt;/div&gt;
+	&lt;span id=&quot;group-email-help&quot; class=&quot;field-help&quot;&gt;Edit the prefix; @login.example.com is fixed and disabled.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;demo-field&quot;&gt;
+	&lt;span id=&quot;group-url-label&quot;&gt;Website address&lt;/span&gt;
+	&lt;div class=&quot;demo-input-group&quot; role=&quot;group&quot; aria-labelledby=&quot;group-url-label&quot; aria-describedby=&quot;group-url-help&quot;&gt;
+		&lt;input name=&quot;scheme&quot; value=&quot;https://&quot; size=&quot;8&quot; data-span=&quot;narrow&quot; aria-label=&quot;Fixed URL scheme&quot; disabled /&gt;
+		&lt;input name=&quot;hostname&quot; value=&quot;example.com&quot; aria-label=&quot;Website hostname&quot; autocomplete=&quot;off&quot; spellcheck=&quot;false&quot; /&gt;
+	&lt;/div&gt;
+	&lt;span id=&quot;group-url-help&quot; class=&quot;field-help&quot;&gt;A disabled prefix makes the required scheme visible.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;demo-field&quot;&gt;
+	&lt;span id=&quot;group-name-label&quot;&gt;Full name&lt;/span&gt;
+	&lt;div class=&quot;demo-input-group&quot; role=&quot;group&quot; aria-labelledby=&quot;group-name-label&quot; aria-describedby=&quot;group-name-help&quot;&gt;
+		&lt;input name=&quot;givenName&quot; placeholder=&quot;First name&quot; aria-label=&quot;First name&quot; autocomplete=&quot;given-name&quot; /&gt;
+		&lt;input name=&quot;familyName&quot; placeholder=&quot;Last name&quot; aria-label=&quot;Last name&quot; autocomplete=&quot;family-name&quot; /&gt;
+	&lt;/div&gt;
+	&lt;span id=&quot;group-name-help&quot; class=&quot;field-help&quot;&gt;Both fields are editable and keep their own accessible names.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;demo-field&quot;&gt;
+	&lt;span id=&quot;group-repository-label&quot;&gt;Repository path&lt;/span&gt;
+	&lt;div class=&quot;demo-input-group&quot; role=&quot;group&quot; aria-labelledby=&quot;group-repository-label&quot; aria-describedby=&quot;group-repository-help&quot;&gt;
+		&lt;input name=&quot;owner&quot; value=&quot;authwave&quot; aria-label=&quot;Repository owner&quot; autocomplete=&quot;off&quot; spellcheck=&quot;false&quot; /&gt;
+		&lt;input name=&quot;separator&quot; value=&quot;/&quot; size=&quot;1&quot; data-span=&quot;narrow&quot; aria-label=&quot;Fixed path separator&quot; disabled /&gt;
+		&lt;input name=&quot;repository&quot; value=&quot;provider&quot; aria-label=&quot;Repository name&quot; autocomplete=&quot;off&quot; spellcheck=&quot;false&quot; /&gt;
+	&lt;/div&gt;
+	&lt;span id=&quot;group-repository-help&quot; class=&quot;field-help&quot;&gt;A disabled field can sit between two editable fields.&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;demo-field&quot;&gt;
+	&lt;span id=&quot;group-amount-label&quot;&gt;Amount and currency&lt;/span&gt;
+	&lt;div class=&quot;demo-input-group&quot; role=&quot;group&quot; aria-labelledby=&quot;group-amount-label&quot; aria-describedby=&quot;group-amount-help&quot;&gt;
+		&lt;select name=&quot;currency&quot; data-span=&quot;narrow&quot; aria-label=&quot;Currency&quot;&gt;
+			&lt;option value=&quot;GBP&quot;&gt;GBP&lt;/option&gt;
+			&lt;option value=&quot;EUR&quot;&gt;EUR&lt;/option&gt;
+			&lt;option value=&quot;USD&quot;&gt;USD&lt;/option&gt;
+		&lt;/select&gt;
+		&lt;input type=&quot;number&quot; name=&quot;amount&quot; min=&quot;0&quot; step=&quot;0.01&quot; value=&quot;12.50&quot; aria-label=&quot;Amount&quot; /&gt;
+	&lt;/div&gt;
+	&lt;span id=&quot;group-amount-help&quot; class=&quot;field-help&quot;&gt;A native select and number field share the same frame.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+			<pre><code>@use "flair";
+
+.demo-field {
+	@extend %o-form-field;
+}
+
+.demo-input-group {
+	@extend %p-input-group;
+}</code></pre>
+		</details>
+	</section>
+	<hr class="reference-divider" />
+	<section class="reference-section" id="implementation-notes" aria-labelledby="form-dependencies">
+		<h2 id="form-dependencies">How the pattern is composed</h2>
+		<ol>
+			<li>
+				<code>%o-form-field</code>
+				provides label, control and message layout.
+			</li>
+			<li>
+				<code>%o-choice-field</code>
+				puts a native checkbox or radio beside wrapping label text.
+			</li>
+			<li>
+				<code>%o-fieldset</code>
+				provides a bordered group with a legend, fields and choices.
+			</li>
+			<li>
+				<code>%p-field-row</code>
+				extends field objects inside a wrapping flex row. Fields wrap when their combined
+				minimum widths and gap no longer fit the container.
+			</li>
+			<li>
+				<code>%p-form-actions</code>
+				arranges buttons without changing their DOM order. A direct
+				<code>.primary</code>
+				child extends
+				<code>%o-button-primary</code>
+				;
+				<code>.action-start</code>
+				pushes subsequent actions towards the inline end.
+			</li>
+			<li>
+				<code>%p-form-fields</code>
+				combines these definitions into one form structure.
+			</li>
+		</ol>
+		<pre><code>@use "path/to/flair/style/lib/flair";
+
+:root {
+	@include flair.defaults;
+}
+
+contact-form form {
+	@extend %p-form-fields;
+}
+
+contact-form {
+	--theme-form-gap: var(--theme-space-6);
+	--theme-control-radius: .25rem;
+}</code></pre>
+		<h3>Direct children of the pattern</h3>
+		<dl class="token-list">
+			<dt>
+				<code>.field</code>
+				or
+				<code>label</code>
+			</dt>
+			<dd>
+				A wrapping label with its caption span, control and optional messages. A .field
+				container is also supported when needed.
+			</dd>
+			<dt><code>.field-row</code></dt>
+			<dd>
+				A wrapping row containing direct
+				<code>.field</code>
+				or
+				<code>label</code>
+				children.
+			</dd>
+			<dt><code>.choice</code></dt>
+			<dd>
+				A wrapping label containing a checkbox or radio followed by its text in a span.
+			</dd>
+			<dt><code>fieldset</code></dt>
+			<dd>
+				A legend and direct labels,
+				<code>.field</code>
+				containers or
+				<code>.choice</code>
+				labels.
+			</dd>
+			<dt><code>.actions</code></dt>
+			<dd>
+				Buttons and optional application-styled links. Apply
+				<code>%o-button</code>
+				to a link selector if it should look like a button.
+			</dd>
+		</dl>
+		<p>
+			These hooks describe structural roles. They are not a list of visual utility
+			classes. Existing applications can extend the smaller objects and patterns on their
+			own selectors when their markup differs. Arbitrary wrapper depths and nested
+			components are intentionally not traversed.
+		</p>
+		<h3>Form properties</h3>
+		<dl class="token-list">
+			<dt><code>--theme-form-gap</code></dt>
+			<dd>
+				Space between fields and within rows and groups. Falls back to
+				<code>--theme-space-4</code>
+				(1rem).
+			</dd>
+			<dt><code>--theme-field-gap</code></dt>
+			<dd>
+				Space between a label, control and message. Falls back to
+				<code>--theme-space-2</code>
+				(0.5rem).
+			</dd>
+			<dt><code>--theme-field-min-width</code></dt>
+			<dd>
+				Preferred field width before a row wraps. Default: 14rem. Fields can shrink below
+				this to fit narrow containers.
+			</dd>
+			<dt><code>--theme-label-weight</code></dt>
+			<dd>Label, legend and error-text weight. Default: 500.</dd>
+			<dt><code>--theme-fieldset-padding</code></dt>
+			<dd>
+				Falls back to
+				<code>--theme-space-4</code>
+				.
+			</dd>
+			<dt>
+				<code>--theme-actions-align</code>
+				,
+				<code>--theme-actions-gap</code>
+				,
+				<code>--theme-actions-margin</code>
+			</dt>
+			<dd>
+				Action justification, gap and block-start margin. Defaults: flex-end, spacing step
+				3, spacing step 2.
+			</dd>
+			<dt>
+				<code>--theme-actions-direction</code>
+				,
+				<code>--theme-actions-wrap</code>
+				and
+				<code>--theme-action-white-space</code>
+			</dt>
+			<dd>
+				The narrow-layout direction, wrapping and button text wrapping. Set these when a
+				compact toolbar must remain one horizontal row. The compact breakpoint can be
+				configured separately with <code>--theme-actions-compact-direction</code> and
+				<code>--theme-actions-compact-align-items</code>.
+			</dd>
+		</dl>
+		<h3>Output and responsibility</h3>
+		<p>
+			Only extended placeholders produce rules. Including
+			<code>defaults()</code>
+			explicitly emits variables; including
+			<code>controls()</code>
+			explicitly emits native element selectors. Extending a form also includes the
+			objects it depends on. Sass does not inspect the HTML to remove unused parts of that
+			pattern.
+		</p>
+		<p>
+			Extensions add selectors where the original placeholder is defined, not where the
+			extension is written. Use CSS properties for theme changes and local declarations
+			for application-specific adjustments. Extending a placeholder from inside an
+			unrelated media query is not supported; apply responsive property overrides instead.
+		</p>
+		<p>
+			The library adds no JavaScript, validation logic, network requests or submission
+			handlers. The global theme selector, example spacing controls and submission
+			acknowledgement belong to this website. Themes change CSS properties; native browser
+			controls may still render differently between browsers.
+		</p>
+		<p>
+			References:
+			<a href="https://sass-lang.com/documentation/at-rules/extend/">
+				Sass extension behaviour
+			</a>
+			,
+			<a href="https://www.w3.org/WAI/tutorials/forms/labels/">form labels</a>
+			,
+			<a href="https://www.w3.org/WAI/tutorials/forms/grouping/"> grouping controls </a>
+			and
+			<a href="https://www.w3.org/WAI/tutorials/forms/notifications/">
+				validation messages
+			</a>
+			.
+		</p>
+	</section>
 </main>

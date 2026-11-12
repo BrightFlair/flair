@@ -241,20 +241,7 @@
 }</code></pre>
 		</details>
 	</section>
-	<section class="reference-section" aria-labelledby="usage-title">
-		<h2 id="usage-title">Using these styles</h2>
-		<p>
-			Import <code>flair</code>, include <code>flair.defaults</code> on your application
-			root, then extend the placeholders shown in each example onto your own selectors.
-			The <code>demo-</code> names belong to this website. The containing layout
-			determines available width; theme properties are inherited.
-		</p>
-		<p>
-			Change the global theme to compare the same markup. Source files, dependencies,
-			property fallbacks and behavioural requirements are documented in
-			<code>docs/library.md</code>.
-		</p>
-	</section>
+
 
 	<section class="reference-section" id="search-results" aria-labelledby="search-results-title">
 		<h2 id="search-results-title">Search result links</h2>
@@ -357,4 +344,19 @@
 	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;nav class=&quot;demo-rail&quot; aria-label=&quot;Example account&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#rail-navigation&quot; aria-current=&quot;page&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#rail-navigation&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;button type=&quot;button&quot; disabled&gt;Coming soon&lt;/button&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;</code></pre><pre><code>@use "flair";
 .demo-rail { @extend %p-rail-navigation; }</code></pre></details>
 </section>
+	<hr class="reference-divider" />
+	<section class="reference-section" aria-labelledby="usage-title">
+		<h2 id="usage-title">Using these styles</h2>
+		<p>
+			Import <code>flair</code>, include <code>flair.defaults</code> on your application
+			root, then extend the placeholders shown in each example onto your own selectors.
+			The <code>demo-</code> names belong to this website. The containing layout
+			determines available width; theme properties are inherited.
+		</p>
+		<p>
+			Change the global theme to compare the same markup. Source files, dependencies,
+			property fallbacks and behavioural requirements are documented in
+			<code>docs/library.md</code>.
+		</p>
+	</section>
 </main>

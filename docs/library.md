@@ -1008,3 +1008,21 @@ Form action containers (`%p-form-actions`, or `.actions` within `%p-form-fields`
 reserve a label line and field gap above their buttons. This uses the shared label
 font-size, line-height and field-gap tokens, including in stacked forms. Override
 `--theme-actions-padding-block-start` when a layout needs different spacing.
+
+### Input groups and reference-page order
+
+`%p-input-group` joins native controls into one split field. See
+[Form foundations](forms.md#input-groups) and `/library/forms/#input-groups` for
+the markup, disabled prefix/suffix behaviour and sizing contract.
+
+Library pages put all example sections before a `hr.reference-divider`, then
+the composition/usage reference. Existing heading IDs remain stable.
+
+The focused browser check covers all five themes in both colour schemes at
+320px and 1280px, shared seams, keyboard focus, disabled submission, RTL,
+accessibility, and example/reference ordering on all ten library pages:
+
+```sh
+FLAIR_TEST_URL=http://localhost:8084 NODE_PATH=/tmp/flair-review/node_modules \
+  node test/input-groups-browser-check.cjs
+```

@@ -1,0 +1,44 @@
+@use "../mixin/controls";
+
+// Direct native controls share an edge, while keeping independent names and states.
+%p-input-group {
+	display: flex;
+	align-items: stretch;
+	gap: 0;
+	min-inline-size: 0;
+	inline-size: 100%;
+	@include controls.controls("> ");
+
+	> :where(input, select, textarea, button) {
+		position: relative;
+		flex: var(--theme-input-group-flex, 1 1 0);
+		min-inline-size: 0;
+		inline-size: 0;
+		border-radius: 0;
+		box-shadow: none;
+
+		&:not(:first-child) {
+			margin-inline-start: calc(-1 * var(--theme-border-width));
+		}
+
+		&:first-child {
+			border-start-start-radius: var(--theme-control-radius, var(--theme-radius));
+			border-end-start-radius: var(--theme-control-radius, var(--theme-radius));
+		}
+
+		&:last-child {
+			border-start-end-radius: var(--theme-control-radius, var(--theme-radius));
+			border-end-end-radius: var(--theme-control-radius, var(--theme-radius));
+		}
+
+		&[data-span="narrow"] {
+			flex: var(--theme-input-group-narrow-flex, 0 1 auto);
+			inline-size: auto;
+			field-sizing: content;
+		}
+
+		&:focus:not(:disabled) {
+			z-index: 1;
+		}
+	}
+}
