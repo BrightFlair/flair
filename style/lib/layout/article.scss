@@ -1,0 +1,5 @@
+%l-article {
+	max-inline-size: var(--theme-prose-measure, 65ch);
+	margin-inline: auto;
+	min-inline-size: 0;
+}

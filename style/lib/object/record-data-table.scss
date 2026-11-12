@@ -1,0 +1,33 @@
+@use "../variable/break";
+
+%o-record-data-table {
+	inline-size: 100%;
+	border-collapse: collapse;
+	text-align: start;
+	font-size: .85rem;
+
+	th, td {
+		padding: var(--theme-space-4) var(--theme-table-padding-inline);
+		border-block-end: 1px solid var(--theme-color-border);
+		text-align: start;
+	}
+
+	th {
+		font-weight: 600;
+	}
+
+	thead th {
+		font-size: .75rem;
+		color: var(--theme-color-text);
+	}
+
+	tbody th {
+		color: var(--theme-color-heading);
+		white-space: nowrap;
+	}
+
+	[data-priority="secondary"], .full-label {
+		display: none;
+	}
+
+}

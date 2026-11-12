@@ -7,7 +7,7 @@ const sass = require('sass');
 const {chromium} = require('playwright');
 const reference = process.env.FLAIR_GITHUB_REFERENCE;
 assert.ok(reference, 'Set FLAIR_GITHUB_REFERENCE to the reference checkout.');
-const compile = source => sass.compileString(source, {loadPaths: [path.resolve('style'), path.join(reference, 'style')]}).css;
+const compile = source => sass.compileString(source, {loadPaths: [path.resolve('style/lib'), path.join(reference, 'style')]}).css;
 const sourceCss = compile(`
 @use "${reference}/style/style";
 @use "${reference}/style/decoration/sidebar";
@@ -17,7 +17,7 @@ const flairCss = compile(`
 @use "flair";
 @use "theme/github" as theme;
 :root { @include flair.defaults; @include theme.github; font: 400 14px/normal var(--theme-font-body); }
-@include flair.base;
+@include flair.init;
 body { background: var(--theme-color-surface); color: var(--theme-color-text); }
 global-header { display:block; background:var(--theme-color-surface-disabled); border-bottom:1px solid var(--theme-color-border); }
 global-header nav { @extend %p-page-tabs; margin-inline:1rem; }

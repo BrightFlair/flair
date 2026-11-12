@@ -1,0 +1,38 @@
+@use "../variable/break";
+
+%l-admin-shell {
+	min-block-size: 100svh;
+
+	> aside {
+		min-inline-size: 0;
+	}
+
+	> main {
+		min-inline-size: 0;
+		padding: var(--theme-workspace-padding);
+	}
+
+	@media(min-width: break.$shell) {
+		display: grid;
+		grid-template-columns: var(--theme-sidebar-width) minmax(0, 1fr);
+		grid-template-rows: minmax(0, 1fr) auto;
+		align-items: start;
+
+		> aside {
+			position: fixed;
+			inset-block-start: 0;
+			inset-inline-start: 0;
+			inline-size: var(--theme-sidebar-width);
+			block-size: 100svh;
+			z-index: 1;
+			overflow-y: auto;
+			overscroll-behavior: contain;
+		}
+		> main {
+			grid-column: 2;
+		}
+		> footer {
+			grid-column: 2;
+		}
+	}
+}

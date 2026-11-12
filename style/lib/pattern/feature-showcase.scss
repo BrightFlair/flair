@@ -1,0 +1,55 @@
+@use "../variable/break";
+
+// Four native radio choices around one shared media position.
+// Each .showcase-item owns its radio, .showcase-copy and .showcase-media.
+%p-feature-showcase {
+	@media (min-width: break.$wide) {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, var(--theme-showcase-media-share, 1.4fr)) minmax(0, 1fr);
+		gap: var(--theme-showcase-gap, var(--theme-space-8));
+		align-items: start;
+
+		> .showcase-item {
+			display: contents;
+
+			> .showcase-copy {
+				position: relative;
+				min-inline-size: 0;
+				opacity: var(--theme-showcase-inactive-opacity, 0.6);
+			}
+
+			&:nth-child(1) > .showcase-copy { grid-area: 1 / 1; }
+			&:nth-child(2) > .showcase-copy { grid-area: 2 / 1; }
+			&:nth-child(3) > .showcase-copy { grid-area: 1 / 3; }
+			&:nth-child(4) > .showcase-copy { grid-area: 2 / 3; }
+
+			> .showcase-media {
+				display: none;
+				grid-area: 1 / 2 / 3 / 3;
+				min-inline-size: 0;
+				align-self: stretch;
+			}
+
+			&:has(> input:checked) {
+				> .showcase-copy { opacity: 1; }
+				> .showcase-media { display: grid; }
+			}
+
+			&:has(> input:focus-visible) > .showcase-copy {
+				outline: var(--theme-focus-width, 2px) solid var(--theme-focus-color, currentColor);
+				outline-offset: var(--theme-focus-offset, 2px);
+			}
+
+			// A label inside a heading can make the whole copy region clickable.
+			.showcase-copy label {
+				cursor: pointer;
+
+				&::after {
+					content: "";
+					position: absolute;
+					inset: 0;
+				}
+			}
+		}
+	}
+}

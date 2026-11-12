@@ -1,9 +1,0 @@
-%d-cluster {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: var(--theme-cluster-gap, var(--theme-space-3));
-	> * {
-		min-inline-size: 0;
-	}
-}

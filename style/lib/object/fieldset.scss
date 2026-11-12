@@ -1,0 +1,28 @@
+@use "../mixin/controls";
+@use "form-field";
+@use "choice-field";
+
+%o-fieldset {
+	display: grid;
+	gap: var(--theme-form-gap, var(--theme-space-4));
+	min-inline-size: 0;
+	margin: 0;
+	padding: var(--theme-fieldset-padding, var(--theme-space-4));
+	border: var(--theme-border-width) solid var(--theme-color-border);
+	border-radius: var(--theme-radius);
+	font: var(--theme-font-weight) var(--theme-font-size)/var(--theme-line-height) var(--theme-font-body);
+	color: var(--theme-color-text);
+
+	> legend {
+		padding-inline: var(--theme-space-2);
+		font-weight: var(--theme-label-weight);
+	}
+
+	> :where(.field, label:not(.choice)) {
+		@extend %o-form-field;
+	}
+
+	> .choice {
+		@extend %o-choice-field;
+	}
+}

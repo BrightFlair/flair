@@ -1,0 +1,56 @@
+@use "../decoration/typography";
+@use "../object/link";
+
+@mixin typography {
+	:where(h1, h2, h3, h4, h5, h6) {
+		@extend %d-typography-heading;
+		margin-block: var(--theme-space-6) var(--theme-space-3);
+	}
+	:where(h1) {
+		font-size: var(--theme-heading-1, 2.5rem);
+	}
+	:where(h2) {
+		font-size: var(--theme-heading-2, 2rem);
+	}
+	:where(h3) {
+		font-size: var(--theme-heading-3, 1.5rem);
+	}
+	:where(h4) {
+		font-size: var(--theme-heading-4, 1.25rem);
+	}
+	:where(h5, h6) {
+		font-size: var(--theme-font-size);
+	}
+	:where(p, ul, ol, dl, blockquote, figure) {
+		margin: 0;
+		margin-block-end: var(--theme-space-4);
+		line-height: inherit;
+	}
+	:where(ul, ol) {
+		padding-inline-start: var(--theme-space-6);
+	}
+	:where(li + li) {
+		margin-block-start: var(--theme-space-2);
+	}
+	:where(a) {
+		@extend %o-link;
+	}
+	:where(blockquote) {
+		padding-inline-start: var(--theme-space-4);
+		border-inline-start: var(--theme-quote-border-width, 4px) solid var(--theme-color-accent);
+		color: var(--theme-color-muted);
+	}
+	:where(small, figcaption) {
+		font-size: var(--theme-small-size, 0.875rem);
+		color: var(--theme-color-muted);
+	}
+	:where(mark) {
+		background: var(--theme-selected-background, var(--theme-color-surface-disabled));
+		color: var(--theme-selected-text, var(--theme-color-text));
+	}
+	:where(hr) {
+		border: 0;
+		border-block-start: var(--theme-border-width) solid var(--theme-color-border);
+		margin-block: var(--theme-space-6);
+	}
+}

@@ -1,0 +1,18 @@
+@use "grid";
+
+%l-dashboard {
+	display: grid;
+	gap: var(--theme-stack-gap, var(--theme-space-4));
+	min-inline-size: 0;
+
+	> header {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--theme-space-3);
+		justify-content: space-between;
+	}
+
+	> .metrics {
+		@extend %l-grid;
+	}
+}

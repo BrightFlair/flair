@@ -1,0 +1,73 @@
+@use "../variable/break";
+@use "interactive";
+
+%o-button {
+	@extend %o-interactive;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	// Button gap owns icon spacing; glyph margins must not add it twice.
+	--theme-icon-gap: 0px;
+	gap: var(--theme-button-gap, var(--theme-space-2));
+	inline-size: auto;
+	// A glyph-only button asks for a square target through this.
+	min-inline-size: var(--theme-button-min-width, auto);
+	min-block-size: max(44px, var(--theme-button-min-height, var(--theme-control-min-height)));
+	padding-block: var(
+		--theme-button-padding-block,
+		var(--theme-control-padding-block, var(--theme-space-2))
+	);
+	padding-inline: var(
+		--theme-button-padding-inline,
+		var(--theme-control-padding-inline, var(--theme-space-3))
+	);
+	border-radius: var(
+		--theme-button-radius,
+		var(--theme-control-radius, var(--theme-radius))
+	);
+	border-color: var(
+		--theme-button-border,
+		var(--theme-control-border, var(--theme-color-border))
+	);
+	font-size: var(--theme-button-font-size, var(--theme-font-size));
+	text-align: center;
+	text-decoration: none;
+	overflow-wrap: anywhere;
+	cursor: var(--theme-button-cursor, pointer);
+	background: var(--theme-button-background, var(--theme-color-surface));
+	color: var(--theme-button-text, var(--theme-color-text));
+	box-shadow: var(--theme-button-shadow, none);
+	font-weight: var(--theme-button-weight, var(--theme-label-weight));
+	// Prose styles anchors as links after object extensions are resolved. The
+	// link state gives an anchor-button enough specificity to retain button
+	// decoration while still allowing a theme to opt into another treatment.
+	&:any-link {
+		color: var(--theme-button-text, var(--theme-color-text));
+		text-decoration: var(--theme-button-decoration, none);
+	}
+
+	&:hover:not(:disabled, [aria-disabled="true"]) {
+		border-color: var(
+			--theme-button-border-hover,
+			var(--theme-control-border-hover, var(--theme-color-text))
+		);
+		box-shadow: var(--theme-button-shadow-hover, none);
+		background: var(--theme-button-background-hover, var(--theme-color-surface-disabled));
+		text-decoration: var(
+			--theme-button-decoration-hover,
+			var(--theme-button-decoration, none)
+		);
+	}
+
+	&:active:not(:disabled, [aria-disabled="true"]) {
+		background: var(
+			--theme-button-background-active,
+			var(--theme-button-background-hover, var(--theme-color-surface-disabled))
+		);
+		box-shadow: var(--theme-button-shadow-active, none);
+	}
+
+	@media (min-width: break.$compact) {
+		min-block-size: var(--theme-button-min-height, var(--theme-control-min-height));
+	}
+}

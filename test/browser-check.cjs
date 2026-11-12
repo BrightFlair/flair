@@ -4,7 +4,7 @@ const AxeBuilder = require('@axe-core/playwright').default;
 const assert = require('node:assert/strict');
 const baseUrl = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
 const routes = ['typography', 'controls', 'forms', 'surfaces', 'navigation', 'disclosures', 'tables', 'feedback', 'code', 'layouts'];
-const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const themes = ['base', 'bright', 'github', 'clean', 'gt'];
 
 (async () => {
 	const browser = await chromium.launch({
@@ -25,7 +25,7 @@ const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'
 					await page.evaluate(() => document.fonts.ready);
 					assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${theme} ${width} ${route}: page overflow`);
 					assert.equal(await page.locator('html').getAttribute('data-flair-theme'), theme);
-					if(theme === 'ink' && route === 'layouts') {
+					if(theme === 'base' && route === 'layouts') {
 						const columns = await page.locator('[data-grid-default]').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length);
 						assert.equal(columns, width === 320 ? 1 : width === 768 ? 2 : 3);
 						assert.equal(await page.locator('[data-grid-narrow]').evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length), 1);
@@ -62,7 +62,7 @@ const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'
 			console.log(`Passed pages, widths and accessibility: ${theme}`);
 		}
 
-		await page.goto(`${baseUrl}/library/disclosures/?theme=material`);
+		await page.goto(`${baseUrl}/library/disclosures/?theme=bright`);
 		const opener = page.locator('#dialog [data-dialog-open]');
 		await opener.click();
 		assert.ok(await page.locator('#dialog dialog').evaluate(element => element.matches(':modal')));
@@ -99,7 +99,7 @@ const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'
 		assert.equal(await page.locator('#exclusive .demo-accordion > details[open]').count(), 1);
 
 		await page.goto(`${baseUrl}/library/feedback/`);
-		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'material');
+		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'bright');
 		for(const value of ['60', '80', '100', '0']) {
 			await page.locator('[data-progress-step]').click();
 			assert.equal(await page.locator('progress').getAttribute('value'), value);
@@ -167,9 +167,9 @@ const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'
 		await page.goto(`${baseUrl}/library/layouts/`);
 		await page.locator('.reference-source').evaluateAll(elements => elements.forEach(element => { element.open = true; }));
 		assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-		await page.locator('select[name="theme"]').selectOption('ink');
+		await page.locator('select[name="theme"]').selectOption('base');
 		await page.reload();
-		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'ink');
+		assert.equal(await page.locator('html').getAttribute('data-flair-theme'), 'base');
 
 		const nojs = await browser.newContext({javaScriptEnabled: false});
 		const staticPage = await nojs.newPage();

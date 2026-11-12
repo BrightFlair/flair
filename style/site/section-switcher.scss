@@ -1,4 +1,4 @@
-@use "../flair";
+@use "../lib/flair";
 
 @include flair.icon($names: (sun, moon), $prefix: "section-switcher .scheme-choice > span");
 

@@ -131,6 +131,71 @@
 			</p>
 		</div>
 	</section>
+	<section class="reference-section" id="checkboxes" aria-labelledby="checkbox-form-title">
+		<h2 id="checkbox-form-title">Checkboxes in a form</h2>
+		<p>Click either the checkbox or its label to toggle it. Tab moves between controls; Space changes the focused checkbox.</p>
+		<div class="reference-grid">
+			<div class="flair-example">
+				<form class="demo-form">
+					<label class="choice">
+						<input type="checkbox" name="setPassword" />
+						<span>Set password</span>
+					</label>
+					<label class="choice">
+						<input type="checkbox" name="emailInstructions" checked />
+						<span>Email user instructions for logging in</span>
+					</label>
+					<label class="choice">
+						<input type="checkbox" name="unavailable" disabled />
+						<span>Unavailable option</span>
+					</label>
+					<label class="choice">
+						<input type="checkbox" name="enabledElsewhere" checked disabled />
+						<span>Enabled option that cannot be changed</span>
+					</label>
+				</form>
+			</div>
+			<pre><code>&lt;form class="account-form"&gt;
+	&lt;label class="choice"&gt;
+		&lt;input type="checkbox" name="setPassword" /&gt;
+		&lt;span&gt;Set password&lt;/span&gt;
+	&lt;/label&gt;
+	&lt;label class="choice"&gt;
+		&lt;input type="checkbox" name="emailInstructions" checked /&gt;
+		&lt;span&gt;Email user instructions for logging in&lt;/span&gt;
+	&lt;/label&gt;
+&lt;/form&gt;
+
+.account-form {
+	@extend %p-form-fields;
+}</code></pre>
+		</div>
+	</section>
+	<section class="reference-section" aria-labelledby="wrapping-checkbox-title">
+		<h2 id="wrapping-checkbox-title">Wrapping labels</h2>
+		<p>The checkbox stays alongside the first line. Subsequent lines start beneath the label text.</p>
+		<div class="flair-example">
+			<label class="demo-choice" style="max-inline-size: 20rem">
+				<input type="checkbox" name="updates" />
+				<span>Receive release notes, documentation updates and invitations to try new features before they are released.</span>
+			</label>
+		</div>
+	</section>
+	<section class="reference-section" aria-labelledby="large-checkbox-title">
+		<h2 id="large-checkbox-title">Larger text and line spacing</h2>
+		<p>Alignment follows the label's line height, including when a theme changes its font. Use the theme selector to compare appearances.</p>
+		<div class="flair-example" style="--theme-font-size: 1.5rem; --theme-line-height: 1.8">
+			<label class="demo-choice" style="max-inline-size: 28rem">
+				<input type="checkbox" name="largeLabel" />
+				<span>Keep me informed about important changes to my account.</span>
+			</label>
+		</div>
+		<pre><code>.notification-choice {
+	@extend %o-choice-field;
+	--theme-font-size: 1.5rem;
+	--theme-line-height: 1.8;
+}</code></pre>
+	</section>
 	<section class="reference-section" aria-labelledby="additional-states">
 		<h2 id="additional-states">Errors and disabled groups</h2>
 		<p>
@@ -211,7 +276,7 @@
 				combines these definitions into one form structure.
 			</li>
 		</ol>
-		<pre><code>@use "path/to/flair/style/flair";
+		<pre><code>@use "path/to/flair/style/lib/flair";
 
 :root {
 	@include flair.defaults;
@@ -551,4 +616,29 @@ contact-form {
 }</code></pre>
 		</details>
 	</section>
+
+<section class="reference-section" id="segmented-controls" aria-labelledby="segmented-controls-title">
+	<h2 id="segmented-controls-title">Segmented controls</h2>
+	<p>Related native buttons share a border. aria-pressed carries selection; application code owns changes.</p>
+	<div class="flair-example"><div class="demo-segments"><button type="button" aria-pressed="true">Week</button><button type="button" aria-pressed="false">Month</button><button type="button" disabled>Year</button></div></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;div class=&quot;demo-segments&quot;&gt;&lt;button type=&quot;button&quot; aria-pressed=&quot;true&quot;&gt;Week&lt;/button&gt;&lt;button type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;Month&lt;/button&gt;&lt;button type=&quot;button&quot; disabled&gt;Year&lt;/button&gt;&lt;/div&gt;</code></pre><pre><code>@use "flair";
+.demo-segments { @extend %p-segmented-control; }</code></pre></details>
+</section>
+
+<section class="reference-section" id="toggle-badges" aria-labelledby="toggle-badges-title">
+	<h2 id="toggle-badges-title">Toggle badges</h2>
+	<p>A label contains a native checkbox and its visible caption. Checked state remains available without JavaScript.</p>
+	<div class="flair-example"><label class="demo-toggle"><input type="checkbox" checked>Successful</label> <label class="demo-toggle"><input type="checkbox">Failed</label></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;label class=&quot;demo-toggle&quot;&gt;&lt;input type=&quot;checkbox&quot; checked&gt;Successful&lt;/label&gt; &lt;label class=&quot;demo-toggle&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt;Failed&lt;/label&gt;</code></pre><pre><code>@use "flair";
+.demo-toggle { @extend %o-toggle-badge; }</code></pre></details>
+</section>
+
+<section class="reference-section" id="field-actions" aria-labelledby="field-actions-title">
+	<h2 id="field-actions-title">Fields with adjacent actions</h2>
+	<p>A caption and control form one labelled object; the action belongs to the relationship beside it.</p>
+	<div class="flair-example"><div class="demo-field-action"><label class="demo-labelled"><span>Search records</span><input type="search" name="records"></label><button class="demo-button" type="button">Search</button></div></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;div class=&quot;demo-field-action&quot;&gt;&lt;label class=&quot;demo-labelled&quot;&gt;&lt;span&gt;Search records&lt;/span&gt;&lt;input type=&quot;search&quot; name=&quot;records&quot;&gt;&lt;/label&gt;&lt;button class=&quot;demo-button&quot; type=&quot;button&quot;&gt;Search&lt;/button&gt;&lt;/div&gt;</code></pre><pre><code>@use "flair";
+.demo-field-action { @extend %p-field-action; }
+.demo-labelled { @extend %o-labelled-control; @include flair.controls; }</code></pre></details>
+</section>
 </main>

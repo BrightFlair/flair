@@ -349,4 +349,12 @@
 }</code></pre>
 		</details>
 	</section>
+
+<section class="reference-section" id="rail-navigation" aria-labelledby="rail-navigation-title">
+	<h2 id="rail-navigation-title">Compact rail navigation</h2>
+	<p>A vertical relationship for native buttons or links, distinct from the marker-bearing document navigation pattern.</p>
+	<div class="flair-example"><nav class="demo-rail" aria-label="Example account"><ul><li><a href="#rail-navigation" aria-current="page">Overview</a></li><li><a href="#rail-navigation">Settings</a></li><li><button type="button" disabled>Coming soon</button></li></ul></nav></div>
+	<details class="reference-source"><summary>HTML and Sass</summary><pre><code>&lt;nav class=&quot;demo-rail&quot; aria-label=&quot;Example account&quot;&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#rail-navigation&quot; aria-current=&quot;page&quot;&gt;Overview&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#rail-navigation&quot;&gt;Settings&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;button type=&quot;button&quot; disabled&gt;Coming soon&lt;/button&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;</code></pre><pre><code>@use "flair";
+.demo-rail { @extend %p-rail-navigation; }</code></pre></details>
+</section>
 </main>

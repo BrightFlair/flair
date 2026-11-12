@@ -3,7 +3,7 @@ const {chromium} = require('playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 const assert = require('node:assert/strict');
 const base = process.env.FLAIR_TEST_URL || 'http://localhost:8084';
-const themes = ['ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard'];
+const themes = ['base', 'bright', 'github', 'clean', 'gt'];
 const routes = ['library/navigation', 'playground/documentation-website', 'playground/dashboard-app', 'playground/github-clone'];
 (async () => {
  const browser = await chromium.launch({executablePath: process.env.FLAIR_CHROMIUM_PATH || '/usr/bin/chromium', args: ['--no-sandbox']});
@@ -92,7 +92,7 @@ const routes = ['library/navigation', 'playground/documentation-website', 'playg
   assert.equal(await fallback.locator('#dialog-form dialog').evaluate(el=>getComputedStyle(el).position), 'static');
   const sass = require('sass');
   const path = require('node:path');
-  const css = sass.compileString('@use "flair"; html { @include flair.defaults; } nav { @extend %p-side-navigation; @include flair.collapsible-navigation; }', {loadPaths:[path.resolve(__dirname, '../style')]}).css;
+  const css = sass.compileString('@use "flair"; html { @include flair.defaults; } nav { @extend %p-side-navigation; @include flair.collapsible-navigation; }', {loadPaths:[path.resolve(__dirname, '../style/lib')]}).css;
   await fallback.setContent(`<style>${css}</style><nav aria-label="Sections"><button hidden aria-expanded="false" aria-controls="links">Menu</button><ul id="links"><li><a href="#content">Content</a></li></ul></nav>`);
   assert.ok(!await fallback.locator('button').isVisible(), 'standalone consumer needs no reset to hide the enhancement button');
   assert.ok(await fallback.locator('a').isVisible());

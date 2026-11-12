@@ -1,0 +1,29 @@
+@use "interactive";
+
+%o-control {
+	@extend %o-interactive;
+	inline-size: 100%;
+
+	&:focus:not(:disabled) {
+		background-color: var(--theme-control-background-focus, var(--theme-control-background, var(--theme-color-surface)));
+	}
+
+	&:focus-visible {
+		outline-offset: var(--theme-control-focus-offset, var(--theme-focus-offset));
+	}
+
+	&::placeholder {
+		color: var(--theme-color-muted);
+		opacity: var(--theme-control-placeholder-opacity, 1);
+		font-style: var(--theme-control-placeholder-font-style, normal);
+	}
+
+	&:where(textarea) {
+		min-block-size: var(--theme-textarea-min-height);
+		resize: vertical;
+	}
+
+	&[readonly] {
+		border-style: dotted;
+	}
+}

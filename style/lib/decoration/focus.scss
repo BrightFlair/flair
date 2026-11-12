@@ -1,0 +1,18 @@
+%d-focus {
+	outline: 0 solid var(--theme-focus-color, var(--theme-color-accent));
+	outline-offset: var(--theme-focus-offset);
+	transition: var(--theme-focus-transition);
+
+	&:is(:focus, :active):not(:disabled, [aria-disabled="true"]) {
+		outline: var(--theme-focus-outline);
+	}
+
+	&:active:not(:disabled, [aria-disabled="true"]) {
+		outline-width: var(--theme-focus-active-width);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+		--theme-motion-duration: 0s;
+	}
+}

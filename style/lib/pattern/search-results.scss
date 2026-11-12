@@ -1,0 +1,21 @@
+@use "list";
+
+// Ordinary navigation links, not an ARIA listbox or a combobox implementation.
+%p-search-results {
+	@extend %p-list;
+	max-block-size: var(--theme-results-max-height, none);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+
+	> li > a {
+		display: block;
+		overflow-wrap: anywhere;
+		padding: var(--theme-result-link-padding, var(--theme-space-2));
+	}
+
+	:where(p, .result-detail) {
+		font-size: var(--theme-small-size, 0.875rem);
+		color: var(--theme-color-muted);
+		margin-block: var(--theme-space-1);
+	}
+}

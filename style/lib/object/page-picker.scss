@@ -1,0 +1,23 @@
+@use "disclosure-menu";
+
+// A native details menu, e.g. an ellipsis within pagination. The containing
+// pagination can own positioning so the menu stays inside its available width.
+%o-page-picker {
+	@extend %o-disclosure-menu;
+	position: static;
+
+	> .disclosure-content {
+		inset-inline: 0;
+		inline-size: 100%;
+		max-block-size: var(--theme-page-picker-height, 12rem);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--theme-space-2);
+		margin: 0;
+		list-style: none;
+		overflow: auto;
+		overscroll-behavior: contain;
+
+		> li { margin: 0; padding: 0; }
+	}
+}

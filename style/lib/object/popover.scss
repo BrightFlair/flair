@@ -1,0 +1,22 @@
+@use "../decoration/surface";
+
+// Apply to the element with [popover], and connect a native button with
+// popovertarget. Leave display to the browser so closed content stays hidden.
+%o-popover {
+	@extend %d-surface;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	padding: var(--theme-popover-padding, var(--theme-space-4));
+	inline-size: min(var(--theme-popover-width, 24rem), calc(100% - 2 * var(--theme-space-4)));
+	max-block-size: calc(100dvh - 2 * var(--theme-space-4));
+	overflow: auto;
+	overscroll-behavior: contain;
+	overflow-wrap: anywhere;
+
+	// Unsupported browsers retain readable content in normal document flow.
+	@supports selector(:popover-open) {
+		position: fixed;
+		inset: 0;
+		margin: auto;
+	}
+}

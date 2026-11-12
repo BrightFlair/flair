@@ -1,4 +1,4 @@
-@use "../flair";
+@use "../lib/flair";
 
 .demo-syntax-tree {
 	@extend %p-syntax-tree;

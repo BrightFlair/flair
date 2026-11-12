@@ -1,0 +1,43 @@
+@use "focus";
+
+%d-control {
+	@extend %d-focus;
+	border: var(--theme-border-width) solid var(--theme-control-border, var(--theme-color-border));
+	border-radius: var(--theme-control-radius, var(--theme-radius));
+	background-color: var(--theme-control-background, var(--theme-color-surface));
+	color: var(--theme-control-text, var(--theme-color-text));
+	font-family: var(--theme-control-font, var(--theme-font-body));
+	box-shadow: var(--theme-control-shadow);
+	transition: var(--theme-control-transition, none);
+	font-size: var(--theme-font-size);
+	font-weight: var(--theme-font-weight);
+	line-height: var(--theme-line-height);
+
+	&:hover:not(:disabled, [aria-disabled="true"]) {
+		border-color: var(--theme-control-border-hover, var(--theme-color-text));
+	}
+
+	&:active:not(:disabled, [aria-disabled="true"]) {
+		background-color: var(--theme-control-background-active, var(--theme-color-surface-disabled));
+	}
+
+	&[aria-invalid="true"] {
+		border-color: var(--theme-color-danger);
+		border-style: var(--theme-control-invalid-border-style, dashed);
+	}
+
+	&:is(:disabled, [aria-disabled="true"]) {
+		background: var(
+			--theme-control-background-disabled,
+			var(--theme-color-surface-disabled)
+		);
+		color: var(--theme-control-text-disabled, var(--theme-color-muted));
+		cursor: not-allowed;
+		opacity: var(--theme-disabled-opacity, 1);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+		--theme-motion-duration: 0s;
+	}
+}

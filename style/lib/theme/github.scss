@@ -1,0 +1,131 @@
+@use "base";
+
+@mixin github {
+	@include base.base;
+
+	--pal-1: light-dark(#1f2328, #e6edf3);
+	--pal-2: light-dark(#fff, #0d1117);
+	--pal-3: light-dark(#f6f8fa, #161b22);
+	--pal-4: light-dark(#d8dee4, #30363d);
+	--pal-5: light-dark(#656d76, #9198a1);
+	--pal-6: light-dark(#0969da, #4493f8);
+	--pal-7: light-dark(#fff, #0d1117);
+	--pal-8: light-dark(#1f883d, #3fb950);
+	--pal-9: light-dark(#a40e26, #f85149);
+	// Selection, positive emphasis, attention and warning, beyond the nine.
+	--pal-10: light-dark(#ddf4ff, #051d4d);
+	--pal-11: light-dark(#1e793a, #238636);
+	--pal-12: light-dark(#fd8c73, #db6d28);
+	--pal-13: light-dark(#9a6700, #d29922);
+
+	--theme-color-text: var(--pal-1);
+	--theme-color-surface: var(--pal-2);
+	--theme-color-surface-disabled: var(--pal-3);
+	--theme-color-border: var(--pal-4);
+	--theme-color-muted: var(--pal-5);
+	--theme-color-tint: var(--pal-6);
+	--theme-color-primary: var(--pal-8);
+	--theme-color-accent: var(--theme-color-tint);
+	--theme-color-on-accent: var(--pal-7);
+	--theme-color-success: var(--pal-8);
+	--theme-color-danger: var(--pal-9);
+	--theme-color-warning: var(--pal-13);
+	--theme-font-body: sans-serif;
+	--theme-control-font: "Mona Sans", sans-serif;
+	--theme-text-leading: normal;
+	--theme-control-transition: background-color 0.1s;
+	--theme-control-background: var(--pal-3);
+	--theme-control-background-focus: var(--pal-2);
+	--theme-control-border-hover: var(--theme-color-accent);
+	--theme-control-padding-block: var(--theme-space-2);
+	--theme-control-padding-inline: var(--theme-space-2);
+	--theme-control-min-height: 0px;
+	--theme-textarea-min-height: 6rem;
+	--theme-line-height: normal;
+	--theme-radius: 0.25rem;
+	--theme-focus-width: 2px;
+	--theme-label-weight: 700;
+	--theme-button-weight: 400;
+	--theme-button-padding-inline: var(--theme-space-4);
+	--theme-button-background: var(--pal-3);
+	--theme-button-background-hover: color-mix(in srgb, var(--pal-3), var(--pal-1) 5%);
+	--theme-button-background-active: color-mix(in srgb, var(--pal-3), var(--pal-1) 20%);
+	--theme-button-border-hover: var(--theme-color-border);
+	--theme-button-primary-background: var(--theme-color-primary);
+	// GitHub's green is dark enough in the light scheme to need white text;
+	// the brighter dark-scheme green retains its established dark foreground.
+	--theme-button-primary-text: light-dark(#fff, #0d1117);
+	--theme-color-ui-background: var(--theme-color-primary);
+	--theme-color-ui-preferred: #0d1117;
+	// Keep white captions readable during hover and press in the light scheme.
+	--theme-button-primary-background-hover: light-dark(
+		color-mix(in srgb, var(--theme-color-primary), black 5%),
+		color-mix(in srgb, var(--theme-color-primary), white 5%)
+	);
+	--theme-button-primary-background-active: light-dark(
+		color-mix(in srgb, var(--theme-color-primary), black 10%),
+		color-mix(in srgb, var(--theme-color-primary), white 20%)
+	);
+	--theme-button-primary-border: var(--pal-11);
+	--theme-button-primary-decoration-hover: none;
+	--theme-font-heading: var(--theme-font-body);
+	--theme-heading-weight: 400;
+	--theme-heading-1: 2rem;
+	--theme-heading-2: 1.5rem;
+	--theme-surface-background: var(--pal-2);
+	--theme-surface-padding: var(--theme-space-4);
+	--theme-surface-radius: 0.375rem;
+	--theme-surface-shadow: 0 1px 0 rgb(31 35 40 / 4%);
+	--theme-selected-background: var(--pal-10);
+	--theme-selected-text: var(--pal-1);
+	--theme-nav-radius: 0.5rem;
+	--theme-nav-current-background: var(--pal-3);
+	--theme-nav-hover-background: var(--pal-4);
+	--theme-nav-current-hover-background: var(--theme-nav-hover-background);
+	--theme-nav-current-shadow: none;
+	--theme-side-nav-current-shadow: none;
+	--theme-tab-indicator-width: 2px;
+	--theme-tab-indicator-color: var(--pal-12);
+	--theme-tab-gap: 0;
+	--theme-tab-link-weight: 500;
+	--theme-tab-current-weight: 500;
+	--theme-tab-link-opacity: 0.75;
+	--theme-tab-current-opacity: 1;
+	--theme-tab-link-transition: background-color 0.1s ease-in-out;
+	--theme-tab-current-background: transparent;
+	--theme-tab-wrap: nowrap;
+	--theme-tab-overflow: auto;
+	--theme-tab-scrollbar: none;
+	--theme-tab-border-width: 0px;
+	--theme-side-nav-line-height: 1.4;
+	--theme-side-nav-background: var(--pal-2);
+	--theme-side-nav-focus-background: var(--pal-2);
+	--theme-side-nav-current-focus-background: var(--pal-3);
+	--theme-side-nav-hover-background: var(--pal-3);
+	--theme-side-nav-margin-block-start: 1rem;
+	--theme-side-nav-icon-opacity: 0.75;
+	--theme-tab-link-margin: 0.5rem;
+	--theme-tab-link-padding-inline: 0.5rem;
+	--theme-tab-link-radius: 0.5rem;
+	--theme-nav-padding-block: var(--theme-space-2);
+	--theme-badge-radius: 999px;
+	--theme-badge-background: var(--pal-3);
+	--theme-disclosure-background: var(--pal-3);
+	--theme-disclosure-hover-background: var(--theme-disclosure-background);
+	--theme-disclosure-weight: 700;
+	--theme-code-background: var(--pal-3);
+	--theme-syntax-keyword: light-dark(#cf222e, #ff7b72);
+	--theme-syntax-string: light-dark(#0a3069, #a5d6ff);
+	--theme-syntax-comment: var(--pal-5);
+	--theme-syntax-number: light-dark(#0550ae, #79c0ff);
+	--theme-table-header-background: var(--pal-3);
+	--theme-table-stripe-background: var(--pal-3);
+	--theme-progress-height: 0.5rem;
+
+	// Coordinated surface and navigation states for the contrast sidebar variant.
+	--theme-sidebar-contrast-background: var(--pal-3);
+	--theme-sidebar-contrast-text: var(--pal-1);
+	--theme-sidebar-contrast-hover-background: light-dark(#eaeef2, #21262d);
+	--theme-sidebar-contrast-current-background: var(--pal-4);
+	--theme-sidebar-contrast-current-text: var(--pal-1);
+}

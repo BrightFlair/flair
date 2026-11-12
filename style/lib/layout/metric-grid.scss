@@ -1,0 +1,14 @@
+%l-metric-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--theme-space-4);
+	min-inline-size: 0;
+	max-inline-size: var(--theme-metrics-max);
+	container: metric-grid / inline-size;
+
+	> * {
+		flex: 1 1 min(var(--theme-metric-max), calc((100% - var(--theme-space-4)) / 2));
+		min-inline-size: 0;
+		max-inline-size: var(--theme-metric-max);
+	}
+}

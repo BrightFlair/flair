@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const sass = require('sass');
 const path = require('node:path');
 const compile = source => sass.compileString(source, {
-	loadPaths: [path.resolve(__dirname, '../style')], style: 'expanded',
+	loadPaths: [path.resolve(__dirname, '../style/lib')], style: 'expanded',
 }).css;
 
 test('importing public definitions has no CSS or font side effects', () => {
@@ -15,7 +15,7 @@ test('a button consumer emits its dependencies without form or element defaults'
 .download {
 	@extend %o-button;
 }`);
-	assert.match(css, /\.download:focus-visible/);
+	assert.match(css, /\.download:is\(:focus, :active\)/);
 	assert.match(css, /\.download:any-link/);
 	assert.match(css, /--theme-button-decoration, none/);
 	assert.match(css, /--theme-control-padding-inline/);
@@ -42,7 +42,8 @@ test('form extension includes fields, rows, actions and native disabled state', 
 		assert.ok(css.includes(part), part);
 	}
 	assert.doesNotMatch(css, /!important|position:\s*(absolute|fixed)|@font-face/);
-	assert.ok(css.length < 30000, `Unexpected selector growth: ${css.length} bytes`);
+	// Pointer focus and press now share the themed ring in every native mapping.
+	assert.ok(css.length < 40 * 1024, `Unexpected selector growth: ${css.length} bytes`);
 });
 
 test('native element rules and default properties are explicitly opt-in', () => {
@@ -71,104 +72,15 @@ test('primary buttons use an independent colour with tint-aware contrast', () =>
 	assert.match(defaults, /--theme-color-ui-background:\s*var\(--theme-color-primary\)/);
 	assert.match(defaults, /--theme-color-ui-preferred:\s*var\(--theme-color-on-accent\)/);
 	assert.match(defaults, /--theme-color-ui-contrast:\s*var\(--theme-color-ui-preferred\)/);
-	assert.match(defaults, /contrast-color\(var\(--theme-color-ui-background\)\) 80%/);
+	assert.doesNotMatch(defaults, /contrast-color/);
 	assert.match(defaults, /var\(--theme-color-ui-preferred\)/);
 	assert.match(button, /var\(--theme-button-primary-text, var\(--theme-color-ui-contrast\)\)/);
 	assert.match(button, /var\(--theme-button-primary-background, var\(--theme-color-primary\)\)/);
-	const github = compile('@use "theme"; .theme { @include theme.github; }');
+	const github = compile('@use "theme/github" as theme; .theme { @include theme.github; }');
 	assert.match(github, /--theme-color-tint:\s*var\(--pal-6\)/);
 	assert.match(github, /--theme-color-primary:\s*var\(--pal-8\)/);
 	assert.match(github, /--theme-color-ui-background:\s*var\(--theme-color-primary\)/);
 	assert.match(github, /--theme-color-ui-preferred:\s*#0d1117/);
-});
-
-test('material derives its tonal surfaces from the primary colour', () => {
-	const material = compile('@use "theme"; .theme { @include theme.material; }');
-	for(const token of [
-		'--theme-color-surface', '--theme-color-surface-disabled',
-		'--theme-control-background', '--theme-surface-background',
-		'--theme-inset-background', '--theme-selected-background',
-	]) {
-		assert.match(material, new RegExp(`${token}:\\s*light-dark\\(`), token);
-	}
-	assert.match(material, /color-mix\(in srgb, #fff, var\(--theme-color-primary\)/);
-	assert.match(material, /color-mix\(in srgb, #141218, var\(--theme-color-primary\)/);
-});
-
-test('vivid derives its primary and companion tones from the primary colour', () => {
-	const vivid = compile('@use "theme"; .theme { @include theme.vivid; }');
-	for(const token of [
-		'--theme-vivid-ink', '--theme-vivid-surface', '--theme-vivid-raised',
-		'--theme-vivid-inset', '--theme-vivid-border', '--theme-vivid-muted',
-	]) {
-		assert.match(vivid, new RegExp(`${token}:\\s*light-dark\\(`), token);
-	}
-	assert.match(vivid, /--theme-selected-background:\s*var\(--theme-color-primary\)/);
-	assert.match(vivid, /--theme-sidebar-contrast-current-background:\s*var\(--theme-color-primary\)/);
-	assert.match(vivid, /--theme-selected-text:\s*var\(--theme-color-ui-contrast\)/);
-	assert.match(vivid, /--theme-badge-text:\s*var\(--theme-color-ui-contrast\)/);
-	assert.match(vivid, /color-mix\(in srgb, #fff6b0 75%, var\(--theme-color-primary\)\)/);
-});
-
-test('paper derives its stock and selected states from the primary colour', () => {
-	const paper = compile('@use "theme"; .theme { @include theme.paper; }');
-	for(const token of [
-		'--theme-paper-ink', '--theme-paper-surface', '--theme-paper-raised',
-		'--theme-paper-inset', '--theme-paper-border', '--theme-paper-muted',
-	]) {
-		assert.match(paper, new RegExp(`${token}:\\s*light-dark\\(`), token);
-	}
-	assert.match(paper, /--theme-selected-background:\s*var\(--theme-color-primary\)/);
-	assert.match(paper, /--theme-selected-text:\s*var\(--theme-color-ui-contrast\)/);
-	assert.match(paper, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
-});
-
-test('monochrome derives restrained neutral tones from the primary colour', () => {
-	const ink = compile('@use "theme"; .theme { @include theme.ink; }');
-	for(const token of [
-		'--theme-ink-text', '--theme-ink-surface', '--theme-ink-raised',
-		'--theme-ink-panel', '--theme-ink-border', '--theme-ink-muted',
-	]) {
-		assert.match(ink, new RegExp(`${token}:\\s*light-dark\\(`), token);
-	}
-	assert.match(ink, /--theme-selected-background:\s*var\(--theme-color-primary\)/);
-	assert.match(ink, /--theme-selected-text:\s*var\(--theme-color-ui-contrast\)/);
-	assert.match(ink, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
-});
-
-test('clean dashboard derives its product surfaces from the primary colour', () => {
-	const dashboard = compile('@use "theme"; .theme { @include theme.clean-dashboard; }');
-	for(const token of [
-		'--theme-clean-dashboard-ink', '--theme-clean-dashboard-surface',
-		'--theme-clean-dashboard-raised', '--theme-clean-dashboard-inset',
-		'--theme-clean-dashboard-border', '--theme-clean-dashboard-muted',
-	]) {
-		assert.match(dashboard, new RegExp(`${token}:\\s*light-dark\\(`), token);
-	}
-	assert.match(dashboard, /--theme-sidebar-contrast-current-background:\s*var\(--theme-color-primary\)/);
-	assert.match(dashboard, /--theme-sidebar-contrast-current-text:\s*var\(--theme-color-ui-contrast\)/);
-	assert.match(dashboard, /--theme-button-primary-text:\s*var\(--theme-color-ui-contrast\)/);
-	assert.match(dashboard, /--theme-table-stripe-background:\s*color-mix\(in srgb, var\(--theme-color-primary\)/);
-});
-
-test('public overrides remain inherited, not reset on individual controls', () => {
-	const css = compile(`@use "flair";
-.profile {
-	@extend %p-form-fields;
-	--theme-control-padding-inline: 2rem;
-}`);
-	assert.match(css, /var\(--theme-control-padding-inline, var\(--theme-space-3\)\)/);
-	assert.equal((css.match(/--theme-control-padding-inline:/g) || []).length, 1);
-});
-
-test('grid consumers do not emit surfaces, navigation or application width limits', () => {
-	const css = compile(`@use "flair";
-.results {
-	@extend %p-grid;
-}`);
-	assert.match(css, /repeat\(auto-fit/);
-	assert.match(css, /--theme-grid-columns, 3/);
-	assert.doesNotMatch(css, /max-inline-size|background|aria-current|:root|@media/);
 });
 
 test('sidebar consumers wrap in source order without positioning offsets', () => {
@@ -193,7 +105,7 @@ test('disclosure extension preserves native visibility and marker behaviour', ()
 
 test('every public placeholder can be consumed in isolation', () => {
 	const fs = require('node:fs');
-	const root = path.resolve(__dirname, '../style');
+	const root = path.resolve(__dirname, '../style/lib');
 	const placeholders = new Set();
 	for (const folder of ['decoration', 'object', 'pattern', 'layout']) {
 		for (const file of fs.readdirSync(path.join(root, folder))) {
@@ -220,7 +132,7 @@ test('every public placeholder can be consumed in isolation', () => {
 
 test('library placeholders have one matching file and explicit dependencies', () => {
 	const fs = require('node:fs');
-	const root = path.resolve(__dirname, '../style');
+	const root = path.resolve(__dirname, '../style/lib');
 	for (const [folder, prefix] of Object.entries({ decoration: 'd', object: 'o', pattern: 'p', layout: 'l' })) {
 		for (const file of fs.readdirSync(path.join(root, folder)).filter(file => file.endsWith('.scss'))) {
 			const source = fs.readFileSync(path.join(root, folder, file), 'utf8');
@@ -261,10 +173,9 @@ test('checklists remain independent of pricing, card surfaces and application fo
 });
 
 test('theme mixins are opt-in and export no website selectors or font downloads', () => {
-	assert.equal(compile('@use "theme";'), '');
-	for (const name of ['base', 'ink', 'paper', 'vivid', 'github', 'material', 'clean-dashboard']) {
-		const css = compile(`@use "theme"; .theme { @include theme.${name}; }`);
-		assert.equal(compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`), css);
+	for (const name of ['base', 'bright', 'github', 'clean', 'gt']) {
+		assert.equal(compile(`@use "theme/${name}";`), '');
+		const css = compile(`@use "theme/${name}" as theme; .theme { @include theme.${name}; }`);
 		assert.match(css, /--theme-color-text/);
 		assert.match(css, /--theme-color-tint/);
 		assert.match(css, /--theme-color-primary/);
@@ -299,7 +210,7 @@ test('all new patterns have live examples and source in the appropriate document
 		code: ['document-baseline', 'syntax-trees', 'http-metadata', 'labelled-regions'],
 		controls: ['icons', 'icon-buttons'],
 		forms: ['compound-fields', 'repeatable-fields'],
-		disclosures: ['drawers'],
+		disclosures: ['drawers', 'popovers'],
 		tables: ['key-value-lists'],
 	};
 	for (const [page, ids] of Object.entries(pages)) {

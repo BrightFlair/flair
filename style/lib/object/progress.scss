@@ -1,0 +1,23 @@
+%o-progress {
+	inline-size: 100%;
+	block-size: var(--theme-progress-height, 0.75rem);
+	accent-color: var(--theme-color-accent);
+	border: 0;
+	border-radius: var(--theme-radius);
+	background: var(--theme-color-surface-disabled);
+
+	&::-webkit-progress-bar {
+		background: var(--theme-color-surface-disabled);
+		border-radius: var(--theme-radius);
+	}
+
+	&::-webkit-progress-value {
+		background: var(--theme-color-accent);
+		border-radius: var(--theme-radius);
+	}
+
+	&::-moz-progress-bar {
+		background: var(--theme-color-accent);
+		border-radius: var(--theme-radius);
+	}
+}

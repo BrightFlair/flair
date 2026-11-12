@@ -1,0 +1,9 @@
+// Shared media geometry for article heroes, previews and prose figures.
+%o-article-picture {
+	display: block;
+	inline-size: 100%;
+	aspect-ratio: var(--theme-article-picture-ratio, 3 / 2);
+	background: var(--theme-color-surface-disabled);
+	border: var(--theme-border-width) solid var(--theme-color-border);
+	object-fit: cover;
+}

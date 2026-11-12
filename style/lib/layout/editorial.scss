@@ -1,0 +1,15 @@
+@use "../variable/break";
+
+// A heading or short introduction beside a wider content column.
+%l-editorial {
+	@media (min-width: break.$wide) {
+		display: grid;
+		grid-template-columns: minmax(0, var(--theme-editorial-leading, 1fr)) minmax(0, var(--theme-editorial-content, 1fr));
+		gap: var(--theme-editorial-gap, var(--theme-space-12));
+		align-items: start;
+
+		> * {
+			min-inline-size: 0;
+		}
+	}
+}

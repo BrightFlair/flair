@@ -1,0 +1,15 @@
+@use "../decoration/control";
+@use "../variable/break";
+
+%o-interactive {
+	@extend %d-control;
+	box-sizing: border-box;
+	min-inline-size: 0;
+	max-inline-size: 100%;
+	min-block-size: max(44px, var(--theme-control-min-height));
+	margin: 0;
+	padding: var(--theme-control-padding-block, var(--theme-space-2)) var(--theme-control-padding-inline, var(--theme-space-3));
+	@media (min-width: break.$compact) {
+		min-block-size: var(--theme-control-min-height);
+	}
+}

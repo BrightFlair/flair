@@ -1,0 +1,42 @@
+@use "button";
+
+%o-button-primary {
+	@extend %o-button;
+
+	&:not(:disabled, [aria-disabled="true"]) {
+		background: var(--theme-button-primary-background, var(--theme-color-primary));
+		color: var(--theme-button-primary-text, var(--theme-color-ui-contrast));
+		border-color: var(
+			--theme-button-primary-border,
+			var(--theme-button-primary-background, var(--theme-color-primary))
+		);
+		box-shadow: var(--theme-button-primary-shadow, var(--theme-button-shadow, none));
+	}
+
+	&:hover:not(:disabled, [aria-disabled="true"]) {
+		border-color: var(
+			--theme-button-primary-border,
+			var(--theme-button-primary-background, var(--theme-color-primary))
+		);
+		background: var(
+			--theme-button-primary-background-hover,
+			color-mix(in srgb, var(--theme-color-primary), var(--theme-color-ui-contrast) 15%)
+		);
+		box-shadow: var(--theme-button-primary-shadow-hover, var(--theme-button-shadow-hover, none));
+		text-decoration: var(
+			--theme-button-primary-decoration-hover,
+			var(--theme-button-decoration-hover, var(--theme-button-decoration, none))
+		);
+	}
+
+	&:active:not(:disabled, [aria-disabled="true"]) {
+		background: var(
+			--theme-button-primary-background-active,
+			var(
+				--theme-button-primary-background-hover,
+				color-mix(in srgb, var(--theme-color-primary), var(--theme-color-ui-contrast) 25%)
+			)
+		);
+		box-shadow: var(--theme-button-primary-shadow-active, none);
+	}
+}

@@ -1,9 +1,0 @@
-@use "../decoration/surface";
-@use "stack";
-%p-empty-state {
-	@extend %d-surface;
-	@extend %p-stack;
-	align-items: center;
-	text-align: center;
-	padding: var(--theme-empty-padding, var(--theme-space-8));
-}

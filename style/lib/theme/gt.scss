@@ -1,0 +1,90 @@
+@use "base";
+
+@mixin gt {
+	@include base.base;
+
+	--theme-color-primary: light-dark(#4f5b93, #aeb8ef);
+	--theme-color-page: light-dark(#fff, #17191f);
+	--theme-color-surface: var(--theme-color-page);
+	--theme-color-text: light-dark(#344145, #e4e9eb);
+	--theme-color-tint: light-dark(#369, #8cc8f5);
+	--theme-link-hover-color: light-dark(#793862, #eba0d0);
+	--theme-sidebar-contrast-background: light-dark(
+		color-mix(in srgb, #4f5b93 10%, #fff),
+		color-mix(in srgb, #4f5b93 22%, #17191f)
+	);
+	--theme-button-background: light-dark(
+		color-mix(in srgb, #4f5b93 10%, #fff),
+		color-mix(in srgb, #4f5b93 30%, #17191f)
+	);
+	--theme-button-background-hover: light-dark(
+		color-mix(in srgb, #4f5b93 15%, #fff),
+		color-mix(in srgb, #4f5b93 42%, #17191f)
+	);
+	--theme-code-outline: light-dark(
+		color-mix(in srgb, var(--theme-sidebar-contrast-background), var(--theme-color-primary) 10%),
+		color-mix(in srgb, var(--theme-sidebar-contrast-background), var(--theme-color-primary) 35%)
+	);
+	--theme-notice-background: light-dark(#bbf6b7, #183d25);
+	--theme-gallery-background: light-dark(#f3f4f8, #20242d);
+
+	--theme-color-surface-disabled: var(--theme-sidebar-contrast-background);
+	--theme-color-border: color-mix(in srgb, var(--theme-color-primary), transparent 75%);
+	--theme-color-muted: color-mix(in srgb, var(--theme-color-text), var(--theme-color-page) 25%);
+	--theme-color-accent: var(--theme-color-tint);
+	--theme-color-on-accent: var(--theme-color-page);
+	--theme-color-success: light-dark(#26722d, #8fe298);
+	--theme-color-danger: light-dark(#a52222, #ff9999);
+	--theme-font-body: "Ubuntu", sans-serif;
+	--theme-font-heading: "Ubuntu", sans-serif;
+	--theme-font-mono: "Ubuntu Mono", monospace;
+	--theme-font-weight: 400;
+	--theme-line-height: normal;
+	--theme-heading-weight: 700;
+	--theme-text-leading: normal;
+	--theme-heading-leading: normal;
+	--theme-link-thickness: 2px;
+	--theme-radius: 1rem;
+	--theme-focus-color: var(--theme-color-primary);
+	--theme-focus-width: 0.25rem;
+	--theme-focus-offset: 0;
+	--theme-control-background: var(--theme-button-background);
+	--theme-control-background-focus: var(--theme-button-background);
+	--theme-control-border: transparent;
+	--theme-control-border-hover: var(--theme-color-primary);
+	--theme-control-font: var(--theme-font-body);
+	--theme-control-min-height: 0px;
+	--theme-code-background: var(--theme-sidebar-contrast-background);
+	--theme-code-text: var(--theme-color-text);
+	--theme-code-radius: 0px;
+	--theme-syntax-keyword: light-dark(#793862, #efa4d3);
+	--theme-syntax-string: light-dark(#26722d, #9cdea1);
+	--theme-syntax-comment: color-mix(in srgb, var(--theme-color-text), var(--theme-color-page) 15%);
+	--theme-syntax-number: light-dark(#7b2cbf, #c79bf0);
+	--theme-syntax-key: light-dark(#8b5a00, #efca7b);
+	--theme-syntax-tag: light-dark(#793862, #efa4d3);
+	--theme-syntax-attribute: light-dark(#7b2cbf, #c79bf0);
+
+	--theme-nav-gap: 0px;
+	--theme-nav-radius: 0px;
+	--theme-nav-text: var(--theme-color-text);
+	--theme-nav-hover-background: transparent;
+	--theme-nav-current-background: transparent;
+	--theme-nav-current-hover-background: transparent;
+	--theme-nav-current-text: var(--theme-color-primary);
+	--theme-nav-current-weight: 400;
+	--theme-nav-current-shadow: none;
+	--theme-side-nav-background: transparent;
+	--theme-side-nav-hover-background: transparent;
+	--theme-side-nav-current-shadow: none;
+	--theme-side-nav-marker-width: 0.5rem;
+	--theme-side-nav-marker-height: 0.5rem;
+	--theme-side-nav-marker-color: var(--theme-color-primary);
+	--theme-side-nav-marker-radius: 50%;
+
+	--theme-sidebar-contrast-text: var(--theme-color-text);
+	--theme-sidebar-contrast-hover-background: transparent;
+	--theme-sidebar-contrast-current-background: transparent;
+	--theme-sidebar-contrast-current-text: var(--theme-color-primary);
+	--theme-page-width: 96rem;
+}

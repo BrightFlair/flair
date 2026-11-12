@@ -1,0 +1,36 @@
+@use "../object/inset";
+@use "../object/nav-link";
+@use "../decoration/typography";
+@use "../variable/break";
+
+// An ordinary table of anchor links, not a scripted scroll-spy widget.
+%p-contents {
+	@extend %o-inset;
+	--theme-inset-background: var(--theme-contents-background, var(--theme-color-surface-disabled));
+
+	> h2 {
+		@extend %d-typography-eyebrow;
+		margin: 0 0 var(--theme-space-2);
+		font-family: var(--theme-font-body);
+	}
+
+	> ol {
+		display: flex;
+		gap: var(--theme-space-2);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		overflow-x: auto;
+		overscroll-behavior-inline: contain;
+
+		> li { flex: 0 0 auto; margin: 0; }
+		> li > a { @extend %o-nav-link; white-space: nowrap; }
+	}
+
+	@media (min-width: break.$wide) {
+		> ol {
+			flex-direction: column;
+			> li > a { white-space: normal; }
+		}
+	}
+}

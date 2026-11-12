@@ -1,7 +1,0 @@
-@use "../decoration/surface";
-
-%o-inset {
-	@extend %d-surface;
-	background: var(--theme-inset-background, var(--theme-color-surface-disabled));
-	box-shadow: none;
-}

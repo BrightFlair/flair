@@ -1,0 +1,3 @@
+@use "../lib/flair";
+
+.demo-menu { @extend %o-disclosure-menu; }
